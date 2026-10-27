@@ -87,7 +87,14 @@ if /i "%F%"=="T05" set "PLAT=codex"
 if /i "%F%"=="T06" set "PLAT=opencode"
 set "TITULO=%F%-%PLAT%"
 where %PLAT% >nul 2>nul
-if errorlevel 1 (echo %F%: no se encontro "%PLAT%". Instalalo o abre la carpeta %DIR% con otra herramienta. & exit /b 0)
+if errorlevel 1 (
+  echo.
+  echo %F%: no hay "%PLAT%" en consola. Usa la app:
+  echo    1. Abre la app %PLAT% y agrega como proyecto la carpeta: %DIR%
+  echo    2. Crea un hilo nuevo en modo LOCAL ^(no worktree ni nube^) con permisos para editar y ejecutar comandos.
+  echo    3. Pega el texto de .orquesta\PROMPT-SESION.txt
+  exit /b 0
+)
 echo Abriendo %F% con %PLAT% ...
 if /i "%PLAT%"=="claude" start "%TITULO%" /d "%DIR%" cmd /k claude --permission-mode acceptEdits "%PROMPT_FICHA%"
 if /i "%PLAT%"=="codex" start "%TITULO%" /d "%DIR%" cmd /k codex --full-auto "%PROMPT_FICHA%"

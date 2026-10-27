@@ -1,0 +1,5 @@
+# Los scripts deben conservar finales de línea LF también en Windows
+*.sh text eol=lf
+scripts/git-hooks/* text eol=lf
+*.md text eol=lf
+*.json text eol=lf

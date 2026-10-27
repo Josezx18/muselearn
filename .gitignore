@@ -1,0 +1,6 @@
+.env*
+!.env.example
+.ficha-actual
+.orquesta-stop-count
+node_modules/
+.next/

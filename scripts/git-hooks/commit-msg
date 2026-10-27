@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Git hook commit-msg: quita de cada commit las líneas que agregan las herramientas de IA
+# (Co-Authored-By de Claude, Codex, OpenCode, Muse…, "Generated with…", "Claude-Session:"),
+# para que en el repositorio público el único autor y contribuidor seas tú.
+# Funciona igual para Claude Code, Codex, OpenCode y Muse Code, y en todos los worktrees.
+archivo="$1"
+patron='^(co-authored-by:.*(claude|anthropic|codex|openai|chatgpt|gpt|opencode|muse|meta\.ai|copilot|cursor|gemini|noreply@)|.*generated with \[?(claude|codex|opencode|muse)|.*🤖 generated|claude-session:)'
+tmp="$(mktemp)"
+grep -viE "$patron" "$archivo" > "$tmp" || true
+# Quitar líneas vacías sobrantes al final
+sed -e :a -e '/^\n*$/{$d;N;ba' -e '}' "$tmp" > "$archivo"
+rm -f "$tmp"

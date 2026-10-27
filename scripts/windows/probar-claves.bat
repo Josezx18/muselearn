@@ -4,6 +4,10 @@ title MuseLearn - probar claves
 pushd "%~dp0..\.."
 echo Probando las claves de .env.local (no se muestran las claves) ...
 echo.
+if not exist "node_modules\@supabase\supabase-js" (
+  echo Instalando dependencias ^(npm install^), tarda unos minutos ...
+  call npm install --no-audit --no-fund
+)
 (
   echo ===== npm run prueba:ia =====
   call npm run prueba:ia

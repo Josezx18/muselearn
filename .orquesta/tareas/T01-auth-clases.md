@@ -13,13 +13,13 @@
 Registro e inicio de sesión con rol, creación de clase con código y unión con código.
 
 ## Criterios de aceptación
-- [ ] Registro con correo y contraseña, eligiendo rol (docente o estudiante) y nombre; crea fila en `perfiles`.
-- [ ] Inicio y cierre de sesión; redirección según rol a `/docente` o `/estudiante/hoy`.
-- [ ] Rutas protegidas por rol en el middleware.
-- [ ] Docente: formulario "Nueva clase" (nombre, materia, grado) → genera código único de 6 caracteres (sin O/0/I/1).
-- [ ] Docente: lista de sus clases con código copiable y número de estudiantes.
-- [ ] Estudiante: pantalla "Unirme a una clase" con el código; error claro si no existe.
-- [ ] Endpoints `POST/GET /api/clases`, `POST /api/clases/unirse`, `GET /api/clases/:id/estudiantes`.
+- [x] Registro con correo y contraseña, eligiendo rol (docente o estudiante) y nombre; crea fila en `perfiles`.
+- [x] Inicio y cierre de sesión; redirección según rol a `/docente` o `/estudiante/hoy`.
+- [x] Rutas protegidas por rol en el middleware.
+- [x] Docente: formulario "Nueva clase" (nombre, materia, grado) → genera código único de 6 caracteres (sin O/0/I/1).
+- [x] Docente: lista de sus clases con código copiable y número de estudiantes.
+- [x] Estudiante: pantalla "Unirme a una clase" con el código; error claro si no existe.
+- [x] Endpoints `POST/GET /api/clases`, `POST /api/clases/unirse`, `GET /api/clases/:id/estudiantes`.
 - [ ] Políticas RLS completas para `perfiles`, `clases`, `inscripciones` y lectura de `tareas` por inscritos, en `supabase/politicas/rls.sql`.
 - [ ] Usuarios de demo: `docente@demo.muselearn` y 3 estudiantes (datos ficticios) en `supabase/seed-auth.ts`.
 - [ ] Textos en es y en. Pruebas: generador de códigos y validación de unión.

@@ -1,17 +1,23 @@
-import type { ReactNode } from "react";
 import { Navegacion, type ItemNav } from "@/components/comun/Navegacion";
+import { BotonSalir } from "@/components/auth/BotonSalir";
+import { exigirRol } from "@/lib/db/sesion";
+import { usarMocks } from "@/lib/api-cliente";
 
-// Layout del estudiante (T00; T05 puede modificarlo). T01 agrega la comprobación de sesión y rol.
 const items: ItemNav[] = [
   { href: "/estudiante/hoy", clave: "hoy" },
   { href: "/estudiante/semana", clave: "semana" },
 ];
 
-export default function LayoutEstudiante({ children }: { children: ReactNode }) {
+export default async function LayoutEstudiante({ children, params }: LayoutProps<"/[locale]/estudiante">) {
+  const { locale } = await params;
+  if (!usarMocks()) await exigirRol("estudiante", locale); // T01: sin sesión → login; otro rol → su inicio
   return (
     <>
       <Navegacion items={items} />
-      <main className="mx-auto w-full max-w-5xl flex-1 px-4 pb-24 pt-6 sm:pb-10">{children}</main>
+      <div className="mx-auto w-full max-w-5xl">
+        <BotonSalir />
+      </div>
+      <main className="mx-auto w-full max-w-5xl flex-1 px-4 pb-24 pt-4 sm:pb-10">{children}</main>
     </>
   );
 }

@@ -1,6 +1,5 @@
-import { EnConstruccion } from "@/components/comun/EnConstruccion";
+import { FormularioLogin } from "@/components/auth/FormularioLogin";
 
-// Dueño: T01. Reemplaza este marcador por la pantalla real.
-export default function Pagina() {
-  return <EnConstruccion ficha="T01" titulo="Iniciar sesión" />;
+export default function PaginaLogin() {
+  return <FormularioLogin />;
 }

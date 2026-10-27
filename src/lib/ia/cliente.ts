@@ -219,5 +219,54 @@ export function crearLlamador(
   };
 }
 
+/** Versión con streaming (texto plano, sin esquema). Respaldo solo si el proveedor falla antes del primer trozo. */
+export function crearLlamadorStream(
+  proveedores: Partial<Record<IdProveedor, Proveedor>> = proveedoresDesdeEntorno(),
+  fabrica: FabricaCliente = fabricaReal,
+) {
+  return async function* llamarMuseStream(op: Omit<OpcionesLlamada<string>, "esquema">): AsyncGenerator<string> {
+    const candidatos = RUTAS[op.funcion].map((id) => proveedores[id]).filter((p): p is Proveedor => Boolean(p));
+    if (candidatos.length === 0) throw new ErrorIA(`No hay proveedor configurado para "${op.funcion}". Revisa .env.local`);
+    const sistema = `${REGLAS_COMUNES}
+
+IDIOMA: ${op.idioma ?? "es"}
+
+${op.sistema}`;
+    const intentos: { proveedor: IdProveedor; error: string }[] = [];
+
+    for (const p of candidatos) {
+      let emitido = false;
+      try {
+        const cuerpo: Record<string, unknown> = {
+          model: p.modelo,
+          messages: [{ role: "system", content: sistema }, ...op.mensajes],
+          max_tokens: op.maxTokens ?? 4096,
+          stream: true,
+        };
+        if (p.avanzado) cuerpo.reasoning_effort = op.esfuerzo ?? ESFUERZO_POR_DEFECTO[op.funcion];
+        const flujo = (await fabrica(p).chat.completions.create(cuerpo)) as AsyncIterable<{
+          choices?: { delta?: { content?: string | null } }[];
+        }>;
+        for await (const trozo of flujo) {
+          const texto = trozo.choices?.[0]?.delta?.content;
+          if (texto) {
+            emitido = true;
+            yield texto;
+          }
+        }
+        console.info(`[ia] ${op.funcion} ${p.id}/${p.modelo} (stream)`);
+        return;
+      } catch (e) {
+        if (emitido) throw e; // ya se envió texto: no se puede cambiar de proveedor a mitad
+        intentos.push({ proveedor: p.id, error: (e as Error).message });
+        console.warn(`[ia] ${op.funcion} (stream) falló en ${p.id}: ${(e as Error).message}`);
+      }
+    }
+    throw new ErrorIA(`Ningún proveedor respondió para "${op.funcion}"`, intentos);
+  };
+}
+
+export const llamarMuseStream = crearLlamadorStream();
+
 /** Llamada estándar con los proveedores del entorno. */
 export const llamarMuse = crearLlamador();

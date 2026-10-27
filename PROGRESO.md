@@ -14,7 +14,9 @@ Formato: `- AAAA-MM-DD HH:MM [Txx] qué se hizo / qué falta / decisión tomada`
 5. T08 demo y entregables
 
 ## Mejoras propuestas (por los agentes; el integrador decide)
-- (vacío)
+- (T03) Guardar minutos reales por tarea (tabla o columna) para que el historial del analizador sea exacto.
+- (T03) Extraer texto de los PDFs adjuntos antes de analizar.
+- (T03) Mostrar en Hoy los `avisos` del plan como notificación al reorganizarse.
 
 ## Decisiones tomadas
 - 2026-10-24 Stack: Next.js + Supabase + Meta Model API. Interfaz español + inglés. Nombre de trabajo: MuseLearn.
@@ -24,3 +26,4 @@ Formato: `- AAAA-MM-DD HH:MM [Txx] qué se hizo / qué falta / decisión tomada`
 
 ## Bitácora
 - 2026-10-27 [T00] Proyecto creado (Next 16.4). Supabase `muselearn` con migraciones 0001 y 0002. Pendiente de José: claves reales y push a GitHub.
+- 2026-10-27 [T03] Analizador, planificador determinista (+avisos con Muse), `llamarMuseStream`, endpoints `/api/ia/*` y `/api/preferencias`. lint/typecheck/test OK (57 pruebas). Pendiente: salidas reales y costo (faltan claves) — ver Bloqueos en la ficha.

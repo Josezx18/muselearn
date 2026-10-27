@@ -1,6 +1,30 @@
+# dependencias
+/node_modules
+/.pnp
+.pnp.*
+
+# pruebas
+/coverage
+/test-results
+/playwright-report
+
+# next.js
+/.next/
+/out/
+/build
+*.tsbuildinfo
+next-env.d.ts
+
+# entorno (nunca se suben)
 .env*
 !.env.example
+
+# varios
+.DS_Store
+*.pem
+npm-debug.log*
+.vercel
+
+# coordinación local de agentes
 .ficha-actual
 .orquesta-stop-count
-node_modules/
-.next/

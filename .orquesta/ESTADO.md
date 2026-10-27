@@ -5,7 +5,7 @@ Estados: ⬜ sin empezar · 🟦 trabajando · 🟨 bloqueado · 🟩 lista para
 
 | Ficha | Pieza | Plataforma | Nombre de sesión | Rama | Estado | Último avance |
 |---|---|---|---|---|---|---|
-| T00 | Esqueleto y contratos | Claude Code | `T00-esqueleto` | main | ⬜ | |
+| T00 | Esqueleto y contratos | Claude Code | `T00-esqueleto` | main | ✅ | 27 oct: listo; falta prueba con claves reales y push |
 | T01 | Auth y clases | Claude Code | `T01-auth-claude` | t01-auth-clases | ⬜ | |
 | T02 | Tareas y entregas | OpenCode | `T02-tareas-opencode` | t02-tareas | ⬜ | |
 | T03 | Motor IA | Claude Code | `T03-motor-claude` | t03-motor-ia | ⬜ | |

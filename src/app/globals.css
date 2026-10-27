@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+/* Tokens de diseño de MuseLearn (T00, congelado). Úsalos como clases: bg-primario, text-tinta, border-borde… */
+@theme {
+  --color-tinta: #1b1f24;
+  --color-tinta-suave: #5b636e;
+  --color-fondo: #faf8f4;
+  --color-superficie: #ffffff;
+  --color-borde: #e6e1d8;
+
+  --color-primario: #1f6f5c;
+  --color-primario-fuerte: #17574a;
+  --color-primario-claro: #e3f1ec;
+  --color-acento: #f2a541;
+  --color-acento-claro: #fdf0dc;
+  --color-peligro: #c2410c;
+  --color-peligro-claro: #fdeee6;
+
+  /* Niveles de dominio MINERD: 1 Inicial · 2 En proceso · 3 Logrado · 4 Destacado */
+  --color-nivel-1: #e5674b;
+  --color-nivel-2: #f2a541;
+  --color-nivel-3: #3a9d7b;
+  --color-nivel-4: #1f6f5c;
+  --color-nivel-vacio: #e9e6e0;
+
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-fondo);
+  color: var(--color-tinta);
+  font-family: var(--font-sans);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-acento);
+  outline-offset: 2px;
+}

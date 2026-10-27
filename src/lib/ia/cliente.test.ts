@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 import { z } from "zod";
-import { crearLlamador, extraerJson, proveedoresDesdeEntorno, type ClienteChat, type Proveedor } from "./cliente";
+import { crearLlamador, crearLlamadorStream, extraerJson, proveedoresDesdeEntorno, type ClienteChat, type Proveedor } from "./cliente";
 
 const meta: Proveedor = { id: "meta", baseURL: "https://api.meta.ai/v1", apiKey: "k", modelo: "muse-spark-1.3", avanzado: true };
 const abierto: Proveedor = { id: "abierto", baseURL: "https://inference.baseten.co/v1", apiKey: "k", modelo: "meta-models/muse-spark-open-1026", avanzado: false };
@@ -95,5 +95,31 @@ describe("utilidades", () => {
     const p = proveedoresDesdeEntorno({ MODEL_API_KEY: "x", NODE_ENV: "test" } as NodeJS.ProcessEnv);
     expect(Object.keys(p)).toEqual(["meta"]);
     expect(p.meta?.modelo).toBe("muse-spark-1.3");
+  });
+});
+
+describe("llamarMuseStream", () => {
+  const flujo = (trozos: string[], falla = false) =>
+    (async function* () {
+      if (falla) throw new Error("503");
+      for (const t of trozos) yield { choices: [{ delta: { content: t } }] };
+    })();
+
+  it("emite los trozos en orden", async () => {
+    const llamar = crearLlamadorStream({ meta }, () => ({ chat: { completions: { create: async () => flujo(["Hola", " mundo"]) } } }));
+    const salida: string[] = [];
+    for await (const t of llamar({ funcion: "tutor", sistema: "s", mensajes: [] })) salida.push(t);
+    expect(salida.join("")).toBe("Hola mundo");
+  });
+
+  it("pasa al respaldo si el proveedor falla antes del primer trozo", async () => {
+    const usados: string[] = [];
+    const llamar = crearLlamadorStream({ meta, abierto }, (p) => ({
+      chat: { completions: { create: async () => (usados.push(p.id), flujo(["ok"], p.id === "meta")) } },
+    }));
+    const salida: string[] = [];
+    for await (const t of llamar({ funcion: "tutor", sistema: "s", mensajes: [] })) salida.push(t);
+    expect(usados).toEqual(["meta", "abierto"]);
+    expect(salida).toEqual(["ok"]);
   });
 });

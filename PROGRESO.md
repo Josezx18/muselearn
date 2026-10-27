@@ -17,6 +17,9 @@ Formato: `- AAAA-MM-DD HH:MM [Txx] qué se hizo / qué falta / decisión tomada`
 - [T01] Verificar el correo al registrarse y recuperar contraseña (hoy el correo se confirma solo).
 - [T01] Permitir al docente quitar estudiantes de la clase y regenerar el código.
 - [T01] Enlace de invitación `/unirse?codigo=XXXXXX` que rellene el código.
+- (T03) Guardar minutos reales por tarea (tabla o columna) para que el historial del analizador sea exacto.
+- (T03) Extraer texto de los PDFs adjuntos antes de analizar.
+- (T03) Mostrar en Hoy los `avisos` del plan como notificación al reorganizarse.
 
 ## Decisiones tomadas
 - 2026-10-24 Stack: Next.js + Supabase + Meta Model API. Interfaz español + inglés. Nombre de trabajo: MuseLearn.
@@ -27,3 +30,4 @@ Formato: `- AAAA-MM-DD HH:MM [Txx] qué se hizo / qué falta / decisión tomada`
 ## Bitácora
 - 2026-10-27 [T00] Proyecto creado (Next 16.4). Supabase `muselearn` con migraciones 0001 y 0002. Pendiente de José: claves reales y push a GitHub.
 - 2026-10-27 [T01] Auth (registro/login/salir), rutas por rol, clases con código, unirse, 3 endpoints, RLS en supabase/politicas/rls.sql, seed-auth.ts, textos es/en y 20 pruebas. Falta: aplicar RLS y seed en Supabase (ver Solicitudes en la ficha).
+- 2026-10-27 [T03] Analizador, planificador determinista (+avisos con Muse), `llamarMuseStream`, endpoints `/api/ia/*` y `/api/preferencias`. lint/typecheck/test OK (57 pruebas). Pendiente: salidas reales y costo (faltan claves) — ver Bloqueos en la ficha.

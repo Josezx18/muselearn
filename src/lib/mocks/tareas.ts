@@ -1,0 +1,118 @@
+// Mocks de T02 (tareas y entregas). Datos ficticios.
+import type { Entrega, Tarea } from "@/types/contratos";
+import { ESTUDIANTE_ACTUAL, IDS, enSemana } from "./base";
+
+const t = IDS.tareas;
+const c = IDS.clases;
+
+export const tareasMock: Tarea[] = [
+  {
+    id: t.ecuaciones,
+    clase_id: c.matematica,
+    titulo: "Práctica: ecuaciones de primer grado",
+    instrucciones: "Resuelve los ejercicios 1 al 8 de la página 54. Muestra cada paso del despeje.",
+    adjuntos: [],
+    fecha_entrega: enSemana(2, 23, 59),
+    competencias: ["Resuelve problemas con ecuaciones lineales"],
+    nivel_ayuda: "pistas",
+    creada_en: enSemana(0, 8),
+  },
+  {
+    id: t.fracciones,
+    clase_id: c.matematica,
+    titulo: "Repaso de fracciones",
+    instrucciones: "Completa la guía de 10 ejercicios de suma y resta de fracciones heterogéneas.",
+    adjuntos: [],
+    fecha_entrega: enSemana(4, 23, 59),
+    competencias: ["Opera con números racionales"],
+    nivel_ayuda: "ejemplos",
+    creada_en: enSemana(0, 8, 30),
+  },
+  {
+    id: t.arduino,
+    clase_id: c.tecnologia,
+    titulo: "Semáforo con Arduino",
+    instrucciones: "Programa un semáforo con 3 LED y explica en comentarios qué hace cada bloque del código.",
+    adjuntos: [],
+    fecha_entrega: enSemana(1, 23, 59),
+    competencias: ["Programa microcontroladores para resolver problemas"],
+    nivel_ayuda: "explicacion",
+    creada_en: enSemana(-3, 9),
+  },
+  {
+    id: t.circuitos,
+    clase_id: c.tecnologia,
+    titulo: "Ley de Ohm en circuitos en serie",
+    instrucciones: "Calcula la corriente y el voltaje en cada resistencia de los 4 circuitos de la guía.",
+    adjuntos: [],
+    fecha_entrega: enSemana(3, 23, 59),
+    competencias: ["Analiza circuitos eléctricos básicos"],
+    nivel_ayuda: "pistas",
+    creada_en: enSemana(0, 10),
+  },
+  {
+    id: t.movimiento,
+    clase_id: c.fisica,
+    titulo: "Problemas de movimiento rectilíneo uniforme",
+    instrucciones: "Resuelve los 6 problemas de MRU. Incluye datos, fórmula, sustitución y resultado con unidades.",
+    adjuntos: [],
+    fecha_entrega: enSemana(3, 23, 59),
+    competencias: ["Aplica modelos físicos del movimiento"],
+    nivel_ayuda: "pistas",
+    creada_en: enSemana(0, 11),
+  },
+  {
+    id: t.ensayo3d,
+    clase_id: c.tecnologia,
+    titulo: "Diseño 3D de un llavero",
+    instrucciones: "Diseña un llavero en Tinkercad con tu inicial y exporta el archivo STL.",
+    adjuntos: [],
+    fecha_entrega: enSemana(7, 23, 59),
+    competencias: ["Diseña objetos en 3D"],
+    nivel_ayuda: "explicacion",
+    creada_en: enSemana(1, 9),
+  },
+  {
+    id: t.csharp,
+    clase_id: c.tecnologia,
+    titulo: "C#: calculadora de promedios",
+    instrucciones: "Escribe un programa en C# que pida 5 notas y muestre el promedio y si aprobó.",
+    adjuntos: [],
+    fecha_entrega: enSemana(5, 23, 59),
+    competencias: ["Programa algoritmos con estructuras de control"],
+    nivel_ayuda: "ejemplos",
+    creada_en: enSemana(1, 10),
+  },
+  {
+    id: t.vectores,
+    clase_id: c.fisica,
+    titulo: "Suma de vectores",
+    instrucciones: "Resuelve gráfica y analíticamente los 4 ejercicios de suma de vectores.",
+    adjuntos: [],
+    fecha_entrega: enSemana(9, 23, 59),
+    competencias: ["Representa magnitudes vectoriales"],
+    nivel_ayuda: "pistas",
+    creada_en: enSemana(2, 8),
+  },
+];
+
+export const entregasMock: Entrega[] = [
+  {
+    id: IDS.entregas.ecuaciones,
+    tarea_id: t.ecuaciones,
+    estudiante_id: ESTUDIANTE_ACTUAL,
+    contenido_texto: "1) 3x + 5 = 20 → 3x = 15 → x = 5\n2) 2x − 7 = 9 → 2x = 16 → x = 8",
+    adjuntos: [],
+    estado: "verificada",
+    entregada_en: enSemana(1, 19, 30),
+  },
+  {
+    id: IDS.entregas.arduino,
+    tarea_id: t.arduino,
+    estudiante_id: ESTUDIANTE_ACTUAL,
+    contenido_texto: "",
+    adjuntos: [],
+    estado: "pendiente",
+    entregada_en: null,
+  },
+];

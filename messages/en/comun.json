@@ -1,0 +1,65 @@
+{
+  "app": {
+    "nombre": "MuseLearn",
+    "lema": "Proof of learning, not just proof of delivery.",
+    "descripcion": "A study companion that plans your week, teaches you without doing your homework, and asks you to explain what you submitted."
+  },
+  "nav": {
+    "inicio": "Home",
+    "hoy": "Today",
+    "semana": "Week",
+    "clases": "Classes",
+    "tareas": "Assignments",
+    "comprension": "Understanding",
+    "salir": "Sign out",
+    "menu": "Menu"
+  },
+  "idioma": {
+    "etiqueta": "Language",
+    "es": "Español",
+    "en": "English"
+  },
+  "inicio": {
+    "soyDocente": "I'm a teacher",
+    "soyEstudiante": "I'm a student",
+    "pasos": {
+      "organiza": "Plan your week",
+      "organizaDetalle": "Every assignment comes with difficulty, time estimate and priority.",
+      "aprende": "Learn without shortcuts",
+      "aprendeDetalle": "The tutor guides you with questions and hints, never with the answer.",
+      "demuestra": "Show you understood",
+      "demuestraDetalle": "After you submit, explain your work by voice or text."
+    }
+  },
+  "acciones": {
+    "guardar": "Save",
+    "cancelar": "Cancel",
+    "cerrar": "Close",
+    "continuar": "Continue",
+    "volver": "Back",
+    "enviar": "Send",
+    "reintentar": "Try again"
+  },
+  "estado": {
+    "cargando": "Loading…",
+    "error": "Something went wrong. Please try again.",
+    "vacio": "Nothing here yet."
+  },
+  "enConstruccion": {
+    "titulo": "Under construction",
+    "detalle": "This screen is built by task {ficha}."
+  },
+  "dificultad": {
+    "etiqueta": "Difficulty",
+    "valor": "Difficulty {nivel} of 5"
+  },
+  "nivelDominio": {
+    "1": "Beginning",
+    "2": "Developing",
+    "3": "Proficient",
+    "4": "Advanced"
+  },
+  "tiempo": {
+    "minutos": "{minutos} min"
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "app": {
+    "nombre": "MuseLearn",
+    "lema": "Entregar no es aprender. Demuéstralo.",
+    "descripcion": "Un compañero de estudio que organiza tu semana, te enseña sin hacerte la tarea y te pide que expliques lo que entregaste."
+  },
+  "nav": {
+    "inicio": "Inicio",
+    "hoy": "Hoy",
+    "semana": "Semana",
+    "clases": "Clases",
+    "tareas": "Tareas",
+    "comprension": "Comprensión",
+    "salir": "Salir",
+    "menu": "Menú"
+  },
+  "idioma": {
+    "etiqueta": "Idioma",
+    "es": "Español",
+    "en": "English"
+  },
+  "inicio": {
+    "soyDocente": "Soy docente",
+    "soyEstudiante": "Soy estudiante",
+    "pasos": {
+      "organiza": "Organiza tu semana",
+      "organizaDetalle": "Cada tarea llega con dificultad, tiempo estimado y prioridad.",
+      "aprende": "Aprende sin atajos",
+      "aprendeDetalle": "El tutor te guía con preguntas y pistas, nunca con la respuesta.",
+      "demuestra": "Demuestra que entendiste",
+      "demuestraDetalle": "Después de entregar, explica tu trabajo por voz o por texto."
+    }
+  },
+  "acciones": {
+    "guardar": "Guardar",
+    "cancelar": "Cancelar",
+    "cerrar": "Cerrar",
+    "continuar": "Continuar",
+    "volver": "Volver",
+    "enviar": "Enviar",
+    "reintentar": "Reintentar"
+  },
+  "estado": {
+    "cargando": "Cargando…",
+    "error": "Algo salió mal. Inténtalo de nuevo.",
+    "vacio": "No hay nada por aquí todavía."
+  },
+  "enConstruccion": {
+    "titulo": "En construcción",
+    "detalle": "Esta pantalla la construye la ficha {ficha}."
+  },
+  "dificultad": {
+    "etiqueta": "Dificultad",
+    "valor": "Dificultad {nivel} de 5"
+  },
+  "nivelDominio": {
+    "1": "Inicial",
+    "2": "En proceso",
+    "3": "Logrado",
+    "4": "Destacado"
+  },
+  "tiempo": {
+    "minutos": "{minutos} min"
+  }
+}

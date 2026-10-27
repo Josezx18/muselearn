@@ -1,6 +1,5 @@
-import { EnConstruccion } from "@/components/comun/EnConstruccion";
+import { FormularioUnirse } from "@/components/clases/FormularioUnirse";
 
-// Dueño: T01. Reemplaza este marcador por la pantalla real.
-export default function Pagina() {
-  return <EnConstruccion ficha="T01" titulo="Unirme a una clase" />;
+export default function PaginaUnirse() {
+  return <FormularioUnirse />;
 }

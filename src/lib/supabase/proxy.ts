@@ -22,3 +22,29 @@ export async function refrescarSesion(peticion: NextRequest, respuesta: NextResp
   const { data } = await supabase.auth.getUser();
   return { usuario: data.user };
 }
+
+type Rol = "docente" | "estudiante";
+const INICIO: Record<Rol, string> = { docente: "/docente", estudiante: "/estudiante/hoy" };
+
+/**
+ * Protección de rutas por rol (T01). Recibe la ruta SIN prefijo de idioma.
+ * Devuelve la ruta a la que hay que redirigir, o null si puede pasar.
+ * El rol viene de app_metadata (lo fija el servidor al registrar; el usuario no puede editarlo).
+ */
+export function rutaDeRedireccion(ruta: string, usuario: { app_metadata?: Record<string, unknown> } | null): string | null {
+  const area: Rol | null = /^\/docente(\/|$)/.test(ruta) ? "docente" : /^\/estudiante(\/|$)/.test(ruta) ? "estudiante" : null;
+  if (area) {
+    if (!usuario) return "/login";
+    const rol = usuario.app_metadata?.rol;
+    if ((rol === "docente" || rol === "estudiante") && rol !== area) return INICIO[rol];
+    return null;
+  }
+  // Unirse a una clase exige sesión.
+  if (!usuario && /^\/unirse(\/|$)/.test(ruta)) return "/login";
+  // Quien ya tiene sesión no necesita login ni registro.
+  if (usuario && /^\/(login|registro)(\/|$)/.test(ruta)) {
+    const rol = usuario.app_metadata?.rol;
+    return rol === "docente" || rol === "estudiante" ? INICIO[rol] : null;
+  }
+  return null;
+}

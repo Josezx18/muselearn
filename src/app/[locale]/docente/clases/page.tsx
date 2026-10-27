@@ -1,6 +1,7 @@
-import { EnConstruccion } from "@/components/comun/EnConstruccion";
+import { GestorClases } from "@/components/clases/GestorClases";
 
-// Dueño: T02. Reemplaza este marcador por la pantalla real.
+// T01 crea y lista las clases (ARQUITECTURA §5: docente/clases/ es de T02 y T01 para crear clase).
+// T02 puede añadir aquí el enlace de cada clase hacia sus tareas.
 export default function Pagina() {
-  return <EnConstruccion ficha="T02" titulo="Mis clases" />;
+  return <GestorClases />;
 }

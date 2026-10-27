@@ -1,1 +1,38 @@
-{}
+{
+  "titulo": "My classes",
+  "nueva": {
+    "boton": "New class",
+    "titulo": "New class",
+    "nombre": "Class name",
+    "nombreEjemplo": "Math 4th A",
+    "materia": "Subject",
+    "grado": "Grade",
+    "crear": "Create class",
+    "creada": "Class created. Share the code with your students.",
+    "error": "Couldn't create the class. Check the details."
+  },
+  "lista": {
+    "vacio": "You have no classes yet. Create the first one to get a code.",
+    "codigo": "Code",
+    "copiar": "Copy code",
+    "copiado": "Code copied",
+    "estudiantes": "{cantidad, plural, =0 {No students} one {1 student} other {# students}}",
+    "error": "Couldn't load the classes."
+  },
+  "unirse": {
+    "titulo": "Join a class",
+    "ayuda": "Ask your teacher for the 6-character code.",
+    "codigo": "Class code",
+    "unirme": "Join",
+    "exito": "You joined {nombre}.",
+    "irAHoy": "Go to Today",
+    "errores": {
+      "codigo_invalido": "The code has 6 characters (letters and numbers, no O, 0, I or 1).",
+      "no_existe": "We couldn't find a class with that code. Check it and try again.",
+      "ya_inscrito": "You're already enrolled in that class.",
+      "es_docente": "Only students can join a class.",
+      "no_autenticado": "Sign in to join a class.",
+      "error": "Couldn't complete the enrollment. Please try again."
+    }
+  }
+}

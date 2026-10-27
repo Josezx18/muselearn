@@ -1,1 +1,38 @@
-{}
+{
+  "titulo": "Mis clases",
+  "nueva": {
+    "boton": "Nueva clase",
+    "titulo": "Nueva clase",
+    "nombre": "Nombre de la clase",
+    "nombreEjemplo": "Matemática 4to A",
+    "materia": "Materia",
+    "grado": "Grado",
+    "crear": "Crear clase",
+    "creada": "Clase creada. Comparte el código con tus estudiantes.",
+    "error": "No se pudo crear la clase. Revisa los datos."
+  },
+  "lista": {
+    "vacio": "Aún no tienes clases. Crea la primera para obtener un código.",
+    "codigo": "Código",
+    "copiar": "Copiar código",
+    "copiado": "Código copiado",
+    "estudiantes": "{cantidad, plural, =0 {Sin estudiantes} one {1 estudiante} other {# estudiantes}}",
+    "error": "No se pudieron cargar las clases."
+  },
+  "unirse": {
+    "titulo": "Unirme a una clase",
+    "ayuda": "Pídele a tu docente el código de 6 caracteres.",
+    "codigo": "Código de la clase",
+    "unirme": "Unirme",
+    "exito": "Te uniste a {nombre}.",
+    "irAHoy": "Ir a Hoy",
+    "errores": {
+      "codigo_invalido": "El código tiene 6 caracteres (letras y números, sin O, 0, I ni 1).",
+      "no_existe": "No encontramos una clase con ese código. Revísalo e inténtalo de nuevo.",
+      "ya_inscrito": "Ya estás inscrito en esa clase.",
+      "es_docente": "Solo los estudiantes se unen a una clase.",
+      "no_autenticado": "Inicia sesión para unirte a una clase.",
+      "error": "No se pudo completar la inscripción. Inténtalo de nuevo."
+    }
+  }
+}

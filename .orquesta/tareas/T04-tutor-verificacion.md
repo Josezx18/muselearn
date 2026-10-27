@@ -21,7 +21,7 @@ La función estrella. Es lo que más debe brillar en la demo.
 - [ ] Al entregar, pantalla "Explícamelo" con mensaje tranquilizador y botón para empezar.
 - [ ] Preguntas una por una (3-5), basadas en la entrega concreta, según prompt 04.
 - [ ] Si la entrega tiene **fotos del cuaderno**, se envían a Muse Spark como imágenes: el verificador primero transcribe y describe los pasos escritos a mano, y luego pregunta sobre pasos concretos ("en la línea 3 escribiste…"). Probar con 3 fotos reales de cuaderno (letra legible, letra difícil, foto torcida).
-- [ ] Responder por **voz**: botón de grabar (MediaRecorder) → `POST /api/voz/transcribir` con **Muse Voice Transcribe** (ver dev.meta.ai/models/muse-voice-transcribe y el cookbook `meta-models/meta-model-cookbook`); muestra la transcripción y permite corregirla antes de enviar. Respaldo: Web Speech API o solo texto si no hay micrófono.
+- [ ] Responder por **voz**: botón de grabar (MediaRecorder) → `POST /api/voz/transcribir` con **Muse Voice Transcribe** (**lee `.orquesta/referencias/muse-voice-transcribe.md`**: solo acepta WAV mono 16 bits a 24 kHz, así que se graba con Web Audio y se codifica el WAV en el navegador; MediaRecorder/webm no sirve; misma `MODEL_API_KEY`, modelo `muse-voice-transcribe-1.0`, `languageBias` y `keywords` con los conceptos de la tarea); muestra la transcripción y permite corregirla antes de enviar. Respaldo: Web Speech API o solo texto si no hay micrófono.
 - [ ] Ver el taller "Agents 102: Best Practices for Verifiable Agents" (mié 28) y aplicar lo útil al verificador; anotarlo en Decisiones.
 - [ ] Responder por **texto** siempre disponible.
 - [ ] La pregunta se puede **escuchar** (síntesis de voz del navegador) para quien prefiera oír.

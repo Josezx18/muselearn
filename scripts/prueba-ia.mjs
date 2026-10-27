@@ -50,4 +50,34 @@ if (process.env.MODEL_API_KEY) {
   }
 }
 
+// Muse Voice Transcribe: envía 1 s de silencio en WAV (24 kHz, mono, 16 bits).
+// No hay voz, así que el texto sale vacío; lo que importa es que responda 200.
+if (process.env.MODEL_API_KEY) {
+  const modeloVoz = process.env.MUSE_VOZ_MODELO || "muse-voice-transcribe-1.0";
+  const hz = 24000, datos = hz * 2; // 1 s de muestras de 16 bits
+  const wav = Buffer.alloc(44 + datos);
+  wav.write("RIFF", 0); wav.writeUInt32LE(36 + datos, 4); wav.write("WAVE", 8);
+  wav.write("fmt ", 12); wav.writeUInt32LE(16, 16); wav.writeUInt16LE(1, 20); wav.writeUInt16LE(1, 22);
+  wav.writeUInt32LE(hz, 24); wav.writeUInt32LE(hz * 2, 28); wav.writeUInt16LE(2, 32); wav.writeUInt16LE(16, 34);
+  wav.write("data", 36); wav.writeUInt32LE(datos, 40);
+  const formulario = new FormData();
+  formulario.append("request", new Blob([JSON.stringify({ mode: "PUSH_TO_TALK", model: modeloVoz, audioEncoding: "WAV", languageBias: ["Spanish", "English"] })], { type: "application/json" }));
+  formulario.append("audio", new Blob([wav], { type: "audio/wav" }), "silencio.wav");
+  const inicio = Date.now();
+  try {
+    const base = (process.env.META_API_URL || "https://api.meta.ai/v1").replace(/\/$/, "");
+    const r = await fetch(`${base}/asr/transcribe?sessionId=prueba-muselearn`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${process.env.MODEL_API_KEY}` },
+      body: formulario,
+    });
+    const cuerpo = await r.text();
+    if (!r.ok) throw new Error(`${r.status} ${cuerpo.slice(0, 300)}`);
+    console.log(`✅ Muse Voice Transcribe · ${modeloVoz} · ${Date.now() - inicio} ms → respuesta: ${cuerpo.slice(0, 120)}`);
+  } catch (e) {
+    fallos++;
+    console.log(`❌ Muse Voice Transcribe · ${modeloVoz}: ${e.message}`);
+  }
+}
+
 process.exit(fallos ? 1 : 0);

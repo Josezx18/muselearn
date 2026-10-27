@@ -28,3 +28,6 @@ npm-debug.log*
 # coordinación local de agentes
 .ficha-actual
 .orquesta-stop-count
+
+# Resultado local de scripts/windows/probar-claves.bat
+prueba-claves.log

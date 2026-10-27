@@ -14,7 +14,9 @@ Formato: `- AAAA-MM-DD HH:MM [Txx] qué se hizo / qué falta / decisión tomada`
 5. T08 demo y entregables
 
 ## Mejoras propuestas (por los agentes; el integrador decide)
-- (vacío)
+- [T01] Verificar el correo al registrarse y recuperar contraseña (hoy el correo se confirma solo).
+- [T01] Permitir al docente quitar estudiantes de la clase y regenerar el código.
+- [T01] Enlace de invitación `/unirse?codigo=XXXXXX` que rellene el código.
 
 ## Decisiones tomadas
 - 2026-10-24 Stack: Next.js + Supabase + Meta Model API. Interfaz español + inglés. Nombre de trabajo: MuseLearn.
@@ -24,3 +26,4 @@ Formato: `- AAAA-MM-DD HH:MM [Txx] qué se hizo / qué falta / decisión tomada`
 
 ## Bitácora
 - 2026-10-27 [T00] Proyecto creado (Next 16.4). Supabase `muselearn` con migraciones 0001 y 0002. Pendiente de José: claves reales y push a GitHub.
+- 2026-10-27 [T01] Auth (registro/login/salir), rutas por rol, clases con código, unirse, 3 endpoints, RLS en supabase/politicas/rls.sql, seed-auth.ts, textos es/en y 20 pruebas. Falta: aplicar RLS y seed en Supabase (ver Solicitudes en la ficha).

@@ -24,6 +24,10 @@ La pantalla que el estudiante ve todos los días. Debe ser clara, bonita y verse
 - [ ] Todo funciona con `NEXT_PUBLIC_USAR_MOCKS=true` y también con la API real.
 - [ ] Textos en es y en.
 
+## Notas del integrador (27 oct)
+- T03 ya integrada: `GET/POST /api/ia/plan`, `PATCH /api/ia/plan/bloques/:id`, `GET /api/ia/analisis` y `PUT /api/preferencias` funcionan con datos reales. Usa siempre `@/lib/api-cliente` (mocks o real según `NEXT_PUBLIC_USAR_MOCKS`).
+- El layout del estudiante ya exige sesión y rol (T01) y tiene el botón Salir.
+
 ## Decisiones
 - 
 

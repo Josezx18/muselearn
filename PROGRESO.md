@@ -31,3 +31,4 @@ Formato: `- AAAA-MM-DD HH:MM [Txx] qué se hizo / qué falta / decisión tomada`
 - 2026-10-27 [T00] Proyecto creado (Next 16.4). Supabase `muselearn` con migraciones 0001 y 0002. Pendiente de José: claves reales y push a GitHub.
 - 2026-10-27 [T01] Auth (registro/login/salir), rutas por rol, clases con código, unirse, 3 endpoints, RLS en supabase/politicas/rls.sql, seed-auth.ts, textos es/en y 20 pruebas. Falta: aplicar RLS y seed en Supabase (ver Solicitudes en la ficha).
 - 2026-10-27 [T03] Analizador, planificador determinista (+avisos con Muse), `llamarMuseStream`, endpoints `/api/ia/*` y `/api/preferencias`. lint/typecheck/test OK (57 pruebas). Pendiente: salidas reales y costo (faltan claves) — ver Bloqueos en la ficha.
+- 2026-10-27 [T07] Integradas T01 y T03 en main: lint, typecheck y 77 pruebas OK. Migraciones 0003 (RLS) y 0004 aplicadas en Supabase. Las ramas nuevas salen de este main.

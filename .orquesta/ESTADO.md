@@ -6,13 +6,13 @@ Estados: ⬜ sin empezar · 🟦 trabajando · 🟨 bloqueado · 🟩 lista para
 | Ficha | Pieza | Plataforma | Nombre de sesión | Rama | Estado | Último avance |
 |---|---|---|---|---|---|---|
 | T00 | Esqueleto y contratos | Claude Code | `T00-esqueleto` | main | ✅ | 27 oct: listo; falta prueba con claves reales y push |
-| T01 | Auth y clases | Claude Code | `T01-auth-claude` | t01-auth-clases | 🟩 | 27 oct: criterios completos; RLS y seed por aplicar |
+| T01 | Auth y clases | Claude Code | `T01-auth-claude` | t01-auth-clases | ✅ | 27 oct: integrada; falta seed con claves reales |
 | T02 | Tareas y entregas | OpenCode | `T02-tareas-opencode` | t02-tareas | ⬜ | |
-| T03 | Motor IA | Claude Code | `T03-motor-claude` | t03-motor-ia | 🟨 | 27 oct: código completo; faltan claves para medir costo y fixtures reales |
-| T04 | Tutor y verificación | Claude Code | `T04-tutor-claude` | t04-tutor-verificacion | ⬜ | |
+| T03 | Motor IA | Claude Code | `T03-motor-claude` | t03-motor-ia | ✅ | 27 oct: integrada; falta medir costo con claves reales |
+| T04 | Tutor y verificación | Codex | `T04-tutor-codex` | t04-tutor-verificacion | ⬜ | |
 | T05 | Dashboard estudiante | Codex | `T05-dashboard-codex` | t05-dashboard | ⬜ | |
 | T06 | Informes y panel docente | OpenCode | `T06-informes-opencode` | t06-informes | ⬜ | |
-| T07 | Integrador | Claude Code | `T07-integrador` | main | ⬜ | |
+| T07 | Integrador | Claude (chat) | `T07-integrador` | main | 🟦 | 27 oct: integró T01 y T03 |
 | T08 | Demo y entrega | José | — | — | ⬜ | |
 
 ## Orden de integración previsto

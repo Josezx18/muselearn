@@ -2,7 +2,7 @@
 
 | Campo | Valor |
 |---|---|
-| Plataforma | Claude Code (segunda sesión; Muse Code si tomas la suscripción) |
+| Plataforma | Codex |
 | Rama / carpeta | `t04-tutor-verificacion` / `../muselearn-T04` |
 | Oleada | 1 |
 | Depende de | T00; usa `llamarMuse()` de T03 (la versión mínima de T00 basta para empezar) |
@@ -28,6 +28,12 @@ La función estrella. Es lo que más debe brillar en la demo.
 - [ ] Al terminar: genera `InformeComprension` validado, lo guarda en `informes`, cambia la entrega a `verificada`, llama a `generarRuta()` (mock si T06 no existe) y redirige a `/estudiante/informe/[id]`.
 - [ ] Audios en bucket `audios`; se borran después de transcribir.
 - [ ] Pruebas: una entrega bien entendida (espera nivel 3-4) y una copiada que el estudiante no sabe explicar (espera 1-2), con respuestas simuladas.
+
+## Notas del integrador (27 oct)
+- Plataforma cambiada a **Codex** (Claude Code al límite de uso).
+- Para el chat del tutor usa `llamarMuseStream` de `@/lib/ia/cliente` (T03): devuelve texto en partes y hace respaldo de proveedor antes del primer trozo.
+- `sesiones_verificacion` e `informes` se escriben desde el servidor con `crearClienteAdmin()` tras comprobar que la entrega es del estudiante en sesión (RLS solo permite leer).
+- Si T06 aún no existe, llama a un mock de `generarRuta()`.
 
 ## Decisiones
 - 

@@ -24,6 +24,11 @@ El docente crea y asigna tareas; el estudiante entrega. Es el "canal": simple y 
 - [ ] Validación con Zod en todos los endpoints; un estudiante no puede entregar en una clase ajena.
 - [ ] Textos en es y en. Pruebas de los endpoints con datos mock.
 
+## Notas del integrador (27 oct)
+- T01 ya integrada: sesión con `exigirRol()` de `@/lib/db/sesion`, clases reales en `/api/clases`. La página `docente/clases/page.tsx` la creó T01 (lista y nueva clase): amplíala con la lista de tareas, no la reescribas.
+- Para analizar al crear una tarea usa `analizarYGuardar` de `@/lib/ia/analizador/servicio` (T03) por cada estudiante inscrito, sin bloquear la respuesta al docente.
+- RLS activo en Supabase (migraciones 0003 y 0004): las escrituras de entregas van con la sesión del estudiante; las del servidor, con `crearClienteAdmin()` después de comprobar permisos.
+
 ## Decisiones
 - 
 

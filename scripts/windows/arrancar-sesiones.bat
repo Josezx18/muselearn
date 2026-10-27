@@ -2,7 +2,7 @@
 chcp 65001 >nul
 setlocal
 title MuseLearn - preparar sesiones
-rem Prepara las carpetas de las fichas y abre Claude Code en cada una.
+rem Prepara las carpetas de las fichas y abre la herramienta de cada una (Claude Code, Codex u OpenCode).
 rem Uso: doble clic, o:  scripts\windows\arrancar-sesiones.bat T01 T03
 set "RAIZ=%~dp0..\.."
 pushd "%RAIZ%" || goto :error
@@ -38,12 +38,13 @@ for %%F in (%FICHAS%) do call :ficha %%F
 if errorlevel 1 goto :error
 
 echo.
-echo === 5/5 Abriendo Claude Code en cada carpeta ===
+echo === 5/5 Abriendo la herramienta de cada ficha ===
 for %%F in (%FICHAS%) do call :abrir %%F
 
 echo.
 echo Listo. En cada ventana nueva: inicia sesion si lo pide y acepta "confiar en esta carpeta".
 echo Cuando pida permiso para npm o git, elige "permitir siempre".
+echo Si una herramienta no arranco con el prompt, pegale: %PROMPT_FICHA%
 pause
 popd
 exit /b 0
@@ -78,11 +79,19 @@ exit /b %ERR%
 :abrir
 set "F=%~1"
 set "DIR=%RAIZ%-%F%"
-set "TITULO=%F%-claude"
-if /i "%F%"=="T01" set "TITULO=T01-auth-claude"
-if /i "%F%"=="T03" set "TITULO=T03-motor-claude"
-if /i "%F%"=="T04" set "TITULO=T04-tutor-claude"
-start "%TITULO%" /d "%DIR%" cmd /k claude --permission-mode acceptEdits "%PROMPT_FICHA%"
+rem Plataforma por ficha (ver .orquesta/ESTADO.md)
+set "PLAT=claude"
+if /i "%F%"=="T02" set "PLAT=opencode"
+if /i "%F%"=="T04" set "PLAT=codex"
+if /i "%F%"=="T05" set "PLAT=codex"
+if /i "%F%"=="T06" set "PLAT=opencode"
+set "TITULO=%F%-%PLAT%"
+where %PLAT% >nul 2>nul
+if errorlevel 1 (echo %F%: no se encontro "%PLAT%". Instalalo o abre la carpeta %DIR% con otra herramienta. & exit /b 0)
+echo Abriendo %F% con %PLAT% ...
+if /i "%PLAT%"=="claude" start "%TITULO%" /d "%DIR%" cmd /k claude --permission-mode acceptEdits "%PROMPT_FICHA%"
+if /i "%PLAT%"=="codex" start "%TITULO%" /d "%DIR%" cmd /k codex --full-auto "%PROMPT_FICHA%"
+if /i "%PLAT%"=="opencode" start "%TITULO%" /d "%DIR%" cmd /k opencode --prompt "%PROMPT_FICHA%"
 exit /b 0
 
 :error

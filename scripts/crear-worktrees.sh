@@ -18,7 +18,7 @@ declare -A RAMA=(
 )
 declare -A PLATAFORMA=(
   [T01]="claude"   [T02]="opencode"
-  [T03]="claude"   [T04]="claude"
+  [T03]="claude"   [T04]="codex"
   [T05]="codex"    [T06]="opencode"
 )
 

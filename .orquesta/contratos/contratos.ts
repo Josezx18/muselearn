@@ -5,6 +5,9 @@
 // =====================================================================
 import { z } from "zod";
 
+/** Fecha y hora ISO 8601. Acepta "Z" y desfases como "+00:00" (así las devuelve Postgres/Supabase). */
+export const FechaHora = z.iso.datetime({ offset: true });
+
 // ---------- Básicos ----------
 export const Rol = z.enum(["docente", "estudiante"]);
 export const Idioma = z.enum(["es", "en"]);
@@ -26,7 +29,7 @@ export const Clase = z.object({
   materia: z.string(),           // "Matemática"
   grado: z.string(),             // "4to"
   codigo_inscripcion: z.string().length(6),
-  creada_en: z.string().datetime(),
+  creada_en: FechaHora,
 });
 
 export const Adjunto = z.object({
@@ -42,10 +45,10 @@ export const Tarea = z.object({
   titulo: z.string(),
   instrucciones: z.string(),
   adjuntos: z.array(Adjunto).default([]),
-  fecha_entrega: z.string().datetime(),
+  fecha_entrega: FechaHora,
   competencias: z.array(z.string()).default([]),   // p. ej. "Resuelve problemas con ecuaciones lineales"
   nivel_ayuda: NivelAyuda.default("pistas"),
-  creada_en: z.string().datetime(),
+  creada_en: FechaHora,
 });
 
 export const EstadoEntrega = z.enum(["pendiente", "entregada", "verificando", "verificada"]);
@@ -57,7 +60,7 @@ export const Entrega = z.object({
   contenido_texto: z.string().default(""),
   adjuntos: z.array(Adjunto).default([]),
   estado: EstadoEntrega,
-  entregada_en: z.string().datetime().nullable(),
+  entregada_en: FechaHora.nullable(),
 });
 
 // ---------- Motor IA: análisis y plan (T03) ----------
@@ -78,8 +81,8 @@ export const BloquePlan = z.object({
   id: z.string(),
   tarea_id: z.string().uuid(),
   titulo: z.string(),                               // "Química: ejercicios 1-5"
-  inicio: z.string().datetime(),
-  fin: z.string().datetime(),
+  inicio: FechaHora,
+  fin: FechaHora,
   estado: EstadoBloque,
 });
 
@@ -88,7 +91,7 @@ export const PlanSemanal = z.object({
   semana_inicio: z.string(),                        // fecha ISO del lunes
   bloques: z.array(BloquePlan),
   avisos: z.array(z.string()),                      // "Llegó Física para el jueves; moví Química al miércoles"
-  generado_en: z.string().datetime(),
+  generado_en: FechaHora,
 });
 
 export const PreferenciasEstudio = z.object({
@@ -105,7 +108,7 @@ export const PreferenciasEstudio = z.object({
 export const MensajeChat = z.object({
   rol: z.enum(["estudiante", "agente"]),
   contenido: z.string(),
-  creado_en: z.string().datetime(),
+  creado_en: FechaHora,
 });
 
 export const PreguntaVerificacion = z.object({
@@ -139,7 +142,7 @@ export const InformeComprension = z.object({
   debilidades: z.array(z.string()),
   resumen_estudiante: z.string(),                   // tono amable, segunda persona
   resumen_docente: z.string(),                      // tono profesional, breve
-  generado_en: z.string().datetime(),
+  generado_en: FechaHora,
 });
 
 export const PasoRuta = z.object({

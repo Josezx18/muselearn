@@ -86,7 +86,10 @@ if /i "%F%"=="T04" set "PLAT=codex"
 if /i "%F%"=="T05" set "PLAT=codex"
 if /i "%F%"=="T06" set "PLAT=opencode"
 set "TITULO=%F%-%PLAT%"
-where %PLAT% >nul 2>nul
+rem Codex: se usa codex.cmd (la version de consola instalada con npm), no el alias de la app.
+set "EXE=%PLAT%"
+if /i "%PLAT%"=="codex" set "EXE=codex.cmd"
+where %EXE% >nul 2>nul
 if errorlevel 1 (
   echo.
   echo %F%: no hay "%PLAT%" en consola. Usa la app:
@@ -97,7 +100,7 @@ if errorlevel 1 (
 )
 echo Abriendo %F% con %PLAT% ...
 if /i "%PLAT%"=="claude" start "%TITULO%" /d "%DIR%" cmd /k claude --permission-mode acceptEdits "%PROMPT_FICHA%"
-if /i "%PLAT%"=="codex" start "%TITULO%" /d "%DIR%" cmd /k codex --full-auto "%PROMPT_FICHA%"
+if /i "%PLAT%"=="codex" start "%TITULO%" /d "%DIR%" cmd /k %EXE% --full-auto "%PROMPT_FICHA%"
 if /i "%PLAT%"=="opencode" start "%TITULO%" /d "%DIR%" cmd /k opencode --prompt "%PROMPT_FICHA%"
 exit /b 0
 

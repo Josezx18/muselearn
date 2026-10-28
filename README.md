@@ -73,6 +73,8 @@ Work in progress during the hackathon (Oct 27 – Nov 4, 2026).
 - [x] Comprehension check by voice or text, with evidence quoted from the student's own answers
 - [x] Student dashboard (*Today*, *Week*, task page)
 - [x] Understanding report, practice route and teacher heatmap ("submitted" vs. "understood")
+- [x] "Add to my week": the practice route becomes study blocks (one step per day) that re-planning keeps
+- [x] Daily AI usage limits per account, so a public demo can't drain the model credits
 - [ ] Notebook-photo reading tested with real handwriting
 - [x] Public deployment (Vercel)
 - [ ] Demo video

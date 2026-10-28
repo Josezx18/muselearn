@@ -19,7 +19,7 @@ declare -A RAMA=(
 declare -A PLATAFORMA=(
   [T01]="claude"   [T02]="opencode"
   [T03]="claude"   [T04]="codex"
-  [T05]="codex"    [T06]="opencode"
+  [T05]="codex"    [T06]="codex"
 )
 
 if [ "$#" -gt 0 ]; then fichas=("$@"); else fichas=(T01 T02 T03 T04 T05); fi

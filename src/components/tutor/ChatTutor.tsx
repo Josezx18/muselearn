@@ -4,13 +4,19 @@ import { useTranslations } from "next-intl";
 import { enviarAlTutor, historialTutor } from "@/lib/api-cliente";
 import { Button, Textarea } from "@/components/ui";
 import type { MensajeChat } from "@/types/contratos";
+import { ErrorApi } from "@/lib/api-cliente";
+
+/** Código corto del error para mostrar junto al mensaje (ayuda a diagnosticar). */
+function codigoDe(e: unknown): string {
+  return e instanceof ErrorApi ? `${e.estado} ${e.codigo}` : "red";
+}
 
 export function ChatTutor({ tareaId }: { tareaId: string }) {
   const t = useTranslations("tutor");
   const [mensajes, setMensajes] = useState<MensajeChat[]>([]);
   const [texto, setTexto] = useState("");
   const [ocupado, setOcupado] = useState(true);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState<false | string>(false);
   const activo = useRef(false);
   useEffect(() => {
     let vigente = true;
@@ -18,8 +24,8 @@ export function ChatTutor({ tareaId }: { tareaId: string }) {
       .then((m) => {
         if (vigente) setMensajes(m);
       })
-      .catch(() => {
-        if (vigente) setError(true);
+      .catch((e: unknown) => {
+        if (vigente) setError(codigoDe(e));
       })
       .finally(() => {
         if (vigente) setOcupado(false);
@@ -44,8 +50,8 @@ export function ChatTutor({ tareaId }: { tareaId: string }) {
       for await (const trozo of enviarAlTutor(tareaId, mensaje)) {
         setMensajes((prev) => prev.map((m, i) => (i === prev.length - 1 ? { ...m, contenido: m.contenido + trozo } : m)));
       }
-    } catch {
-      setError(true);
+    } catch (e) {
+      setError(codigoDe(e));
       setTexto(mensaje);
       setMensajes((prev) => (prev.at(-1)?.contenido === "" ? prev.slice(0, -1) : prev));
     } finally {
@@ -70,7 +76,7 @@ export function ChatTutor({ tareaId }: { tareaId: string }) {
       </div>
       {error && (
         <p role="alert" className="text-peligro">
-          {t("error")}
+          {t("error")} <span className="text-xs text-tinta-suave">({error})</span>
         </p>
       )}
       <form

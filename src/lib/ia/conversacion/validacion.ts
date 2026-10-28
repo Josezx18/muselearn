@@ -24,5 +24,8 @@ export class ErrorConversacion extends Error {
 export function errorConversacion(error: unknown) {
   const status = error instanceof ErrorConversacion ? error.status : error instanceof z.ZodError ? 400 : 503;
   const codigo = error instanceof ErrorConversacion ? error.codigo : status === 400 ? "datos_invalidos" : "servicio_no_disponible";
+  // Registro en el servidor (Vercel → Logs) para poder diagnosticar en producción. Nunca incluye datos del estudiante.
+  const detalle = error instanceof z.ZodError ? error.issues.map((i) => `${i.path.join(".")}: ${i.message}`).join("; ") : error instanceof Error ? error.message : String(error);
+  (status >= 500 ? console.error : console.warn)(`[conversacion] ${status} ${codigo} — ${detalle.slice(0, 300)}`);
   return Response.json({ error: { codigo, mensaje: codigo } }, { status });
 }

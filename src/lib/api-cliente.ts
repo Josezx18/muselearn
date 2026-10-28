@@ -166,7 +166,10 @@ export async function* enviarAlTutor(tarea_id: string, mensaje: string): AsyncGe
     return;
   }
   const r = await fetch("/api/tutor", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ tarea_id, mensaje }) });
-  if (!r.ok || !r.body) throw new ErrorApi(r.status, "tutor", `Error ${r.status}`);
+  if (!r.ok || !r.body) {
+    const e = (await r.json().catch(() => null)) as { error?: { codigo?: string } } | null;
+    throw new ErrorApi(r.status, e?.error?.codigo ?? "tutor", `Error ${r.status}`);
+  }
   const lector = r.body.pipeThrough(new TextDecoderStream()).getReader();
   while (true) {
     const { value, done } = await lector.read();

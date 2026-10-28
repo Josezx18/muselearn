@@ -1,1 +1,16 @@
-{}
+{
+  "titulo": "Class understanding",
+  "clase": "Class",
+  "tarea": "Assignment",
+  "todas": "All assignments",
+  "entrego": "Submitted",
+  "comprendio": "Demonstrated understanding",
+  "base": "Percentage of enrolled students. Understanding: at least one report with overall level >= 3.",
+  "reforzar": "Concepts to reinforce",
+  "sinDato": "No data",
+  "detalle": "Student details",
+  "sinInforme": "No understanding report",
+  "seleccionar": "Select a student in the map",
+  "vacio": "No concepts have been assessed yet.",
+  "resumen": "Teacher summary"
+}

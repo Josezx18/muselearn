@@ -1,6 +1,7 @@
 // Mocks de T06 (informe, ruta y panel docente). Datos ficticios.
-import type { InformeComprension, MapaComprension, RutaPractica } from "@/types/contratos";
+import { Entrega, InformeComprension, MapaComprension, RutaPractica } from "@/types/contratos";
 import { usuariosMock } from "./clases";
+import { tareasMock } from "./tareas";
 import { IDS, enSemana } from "./base";
 
 export const informeMock: InformeComprension = {
@@ -52,3 +53,32 @@ export const mapaComprensionMock: MapaComprension = {
     ),
   conceptos_a_reforzar: ["Comprobar la solución"],
 };
+
+/** Un solo conjunto ficticio coherente para mapa, indicadores y detalle. */
+export function panelComprensionMock(claseId: string, tareaId?: string) {
+  const tareas = tareasMock.filter(t => t.clase_id === claseId);
+  const estudiantes = usuariosMock.filter(u => u.rol === "estudiante");
+  const seleccion = tareas.filter(t => !tareaId || t.id === tareaId);
+  const tieneDatos = seleccion.some(t => t.id === IDS.tareas.ecuaciones);
+  const entregas = tieneDatos ? estudiantes.slice(0, 4).map((u, i) => Entrega.parse({
+    id: `00000000-0000-4000-8000-${String(301 + i).padStart(12, "0")}`,
+    tarea_id: IDS.tareas.ecuaciones, estudiante_id: u.id, contenido_texto: "",
+    estado: i < 3 ? "verificada" : "entregada", adjuntos: [], entregada_en: enSemana(1, 18),
+  })) : [];
+  const informes = entregas.filter(e => e.estado === "verificada").map((e, i) => ({
+    estudiante: e.estudiante_id, titulo: tareas.find(t => t.id === e.tarea_id)!.titulo,
+    informe: InformeComprension.parse({ ...informeMock, entrega_id: e.id,
+      nivel_global: i === 2 ? 1 : 3,
+      por_concepto: informeMock.por_concepto.map((c,j) => ({ ...c, nivel: niveles[i][j] })),
+      resumen_docente: i === 2 ? "Requiere acompañamiento para explicar las operaciones y comprobar el resultado." : informeMock.resumen_docente,
+    }),
+  }));
+  const mapa = MapaComprension.parse({ ...mapaComprensionMock, clase_id: claseId, tarea_id: tareaId ?? null,
+    conceptos: tieneDatos ? conceptos : [],
+    celdas: tieneDatos ? estudiantes.flatMap(u => conceptos.map(concepto => ({ estudiante_id: u.id, estudiante_nombre: u.nombre, concepto,
+      nivel: informes.find(f => f.estudiante === u.id)?.informe.por_concepto.find(c => c.concepto === concepto)?.nivel ?? null,
+    }))) : [],
+    conceptos_a_reforzar: tieneDatos ? ["Comprobar la solución"] : [],
+  });
+  return { tareas, estudiantes, entregas, informes, mapa };
+}

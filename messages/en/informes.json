@@ -1,1 +1,25 @@
-{}
+{
+  "titulo": "Your understanding",
+  "nivel": "Overall level",
+  "conceptos": "Understanding by concept",
+  "fortalezas": "Strengths",
+  "debilidades": "Keep improving",
+  "ruta": "Your practice path",
+  "sinRuta": "Your practice path is not available yet.",
+  "minutos": "{n} min",
+  "cargando": "Loading...",
+  "error": "We could not load the data. Please try again.",
+  "reintentar": "Retry",
+  "semana": "View my week",
+  "agregar": "Add to my week",
+  "pendientePlan": "Adding practice steps to the plan is awaiting integration. You can check off your practice here.",
+  "volver": "Back to Today",
+  "vacio": "No data yet.",
+  "evidencia": "Evidence",
+  "niveles": {
+    "1": "Beginning",
+    "2": "Developing",
+    "3": "Achieved",
+    "4": "Advanced"
+  }
+}

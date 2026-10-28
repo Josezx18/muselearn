@@ -1,1 +1,25 @@
-{}
+{
+  "titulo": "Tu comprensión",
+  "nivel": "Nivel global",
+  "conceptos": "Comprensión por concepto",
+  "fortalezas": "Fortalezas",
+  "debilidades": "Para seguir mejorando",
+  "ruta": "Tu ruta de práctica",
+  "sinRuta": "Tu ruta de práctica todavía no está disponible.",
+  "minutos": "{n} min",
+  "cargando": "Cargando…",
+  "error": "No pudimos cargar los datos. Inténtalo de nuevo.",
+  "reintentar": "Reintentar",
+  "semana": "Ver mi semana",
+  "agregar": "Agregar a mi semana",
+  "pendientePlan": "La incorporación de pasos al plan está pendiente de integración. Puedes marcar tu práctica aquí.",
+  "volver": "Volver a Hoy",
+  "vacio": "Todavía no hay datos.",
+  "evidencia": "Evidencia",
+  "niveles": {
+    "1": "Inicial",
+    "2": "En proceso",
+    "3": "Logrado",
+    "4": "Destacado"
+  }
+}

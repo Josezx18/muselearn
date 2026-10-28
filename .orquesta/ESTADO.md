@@ -11,7 +11,7 @@ Estados: ⬜ sin empezar · 🟦 trabajando · 🟨 bloqueado · 🟩 lista para
 | T03 | Motor IA | Claude Code | `T03-motor-claude` | t03-motor-ia | ✅ | 27 oct: integrada; falta medir costo con claves reales |
 | T04 | Tutor y verificación | Codex | `T04-tutor-codex` | t04-tutor-verificacion | ✅ | 27 oct: integrada; voz conectada por T07; faltan 3 fotos reales de cuaderno para la prueba |
 | T05 | Dashboard estudiante | Codex | `T05-dashboard-codex` | t05-dashboard | ✅ | 27 oct: integrada; entrega real de T02 conectada; 380 px verificado |
-| T06 | Informes y panel docente | Codex | `T06-informes-codex` | t06-informes | ⬜ | |
+| T06 | Informes y panel docente | Codex | `T06-informes-codex` | t06-informes | 🟨 | 27 oct: 6/7 criterios; 14 pruebas T06 OK y UI 380/1280 es/en; bloquean contrato plan T03 y mock test T04 |
 | T07 | Integrador | Claude (chat) | `T07-integrador` | main | 🟦 | 27 oct: integró T01 y T03 |
 | T08 | Demo y entrega | José | — | — | ⬜ | |
 

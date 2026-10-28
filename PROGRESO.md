@@ -14,6 +14,9 @@ Formato: `- AAAA-MM-DD HH:MM [Txx] qué se hizo / qué falta / decisión tomada`
 5. T08 demo y entregables
 
 ## Mejoras propuestas (por los agentes; el integrador decide)
+- [T06] Guardar pasos completados por estudiante en DB para sincronizar dispositivos.
+- [T06] Paginar el mapa de calor y agrupar métricas/resúmenes en una sola consulta para clases grandes.
+- [T06] Hacer transaccional e idempotente la incorporación de rutas al plan, conservándolas al reorganizar.
 - [T04] Cierre transaccional y unicidad de sesiones/conversaciones en DB para soportar varias pestañas y procesos.
 - [T04] Mostrar transcripción del cuaderno con sus incertidumbres para que el estudiante corrija partes ilegibles.
 - [T04] Medir calidad del reconocimiento por concepto con audios ficticios en ambos idiomas tras habilitar ASR central.
@@ -35,6 +38,8 @@ Formato: `- AAAA-MM-DD HH:MM [Txx] qué se hizo / qué falta / decisión tomada`
 - 2026-10-26 Discord: se permite cualquier herramienta de programación sin declararla; Muse Code es opcional.
 
 ## Bitácora
+- 2026-10-27 [T06] Por instrucción explícita del usuario, se prepara commit de todo el trabajo tras repetir lint y typecheck (OK) y npm test (116 OK, 2 fallos del mock T04, 10 omitidas). La ficha mantiene documentados ambos bloqueos de integración.
+- 2026-10-27 [T06] Ruta real con Muse y validación del prompt 05, endpoints de informe/ruta con permisos, panel docente calculado sin IA, mapa de calor, indicadores y detalle, informe y práctica marcable, es/en. lint/typecheck OK y 14 pruebas T06 OK; UI verificada en Chrome a 380/1280 px. Bloqueos: contrato de pasos en plan T03 y actualización de mock test T04 (suite global: 116 OK, 2 fallos, 10 omitidas). Sin commit por regla de suite completa; detalles y solicitudes en ficha.
 - 2026-10-27 [T04] Cierre de controles: lint y typecheck OK; suite local 94 pruebas OK (10 omitidas: 7 reales opt-in ya ejecutadas aparte y 3 preexistentes). Siete pruebas Muse reales OK. Permisos, WAV y recuperación probados; estado 🟨 por dependencias externas, sin marcar los cuatro criterios pendientes.
 - 2026-10-27 [T04] Tutor socrático con stream/historial, verificación de tres preguntas, visión de cuaderno, informe con evidencia comprobable, ruta mock y cierre recuperable. UI es/en a 380/1280 px sin desbordamiento; pruebas reales: cinco casos del tutor OK, comprensión 4 y no explicada 1 (resultados guardados). WAV24k/PCM16, dictado de respaldo y texto editable listos. Pendientes bloqueados: adaptador ASR central T03 + audios, tres fotos reales y taller del 28 oct; detalles en ficha.
 - 2026-10-27 [T00] Proyecto creado (Next 16.4). Supabase `muselearn` con migraciones 0001 y 0002. Pendiente de José: claves reales y push a GitHub.

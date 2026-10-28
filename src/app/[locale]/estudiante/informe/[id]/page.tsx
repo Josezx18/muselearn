@@ -1,6 +1,5 @@
-import { EnConstruccion } from "@/components/comun/EnConstruccion";
-
-// Dueño: T06. Reemplaza este marcador por la pantalla real.
-export default function Pagina() {
-  return <EnConstruccion ficha="T06" titulo="Mi informe" />;
+import { Informe } from "@/components/informes/Informe";
+export default async function Pagina({ params }: PageProps<"/[locale]/estudiante/informe/[id]">) {
+  const { id } = await params;
+  return <Informe id={id} />;
 }

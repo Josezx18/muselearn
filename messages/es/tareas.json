@@ -82,7 +82,10 @@
     "pendiente": "Pendiente",
     "entregada": "Entregada",
     "verificando": "Verificando",
-    "verificada": "Verificada"
+    "verificada": "Verificada",
+    "pistas": "Solo pistas",
+    "ejemplos": "Pistas y ejemplos",
+    "explicacion": "Explicación guiada"
   },
   "errores": {
     "tituloRequerido": "El título es obligatorio",

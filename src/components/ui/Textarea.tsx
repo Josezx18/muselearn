@@ -13,7 +13,7 @@ export function Textarea({ etiqueta, error, ayuda, className, id, rows = 4, ...r
   return (
     <div className="flex flex-col gap-1.5">
       {etiqueta && (
-        <label htmlFor={idCampo} className="text-sm font-medium text-tinta">
+        <label htmlFor={idCampo} className="text-sm font-bold text-tinta">
           {etiqueta}
         </label>
       )}
@@ -23,8 +23,8 @@ export function Textarea({ etiqueta, error, ayuda, className, id, rows = 4, ...r
         aria-invalid={error ? true : undefined}
         aria-describedby={error || ayuda ? `${idCampo}-nota` : undefined}
         className={cn(
-          "w-full rounded-xl border bg-superficie px-3 py-2.5 text-base text-tinta placeholder:text-tinta-suave",
-          error ? "border-peligro" : "border-borde focus:border-primario",
+          "w-full rounded-xl border-2 bg-superficie px-3 py-2.5 text-base text-tinta placeholder:text-tinta-suave",
+          error ? "border-peligro" : "border-borde focus:border-primario focus:outline-none focus:ring-4 focus:ring-primario-claro",
           className,
         )}
         {...resto}

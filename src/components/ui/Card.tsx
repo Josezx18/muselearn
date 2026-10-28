@@ -6,7 +6,7 @@ export function Card({ className, ...resto }: HTMLAttributes<HTMLDivElement>) {
 }
 
 export function CardTitulo({ className, ...resto }: HTMLAttributes<HTMLHeadingElement>) {
-  return <h3 className={cn("text-lg font-semibold text-tinta", className)} {...resto} />;
+  return <h3 className={cn("text-lg font-bold text-tinta", className)} {...resto} />;
 }
 
 export function CardTexto({ className, ...resto }: HTMLAttributes<HTMLParagraphElement>) {

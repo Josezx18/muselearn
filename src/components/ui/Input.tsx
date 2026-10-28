@@ -13,7 +13,7 @@ export function Input({ etiqueta, error, ayuda, className, id, ...resto }: Input
   return (
     <div className="flex flex-col gap-1.5">
       {etiqueta && (
-        <label htmlFor={idCampo} className="text-sm font-medium text-tinta">
+        <label htmlFor={idCampo} className="text-sm font-bold text-tinta">
           {etiqueta}
         </label>
       )}
@@ -22,8 +22,8 @@ export function Input({ etiqueta, error, ayuda, className, id, ...resto }: Input
         aria-invalid={error ? true : undefined}
         aria-describedby={error || ayuda ? `${idCampo}-nota` : undefined}
         className={cn(
-          "h-11 w-full rounded-xl border bg-superficie px-3 text-base text-tinta placeholder:text-tinta-suave",
-          error ? "border-peligro" : "border-borde focus:border-primario",
+          "h-11 w-full rounded-xl border-2 bg-superficie px-3 text-base text-tinta placeholder:text-tinta-suave",
+          error ? "border-peligro" : "border-borde focus:border-primario focus:outline-none focus:ring-4 focus:ring-primario-claro",
           className,
         )}
         {...resto}

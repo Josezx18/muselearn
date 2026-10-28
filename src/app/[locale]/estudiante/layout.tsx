@@ -13,11 +13,8 @@ export default async function LayoutEstudiante({ children, params }: LayoutProps
   if (!usarMocks()) await exigirRol("estudiante", locale); // T01: sin sesión → login; otro rol → su inicio
   return (
     <>
-      <Navegacion items={items} />
-      <div className="mx-auto w-full max-w-5xl">
-        <BotonSalir />
-      </div>
-      <main className="mx-auto w-full max-w-5xl flex-1 px-4 pb-24 pt-4 sm:pb-10">{children}</main>
+      <Navegacion items={items} accion={<BotonSalir />} />
+      <main className="mx-auto w-full max-w-5xl flex-1 px-4 pb-28 pt-6 sm:pb-12">{children}</main>
     </>
   );
 }

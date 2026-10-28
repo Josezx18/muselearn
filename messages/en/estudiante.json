@@ -38,5 +38,6 @@
   "sinAdjuntos": "No attachments.",
   "adjuntoPrivado": "Attachment: {nombre}. Download awaiting integration.",
   "irVerificar": "Check what I learned",
-  "verInforme": "See my understanding report"
+  "verInforme": "See my understanding report",
+  "entregaDia": "Due: {titulo}"
 }

@@ -82,7 +82,10 @@
     "pendiente": "Pending",
     "entregada": "Submitted",
     "verificando": "Verifying",
-    "verificada": "Verified"
+    "verificada": "Verified",
+    "pistas": "Hints only",
+    "ejemplos": "Hints and examples",
+    "explicacion": "Guided explanation"
   },
   "errores": {
     "tituloRequerido": "Title is required",

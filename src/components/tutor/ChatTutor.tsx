@@ -60,16 +60,20 @@ export function ChatTutor({ tareaId }: { tareaId: string }) {
     }
   }
   return (
-    <section className="mx-auto flex w-full min-w-0 max-w-2xl flex-col gap-4 p-4">
-      <h1 className="text-2xl font-bold">{t("titulo")}</h1>
+    <section className="mx-auto flex w-full min-w-0 max-w-2xl flex-col gap-4">
+      <h1 className="text-4xl font-extrabold">{t("titulo")}</h1>
       <p className="text-tinta-suave">{t("introduccion")}</p>
-      <div role="log" aria-label={t("historial")} aria-live="polite" className="flex max-h-[55vh] min-h-32 flex-col gap-3 overflow-y-auto">
+      <div role="log" aria-label={t("historial")} aria-live="polite" className="papel flex max-h-[58vh] min-h-48 flex-col gap-3 overflow-y-auto rounded-2xl border-2 border-borde p-3">
         {mensajes.map((m, i) => (
           <div
             key={i}
-            className={`whitespace-pre-wrap break-words rounded-xl p-3 ${m.rol === "estudiante" ? "ml-6 bg-primario-claro" : "mr-6 border border-borde bg-superficie"}`}
+            className={`max-w-[88%] whitespace-pre-wrap break-words rounded-2xl px-4 py-3 ${
+              m.rol === "estudiante"
+                ? "ml-auto rounded-br-md bg-tinta text-white"
+                : "mr-auto rounded-bl-md border-2 border-borde bg-superficie"
+            }`}
           >
-            <p className="mb-1 text-sm font-semibold">{t(m.rol)}</p>
+            <p className={`mb-0.5 text-xs font-bold ${m.rol === "estudiante" ? "text-white/70" : "text-primario-fuerte"}`}>{t(m.rol)}</p>
             {m.contenido || t("pensando")}
           </div>
         ))}
@@ -86,14 +90,19 @@ export function ChatTutor({ tareaId }: { tareaId: string }) {
           void enviar(texto);
         }}
       >
-        <Textarea etiqueta={t("mensaje")} value={texto} onChange={(e) => setTexto(e.target.value)} maxLength={6000} disabled={ocupado} />
+        <Textarea etiqueta={t("mensaje")} rows={3} value={texto} onChange={(e) => setTexto(e.target.value)} maxLength={6000} disabled={ocupado} />
         <div className="flex flex-wrap gap-2">
           <Button type="submit" cargando={ocupado} disabled={!texto.trim()}>
             {t("enviar")}
           </Button>
-          <Button type="button" variante="secundario" disabled={ocupado} onClick={() => void enviar(t("pistaMensaje"))}>
+          <button
+            type="button"
+            disabled={ocupado}
+            onClick={() => void enviar(t("pistaMensaje"))}
+            className="inline-flex min-h-11 items-center rounded-xl border-2 border-tinta bg-resaltador px-4 font-bold shadow-[0_3px_0_0_var(--color-tinta)] active:translate-y-[2px] active:shadow-none disabled:opacity-50"
+          >
             {t("pista")}
-          </Button>
+          </button>
         </div>
       </form>
     </section>

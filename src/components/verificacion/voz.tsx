@@ -112,14 +112,32 @@ export function EntradaVoz({
   return (
     <div className="flex flex-col gap-2">
       {disponible && (
-        <Button
+        <button
           type="button"
-          variante="secundario"
           disabled={disabled || procesando}
           onClick={() => void (grabando ? detener() : empezar())}
+          aria-pressed={grabando}
+          className={`flex min-h-16 items-center gap-3 rounded-2xl border-2 px-3 py-2 text-left font-titulo text-lg font-extrabold transition-colors disabled:opacity-50 ${
+            grabando
+              ? "border-peligro bg-peligro-claro text-peligro"
+              : "border-tinta bg-superficie shadow-[0_3px_0_0_var(--color-tinta)] active:translate-y-[2px] active:shadow-none"
+          }`}
         >
+          <span className={`relative grid size-12 shrink-0 place-items-center rounded-full text-white ${grabando ? "bg-peligro" : "bg-primario"}`}>
+            {grabando && <span aria-hidden className="absolute inset-0 animate-ping rounded-full bg-peligro/40" />}
+            <svg viewBox="0 0 24 24" className="relative size-6" aria-hidden>
+              {grabando ? (
+                <rect x="7" y="7" width="10" height="10" rx="2" fill="currentColor" />
+              ) : (
+                <>
+                  <rect x="9" y="3" width="6" height="11" rx="3" fill="currentColor" />
+                  <path d="M6 11a6 6 0 0 0 12 0M12 17v3.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                </>
+              )}
+            </svg>
+          </span>
           {t(grabando ? "detener" : "grabar")}
-        </Button>
+        </button>
       )}
       <p className="text-sm text-tinta-suave" role="status">
         {t(procesando ? "transcribiendo" : grabando ? "grabando" : "vozOpcional")}

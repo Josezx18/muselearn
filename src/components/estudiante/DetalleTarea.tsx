@@ -1,14 +1,14 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { obtenerTarea, listarAnalisis, listarClases, listarEntregas } from "@/lib/api-cliente";
 import type { Tarea, AnalisisTarea, Entrega } from "@/types/contratos";
 import { FormularioEntrega } from "@/components/entregas";
-import { Button, Card, Skeleton } from "@/components/ui";
+import { Button, Dificultad, Skeleton } from "@/components/ui";
 import { Link } from "@/i18n/navigation";
-import { TarjetaTarea } from "./TarjetaTarea";
 export function DetalleTarea({ id, estudianteId }: { id: string; estudianteId: string }) {
   const t = useTranslations("estudiante");
+  const locale = useLocale();
   const [tarea, setTarea] = useState<Tarea | null>(null);
   const [analisis, setAnalisis] = useState<AnalisisTarea>();
   const [materia, setMateria] = useState<string>();
@@ -38,72 +38,110 @@ export function DetalleTarea({ id, estudianteId }: { id: string; estudianteId: s
       activo = false;
     };
   }, [id, estudianteId, intento]);
+  const fecha = tarea ? new Date(tarea.fecha_entrega) : null;
   return (
-    <div className="min-w-0 space-y-6 break-words">
-      <Link className="text-primario underline" href="/estudiante/hoy">
-        {t("volver")}
+    <div className="min-w-0 break-words">
+      <Link className="inline-flex min-h-9 items-center font-bold text-primario-fuerte underline-offset-4 hover:underline" href="/estudiante/hoy">
+        ‹ {t("volver")}
       </Link>
       {error ? (
-        <div role="alert">
-          <p>{t("error")}</p>
-          <Button onClick={() => setIntento((i) => i + 1)}>{t("reintentar")}</Button>
+        <div role="alert" className="mt-4 flex flex-wrap items-center gap-3 rounded-2xl border-2 border-peligro bg-peligro-claro p-4">
+          <p className="font-bold text-peligro">{t("error")}</p>
+          <Button variante="secundario" tamano="sm" onClick={() => setIntento((i) => i + 1)}>
+            {t("reintentar")}
+          </Button>
         </div>
-      ) : !tarea ? (
-        <div role="status">
-          <p>{t("carga")}</p>
+      ) : !tarea || !fecha ? (
+        <div role="status" className="mt-4 space-y-3">
+          <p className="sr-only">{t("carga")}</p>
+          <Skeleton className="h-24" />
           <Skeleton className="h-64" />
         </div>
       ) : (
         <>
-          <h1 className="text-2xl font-bold">{tarea.titulo}</h1>
-          <TarjetaTarea tarea={tarea} analisis={analisis} materia={materia} />
-          <Card>
-            <h2 className="text-xl font-semibold">{t("instrucciones")}</h2>
-            <p className="mt-3 whitespace-pre-wrap">{tarea.instrucciones}</p>
-          </Card>
-          <Card>
-            <h2 className="text-xl font-semibold">{t("adjuntos")}</h2>
-            {tarea.adjuntos.length ? (
-              <ul className="mt-3 space-y-2">
-                {tarea.adjuntos.map((a, i) => (
-                  <li key={i}>{t("adjuntoPrivado", { nombre: a.nombre })}</li>
-                ))}
-              </ul>
-            ) : (
-              <p>{t("sinAdjuntos")}</p>
-            )}
-          </Card>
-          <Card className="space-y-3">
-            <h2 className="text-xl font-semibold">{t("analisis")}</h2>
-            {analisis ? (
-              <>
-                <p>{analisis.conceptos.join(" / ")}</p>
-                <h3 className="font-semibold">{t("pasos")}</h3>
-                <ol className="list-decimal space-y-2 pl-5">
-                  {analisis.pasos_sugeridos.map((s, i) => (
-                    <li key={i}>{s}</li>
-                  ))}
-                </ol>
-              </>
-            ) : (
-              <p>{t("sinAnalisis")}</p>
-            )}
-          </Card>
-          <Link
-            className="inline-flex min-h-11 items-center rounded-xl bg-primario px-4 py-2 text-superficie"
-            href={`/estudiante/tarea/${id}/tutor`}
-          >
-            {t("tutor")}
-          </Link>
-          <FormularioEntrega tareaId={id} entregaExistente={entrega} alEntregar={setEntrega} />
-          {entrega && entrega.estado !== "pendiente" && (
-            <Link
-              className="inline-flex min-h-11 items-center rounded-xl bg-primario-fuerte px-4 py-2 font-semibold text-superficie"
-              href={`/estudiante/tarea/${id}/verificar`}
-            >
-              {t(entrega.estado === "verificada" ? "verInforme" : "irVerificar")}
-            </Link>
-          )}
+          <header className="mt-3">
+            <p className="font-bold text-primario-fuerte">{materia ?? t("materia")}</p>
+            <h1 className="text-3xl font-extrabold sm:text-4xl">{tarea.titulo}</h1>
+            <div className="mt-3 flex flex-wrap items-center gap-2 text-sm">
+              <span className="rounded-full border-2 border-borde bg-superficie px-3 py-1 font-bold">
+                {t("fecha", { fecha: fecha.toLocaleString(locale, { weekday: "long", day: "numeric", month: "long", hour: "2-digit", minute: "2-digit" }) })}
+              </span>
+              {analisis && (
+                <>
+                  <span className="inline-flex items-center gap-2 rounded-full border-2 border-borde bg-superficie px-3 py-1">
+                    <Dificultad nivel={analisis.dificultad} />
+                  </span>
+                  <span className="rounded-full border-2 border-borde bg-superficie px-3 py-1">{t("minutos", { n: analisis.minutos_estimados })}</span>
+                </>
+              )}
+            </div>
+          </header>
+
+          <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_22rem] lg:items-start">
+            <div className="min-w-0 space-y-6">
+              <section aria-labelledby="titulo-instrucciones" className="papel papel-margen rounded-2xl border-2 border-borde py-5 pl-14 pr-5">
+                <h2 id="titulo-instrucciones" className="text-xl font-extrabold">
+                  {t("instrucciones")}
+                </h2>
+                <p className="mt-2 whitespace-pre-wrap text-lg leading-[2.2rem]">{tarea.instrucciones}</p>
+                {tarea.adjuntos.length > 0 && (
+                  <ul className="mt-4 space-y-1 text-sm text-tinta-suave">
+                    {tarea.adjuntos.map((a, i) => (
+                      <li key={i}>📎 {a.nombre}</li>
+                    ))}
+                  </ul>
+                )}
+              </section>
+
+              <section aria-labelledby="titulo-analisis" className="rounded-2xl border-2 border-borde bg-superficie p-5">
+                <h2 id="titulo-analisis" className="text-xl font-extrabold">
+                  {t("pasos")}
+                </h2>
+                {analisis ? (
+                  <>
+                    <ol className="mt-3 space-y-3">
+                      {analisis.pasos_sugeridos.map((paso, i) => (
+                        <li key={i} className="flex gap-3">
+                          <span className="grid size-7 shrink-0 place-items-center rounded-full border-2 border-tinta bg-resaltador-claro font-titulo text-sm font-extrabold">
+                            {i + 1}
+                          </span>
+                          <span className="pt-0.5">{paso}</span>
+                        </li>
+                      ))}
+                    </ol>
+                    <p className="mt-4 text-sm text-tinta-suave">{analisis.razon}</p>
+                    <ul className="mt-3 flex flex-wrap gap-2" aria-label={t("analisis")}>
+                      {analisis.conceptos.map((c) => (
+                        <li key={c} className="rounded-full bg-primario-claro px-3 py-1 text-sm font-bold text-primario-fuerte">
+                          {c}
+                        </li>
+                      ))}
+                    </ul>
+                  </>
+                ) : (
+                  <p className="mt-2 text-tinta-suave">{t("sinAnalisis")}</p>
+                )}
+              </section>
+            </div>
+
+            <aside className="space-y-4 lg:sticky lg:top-24">
+              <Link
+                className="flex min-h-13 items-center justify-center gap-2 rounded-xl border-2 border-tinta bg-resaltador px-4 font-titulo text-lg font-extrabold shadow-[0_3px_0_0_var(--color-tinta)] active:translate-y-[2px] active:shadow-none"
+                href={`/estudiante/tarea/${id}/tutor`}
+              >
+                {t("tutor")}
+              </Link>
+              <FormularioEntrega tareaId={id} entregaExistente={entrega} alEntregar={setEntrega} />
+              {entrega && entrega.estado !== "pendiente" && (
+                <Link
+                  className="flex min-h-13 items-center justify-center rounded-xl bg-primario px-4 text-center font-bold text-white shadow-[0_3px_0_0_var(--color-primario-fuerte)] active:translate-y-[2px] active:shadow-none"
+                  href={`/estudiante/tarea/${id}/verificar`}
+                >
+                  {t(entrega.estado === "verificada" ? "verInforme" : "irVerificar")}
+                </Link>
+              )}
+            </aside>
+          </div>
         </>
       )}
     </div>

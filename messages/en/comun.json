@@ -29,7 +29,36 @@
       "aprendeDetalle": "The tutor guides you with questions and hints, never with the answer.",
       "demuestra": "Show you understood",
       "demuestraDetalle": "After you submit, explain your work by voice or text."
-    }
+    },
+    "cuaderno": {
+      "etiqueta": "Example: assignment submitted as a notebook photo",
+      "margen": "MuseLearn asks",
+      "pregunta": "On line 2 you subtracted 5 on both sides. Why on both?",
+      "respuesta": "So the equation stays equal: whatever I do on one side I do on the other.",
+      "respondio": "Camila answered by voice",
+      "nivel": "Proficient"
+    },
+    "comoFunciona": "How it works",
+    "docente": {
+      "titulo": "What the teacher sees",
+      "texto": "Not just who submitted, but who understood. A map by student and concept, plus the topics the class needs to review.",
+      "entrego": "submitted the assignment",
+      "comprendio": "showed they understood it",
+      "conceptos": [
+        "Inverse operations",
+        "Solve for x",
+        "Check the answer"
+      ],
+      "estudiantes": [
+        "Camila",
+        "Luis",
+        "Sofía",
+        "Diego",
+        "Valeria"
+      ],
+      "sinDato": "no data"
+    },
+    "pie": "Made in the Dominican Republic for the Meta AI Developer Hackathon 2026. Sample data is 100% fictional."
   },
   "acciones": {
     "guardar": "Save",

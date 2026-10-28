@@ -29,7 +29,36 @@
       "aprendeDetalle": "El tutor te guía con preguntas y pistas, nunca con la respuesta.",
       "demuestra": "Demuestra que entendiste",
       "demuestraDetalle": "Después de entregar, explica tu trabajo por voz o por texto."
-    }
+    },
+    "cuaderno": {
+      "etiqueta": "Ejemplo: tarea entregada con foto del cuaderno",
+      "margen": "MuseLearn pregunta",
+      "pregunta": "En la línea 2 restaste 5 en los dos lados. ¿Por qué en los dos?",
+      "respuesta": "Para que la igualdad no cambie: lo que hago de un lado lo hago del otro.",
+      "respondio": "Camila respondió por voz",
+      "nivel": "Logrado"
+    },
+    "comoFunciona": "Cómo funciona",
+    "docente": {
+      "titulo": "Lo que ve el docente",
+      "texto": "No solo quién entregó: quién entendió. Un mapa por estudiante y concepto, y los temas que la clase necesita repasar.",
+      "entrego": "entregó la tarea",
+      "comprendio": "demostró que la entendió",
+      "conceptos": [
+        "Operaciones inversas",
+        "Despejar x",
+        "Comprobar"
+      ],
+      "estudiantes": [
+        "Camila",
+        "Luis",
+        "Sofía",
+        "Diego",
+        "Valeria"
+      ],
+      "sinDato": "sin dato"
+    },
+    "pie": "Hecho en República Dominicana para el Meta AI Developer Hackathon 2026. Datos de ejemplo 100 % ficticios."
   },
   "acciones": {
     "guardar": "Guardar",

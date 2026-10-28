@@ -15,6 +15,9 @@
     "seed:auth": "node --env-file=.env.local --experimental-strip-types supabase/seed-auth.ts"
   },
   "dependencies": {
+    "@fontsource-variable/bricolage-grotesque": "^5.3.0",
+    "@fontsource-variable/caveat": "^5.3.0",
+    "@fontsource-variable/lexend": "^5.2.11",
     "@supabase/ssr": "^0.12.7",
     "@supabase/supabase-js": "^2.118.0",
     "date-fns": "^4.4.0",

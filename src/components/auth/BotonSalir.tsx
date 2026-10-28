@@ -8,7 +8,7 @@ import { cerrarSesion } from "./acciones";
 export function BotonSalir() {
   const t = useTranslations("comun");
   return (
-    <form action={cerrarSesion} className="flex justify-end px-4 pt-2">
+    <form action={cerrarSesion}>
       <Button type="submit" variante="fantasma" tamano="sm">
         {t("nav.salir")}
       </Button>

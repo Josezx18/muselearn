@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import { listarClases, cargarComprension } from "@/lib/api-cliente";
 import type { Clase, Tarea, Usuario, Entrega, InformeComprension, MapaComprension } from "@/types/contratos";
 import { Button, Card } from "@/components/ui";
-const colores = { 1: "bg-nivel-1", 2: "bg-nivel-2", 3: "bg-nivel-3", 4: "bg-nivel-4" };
+const colores = { 1: "bg-nivel-1 text-white", 2: "bg-nivel-2 text-tinta", 3: "bg-nivel-3 text-white", 4: "bg-nivel-4 text-white" };
 type Datos = {
   mapa: MapaComprension;
   estudiantes: Usuario[];
@@ -61,7 +61,7 @@ export function Comprension() {
       : 0;
   return (
     <div className="mx-auto grid w-full min-w-0 max-w-6xl gap-5">
-      <h1 className="text-2xl font-bold">{t("titulo")}</h1>
+      <h1 className="text-4xl font-extrabold">{t("titulo")}</h1>
       <div className="grid gap-3 sm:grid-cols-2">
         <label htmlFor="comprension-clase" className="grid gap-1">
           {t("clase")}
@@ -124,28 +124,42 @@ export function Comprension() {
         <p role="status">{clase ? comun("cargando") : comun("vacio")}</p>
       ) : (
         <>
-          <div className="grid grid-cols-2 gap-3">
-            <Card>
-              <p className="text-3xl font-bold">
-                {porcentaje(datos.entregas.filter((e) => e.estado !== "pendiente").map((e) => e.estudiante_id))}%
-              </p>
-              {t("entrego")}
-            </Card>
-            <Card>
-              <p className="text-3xl font-bold">
-                {porcentaje(datos.informes.filter((f) => f.informe.nivel_global >= 3).map((f) => f.estudiante))}%
-              </p>
-              {t("comprendio")}
-            </Card>
-          </div>
+          {(() => {
+            const entrego = porcentaje(datos.entregas.filter((e) => e.estado !== "pendiente").map((e) => e.estudiante_id));
+            const comprendio = porcentaje(datos.informes.filter((f) => f.informe.nivel_global >= 3).map((f) => f.estudiante));
+            return (
+              <section className="rounded-2xl border-2 border-tinta bg-superficie p-5 shadow-[4px_4px_0_0_var(--color-tinta)]">
+                <dl className="grid gap-4">
+                  <div>
+                    <div className="flex items-baseline justify-between gap-3">
+                      <dt className="font-bold">{t("entrego")}</dt>
+                      <dd className="font-titulo text-3xl font-extrabold tabular-nums">{entrego}%</dd>
+                    </div>
+                    <div className="mt-1.5 h-4 overflow-hidden rounded-full bg-nivel-vacio" aria-hidden>
+                      <div className="h-full rounded-full bg-tinta-suave" style={{ width: `${entrego}%` }} />
+                    </div>
+                  </div>
+                  <div>
+                    <div className="flex items-baseline justify-between gap-3">
+                      <dt className="font-bold">{t("comprendio")}</dt>
+                      <dd className="font-titulo text-3xl font-extrabold tabular-nums">{comprendio}%</dd>
+                    </div>
+                    <div className="mt-1.5 h-4 overflow-hidden rounded-full bg-nivel-vacio" aria-hidden>
+                      <div className="h-full rounded-full bg-primario" style={{ width: `${comprendio}%` }} />
+                    </div>
+                  </div>
+                </dl>
+              </section>
+            );
+          })()}
           <p className="text-sm text-tinta-suave">{t("base")}</p>
           <div className="flex flex-wrap gap-3 text-sm">
             {([1, 2, 3, 4] as const).map((n) => (
-              <span key={n} className={`rounded px-2 py-1 ${colores[n]}`}>
+              <span key={n} className={`rounded-lg px-2.5 py-1 font-bold ${colores[n]}`}>
                 {n} · {comun(`niveles.${n}`)}
               </span>
             ))}
-            <span className="rounded bg-nivel-vacio px-2 py-1">{t("sinDato")}</span>
+            <span className="rounded-lg bg-nivel-vacio px-2.5 py-1 font-bold text-tinta-suave">{t("sinDato")}</span>
           </div>
           {!datos.mapa.conceptos.length && <p>{t("vacio")}</p>}
           <div
@@ -181,7 +195,7 @@ export function Comprension() {
                           <button
                             onClick={() => setSeleccion(u.id)}
                             aria-label={`${u.nombre}, ${c}: ${nivel ? comun(`niveles.${nivel}`) : t("sinDato")}`}
-                            className={`w-full rounded p-3 ${nivel ? colores[nivel] : "bg-nivel-vacio"}`}
+                            className={`w-full rounded-lg p-3 font-titulo font-extrabold ${nivel ? colores[nivel] : "bg-nivel-vacio text-tinta-suave"}`}
                           >
                             {nivel ?? t("sinDato")}
                           </button>

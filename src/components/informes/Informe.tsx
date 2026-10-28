@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { obtenerInforme, type InformeConRuta } from "@/lib/api-cliente";
 import { Link } from "@/i18n/navigation";
-import { Card, Button } from "@/components/ui";
+import { Card, Button, NivelDominio } from "@/components/ui";
 import { z } from "zod";
 type Datos = z.infer<typeof InformeConRuta>;
 export function Informe({ id }: { id: string }) {
@@ -60,33 +60,39 @@ export function Informe({ id }: { id: string }) {
   const { informe, ruta } = datos;
   return (
     <div className="mx-auto grid w-full min-w-0 max-w-3xl gap-5">
-      <Link className="text-primario underline" href="/estudiante/hoy">
+      <Link className="inline-flex min-h-9 items-center font-bold text-primario-fuerte underline-offset-4 hover:underline" href="/estudiante/hoy">
         {t("volver")}
       </Link>
-      <h1 className="text-2xl font-bold">{t("titulo")}</h1>
-      <Card>
-        <h2 className="font-semibold">
-          {t("nivel")}: {t(`niveles.${informe.nivel_global}`)}
-        </h2>
-        <p className="mt-3">{informe.resumen_estudiante}</p>
-      </Card>
+      <h1 className="text-4xl font-extrabold">{t("titulo")}</h1>
+      <section className="rounded-2xl border-2 border-tinta bg-superficie p-5 shadow-[4px_4px_0_0_var(--color-tinta)]">
+        <h2 className="text-sm font-bold text-tinta-suave">{t("nivel")}</h2>
+        <p className="font-titulo text-3xl font-extrabold">{t(`niveles.${informe.nivel_global}`)}</p>
+        <div className="mt-2 grid grid-cols-4 gap-1.5" aria-hidden>
+          {[1, 2, 3, 4].map((n) => (
+            <span key={n} className={`h-3 rounded-full ${n <= informe.nivel_global ? ["bg-nivel-1", "bg-nivel-2", "bg-nivel-3", "bg-nivel-4"][informe.nivel_global - 1] : "bg-nivel-vacio"}`} />
+          ))}
+        </div>
+        <p className="mt-4 text-lg">{informe.resumen_estudiante}</p>
+      </section>
       <section className="grid gap-3">
-        <h2 className="text-xl font-semibold">{t("conceptos")}</h2>
+        <h2 className="text-2xl font-extrabold">{t("conceptos")}</h2>
         {informe.por_concepto.map((c) => (
           <Card key={c.concepto}>
-            <h3 className="font-semibold break-words">
-              {c.concepto} · {t(`niveles.${c.nivel}`)}
-            </h3>
-            {c.competencia && <p className="text-tinta-suave">{c.competencia}</p>}
-            <p className="mt-2 break-words">
-              {t("evidencia")}: <q>{c.evidencia.replace(/^["“”«»\s]+|["“”«»\s]+$/g, "")}</q>
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <h3 className="break-words text-lg font-bold">{c.concepto}</h3>
+              <NivelDominio nivel={c.nivel} />
+            </div>
+            {c.competencia && <p className="text-sm text-tinta-suave">{c.competencia}</p>}
+            <p className="mt-3 break-words">
+              <span className="sr-only">{t("evidencia")}: </span>
+              <q className="resaltado font-mano text-2xl leading-snug">{c.evidencia.replace(/^["“”«»\s]+|["“”«»\s]+$/g, "")}</q>
             </p>
           </Card>
         ))}
       </section>
       {(["fortalezas", "debilidades"] as const).map((k) => (
         <Card key={k}>
-          <h2 className="font-semibold">{t(k)}</h2>
+          <h2 className="text-lg font-bold">{t(k)}</h2>
           <ul className="list-inside list-disc">
             {informe[k].map((s, i) => (
               <li key={i}>{s}</li>
@@ -95,7 +101,7 @@ export function Informe({ id }: { id: string }) {
         </Card>
       ))}
       <section className="grid gap-3">
-        <h2 className="text-xl font-semibold">{t("ruta")}</h2>
+        <h2 className="text-2xl font-extrabold">{t("ruta")}</h2>
         {ruta ? (
           <ol className="grid gap-3">
             {ruta.pasos.map((p, i) => (

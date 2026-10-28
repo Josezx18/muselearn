@@ -85,45 +85,60 @@ export function Verificacion({ tareaId, entregaId }: { tareaId: string; entregaI
     voz.lang = locale === "en" ? "en-US" : "es-ES";
     window.speechSynthesis.speak(voz);
   }
+  const numero = sesion?.preguntas.length ?? 0;
   return (
-    <section className="mx-auto flex w-full min-w-0 max-w-2xl flex-col gap-4 p-4">
-      <h1 className="text-2xl font-bold">{t("titulo")}</h1>
-      <p className="text-tinta-suave">{t("tranquilidad")}</p>
+    <section className="mx-auto flex w-full min-w-0 max-w-2xl flex-col gap-5">
+      <header>
+        <h1 className="text-4xl font-extrabold">{t("titulo")}</h1>
+        {!pregunta && <p className="mt-3 max-w-prose text-lg text-tinta-suave">{t("tranquilidad")}</p>}
+      </header>
       {error && (
-        <p role="alert" className="text-peligro">
+        <p role="alert" className="rounded-2xl border-2 border-peligro bg-peligro-claro p-4 font-bold text-peligro">
           {t("error")}
         </p>
       )}
       {!pregunta ? (
-        <Button onClick={() => void empezar()} cargando={ocupado}>
-          {t("empezar")}
-        </Button>
+        <div className="papel papel-margen rounded-2xl border-2 border-borde py-6 pl-14 pr-5">
+          <ol className="space-y-3 font-mano text-2xl text-tinta" aria-hidden>
+            <li>1) ¿Cómo empezaste?</li>
+            <li>2) ¿Por qué ese paso?</li>
+            <li>3) ¿Cómo sabes que está bien?</li>
+          </ol>
+          <Button tamano="lg" className="mt-6 w-full sm:w-auto" onClick={() => void empezar()} cargando={ocupado}>
+            {t("empezar")}
+          </Button>
+        </div>
       ) : (
         <>
-          <p className="text-sm text-tinta-suave">{t("progreso", { numero: sesion!.preguntas.length })}</p>
-          <h2 className="break-words rounded-xl border border-borde bg-superficie p-4 text-lg" aria-live="polite">
-            {pregunta.texto}
-          </h2>
-          {vozDisponible && (
-            <Button variante="fantasma" onClick={escuchar}>
-              {t("escuchar")}
-            </Button>
-          )}
+          <div className="flex items-center gap-3">
+            <div className="flex gap-1.5" aria-hidden>
+              {[1, 2, 3].map((n) => (
+                <span key={n} className={`h-2.5 w-8 rounded-full ${n < numero ? "bg-primario" : n === numero ? "bg-resaltador" : "bg-nivel-vacio"}`} />
+              ))}
+            </div>
+            <p className="text-sm font-bold text-tinta-suave">{t("progreso", { numero })}</p>
+          </div>
+          <div className="papel rounded-2xl border-2 border-tinta p-5 shadow-[4px_4px_0_0_var(--color-tinta)]">
+            <h2 className="break-words font-titulo text-2xl font-extrabold leading-snug" aria-live="polite">
+              {pregunta.texto}
+            </h2>
+            {vozDisponible && (
+              <Button variante="fantasma" tamano="sm" className="mt-3 -ml-2" onClick={escuchar}>
+                <svg viewBox="0 0 24 24" className="size-5" aria-hidden>
+                  <path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor" />
+                  <path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                </svg>
+                {t("escuchar")}
+              </Button>
+            )}
+          </div>
           <form
-            className="flex flex-col gap-3"
+            className="flex flex-col gap-4"
             onSubmit={(e) => {
               e.preventDefault();
               void enviar();
             }}
           >
-            <Textarea
-              etiqueta={t("respuesta")}
-              ayuda={t("corregir")}
-              value={respuesta}
-              maxLength={10000}
-              disabled={ocupado}
-              onChange={(e) => setRespuesta(e.target.value)}
-            />
             <EntradaVoz
               tareaId={tareaId}
               disabled={ocupado}
@@ -133,7 +148,15 @@ export function Verificacion({ tareaId, entregaId }: { tareaId: string; entregaI
                 setVia("voz");
               }}
             />
-            <Button type="submit" cargando={ocupado} disabled={!respuesta.trim() || vozOcupada}>
+            <Textarea
+              etiqueta={t("respuesta")}
+              ayuda={t("corregir")}
+              value={respuesta}
+              maxLength={10000}
+              disabled={ocupado}
+              onChange={(e) => setRespuesta(e.target.value)}
+            />
+            <Button type="submit" tamano="lg" cargando={ocupado} disabled={!respuesta.trim() || vozOcupada}>
               {t("enviar")}
             </Button>
           </form>

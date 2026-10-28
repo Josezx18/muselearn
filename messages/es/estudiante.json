@@ -38,5 +38,6 @@
   "sinAdjuntos": "Sin adjuntos.",
   "adjuntoPrivado": "Archivo adjunto: {nombre}. Descarga pendiente de integración.",
   "irVerificar": "Comprobar lo que aprendí",
-  "verInforme": "Ver mi informe de comprensión"
+  "verInforme": "Ver mi informe de comprensión",
+  "entregaDia": "Se entrega: {titulo}"
 }

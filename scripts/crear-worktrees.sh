@@ -48,4 +48,4 @@ done
 
 echo
 echo "Abre una terminal por carpeta, nómbrala como la ficha (p. ej. T03-motor-muse)"
-echo "y pega el prompt de arranque del README."
+echo "y pega el prompt de .orquesta/PROMPT-SESION.txt."

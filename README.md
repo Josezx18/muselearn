@@ -72,7 +72,8 @@ npm run dev                     # http://localhost:3000
 
 - **No keys yet?** Keep `NEXT_PUBLIC_USAR_MOCKS=true` in `.env.local` and the UI runs on sample data.
 - `npm run prueba:ia` — checks that each AI provider in `.env.local` answers.
-- `npm run seed:auth` — creates fictional demo users and a demo class.
+- `npm run seed:auth` — creates fictional demo users and a demo class; then run `supabase/seed-demo.sql` in the Supabase SQL Editor for demo tasks, submissions and reports.
+- `npm run e2e` — end-to-end tests of the demo flow (desktop and phone) with sample data.
 - Database schema and RLS policies: `supabase/migrations/`.
 - `npm run lint`, `npm run typecheck`, `npm test`, `npm run build`.
 

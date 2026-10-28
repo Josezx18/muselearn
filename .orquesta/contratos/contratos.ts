@@ -94,6 +94,13 @@ export const PlanSemanal = z.object({
   generado_en: FechaHora,
 });
 
+/** Respuesta de "Agregar a mi semana": bloques de práctica creados (de esta semana o la siguiente). */
+export const PracticaAgregada = z.object({
+  bloques: z.array(BloquePlan),
+  sin_ubicar: z.number().int().min(0),              // pasos que no cupieron en las horas libres
+  ya_estaba: z.boolean(),                           // la ruta ya se había agregado antes
+});
+
 export const PreferenciasEstudio = z.object({
   estudiante_id: z.string().uuid(),
   horas_disponibles: z.array(z.object({             // franjas libres por día
@@ -182,6 +189,7 @@ export type Entrega = z.infer<typeof Entrega>;
 export type AnalisisTarea = z.infer<typeof AnalisisTarea>;
 export type BloquePlan = z.infer<typeof BloquePlan>;
 export type PlanSemanal = z.infer<typeof PlanSemanal>;
+export type PracticaAgregada = z.infer<typeof PracticaAgregada>;
 export type PreferenciasEstudio = z.infer<typeof PreferenciasEstudio>;
 export type MensajeChat = z.infer<typeof MensajeChat>;
 export type SesionVerificacion = z.infer<typeof SesionVerificacion>;

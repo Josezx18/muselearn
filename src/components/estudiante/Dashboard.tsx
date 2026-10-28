@@ -7,6 +7,7 @@ import { actualizarBloque, listarAnalisis, listarClases, listarTareas, obtenerPl
 import { Button, Card, Skeleton } from "@/components/ui";
 import type { Usuario, PlanSemanal, Tarea, AnalisisTarea, Clase, BloquePlan, EstadoBloque } from "@/types/contratos";
 import { TarjetaTarea } from "./TarjetaTarea";
+import { enlaceDeBloque } from "@/lib/practica";
 export function Dashboard({ vista, usuario }: { vista: "hoy" | "semana"; usuario: Usuario }) {
   const t = useTranslations("estudiante");
   const locale = useLocale();
@@ -103,7 +104,7 @@ export function Dashboard({ vista, usuario }: { vista: "hoy" | "semana"; usuario
         <div className={`min-w-0 rounded-2xl border-2 bg-superficie p-3 ${hecho ? "border-nivel-3/40" : "border-borde"}`}>
           <Link
             className={`block font-bold leading-snug underline-offset-4 hover:underline ${hecho || omitido ? "text-tinta-suave line-through decoration-2" : ""}`}
-            href={`/estudiante/tarea/${b.tarea_id}`}
+            href={enlaceDeBloque(b)}
           >
             {b.titulo}
           </Link>
@@ -218,7 +219,7 @@ export function Dashboard({ vista, usuario }: { vista: "hoy" | "semana"; usuario
                     </p>
                     <div className="mt-4 flex flex-wrap gap-2">
                       <Link
-                        href={`/estudiante/tarea/${proximo.tarea_id}`}
+                        href={enlaceDeBloque(proximo)}
                         className="inline-flex min-h-11 items-center rounded-xl bg-primario px-5 font-bold text-white shadow-[0_3px_0_0_var(--color-primario-fuerte)] active:translate-y-[2px] active:shadow-none"
                       >
                         {t("abrir")}
@@ -282,7 +283,7 @@ export function Dashboard({ vista, usuario }: { vista: "hoy" | "semana"; usuario
                       {delDia(d).map((b) => (
                         <Link
                           key={b.id}
-                          href={`/estudiante/tarea/${b.tarea_id}`}
+                          href={enlaceDeBloque(b)}
                           className={`block rounded-xl border-2 bg-superficie px-3 py-2 text-sm leading-snug ${b.estado === "hecho" ? "border-nivel-3/40 text-tinta-suave line-through" : "border-borde"}`}
                         >
                           <span className="block font-titulo font-bold tabular-nums text-tinta-suave no-underline">{hora(b.inicio)}</span>

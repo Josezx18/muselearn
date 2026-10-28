@@ -21,5 +21,10 @@
     "2": "En proceso",
     "3": "Logrado",
     "4": "Destacado"
-  }
+  },
+  "agregado": "Listo: {n, plural, one {agregué 1 paso} other {agregué # pasos}} a tu semana, en tus horas libres.",
+  "yaEstaba": "Esta ruta ya está en tu semana.",
+  "sinUbicar": "{n, plural, one {1 paso no cupo} other {# pasos no cupieron}} en tus horas libres. Puedes ampliarlas en Semana.",
+  "errorAgregar": "No pudimos agregarla a tu semana. Inténtalo de nuevo.",
+  "agregarAyuda": "Pondré un paso por día en tus horas libres, sin mover tus tareas."
 }

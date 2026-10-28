@@ -15,6 +15,7 @@ import {
   MapaComprension,
   MensajeChat,
   PlanSemanal,
+  PracticaAgregada,
   PreferenciasEstudio,
   PreguntaVerificacion,
   RutaPractica,
@@ -215,6 +216,29 @@ export const InformeConRuta = z.object({ informe: InformeComprension, ruta: Ruta
 
 export const obtenerInforme = (entrega_id: string) =>
   usarMocks() ? mock({ informe: informeMock, ruta: rutaMock }) : pedir(`/api/informes/${entrega_id}`, InformeConRuta);
+
+/** "Agregar a mi semana": coloca los pasos de la ruta de práctica en el plan del estudiante. */
+export const agregarRutaASemana = (entrega_id: string) =>
+  usarMocks()
+    ? mock(practicaMock(entrega_id), 800)
+    : pedir(`/api/informes/${entrega_id}/semana`, PracticaAgregada, { method: "POST" });
+
+function practicaMock(entrega_id: string): PracticaAgregada {
+  const dia = new Date();
+  dia.setHours(17, 0, 0, 0);
+  const bloques = rutaMock.pasos.map((p, i) => {
+    const inicio = new Date(dia.getTime() + (i + 1) * 86_400_000);
+    return {
+      id: `practica-${entrega_id}-${i}`,
+      tarea_id: tareasMock[0].id,
+      titulo: `Práctica: ${p.titulo}`,
+      inicio: inicio.toISOString(),
+      fin: new Date(inicio.getTime() + p.minutos * 60_000).toISOString(),
+      estado: "planificado" as const,
+    };
+  });
+  return { bloques, sin_ubicar: 0, ya_estaba: false };
+}
 
 export const obtenerMapaComprension = (clase_id: string, tarea_id?: string) =>
   usarMocks()

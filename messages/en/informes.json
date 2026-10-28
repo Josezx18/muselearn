@@ -21,5 +21,10 @@
     "2": "Developing",
     "3": "Achieved",
     "4": "Advanced"
-  }
+  },
+  "agregado": "Done: {n, plural, one {I added 1 step} other {I added # steps}} to your week, in your free hours.",
+  "yaEstaba": "This path is already in your week.",
+  "sinUbicar": "{n, plural, one {1 step didn't fit} other {# steps didn't fit}} in your free hours. You can add more in Week.",
+  "errorAgregar": "We couldn't add it to your week. Please try again.",
+  "agregarAyuda": "I'll place one step per day in your free hours, without moving your tasks."
 }

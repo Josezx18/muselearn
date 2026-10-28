@@ -2,6 +2,7 @@
 // Sin IA y sin base de datos: mismas entradas, mismo plan. Las horas se interpretan en la zona
 // horaria del centro, dada como desplazamiento fijo respecto a UTC (RD: -240, sin horario de verano).
 import type { BloquePlan, PreferenciasEstudio } from "@/types/contratos";
+import { esPractica } from "@/lib/practica";
 
 const MIN = 60_000;
 const DIA = 24 * 60 * MIN;
@@ -123,20 +124,19 @@ export function construirPlan(e: EntradaPlan): ResultadoPlan {
   const fijos: BloquePlan[] = [];
 
   // Lo hecho no se mueve; lo omitido (o vencido sin hacer) queda registrado y su hueco no se reutiliza.
+  // La práctica que el estudiante agregó a su semana tampoco se mueve: la eligió él.
   for (const b of e.bloquesAnteriores) {
     const ini = Date.parse(b.inicio);
     const fin = Date.parse(b.fin);
     let estado = b.estado;
     if (estado === "planificado" && fin < ahoraMs) estado = "omitido";
-    if (estado === "planificado") continue; // se vuelve a calcular
+    if (estado === "planificado" && !esPractica(b.id)) continue; // se vuelve a calcular
     fijos.push({ ...b, estado });
-    const holgura = estado === "hecho" ? DESCANSO_MIN * MIN : 0;
+    const holgura = estado === "omitido" ? 0 : DESCANSO_MIN * MIN;
     libres = restar(libres, { ini: ini - holgura, fin: fin + holgura });
   }
 
-  const orden = [...e.tareas].sort(
-    (a, b) => b.prioridad - a.prioridad || Date.parse(a.fecha_entrega) - Date.parse(b.fecha_entrega),
-  );
+  const orden = [...e.tareas].sort((a, b) => b.prioridad - a.prioridad || Date.parse(a.fecha_entrega) - Date.parse(b.fecha_entrega));
   const nuevos = new Map<string, Colocado[]>();
   const en_riesgo: TareaEnRiesgo[] = [];
 
@@ -203,4 +203,55 @@ export function construirPlan(e: EntradaPlan): ResultadoPlan {
   }
   bloques.sort((a, b) => Date.parse(a.inicio) - Date.parse(b.inicio));
   return { bloques, en_riesgo };
+}
+
+export interface PasoAUbicar {
+  id: string;
+  tarea_id: string;
+  titulo: string;
+  minutos: number;
+}
+
+/**
+ * Coloca pasos de práctica en los huecos que dejan los bloques ya planificados de la semana, en orden
+ * y como máximo uno por día (practicar poco y seguido funciona mejor que todo de golpe). Devuelve los
+ * bloques creados y los pasos que no cupieron.
+ */
+export function ubicarPractica(e: EntradaPlan, pasos: PasoAUbicar[]): { bloques: BloquePlan[]; sin_ubicar: PasoAUbicar[] } {
+  const ahoraMs = e.ahora.getTime();
+  const base = inicioSemanaMs(e.semana_inicio, e.offsetMin);
+  let libres = franjasDeLaSemana(e);
+  for (const b of e.bloquesAnteriores) {
+    if (b.estado === "omitido" || Date.parse(b.fin) < ahoraMs) continue;
+    libres = restar(libres, { ini: Date.parse(b.inicio) - DESCANSO_MIN * MIN, fin: Date.parse(b.fin) + DESCANSO_MIN * MIN });
+  }
+  const diaDe = (ms: number) => Math.floor((ms - base) / DIA);
+  const diasUsados = new Set(
+    e.bloquesAnteriores.filter((b) => esPractica(b.id) && b.estado !== "omitido").map((b) => diaDe(Date.parse(b.inicio))),
+  );
+  const bloques: BloquePlan[] = [];
+  const sin_ubicar: PasoAUbicar[] = [];
+  let desde = ahoraMs;
+  for (const p of pasos) {
+    const dur = Math.max(BLOQUE_MIN, Math.min(p.minutos, e.preferencias.max_minutos_bloque));
+    const l = libres.find((x) => x.ini >= desde && !diasUsados.has(diaDe(x.ini)) && x.fin - x.ini >= dur * MIN);
+    if (!l) {
+      sin_ubicar.push(p);
+      continue;
+    }
+    const ini = l.ini;
+    const fin = ini + dur * MIN;
+    bloques.push({
+      id: p.id,
+      tarea_id: p.tarea_id,
+      titulo: p.titulo,
+      inicio: new Date(ini).toISOString(),
+      fin: new Date(fin).toISOString(),
+      estado: "planificado",
+    });
+    diasUsados.add(diaDe(ini));
+    libres = restar(libres, { ini, fin: fin + DESCANSO_MIN * MIN });
+    desde = fin; // el orden de la ruta importa: cada paso va después del anterior
+  }
+  return { bloques, sin_ubicar };
 }

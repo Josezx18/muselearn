@@ -1,7 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
-import { obtenerInforme, type InformeConRuta } from "@/lib/api-cliente";
+import { agregarRutaASemana, obtenerInforme, type InformeConRuta } from "@/lib/api-cliente";
+import type { PracticaAgregada } from "@/types/contratos";
 import { Link } from "@/i18n/navigation";
 import { Card, Button, NivelDominio } from "@/components/ui";
 import { z } from "zod";
@@ -12,6 +13,9 @@ export function Informe({ id }: { id: string }) {
   const [error, setError] = useState(false);
   const [intento, setIntento] = useState(0);
   const [hechos, setHechos] = useState<number[]>([]);
+  const [agregando, setAgregando] = useState(false);
+  const [agregada, setAgregada] = useState<PracticaAgregada | null>(null);
+  const [errorAgregar, setErrorAgregar] = useState(false);
   useEffect(() => {
     let activo = true;
     obtenerInforme(id)
@@ -42,6 +46,18 @@ export function Informe({ id }: { id: string }) {
       /* El navegador puede bloquear el almacenamiento local. */
     }
   }
+  async function agregar() {
+    if (agregando) return;
+    setAgregando(true);
+    setErrorAgregar(false);
+    try {
+      setAgregada(await agregarRutaASemana(id));
+    } catch {
+      setErrorAgregar(true);
+    } finally {
+      setAgregando(false);
+    }
+  }
   if (error)
     return (
       <div role="alert">
@@ -60,7 +76,10 @@ export function Informe({ id }: { id: string }) {
   const { informe, ruta } = datos;
   return (
     <div className="mx-auto grid w-full min-w-0 max-w-3xl gap-5">
-      <Link className="inline-flex min-h-9 items-center font-bold text-primario-fuerte underline-offset-4 hover:underline" href="/estudiante/hoy">
+      <Link
+        className="inline-flex min-h-9 items-center font-bold text-primario-fuerte underline-offset-4 hover:underline"
+        href="/estudiante/hoy"
+      >
         {t("volver")}
       </Link>
       <h1 className="text-4xl font-extrabold">{t("titulo")}</h1>
@@ -69,7 +88,10 @@ export function Informe({ id }: { id: string }) {
         <p className="font-titulo text-3xl font-extrabold">{t(`niveles.${informe.nivel_global}`)}</p>
         <div className="mt-2 grid grid-cols-4 gap-1.5" aria-hidden>
           {[1, 2, 3, 4].map((n) => (
-            <span key={n} className={`h-3 rounded-full ${n <= informe.nivel_global ? ["bg-nivel-1", "bg-nivel-2", "bg-nivel-3", "bg-nivel-4"][informe.nivel_global - 1] : "bg-nivel-vacio"}`} />
+            <span
+              key={n}
+              className={`h-3 rounded-full ${n <= informe.nivel_global ? ["bg-nivel-1", "bg-nivel-2", "bg-nivel-3", "bg-nivel-4"][informe.nivel_global - 1] : "bg-nivel-vacio"}`}
+            />
           ))}
         </div>
         <p className="mt-4 text-lg">{informe.resumen_estudiante}</p>
@@ -123,6 +145,25 @@ export function Informe({ id }: { id: string }) {
           <p>{t("sinRuta")}</p>
         )}
         <p className="text-sm text-tinta-suave">{t("pendientePlan")}</p>
+        {ruta && !agregada && (
+          <div className="grid gap-2">
+            <Button tamano="lg" className="w-full sm:w-auto sm:justify-self-start" onClick={() => void agregar()} cargando={agregando}>
+              {t("agregar")}
+            </Button>
+            <p className="text-sm text-tinta-suave">{t("agregarAyuda")}</p>
+          </div>
+        )}
+        {errorAgregar && (
+          <p role="alert" className="font-bold text-peligro">
+            {t("errorAgregar")}
+          </p>
+        )}
+        {agregada && (
+          <div role="status" className="rounded-2xl border-2 border-primario bg-superficie p-4">
+            <p className="font-bold">{agregada.ya_estaba ? t("yaEstaba") : t("agregado", { n: agregada.bloques.length })}</p>
+            {agregada.sin_ubicar > 0 && <p className="mt-1 text-tinta-suave">{t("sinUbicar", { n: agregada.sin_ubicar })}</p>}
+          </div>
+        )}
         <Link className="inline-flex min-h-11 items-center font-semibold text-primario underline" href="/estudiante/semana">
           {t("semana")}
         </Link>

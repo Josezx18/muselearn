@@ -4,6 +4,7 @@ import { AnalisisTarea, PlanSemanal, PreferenciasEstudio, type Idioma } from "@/
 import { crearClienteAdmin } from "@/lib/supabase/servidor";
 import type { HistorialMateria } from "../analizador";
 import type { TareaPlan } from "./algoritmo";
+import { esPractica } from "@/lib/practica";
 
 export interface Almacen {
   /** Tareas con análisis, no entregadas, con los minutos ya hechos. */
@@ -37,7 +38,7 @@ export function crearAlmacenSupabase(): Almacen {
     const mapa = new Map<string, number>();
     for (const plan of await planesDe(estudiante_id)) {
       for (const b of plan.bloques) {
-        if (b.estado === "hecho") mapa.set(b.tarea_id, (mapa.get(b.tarea_id) ?? 0) + minutosDe(b));
+        if (b.estado === "hecho" && !esPractica(b.id)) mapa.set(b.tarea_id, (mapa.get(b.tarea_id) ?? 0) + minutosDe(b));
       }
     }
     return mapa;

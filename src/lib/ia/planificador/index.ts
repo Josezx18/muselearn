@@ -1,9 +1,10 @@
 // Planificador semanal (T03): algoritmo determinista + una llamada a Muse solo para redactar los avisos.
 import { z } from "zod";
-import { PlanSemanal, type BloquePlan, type Idioma } from "@/types/contratos";
+import { PlanSemanal, type BloquePlan, type Idioma, type PasoRuta, type PracticaAgregada } from "@/types/contratos";
+import { idPractica } from "@/lib/practica";
 import { llamarMuse as llamarReal, type OpcionesLlamada, type ResultadoIA } from "../cliente";
 import { PROMPT_PLANIFICADOR } from "../prompts/planificador";
-import { construirPlan, lunesDe, type TareaEnRiesgo, type TareaPlan } from "./algoritmo";
+import { construirPlan, inicioSemanaMs, lunesDe, ubicarPractica, type PasoAUbicar, type TareaEnRiesgo, type TareaPlan } from "./algoritmo";
 import type { Almacen } from "./almacen";
 import { preferenciasPorDefecto } from "./preferencias";
 
@@ -65,7 +66,9 @@ export function avisosDeRespaldo(d: Diferencias, riesgo: TareaEnRiesgo[], idioma
     avisos.push(es ? `Agregué "${d.tareas_nuevas.join('", "')}" a tu semana.` : `I added "${d.tareas_nuevas.join('", "')}" to your week.`);
   }
   if (d.tareas_movidas.length) {
-    avisos.push(es ? `Moví los bloques de "${d.tareas_movidas.join('", "')}".` : `I moved the blocks for "${d.tareas_movidas.join('", "')}".`);
+    avisos.push(
+      es ? `Moví los bloques de "${d.tareas_movidas.join('", "')}".` : `I moved the blocks for "${d.tareas_movidas.join('", "')}".`,
+    );
   }
   if (riesgo.length) {
     const nombres = riesgo.map((r) => r.titulo).join('", "');
@@ -166,6 +169,78 @@ export async function actualizarEstadoBloque(
     bloques: plan.bloques.map((b) => (b.id === bloque_id ? { ...b, estado } : b)),
   };
   await almacen.guardarPlan(actualizado);
-  const nuevo = estado === "omitido" ? await planificarSemana(estudiante_id, plan.semana_inicio, { ...opciones, causa: "bloque_omitido" }) : actualizado;
+  const nuevo =
+    estado === "omitido"
+      ? await planificarSemana(estudiante_id, plan.semana_inicio, { ...opciones, causa: "bloque_omitido" })
+      : actualizado;
   return nuevo.bloques.find((b) => b.id === bloque_id) ?? actualizado.bloques.find((b) => b.id === bloque_id) ?? null;
+}
+
+export interface RutaParaAgregar {
+  entrega_id: string;
+  tarea_id: string;
+  pasos: Pick<PasoRuta, "titulo" | "minutos">[];
+}
+
+/**
+ * "Agregar a mi semana": coloca los pasos de la ruta de práctica en las horas libres de esta semana
+ * (y lo que no quepa, en la siguiente), sin mover lo ya planificado. Idempotente: si la ruta ya está
+ * en el plan, no la duplica. No llama a la IA: el aviso es fijo y no gasta créditos.
+ */
+export async function agregarPracticaASemana(
+  estudiante_id: string,
+  ruta: RutaParaAgregar,
+  opciones: OpcionesPlan,
+): Promise<PracticaAgregada> {
+  const { almacen } = opciones;
+  const ahora = opciones.ahora ?? new Date();
+  const offsetMin = opciones.offsetMin ?? offsetPorDefecto();
+  const idioma = opciones.idioma ?? (await almacen.cargarIdioma(estudiante_id));
+  const preferencias = (await almacen.cargarPreferencias(estudiante_id)) ?? preferenciasPorDefecto(estudiante_id);
+  const ids = ruta.pasos.map((_, i) => idPractica(ruta.entrega_id, i));
+
+  const estaSemana = lunesDe(ahora, offsetMin);
+  const siguiente = lunesDe(new Date(inicioSemanaMs(estaSemana, offsetMin) + 7 * 86_400_000 + 12 * 3_600_000), offsetMin);
+  const semanas = [estaSemana, siguiente];
+
+  // Si ya se agregó (en cualquiera de las dos semanas), no se duplica.
+  const guardados = await Promise.all(semanas.map((s) => almacen.cargarPlan(estudiante_id, s)));
+  const existentes = guardados.flatMap((p) => p?.bloques ?? []).filter((b) => ids.includes(b.id));
+  if (existentes.length > 0) return { bloques: existentes, sin_ubicar: 0, ya_estaba: true };
+
+  const prefijo = idioma === "es" ? "Práctica" : "Practice";
+  let pendientes: PasoAUbicar[] = ruta.pasos.map((p, i) => ({
+    id: ids[i],
+    tarea_id: ruta.tarea_id,
+    titulo: `${prefijo}: ${p.titulo}`,
+    minutos: p.minutos,
+  }));
+  const creados: BloquePlan[] = [];
+  for (const [i, semana] of semanas.entries()) {
+    if (pendientes.length === 0) break;
+    // La semana siguiente solo se toca si hace falta; sin plan guardado se calcula igual que al abrirla.
+    const plan =
+      guardados[i] ?? (await planificarSemana(estudiante_id, semana, { ...opciones, ahora, offsetMin, idioma, causa: "reorganizar" }));
+    const { bloques, sin_ubicar } = ubicarPractica(
+      { semana_inicio: plan.semana_inicio, tareas: [], preferencias, bloquesAnteriores: plan.bloques, ahora, offsetMin },
+      pendientes,
+    );
+    pendientes = sin_ubicar;
+    if (bloques.length === 0) continue;
+    creados.push(...bloques);
+    const n = bloques.length;
+    const aviso =
+      idioma === "es"
+        ? `Agregué ${n === 1 ? "1 paso" : `${n} pasos`} de tu ruta de práctica a ${plan.semana_inicio === estaSemana ? "esta semana" : "la próxima semana"}.`
+        : `I added ${n === 1 ? "1 step" : `${n} steps`} of your practice route to ${plan.semana_inicio === estaSemana ? "this week" : "next week"}.`;
+    await almacen.guardarPlan(
+      PlanSemanal.parse({
+        ...plan,
+        bloques: [...plan.bloques, ...bloques].sort((a, b) => Date.parse(a.inicio) - Date.parse(b.inicio)),
+        avisos: [aviso, ...plan.avisos].slice(0, 3),
+        generado_en: ahora.toISOString(),
+      }),
+    );
+  }
+  return { bloques: creados, sin_ubicar: pendientes.length, ya_estaba: false };
 }

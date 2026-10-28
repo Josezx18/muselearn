@@ -14,6 +14,9 @@ Formato: `- AAAA-MM-DD HH:MM [Txx] qué se hizo / qué falta / decisión tomada`
 5. T08 demo y entregables
 
 ## Mejoras propuestas (por los agentes; el integrador decide)
+- [T06] Guardar pasos completados por estudiante en DB para sincronizar dispositivos.
+- [T06] Paginar el mapa de calor y agrupar métricas/resúmenes en una sola consulta para clases grandes.
+- [T06] Hacer transaccional e idempotente la incorporación de rutas al plan, conservándolas al reorganizar.
 - [T04] Cierre transaccional y unicidad de sesiones/conversaciones en DB para soportar varias pestañas y procesos.
 - [T04] Mostrar transcripción del cuaderno con sus incertidumbres para que el estudiante corrija partes ilegibles.
 - [T04] Medir calidad del reconocimiento por concepto con audios ficticios en ambos idiomas tras habilitar ASR central.
@@ -22,6 +25,7 @@ Formato: `- AAAA-MM-DD HH:MM [Txx] qué se hizo / qué falta / decisión tomada`
 - [T01] Enlace de invitación `/unirse?codigo=XXXXXX` que rellene el código.
 - (T03) Guardar minutos reales por tarea (tabla o columna) para que el historial del analizador sea exacto.
 - (T03) Extraer texto de los PDFs adjuntos antes de analizar (T02 no lo hizo; los PDFs ya se suben a Storage).
+- (T03/T06) "Agregar a mi semana": que los pasos de la ruta se vuelvan bloques del plan sin que "Reorganizar" los borre.
 - (T02) Editar una tarea existente (falta `PATCH /api/tareas/:id`).
 - (T03) Mostrar en Hoy los `avisos` del plan como notificación al reorganizarse.
 
@@ -35,6 +39,8 @@ Formato: `- AAAA-MM-DD HH:MM [Txx] qué se hizo / qué falta / decisión tomada`
 - 2026-10-26 Discord: se permite cualquier herramienta de programación sin declararla; Muse Code es opcional.
 
 ## Bitácora
+- 2026-10-27 [T06] Por instrucción explícita del usuario, se prepara commit de todo el trabajo tras repetir lint y typecheck (OK) y npm test (116 OK, 2 fallos del mock T04, 10 omitidas). La ficha mantiene documentados ambos bloqueos de integración.
+- 2026-10-27 [T06] Ruta real con Muse y validación del prompt 05, endpoints de informe/ruta con permisos, panel docente calculado sin IA, mapa de calor, indicadores y detalle, informe y práctica marcable, es/en. lint/typecheck OK y 14 pruebas T06 OK; UI verificada en Chrome a 380/1280 px. Bloqueos: contrato de pasos en plan T03 y actualización de mock test T04 (suite global: 116 OK, 2 fallos, 10 omitidas). Sin commit por regla de suite completa; detalles y solicitudes en ficha.
 - 2026-10-27 [T04] Cierre de controles: lint y typecheck OK; suite local 94 pruebas OK (10 omitidas: 7 reales opt-in ya ejecutadas aparte y 3 preexistentes). Siete pruebas Muse reales OK. Permisos, WAV y recuperación probados; estado 🟨 por dependencias externas, sin marcar los cuatro criterios pendientes.
 - 2026-10-27 [T04] Tutor socrático con stream/historial, verificación de tres preguntas, visión de cuaderno, informe con evidencia comprobable, ruta mock y cierre recuperable. UI es/en a 380/1280 px sin desbordamiento; pruebas reales: cinco casos del tutor OK, comprensión 4 y no explicada 1 (resultados guardados). WAV24k/PCM16, dictado de respaldo y texto editable listos. Pendientes bloqueados: adaptador ASR central T03 + audios, tres fotos reales y taller del 28 oct; detalles en ficha.
 - 2026-10-27 [T00] Proyecto creado (Next 16.4). Supabase `muselearn` con migraciones 0001 y 0002. Pendiente de José: claves reales y push a GitHub.
@@ -46,3 +52,4 @@ Formato: `- AAAA-MM-DD HH:MM [Txx] qué se hizo / qué falta / decisión tomada`
 - 2026-10-27 [T05] Implementados Hoy, Semana lunes-domingo deslizable, tarjetas con razon desplegable, avisos descartables, reorganizacion, bloques hecho/omitir, detalle con analisis y pasos, tutor, placeholder de entrega y textos es/en. lint y typecheck OK; 77 pruebas pasan, 3 omitidas. Pendientes: revision visual (navegador no disponible) e integracion real T02; ver Bloqueos de T05.
 - 2026-10-27 [T07] Integrada T05: Hoy, Semana y página de tarea con la entrega real de T02 y enlace a la verificación. Código formateado; 380 px verificado con Playwright. lint, typecheck y 83 pruebas OK.
 - 2026-10-27 [T07] Integrada T04: tutor con stream e historial, verificación de 3 preguntas con evidencias verificables, informe y ruta (mock hasta T06). T07 conectó la voz (Muse Voice Transcribe, el audio no se guarda) y el reintento de evaluación. lint, typecheck y 104 pruebas OK. Falta: probar lectura de cuaderno con 3 fotos reales.
+- 2026-10-28 [T07] Integrada T06: informe del estudiante, ruta de práctica con Muse (y respaldo sin IA), mapa de calor y "entregó vs. comprendió". lint, typecheck, 119 pruebas y build OK; 380 px verificado. Producto completo de punta a punta; falta probar la lectura del cuaderno con fotos reales, el despliegue y el video.

@@ -220,3 +220,20 @@ export const obtenerMapaComprension = (clase_id: string, tarea_id?: string) =>
         `/api/docente/comprension?clase_id=${encodeURIComponent(clase_id)}${tarea_id ? `&tarea_id=${encodeURIComponent(tarea_id)}` : ""}`,
         MapaComprension,
       );
+
+// T06: composición de endpoints existentes para indicadores y resúmenes docentes.
+export async function cargarComprension(claseId: string, tareaId?: string) {
+  if (usarMocks()) {
+    const { panelComprensionMock } = await import("./mocks/informes");
+    return mock(panelComprensionMock(claseId, tareaId));
+  }
+  const [tareas, estudiantes, mapa] = await Promise.all([
+    listarTareas(claseId), listarEstudiantes(claseId), obtenerMapaComprension(claseId, tareaId),
+  ]);
+  const entregas = (await Promise.all(tareas.filter(t => !tareaId || t.id === tareaId).map(t => listarEntregas(t.id)))).flat();
+  const informes = await Promise.all(entregas.filter(e => e.estado === "verificada").map(async e => ({
+    estudiante: e.estudiante_id, titulo: tareas.find(t => t.id === e.tarea_id)?.titulo ?? "",
+    informe: (await obtenerInforme(e.id)).informe,
+  })));
+  return { tareas, estudiantes, mapa, entregas, informes };
+}

@@ -53,9 +53,11 @@ Work in progress during the hackathon (Oct 27 – Nov 4, 2026).
 - [x] Teacher and student accounts, roles, classes with a 6-character join code
 - [x] Tasks with attachments; submissions with text, files and notebook photos (compressed on the phone)
 - [x] AI task analysis and weekly planner with automatic re-planning
-- [ ] Socratic tutor and voice/notebook comprehension verification
-- [ ] Student dashboard (*Today*, *Week*)
-- [ ] Teacher comprehension heatmap and reports
+- [x] Socratic tutor (streaming, respects the teacher's help level)
+- [x] Comprehension check by voice or text, with evidence quoted from the student's own answers
+- [x] Student dashboard (*Today*, *Week*, task page)
+- [x] Understanding report, practice route and teacher heatmap ("submitted" vs. "understood")
+- [ ] Notebook-photo reading tested with real handwriting
 - [ ] Public deployment and demo video
 
 ## Run it locally

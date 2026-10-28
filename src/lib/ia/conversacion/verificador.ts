@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { llamarMuse, type MensajeIA } from "@/lib/ia/cliente";
-import { InformeComprension, PreguntaVerificacion, RutaPractica, type Tarea } from "@/types/contratos";
+import { InformeComprension, PreguntaVerificacion } from "@/types/contratos";
 import { SISTEMA_EVALUACION, SISTEMA_PREGUNTAS } from "./prompts";
 import { contextoEntrega } from "./servidor";
 
@@ -102,20 +102,4 @@ export function validarEvidencias(informe: InformeComprension, preguntas: Pregun
   }
 }
 
-/** Adaptador temporal hasta que T06 exporte generarRuta. No inventa una segunda evaluación. */
-export async function generarRuta(informe: InformeComprension, tarea: Tarea, idioma: "es" | "en") {
-  const en = idioma === "en";
-  const conceptos = informe.por_concepto.filter((c) => c.nivel < 3);
-  return RutaPractica.parse({
-    entrega_id: informe.entrega_id,
-    pasos: (conceptos.length ? conceptos : informe.por_concepto.slice(0, 1)).slice(0, 6).map((c) => ({
-      titulo: en ? `Review: ${c.concepto}` : `Repasar: ${c.concepto}`,
-      tipo: "repaso",
-      descripcion: en
-        ? `Explain a step of ${tarea.titulo} in your own words and check why it works.`
-        : `Explica con tus palabras un paso de ${tarea.titulo} y comprueba por qué funciona.`,
-      concepto: c.concepto,
-      minutos: 10,
-    })),
-  });
-}
+export { generarRuta } from "@/lib/ia/informes";

@@ -1,1 +1,16 @@
-{}
+{
+  "titulo": "Comprensión de la clase",
+  "clase": "Clase",
+  "tarea": "Tarea",
+  "todas": "Todas las tareas",
+  "entrego": "Entregó",
+  "comprendio": "Demostró comprensión",
+  "base": "Porcentaje de estudiantes inscritos. Comprensión: al menos un informe con nivel global >= 3.",
+  "reforzar": "Conceptos a reforzar",
+  "sinDato": "Sin dato",
+  "detalle": "Detalle por estudiante",
+  "sinInforme": "Sin informe de comprensión",
+  "seleccionar": "Selecciona un estudiante en el mapa",
+  "vacio": "Todavía no hay conceptos evaluados.",
+  "resumen": "Resumen docente"
+}

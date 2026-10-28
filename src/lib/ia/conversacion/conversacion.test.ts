@@ -64,7 +64,22 @@ describe("verificador", () => {
     );
     expect(informe.entrega_id).toBe(id);
     expect(informe.nivel_global).toBe(nivel);
+    // generarRuta (T06) hace su propia llamada a Muse con funcion "ruta": nivel 1 → 2 pasos de repaso; nivel 4 → 1 reto.
+    const paso = { tipo: "ejercicio", descripcion: "Practica.", concepto: "Inversas", minutos: 10 };
+    llamada.mockResolvedValueOnce({
+      datos: {
+        entrega_id: crypto.randomUUID(),
+        pasos:
+          nivel === 1
+            ? [
+                { ...paso, titulo: "A" },
+                { ...paso, titulo: "B" },
+              ]
+            : [{ ...paso, titulo: "Reto" }],
+      },
+    });
     const ruta = await generarRuta(informe, tareasMock[0], "es");
+    expect(llamada.mock.calls.at(-1)?.[0].funcion).toBe("ruta");
     expect(ruta.entrega_id).toBe(id);
     expect(ruta.pasos.length).toBeGreaterThan(0);
     expect(() => validarEvidencias(informe, [])).toThrow("evidencia_no_verificable");

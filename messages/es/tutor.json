@@ -1,1 +1,13 @@
-{}
+{
+  "titulo": "Tu tutor",
+  "introduccion": "Vamos paso a paso. Te ayudaré a encontrar el camino para resolver tu tarea.",
+  "historial": "Conversación con el tutor",
+  "estudiante": "Tú",
+  "agente": "Tutor",
+  "pensando": "Pensando…",
+  "error": "No pudimos completar la conversación. Inténtalo de nuevo.",
+  "mensaje": "¿Qué has intentado?",
+  "enviar": "Enviar",
+  "pista": "Necesito una pista",
+  "pistaMensaje": "Necesito una pista para continuar con mi tarea."
+}

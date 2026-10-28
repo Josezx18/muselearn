@@ -1,1 +1,18 @@
-{}
+{
+  "titulo": "Explain it to me",
+  "tranquilidad": "Well done submitting your work. This is not an exam: tell us how you did it, as if explaining to a classmate. Take your time.",
+  "empezar": "Start",
+  "progreso": "Question {numero} · 3 to 5 in total",
+  "escuchar": "Listen to the question",
+  "respuesta": "Your explanation",
+  "corregir": "You can type or edit the transcript before sending.",
+  "enviar": "Send explanation",
+  "error": "We could not continue. Check that you submitted your assignment and try again.",
+  "grabar": "Record my explanation",
+  "detener": "Stop recording",
+  "grabando": "Recording · up to two minutes.",
+  "transcribiendo": "Processing your voice…",
+  "vozOpcional": "Voice is optional. You can always type your answer.",
+  "errorVoz": "We could not transcribe. Type your explanation or try browser dictation.",
+  "dictar": "Try browser dictation"
+}

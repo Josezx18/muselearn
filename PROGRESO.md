@@ -14,6 +14,9 @@ Formato: `- AAAA-MM-DD HH:MM [Txx] qué se hizo / qué falta / decisión tomada`
 5. T08 demo y entregables
 
 ## Mejoras propuestas (por los agentes; el integrador decide)
+- [T04] Cierre transaccional y unicidad de sesiones/conversaciones en DB para soportar varias pestañas y procesos.
+- [T04] Mostrar transcripción del cuaderno con sus incertidumbres para que el estudiante corrija partes ilegibles.
+- [T04] Medir calidad del reconocimiento por concepto con audios ficticios en ambos idiomas tras habilitar ASR central.
 - [T01] Verificar el correo al registrarse y recuperar contraseña (hoy el correo se confirma solo).
 - [T01] Permitir al docente quitar estudiantes de la clase y regenerar el código.
 - [T01] Enlace de invitación `/unirse?codigo=XXXXXX` que rellene el código.
@@ -28,6 +31,8 @@ Formato: `- AAAA-MM-DD HH:MM [Txx] qué se hizo / qué falta / decisión tomada`
 - 2026-10-26 Discord: se permite cualquier herramienta de programación sin declararla; Muse Code es opcional.
 
 ## Bitácora
+- 2026-10-27 [T04] Cierre de controles: lint y typecheck OK; suite local 94 pruebas OK (10 omitidas: 7 reales opt-in ya ejecutadas aparte y 3 preexistentes). Siete pruebas Muse reales OK. Permisos, WAV y recuperación probados; estado 🟨 por dependencias externas, sin marcar los cuatro criterios pendientes.
+- 2026-10-27 [T04] Tutor socrático con stream/historial, verificación de tres preguntas, visión de cuaderno, informe con evidencia comprobable, ruta mock y cierre recuperable. UI es/en a 380/1280 px sin desbordamiento; pruebas reales: cinco casos del tutor OK, comprensión 4 y no explicada 1 (resultados guardados). WAV24k/PCM16, dictado de respaldo y texto editable listos. Pendientes bloqueados: adaptador ASR central T03 + audios, tres fotos reales y taller del 28 oct; detalles en ficha.
 - 2026-10-27 [T00] Proyecto creado (Next 16.4). Supabase `muselearn` con migraciones 0001 y 0002. Pendiente de José: claves reales y push a GitHub.
 - 2026-10-27 [T01] Auth (registro/login/salir), rutas por rol, clases con código, unirse, 3 endpoints, RLS en supabase/politicas/rls.sql, seed-auth.ts, textos es/en y 20 pruebas. Falta: aplicar RLS y seed en Supabase (ver Solicitudes en la ficha).
 - 2026-10-27 [T03] Analizador, planificador determinista (+avisos con Muse), `llamarMuseStream`, endpoints `/api/ia/*` y `/api/preferencias`. lint/typecheck/test OK (57 pruebas). Pendiente: salidas reales y costo (faltan claves) — ver Bloqueos en la ficha.

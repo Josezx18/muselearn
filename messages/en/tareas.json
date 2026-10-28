@@ -1,1 +1,90 @@
-{}
+{
+  "titulo": "Tasks",
+  "nueva": {
+    "boton": "New task",
+    "titulo": "Create new task",
+    "guardando": "Saving...",
+    "guardar": "Save",
+    "cancelar": "Cancel",
+    "exito": "Task created successfully",
+    "error": "Could not create task"
+  },
+  "formulario": {
+    "titulo": "Task title",
+    "tituloPlaceholder": "E.g., First-degree equations practice",
+    "instrucciones": "Instructions",
+    "instruccionesPlaceholder": "Describe steps, exercises, delivery format...",
+    "fechaEntrega": "Due date and time",
+    "competencias": "Competencies (chips)",
+    "competenciasPlaceholder": "Type and press Enter to add",
+    "nivelAyuda": "Tutor help level",
+    "nivelAyudaPistas": "Hints only",
+    "nivelAyudaPistasDesc": "Tutor asks guiding questions and gives hints, never the answer.",
+    "nivelAyudaEjemplos": "Hints + examples",
+    "nivelAyudaEjemplosDesc": "Hints + similar solved examples (never the task exercise).",
+    "nivelAyudaExplicacion": "Full explanation",
+    "nivelAyudaExplicacionDesc": "Explains the full concept, but does not solve the task.",
+    "adjuntos": "Attachments (PDF/image, max 10 MB)",
+    "adjuntosAgregar": "Add file",
+    "adjuntosErrorTamano": "File exceeds 10 MB limit",
+    "adjuntosErrorTipo": "Only PDF and images allowed"
+  },
+  "lista": {
+    "vacio": "No tasks in this class. Create the first one.",
+    "cargando": "Loading tasks...",
+    "error": "Could not load tasks",
+    "verEntregas": "View submissions",
+    "editar": "Edit",
+    "eliminar": "Delete",
+    "sinEntregas": "No submissions",
+    "pendientes": "Pending",
+    "entregadas": "Submitted",
+    "verificando": "Verifying",
+    "verificadas": "Verified"
+  },
+  "detalle": {
+    "titulo": "Task detail",
+    "instrucciones": "Instructions",
+    "fechaEntrega": "Due on",
+    "competencias": "Competencies",
+    "nivelAyuda": "Tutor help level",
+    "adjuntos": "Attachments",
+    "estudiantes": "Students",
+    "estado": "Status",
+    "entrega": "Submission",
+    "verEntrega": "View submission",
+    "sinEntrega": "Not submitted"
+  },
+  "entrega": {
+    "titulo": "Submit task",
+    "contenidoTexto": "Your answer (text)",
+    "contenidoTextoPlaceholder": "Write your solution here...",
+    "adjuntos": "Attachments (notebook photos, PDF...)",
+    "adjuntosAgregar": "Add file",
+    "tomarFoto": "Take notebook photo",
+    "maxFotos": "Maximum 4 photos",
+    "comprimiendo": "Compressing image...",
+    "entregando": "Submitting...",
+    "entregar": "Submit",
+    "cancelar": "Cancel",
+    "exito": "Task submitted successfully!",
+    "error": "Could not submit task",
+    "yaEntregada": "You have already submitted this task",
+    "noPermitido": "You cannot submit to a class you don't belong to"
+  },
+  "estados": {
+    "pendiente": "Pending",
+    "entregada": "Submitted",
+    "verificando": "Verifying",
+    "verificada": "Verified"
+  },
+  "errores": {
+    "tituloRequerido": "Title is required",
+    "fechaRequerida": "Due date is required",
+    "fechaPasado": "Due date must be in the future",
+    "adjuntoDemasiadoGrande": "File is too large (max 10 MB)",
+    "adjuntoTipoInvalido": "File type not allowed",
+    "sinPermiso": "You don't have permission for this action",
+    "noEncontrado": "Task not found"
+  }
+}

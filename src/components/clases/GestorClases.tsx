@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
 import { Badge, Button, Card, Skeleton, useToast } from "@/components/ui";
 import { listarClases, listarEstudiantes } from "@/lib/api-cliente";
 import type { Clase } from "@/types/contratos";
@@ -79,24 +80,26 @@ export function GestorClases() {
         {filas?.map((c) => (
           <li key={c.id}>
             <Card className="flex h-full flex-col gap-3">
-              <div>
-                <h2 className="text-lg font-semibold">{c.nombre}</h2>
-                <p className="text-sm text-tinta-suave">
-                  {c.materia} · {c.grado}
-                </p>
-              </div>
-              <div className="flex flex-wrap items-center justify-between gap-2">
-                <div className="flex items-center gap-2">
-                  <span className="text-xs font-medium text-tinta-suave">{t("lista.codigo")}</span>
-                  <code className="rounded-lg bg-primario-claro px-2.5 py-1 font-mono text-lg font-bold tracking-widest text-primario-fuerte">
-                    {c.codigo_inscripcion}
-                  </code>
+              <Link href={`/docente/clases/${c.id}`} className="flex flex-col gap-3">
+                <div>
+                  <h2 className="text-lg font-semibold">{c.nombre}</h2>
+                  <p className="text-sm text-tinta-suave">
+                    {c.materia} · {c.grado}
+                  </p>
                 </div>
-                <Button variante="secundario" tamano="sm" onClick={() => copiar(c.codigo_inscripcion)}>
-                  {t("lista.copiar")}
-                </Button>
-              </div>
-              {c.estudiantes !== null && <Badge className="self-start">{t("lista.estudiantes", { cantidad: c.estudiantes })}</Badge>}
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-medium text-tinta-suave">{t("lista.codigo")}</span>
+                    <code className="rounded-lg bg-primario-claro px-2.5 py-1 font-mono text-lg font-bold tracking-widest text-primario-fuerte">
+                      {c.codigo_inscripcion}
+                    </code>
+                  </div>
+                  <Button variante="secundario" tamano="sm" onClick={(e) => { e.preventDefault(); copiar(c.codigo_inscripcion); }}>
+                    {t("lista.copiar")}
+                  </Button>
+                </div>
+                {c.estudiantes !== null && <Badge className="self-start">{t("lista.estudiantes", { cantidad: c.estudiantes })}</Badge>}
+              </Link>
             </Card>
           </li>
         ))}

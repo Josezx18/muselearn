@@ -32,7 +32,7 @@ export default async function Portada() {
 
       <main className="flex-1">
         {/* Portada: titular + hoja de cuaderno */}
-        <section className="mx-auto grid w-full max-w-6xl items-center gap-10 px-4 pb-16 pt-10 md:grid-cols-[1fr_1.05fr] md:pt-16">
+        <section className="mx-auto grid w-full max-w-6xl items-center gap-10 px-4 pb-16 pt-10 lg:grid-cols-[1fr_1.05fr] lg:pt-16">
           <div>
             <h1 className="max-w-xl text-[2.6rem] font-extrabold leading-[1.02] tracking-[-0.025em] sm:text-6xl">{t("app.lema")}</h1>
             <p className="mt-5 max-w-md text-lg text-tinta-suave">{t("app.descripcion")}</p>
@@ -115,7 +115,7 @@ export default async function Portada() {
         </section>
 
         {/* Lo que ve el docente */}
-        <section className="mx-auto grid w-full max-w-6xl items-center gap-10 px-4 py-14 md:grid-cols-2">
+        <section className="mx-auto grid w-full max-w-6xl items-center gap-10 px-4 py-14 lg:grid-cols-2">
           <div>
             <h2 className="text-2xl font-extrabold sm:text-3xl">{t("inicio.docente.titulo")}</h2>
             <p className="mt-3 max-w-md text-lg text-tinta-suave">{t("inicio.docente.texto")}</p>

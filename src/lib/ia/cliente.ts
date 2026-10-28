@@ -270,3 +270,57 @@ export const llamarMuseStream = crearLlamadorStream();
 
 /** Llamada estándar con los proveedores del entorno. */
 export const llamarMuse = crearLlamador();
+
+// ---------------- Voz → texto (Muse Voice Transcribe) ----------------
+// Ver .orquesta/referencias/muse-voice-transcribe.md. Misma MODEL_API_KEY que Muse Spark.
+// El audio se envía en memoria y no se guarda en ningún lado.
+
+export interface OpcionesTranscripcion {
+  /** WAV RIFF mono, PCM 16 bits, 16 o 24 kHz. */
+  wav: Blob;
+  idioma?: "es" | "en";
+  /** Términos de la tarea que el modelo podría oír mal (conceptos, nombres). Máx. 30. */
+  palabrasClave?: string[];
+}
+
+const IDIOMAS_VOZ: Record<"es" | "en", string[]> = { es: ["Spanish", "English"], en: ["English", "Spanish"] };
+
+export function crearTranscriptor(env: NodeJS.ProcessEnv = process.env, hacerFetch: typeof fetch = fetch) {
+  return async function transcribirAudio(op: OpcionesTranscripcion): Promise<string> {
+    if (!env.MODEL_API_KEY) throw new ErrorIA("No hay MODEL_API_KEY para transcribir voz. Revisa .env.local");
+    const base = (env.META_API_URL || "https://api.meta.ai/v1").replace(/\/$/, "");
+    const modelo = env.MUSE_VOZ_MODELO || "muse-voice-transcribe-1.0";
+    const ajustes: Record<string, unknown> = {
+      mode: "PUSH_TO_TALK",
+      model: modelo,
+      audioEncoding: "WAV",
+      languageBias: IDIOMAS_VOZ[op.idioma ?? "es"],
+    };
+    const claves = (op.palabrasClave ?? []).map((p) => p.trim()).filter(Boolean).slice(0, 30);
+    if (claves.length) ajustes.keywords = claves;
+
+    let ultimoError = "";
+    // 2 intentos: el segundo solo si el servicio respondió 429 o 5xx (según la documentación de Meta).
+    for (let intento = 0; intento < 2; intento++) {
+      const cuerpo = new FormData();
+      cuerpo.append("request", new Blob([JSON.stringify(ajustes)], { type: "application/json" }));
+      cuerpo.append("audio", op.wav, "respuesta.wav");
+      const r = await hacerFetch(`${base}/asr/transcribe`, {
+        method: "POST",
+        headers: { Authorization: `Bearer ${env.MODEL_API_KEY}` },
+        body: cuerpo,
+      });
+      if (r.ok) {
+        const datos = (await r.json()) as { transcript?: unknown; audioDurationMs?: unknown };
+        console.info(`[ia] voz ${modelo} audio=${String(datos.audioDurationMs ?? "?")}ms`);
+        return typeof datos.transcript === "string" ? datos.transcript.trim() : "";
+      }
+      ultimoError = `${r.status} ${(await r.text().catch(() => "")).slice(0, 200)}`;
+      if (r.status !== 429 && r.status < 500) break;
+      await new Promise((listo) => setTimeout(listo, 800 * (intento + 1)));
+    }
+    throw new ErrorIA(`No se pudo transcribir el audio: ${ultimoError}`, [{ proveedor: "meta", error: ultimoError }]);
+  };
+}
+
+export const transcribirAudio = crearTranscriptor();

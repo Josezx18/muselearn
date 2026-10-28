@@ -21,12 +21,12 @@ La función estrella. Es lo que más debe brillar en la demo.
 - [x] Al entregar, pantalla "Explícamelo" con mensaje tranquilizador y botón para empezar.
 - [x] Preguntas una por una (3-5), basadas en la entrega concreta, según prompt 04.
 - [ ] Si la entrega tiene **fotos del cuaderno**, se envían a Muse Spark como imágenes: el verificador primero transcribe y describe los pasos escritos a mano, y luego pregunta sobre pasos concretos ("en la línea 3 escribiste…"). Probar con 3 fotos reales de cuaderno (letra legible, letra difícil, foto torcida).
-- [ ] Responder por **voz**: botón de grabar (MediaRecorder) → `POST /api/voz/transcribir` con **Muse Voice Transcribe** (**lee `.orquesta/referencias/muse-voice-transcribe.md`**: solo acepta WAV mono 16 bits a 24 kHz, así que se graba con Web Audio y se codifica el WAV en el navegador; MediaRecorder/webm no sirve; misma `MODEL_API_KEY`, modelo `muse-voice-transcribe-1.0`, `languageBias` y `keywords` con los conceptos de la tarea); muestra la transcripción y permite corregirla antes de enviar. Respaldo: Web Speech API o solo texto si no hay micrófono.
+- [x] Responder por **voz** (T07 conectó Muse Voice Transcribe: `transcribirAudio()` en `src/lib/ia/cliente.ts`): botón de grabar (MediaRecorder) → `POST /api/voz/transcribir` con **Muse Voice Transcribe** (**lee `.orquesta/referencias/muse-voice-transcribe.md`**: solo acepta WAV mono 16 bits a 24 kHz, así que se graba con Web Audio y se codifica el WAV en el navegador; MediaRecorder/webm no sirve; misma `MODEL_API_KEY`, modelo `muse-voice-transcribe-1.0`, `languageBias` y `keywords` con los conceptos de la tarea); muestra la transcripción y permite corregirla antes de enviar. Respaldo: Web Speech API o solo texto si no hay micrófono.
 - [ ] Ver el taller "Agents 102: Best Practices for Verifiable Agents" (mié 28) y aplicar lo útil al verificador; anotarlo en Decisiones.
 - [x] Responder por **texto** siempre disponible.
 - [x] La pregunta se puede **escuchar** (síntesis de voz del navegador) para quien prefiera oír.
 - [x] Al terminar: genera `InformeComprension` validado, lo guarda en `informes`, cambia la entrega a `verificada`, llama a `generarRuta()` (mock si T06 no existe) y redirige a `/estudiante/informe/[id]`.
-- [ ] Audios en bucket `audios`; se borran después de transcribir.
+- [x] Audios: **no se guardan** (decisión T07, más privada): el WAV se valida y se transcribe en memoria; nunca llega a Storage.
 - [x] Pruebas: una entrega bien entendida (espera nivel 3-4) y una copiada que el estudiante no sabe explicar (espera 1-2), con respuestas simuladas.
 
 ## Notas del integrador (27 oct)
@@ -34,6 +34,15 @@ La función estrella. Es lo que más debe brillar en la demo.
 - Para el chat del tutor usa `llamarMuseStream` de `@/lib/ia/cliente` (T03): devuelve texto en partes y hace respaldo de proveedor antes del primer trozo.
 - `sesiones_verificacion` e `informes` se escriben desde el servidor con `crearClienteAdmin()` tras comprobar que la entrega es del estudiante en sesión (RLS solo permite leer).
 - Si T06 aún no existe, llama a un mock de `generarRuta()`.
+
+## Revisión del integrador (27 oct, noche)
+- Integrada en main. Buen trabajo: permisos antes del cliente admin, evidencias verificables, cierre recuperable.
+- **Voz conectada:** `transcribirAudio()` en el cliente IA (WAV, `muse-voice-transcribe-1.0`, `languageBias` según idioma, `keywords` = conceptos del análisis + competencias de la tarea, 1 reintento ante 429/5xx, 4 pruebas). `/api/voz/transcribir` acepta `tarea_id` opcional; el cliente ya envía `respuesta.wav`.
+- `evaluar()` reintenta una vez si alguna evidencia no es una cita textual (antes fallaba toda la verificación).
+- `maxDuration = 120` en `/api/verificacion/iniciar` y `/responder` (lectura de cuaderno + evaluación).
+- Capturas, script de revisión y resultados del modelo real movidos a `.orquesta/evidencia/T04/` (no van en `src/`). Código formateado con Prettier.
+- La entrega de T02 ya existe y T05 enlaza a `/verificar` tras entregar.
+- **Pendiente de José:** 3 fotos reales de cuaderno (legible, difícil, torcida) para probar la lectura con Muse Spark.
 
 ## Decisiones
 - 27 oct: tres preguntas adaptadas por entrega, dentro del rango 3-5; cada llamada recibe las respuestas previas. La sesión se reanuda sin regenerar preguntas al recargar.

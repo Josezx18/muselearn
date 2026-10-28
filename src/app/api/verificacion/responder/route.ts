@@ -3,6 +3,9 @@ import { comprobarEscritura, contextoEntrega, estudianteActual } from "@/lib/ia/
 import { contenidoEntrega, evaluar, generarRuta, siguientePregunta } from "@/lib/ia/conversacion/verificador";
 import { EntradaRespuesta, ErrorConversacion, errorConversacion } from "@/lib/ia/conversacion/validacion";
 
+/** Lectura del cuaderno y evaluación pueden tardar: margen en Vercel (segundos). */
+export const maxDuration = 120;
+
 export async function POST(request: Request) {
   try {
     const entrada = EntradaRespuesta.parse(await request.json().catch(() => null));
@@ -25,11 +28,16 @@ export async function POST(request: Request) {
       throw new ErrorConversacion(409, "informe_no_disponible");
     }
     const ultima = sesion.preguntas.at(-1);
-    if (!ultima || ultima.id !== entrada.pregunta_id || (ultima.respuesta !== null &&
-      (sesion.preguntas.length !== 3 || ultima.respuesta !== entrada.respuesta || ultima.via !== entrada.via))) {
+    if (
+      !ultima ||
+      ultima.id !== entrada.pregunta_id ||
+      (ultima.respuesta !== null && (sesion.preguntas.length !== 3 || ultima.respuesta !== entrada.respuesta || ultima.via !== entrada.via))
+    ) {
       throw new ErrorConversacion(409, "pregunta_fuera_de_turno");
     }
-    const preguntas = sesion.preguntas.map(p => p.id === entrada.pregunta_id ? { ...p, respuesta: entrada.respuesta, via: entrada.via } : p);
+    const preguntas = sesion.preguntas.map((p) =>
+      p.id === entrada.pregunta_id ? { ...p, respuesta: entrada.respuesta, via: entrada.via } : p,
+    );
     const contenido = await contenidoEntrega(ctx);
     let salida;
     if (preguntas.length < 3) {
@@ -38,21 +46,37 @@ export async function POST(request: Request) {
       salida = { siguiente };
     } else {
       // Guarda la respuesta antes de evaluar; si la IA falla, se puede reintentar sin perder evidencia.
-      const { data: reclamada, error: fallo } = await ctx.admin.from("sesiones_verificacion").update({ preguntas })
-        .eq("id", sesion.id).eq("estado", "en_curso").eq("preguntas", JSON.stringify(sesion.preguntas)).select("id").maybeSingle();
+      const { data: reclamada, error: fallo } = await ctx.admin
+        .from("sesiones_verificacion")
+        .update({ preguntas })
+        .eq("id", sesion.id)
+        .eq("estado", "en_curso")
+        .eq("preguntas", JSON.stringify(sesion.preguntas))
+        .select("id")
+        .maybeSingle();
       if (fallo) throw fallo;
       if (!reclamada) throw new ErrorConversacion(409, "sesion_actualizada");
       const informe = await evaluar(contenido, preguntas, ctx.entrega.id, ctx.usuario.idioma);
       const ruta = await generarRuta(informe, ctx.tarea, ctx.usuario.idioma);
-      comprobarEscritura(await ctx.admin.from("informes").upsert({ entrega_id: ctx.entrega.id, informe, ruta }, { onConflict: "entrega_id" }));
+      comprobarEscritura(
+        await ctx.admin.from("informes").upsert({ entrega_id: ctx.entrega.id, informe, ruta }, { onConflict: "entrega_id" }),
+      );
       comprobarEscritura(await ctx.admin.from("entregas").update({ estado: "verificada" }).eq("id", ctx.entrega.id));
       comprobarEscritura(await ctx.admin.from("sesiones_verificacion").update({ estado: "completada" }).eq("id", sesion.id));
       return Response.json({ informe });
     }
-    const { data: actualizado, error: fallo } = await ctx.admin.from("sesiones_verificacion").update({ preguntas, estado: "en_curso" })
-      .eq("id", sesion.id).eq("estado", "en_curso").eq("preguntas", JSON.stringify(sesion.preguntas)).select("id").maybeSingle();
+    const { data: actualizado, error: fallo } = await ctx.admin
+      .from("sesiones_verificacion")
+      .update({ preguntas, estado: "en_curso" })
+      .eq("id", sesion.id)
+      .eq("estado", "en_curso")
+      .eq("preguntas", JSON.stringify(sesion.preguntas))
+      .select("id")
+      .maybeSingle();
     if (fallo) throw fallo;
     if (!actualizado) throw new ErrorConversacion(409, "sesion_actualizada");
     return Response.json(salida);
-  } catch (e) { return errorConversacion(e); }
+  } catch (e) {
+    return errorConversacion(e);
+  }
 }

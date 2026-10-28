@@ -7,7 +7,8 @@ import { entregasMock, tareasMock } from "@/lib/mocks/tareas";
 
 function baseDatos(filas: unknown[]) {
   const cadena = { select: vi.fn(), eq: vi.fn(), maybeSingle: vi.fn() };
-  cadena.select.mockReturnValue(cadena); cadena.eq.mockReturnValue(cadena);
+  cadena.select.mockReturnValue(cadena);
+  cadena.eq.mockReturnValue(cadena);
   for (const data of filas) cadena.maybeSingle.mockResolvedValueOnce({ data, error: null });
   return { from: vi.fn(() => cadena), cadena };
 }

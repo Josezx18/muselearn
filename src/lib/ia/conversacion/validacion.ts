@@ -4,14 +4,21 @@ import { MensajeChat, PreguntaVerificacion } from "@/types/contratos";
 export const EntradaTutor = z.object({ tarea_id: z.string().uuid(), mensaje: z.string().trim().min(1).max(6000) });
 export const EntradaInicio = z.object({ entrega_id: z.string().uuid() });
 export const EntradaRespuesta = z.object({
-  sesion_id: z.string().uuid(), pregunta_id: z.string().min(1).max(100),
-  respuesta: z.string().trim().min(1).max(10000), via: z.enum(["voz", "texto"]),
+  sesion_id: z.string().uuid(),
+  pregunta_id: z.string().min(1).max(100),
+  respuesta: z.string().trim().min(1).max(10000),
+  via: z.enum(["voz", "texto"]),
 });
 export const Historial = z.array(MensajeChat);
 export const Preguntas = z.array(PreguntaVerificacion).max(5);
 
 export class ErrorConversacion extends Error {
-  constructor(public status: number, public codigo: string) { super(codigo); }
+  constructor(
+    public status: number,
+    public codigo: string,
+  ) {
+    super(codigo);
+  }
 }
 
 export function errorConversacion(error: unknown) {

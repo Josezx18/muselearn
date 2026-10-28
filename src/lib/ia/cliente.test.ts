@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 import { z } from "zod";
-import { crearLlamador, crearLlamadorStream, extraerJson, proveedoresDesdeEntorno, type ClienteChat, type Proveedor } from "./cliente";
+import { crearLlamador, crearLlamadorStream, crearTranscriptor, extraerJson, proveedoresDesdeEntorno, type ClienteChat, type Proveedor } from "./cliente";
 
 const meta: Proveedor = { id: "meta", baseURL: "https://api.meta.ai/v1", apiKey: "k", modelo: "muse-spark-1.3", avanzado: true };
 const abierto: Proveedor = { id: "abierto", baseURL: "https://inference.baseten.co/v1", apiKey: "k", modelo: "meta-models/muse-spark-open-1026", avanzado: false };
@@ -121,5 +121,48 @@ describe("llamarMuseStream", () => {
     for await (const t of llamar({ funcion: "tutor", sistema: "s", mensajes: [] })) salida.push(t);
     expect(usados).toEqual(["meta", "abierto"]);
     expect(salida).toEqual(["ok"]);
+  });
+});
+
+describe("transcribirAudio", () => {
+  const wav = new Blob([new Uint8Array(100)], { type: "audio/wav" });
+  const env = { MODEL_API_KEY: "k", NODE_ENV: "test" } as NodeJS.ProcessEnv;
+  const respuesta = (status: number, cuerpo: unknown) =>
+    new Response(typeof cuerpo === "string" ? cuerpo : JSON.stringify(cuerpo), { status });
+
+  it("envía el WAV con el modelo, los idiomas y las palabras clave", async () => {
+    const llamadas: { url: string; ajustes: Record<string, unknown>; auth: string | null }[] = [];
+    const falso = (async (url: string, init: RequestInit) => {
+      const cuerpo = init.body as FormData;
+      llamadas.push({
+        url,
+        ajustes: JSON.parse(await (cuerpo.get("request") as Blob).text()),
+        auth: new Headers(init.headers).get("Authorization"),
+      });
+      return respuesta(200, { transcript: " porque resto 5 en los dos lados ", audioDurationMs: 2000 });
+    }) as unknown as typeof fetch;
+    const texto = await crearTranscriptor(env, falso)({ wav, idioma: "es", palabrasClave: ["despeje", " ", "ecuación"] });
+    expect(texto).toBe("porque resto 5 en los dos lados");
+    expect(llamadas[0].url).toBe("https://api.meta.ai/v1/asr/transcribe");
+    expect(llamadas[0].auth).toBe("Bearer k");
+    expect(llamadas[0].ajustes).toMatchObject({ model: "muse-voice-transcribe-1.0", audioEncoding: "WAV", languageBias: ["Spanish", "English"], keywords: ["despeje", "ecuación"] });
+  });
+
+  it("reintenta una vez si el servicio está saturado (429)", async () => {
+    let n = 0;
+    const falso = (async () => (++n === 1 ? respuesta(429, "lento") : respuesta(200, { transcript: "ok" }))) as unknown as typeof fetch;
+    expect(await crearTranscriptor(env, falso)({ wav })).toBe("ok");
+    expect(n).toBe(2);
+  });
+
+  it("no reintenta un audio inválido (400) y falla con un error claro", async () => {
+    let n = 0;
+    const falso = (async () => (n++, respuesta(400, "wav"))) as unknown as typeof fetch;
+    await expect(crearTranscriptor(env, falso)({ wav })).rejects.toThrow(/No se pudo transcribir/);
+    expect(n).toBe(1);
+  });
+
+  it("sin clave no llama a nadie", async () => {
+    await expect(crearTranscriptor({} as NodeJS.ProcessEnv)({ wav })).rejects.toThrow(/MODEL_API_KEY/);
   });
 });

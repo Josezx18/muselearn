@@ -1,0 +1,16 @@
+[
+  {
+    "width": 380,
+    "anchoTutor": true,
+    "anchoVerificacion": true,
+    "redireccion": true,
+    "errores": []
+  },
+  {
+    "width": 1280,
+    "anchoTutor": true,
+    "anchoVerificacion": true,
+    "redireccion": true,
+    "errores": []
+  }
+]

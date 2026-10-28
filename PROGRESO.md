@@ -22,6 +22,9 @@ Formato: `- AAAA-MM-DD HH:MM [Txx] qué se hizo / qué falta / decisión tomada`
 - (T02) Editar una tarea existente (falta `PATCH /api/tareas/:id`).
 - (T03) Mostrar en Hoy los `avisos` del plan como notificación al reorganizarse.
 
+- [T05] Incorporar descarga de adjuntos privados con URL firmada y formulario de entrega de T02.
+- [T05] Persistir estados de bloques y semana solicitada en el mock del cliente compartido.
+
 ## Decisiones tomadas
 - 2026-10-24 Stack: Next.js + Supabase + Meta Model API. Interfaz español + inglés. Nombre de trabajo: MuseLearn.
 - 2026-10-26 Herramientas: Claude Code (T00, T01, T03, T04, T07), Codex (T05), OpenCode (T02, T06). Los $150 de Meta API solo para la app.
@@ -35,3 +38,5 @@ Formato: `- AAAA-MM-DD HH:MM [Txx] qué se hizo / qué falta / decisión tomada`
 - 2026-10-27 [T07] Integradas T01 y T03 en main: lint, typecheck y 77 pruebas OK. Migraciones 0003 (RLS) y 0004 aplicadas en Supabase. Las ramas nuevas salen de este main.
 - 2026-10-27 [T02] Tareas y entregas: formularios (título, instrucciones, fecha, competencias, nivel ayuda, adjuntos), lista de tareas por clase, detalle con entregas por estudiante, FormularioEntrega con foto de cuaderno (cámara, compresión 1600px, máx 4), endpoints /api/tareas y /api/entregas con validación Zod, análisis IA en background al crear tarea. lint/typecheck/test OK (80 pruebas).
 - 2026-10-27 [T07] Integrada T02 con correcciones: crear tarea ahora guarda, subida real de adjuntos y fotos (nuevo `POST /api/entregas/adjuntos`), `after()` para el análisis, FormularioEntrega rehecho. lint, typecheck, 83 pruebas y build OK; RLS de entregas y Storage verificado.
+- 2026-10-27 [T05] Implementados Hoy, Semana lunes-domingo deslizable, tarjetas con razon desplegable, avisos descartables, reorganizacion, bloques hecho/omitir, detalle con analisis y pasos, tutor, placeholder de entrega y textos es/en. lint y typecheck OK; 77 pruebas pasan, 3 omitidas. Pendientes: revision visual (navegador no disponible) e integracion real T02; ver Bloqueos de T05.
+- 2026-10-27 [T07] Integrada T05: Hoy, Semana y página de tarea con la entrega real de T02 y enlace a la verificación. Código formateado; 380 px verificado con Playwright. lint, typecheck y 83 pruebas OK.

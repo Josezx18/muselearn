@@ -1,6 +1,7 @@
-import { EnConstruccion } from "@/components/comun/EnConstruccion";
-
-// Dueño: T05. Reemplaza este marcador por la pantalla real.
-export default function Pagina() {
-  return <EnConstruccion ficha="T05" titulo="Hoy" />;
+import { Dashboard } from "@/components/estudiante/Dashboard";
+import { sesionEstudiante } from "@/components/estudiante/sesion";
+export default async function Pagina({ params }: PageProps<"/[locale]/estudiante/hoy">) {
+  const { locale } = await params;
+  const usuario = await sesionEstudiante(locale);
+  return <Dashboard vista="hoy" usuario={usuario} />;
 }

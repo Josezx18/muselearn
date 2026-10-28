@@ -8,6 +8,8 @@ Built for the **Meta AI Developer Hackathon 2026** — Indie track, theme *Build
 
 > *Español:* MuseLearn es una plataforma para docentes y estudiantes de secundaria. La interfaz está en español e inglés.
 
+![MuseLearn landing page: a notebook page with a handwritten equation and the question MuseLearn asks about line 2](docs/capturas/pc-portada.png)
+
 ---
 
 ## Why
@@ -24,6 +26,18 @@ MuseLearn keeps the classroom flow teachers already know (classes, tasks, submis
 | **2. Tutor** | A Socratic tutor answers with questions and hints at the help level the teacher chose — it **never solves the task**. | Chooses the help level per task: hints, worked examples, or explanation. |
 | **3. Verify** | After submitting — including **photos of the handwritten notebook** — the student answers 3–5 short questions about *their own* work, by **voice** or text. | Gets a comprehension report per student and concept, not just "submitted". |
 | **4. Improve** | A personalized practice route of 2–6 steps for the weak concepts. | A **heatmap** (student × concept) with the concepts the class needs to review. |
+
+### Screens
+
+**Student (phone):** *Today* with the next block, the Socratic tutor, the "Explain it to me" verification, and the comprehension report with evidence in the student's own words.
+
+![Four phone screens: Today, Tutor, Explain it to me, Comprehension by concept](docs/capturas/estudiante.png)
+
+**Teacher (desktop):** submitted vs. showed understanding, and the student × concept heatmap.
+
+![Teacher comprehension panel with the submitted vs. understood bars and the heatmap](docs/capturas/pc-docente.png)
+
+*Screenshots use the fictional demo data (`NEXT_PUBLIC_USAR_MOCKS=true`).*
 
 ### Why it is not "another chatbot"
 - The agent acts on its own when something happens (new task, submission, missed study block) instead of waiting for a prompt.

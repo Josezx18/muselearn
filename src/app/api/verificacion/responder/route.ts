@@ -1,6 +1,7 @@
 import { InformeComprension, SesionVerificacion } from "@/types/contratos";
 import { comprobarEscritura, contextoEntrega, estudianteActual } from "@/lib/ia/conversacion/servidor";
 import { contenidoEntrega, evaluar, generarRuta, siguientePregunta } from "@/lib/ia/conversacion/verificador";
+import { rutaBasica } from "@/lib/ia/informes";
 import { EntradaRespuesta, ErrorConversacion, errorConversacion } from "@/lib/ia/conversacion/validacion";
 
 /** Lectura del cuaderno y evaluación pueden tardar: margen en Vercel (segundos). */
@@ -57,7 +58,11 @@ export async function POST(request: Request) {
       if (fallo) throw fallo;
       if (!reclamada) throw new ErrorConversacion(409, "sesion_actualizada");
       const informe = await evaluar(contenido, preguntas, ctx.entrega.id, ctx.usuario.idioma);
-      const ruta = await generarRuta(informe, ctx.tarea, ctx.usuario.idioma);
+      // Si la IA falla al crear la ruta, se guarda una básica: el informe nunca se pierde por la ruta (T07).
+      const ruta = await generarRuta(informe, ctx.tarea, ctx.usuario.idioma).catch((e: unknown) => {
+        console.warn("[verificacion] generarRuta falló; se usa la ruta básica:", e instanceof Error ? e.message : e);
+        return rutaBasica(informe, ctx.tarea, ctx.usuario.idioma);
+      });
       comprobarEscritura(
         await ctx.admin.from("informes").upsert({ entrega_id: ctx.entrega.id, informe, ruta }, { onConflict: "entrega_id" }),
       );

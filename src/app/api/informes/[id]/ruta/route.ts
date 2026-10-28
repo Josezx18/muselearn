@@ -13,5 +13,7 @@ export async function POST(_request: Request, { params }: RouteContext<"/api/inf
     const { error } = await ctx.admin.from("informes").update({ ruta }).eq("entrega_id", id);
     if (error) throw error;
     return Response.json(ruta);
-  } catch (e) { return errorConversacion(e); }
+  } catch (e) {
+    return errorConversacion(e);
+  }
 }

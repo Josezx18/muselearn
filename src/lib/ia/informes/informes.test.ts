@@ -25,28 +25,62 @@ describe("ruta de práctica", () => {
     await expect(generarRuta(informeMock, tareasMock[0])).rejects.toThrow();
   });
   it("acepta un reto de profundización si todos los niveles son altos", async () => {
-    const informe = { ...informeMock, por_concepto: informeMock.por_concepto.map(c => ({ ...c, nivel: 4 as const })) };
+    const informe = { ...informeMock, por_concepto: informeMock.por_concepto.map((c) => ({ ...c, nivel: 4 as const })) };
     llamar.mockResolvedValue({ datos: { ...rutaMock, pasos: [rutaMock.pasos[2]] } });
     expect((await generarRuta(informe, tareasMock[0])).pasos).toHaveLength(1);
   });
 });
 
 describe("mapa de comprensión", () => {
-  const estudiantes = usuariosMock.filter(u => u.rol === "estudiante");
+  const estudiantes = usuariosMock.filter((u) => u.rol === "estudiante");
   it("incluye a quien no tiene informe con nivel null", () => {
-    const mapa = calcularMapa(tareasMock[0].clase_id, tareasMock[0].id, estudiantes, [{ estudiante_id: estudiantes[0].id, informe: informeMock }]);
+    const mapa = calcularMapa(tareasMock[0].clase_id, tareasMock[0].id, estudiantes, [
+      { estudiante_id: estudiantes[0].id, informe: informeMock },
+    ]);
     expect(mapa.celdas).toHaveLength(estudiantes.length * informeMock.por_concepto.length);
-    expect(mapa.celdas.filter(c => c.estudiante_id === estudiantes[1].id).every(c => c.nivel === null)).toBe(true);
+    expect(mapa.celdas.filter((c) => c.estudiante_id === estudiantes[1].id).every((c) => c.nivel === null)).toBe(true);
     expect(mapa.conceptos_a_reforzar).toEqual(["Comprobar la solución"]);
   });
   it("usa el informe más reciente por concepto al agregar tareas", () => {
     const primero = { ...informeMock, generado_en: "2026-10-20T10:00:00Z" };
-    const ultimo = { ...informeMock, generado_en: "2026-10-21T10:00:00Z", por_concepto: informeMock.por_concepto.map(c => ({ ...c, nivel: 4 as const })) };
-    const mapa = calcularMapa(tareasMock[0].clase_id, null, estudiantes, [{ estudiante_id: estudiantes[0].id, informe: ultimo }, { estudiante_id: estudiantes[0].id, informe: primero }]);
-    expect(mapa.celdas.filter(c => c.estudiante_id === estudiantes[0].id).every(c => c.nivel === 4)).toBe(true);
+    const ultimo = {
+      ...informeMock,
+      generado_en: "2026-10-21T10:00:00Z",
+      por_concepto: informeMock.por_concepto.map((c) => ({ ...c, nivel: 4 as const })),
+    };
+    const mapa = calcularMapa(tareasMock[0].clase_id, null, estudiantes, [
+      { estudiante_id: estudiantes[0].id, informe: ultimo },
+      { estudiante_id: estudiantes[0].id, informe: primero },
+    ]);
+    expect(mapa.celdas.filter((c) => c.estudiante_id === estudiantes[0].id).every((c) => c.nivel === 4)).toBe(true);
     expect(mapa.conceptos_a_reforzar).toEqual([]);
   });
   it("admite una clase sin evaluaciones", () => {
     expect(calcularMapa(tareasMock[0].clase_id, null, estudiantes, []).conceptos).toEqual([]);
+  });
+});
+
+describe("rutaBasica (respaldo sin IA)", () => {
+  it("cubre los conceptos débiles y respeta el contrato", async () => {
+    const { rutaBasica } = await import("./index");
+    const { tareasMock } = await import("@/lib/mocks/tareas");
+    const entrega = crypto.randomUUID();
+    const informe = {
+      entrega_id: entrega,
+      nivel_global: 2 as const,
+      por_concepto: [
+        { concepto: "Despeje", competencia: null, nivel: 1 as const, evidencia: "no sé" },
+        { concepto: "Signos", competencia: null, nivel: 4 as const, evidencia: "cambio el signo" },
+      ],
+      fortalezas: [],
+      debilidades: [],
+      resumen_estudiante: "",
+      resumen_docente: "",
+      generado_en: new Date().toISOString(),
+    };
+    const ruta = rutaBasica(informe, tareasMock[0], "en");
+    expect(ruta.entrega_id).toBe(entrega);
+    expect(ruta.pasos.map((p) => p.concepto)).toEqual(["Despeje"]);
+    expect(ruta.pasos[0].titulo).toMatch(/^Review/);
   });
 });

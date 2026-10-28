@@ -29,6 +29,13 @@ Cerrar el ciclo: el estudiante sabe qué mejorar y el docente sabe quién entend
 - El panel docente y `GET /api/docente/comprension` se calculan con consultas (sin IA). Usa `@/lib/api-cliente` en el frontend; si te falta una función, agrégala al final de ese archivo y anótalo aquí.
 - Antes de cada commit: `npm run lint && npm run typecheck && npm test`. Commits pequeños con prefijo `T06:`. Si no puedes ver el navegador, dilo en Bloqueos en vez de marcar el criterio de 380 px.
 
+## Revisión del integrador (28 oct, madrugada)
+- Integrada en main. Ruta real con prompt 05 y validación estricta, informe del estudiante, mapa de calor, indicadores "entregó vs. demostró comprensión" y endpoint sin IA. Buen trabajo.
+- **Respaldo:** si `generarRuta` falla al cerrar la verificación, se guarda `rutaBasica()` (sin IA) y el informe nunca se pierde; se puede regenerar con `POST /api/informes/[id]/ruta`.
+- Arreglado el mock de `conversacion.test.ts` (ahora responde una `RutaPractica` a `funcion: "ruta"`). 119 pruebas OK.
+- UI: comillas duplicadas en la evidencia, enlaces sin estilo, texto interno "pendiente de integración" visible al estudiante, `<main>` anidado, `bg-gray-200` → token `bg-nivel-vacio`. Código formateado.
+- **"Agregar a mi semana" queda como mejora**: el planificador recalcula la semana desde cero y borraría los bloques de práctica; requiere rediseñar T03. Hoy los pasos se marcan en el propio informe.
+
 ## Decisiones
 - `[id]` es `entrega_id`, como en T04/T05. El adaptador T04 solo reexporta la implementación T06; su cierre existente guarda informe y ruta.
 - Ruta: esquema compartido refinado según prompt 05 (2–6 pasos, 5–25 minutos y conceptos de nivel 1–2; 1–2 retos si todos son ≥ 3). Identidad fijada por servidor. No se usó la API real de IA en estas pruebas.

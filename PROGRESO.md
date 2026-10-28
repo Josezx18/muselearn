@@ -25,6 +25,7 @@ Formato: `- AAAA-MM-DD HH:MM [Txx] qué se hizo / qué falta / decisión tomada`
 - [T01] Enlace de invitación `/unirse?codigo=XXXXXX` que rellene el código.
 - (T03) Guardar minutos reales por tarea (tabla o columna) para que el historial del analizador sea exacto.
 - (T03) Extraer texto de los PDFs adjuntos antes de analizar (T02 no lo hizo; los PDFs ya se suben a Storage).
+- (T03/T06) "Agregar a mi semana": que los pasos de la ruta se vuelvan bloques del plan sin que "Reorganizar" los borre.
 - (T02) Editar una tarea existente (falta `PATCH /api/tareas/:id`).
 - (T03) Mostrar en Hoy los `avisos` del plan como notificación al reorganizarse.
 
@@ -51,3 +52,4 @@ Formato: `- AAAA-MM-DD HH:MM [Txx] qué se hizo / qué falta / decisión tomada`
 - 2026-10-27 [T05] Implementados Hoy, Semana lunes-domingo deslizable, tarjetas con razon desplegable, avisos descartables, reorganizacion, bloques hecho/omitir, detalle con analisis y pasos, tutor, placeholder de entrega y textos es/en. lint y typecheck OK; 77 pruebas pasan, 3 omitidas. Pendientes: revision visual (navegador no disponible) e integracion real T02; ver Bloqueos de T05.
 - 2026-10-27 [T07] Integrada T05: Hoy, Semana y página de tarea con la entrega real de T02 y enlace a la verificación. Código formateado; 380 px verificado con Playwright. lint, typecheck y 83 pruebas OK.
 - 2026-10-27 [T07] Integrada T04: tutor con stream e historial, verificación de 3 preguntas con evidencias verificables, informe y ruta (mock hasta T06). T07 conectó la voz (Muse Voice Transcribe, el audio no se guarda) y el reintento de evaluación. lint, typecheck y 104 pruebas OK. Falta: probar lectura de cuaderno con 3 fotos reales.
+- 2026-10-28 [T07] Integrada T06: informe del estudiante, ruta de práctica con Muse (y respaldo sin IA), mapa de calor y "entregó vs. comprendió". lint, typecheck, 119 pruebas y build OK; 380 px verificado. Producto completo de punta a punta; falta probar la lectura del cuaderno con fotos reales, el despliegue y el video.

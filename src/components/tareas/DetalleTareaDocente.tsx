@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useFormatter, useTranslations } from "next-intl";
 import { Button, Card, Badge, Skeleton } from "@/components/ui";
 import { listarEntregas, listarEstudiantes } from "@/lib/api-cliente";
 import type { Tarea, Entrega, Usuario } from "@/types/contratos";
@@ -14,6 +14,7 @@ const ESTADO_ORDEN: Record<string, number> = { pendiente: 0, entregada: 1, verif
 
 export function DetalleTareaDocente({ tarea }: DetalleTareaDocenteProps) {
   const t = useTranslations("tareas");
+  const formato = useFormatter();
   const [entregas, setEntregas] = useState<Entrega[] | null>(null);
   const [estudiantes, setEstudiantes] = useState<Usuario[] | null>(null);
   const [error, setError] = useState(false);
@@ -110,7 +111,7 @@ export function DetalleTareaDocente({ tarea }: DetalleTareaDocenteProps) {
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
         <div>
           <h1 className="text-2xl font-extrabold tracking-tight">{tarea.titulo}</h1>
-          <p className="text-tinta-suave">{t("detalle.fechaEntrega")} {new Date(tarea.fecha_entrega).toLocaleDateString("es-ES", { day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" })}</p>
+          <p className="text-tinta-suave">{t("detalle.fechaEntrega")} {formato.dateTime(new Date(tarea.fecha_entrega), { dateStyle: "medium", timeStyle: "short" })}</p>
         </div>
         <Badge tono="primario">{obtenerNivelAyudaTexto(tarea.nivel_ayuda)}</Badge>
       </div>

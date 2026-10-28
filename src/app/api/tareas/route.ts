@@ -1,10 +1,13 @@
-import { NextResponse } from "next/server";
+import { NextResponse, after } from "next/server";
 import { crearTarea, listarTareas } from "@/lib/db/tareas";
 import { errorHttp } from "@/lib/db/http";
 import { obtenerUsuarioActual } from "@/lib/db/sesion";
 import { NuevaTarea } from "@/lib/db/validacion-tareas";
 import { analizarYGuardar, cargarContextoTarea, estaInscrito } from "@/lib/ia/analizador/servicio";
 import { crearClienteAdmin } from "@/lib/supabase/servidor";
+
+/** Margen para analizar a todos los estudiantes después de responder (segundos). */
+export const maxDuration = 300;
 
 export async function GET(peticion: Request) {
   const actual = await obtenerUsuarioActual();
@@ -42,8 +45,9 @@ export async function POST(peticion: Request) {
   try {
     const tarea = await crearTarea(actual.db, actual.usuario.id, entrada.data);
 
-    // Disparar análisis en segundo plano para cada estudiante inscrito (sin bloquear)
-    void (async () => {
+    // Análisis en segundo plano para cada estudiante inscrito: after() lo ejecuta cuando ya se respondió
+    // al docente, y en Vercel mantiene viva la función hasta terminar (maxDuration arriba).
+    after(async () => {
       try {
         const admin = crearClienteAdmin();
         const { data: inscripciones } = await admin
@@ -67,7 +71,7 @@ export async function POST(peticion: Request) {
       } catch (e) {
         console.warn("[tareas] Error en análisis en segundo plano:", e);
       }
-    })();
+    });
 
     return NextResponse.json(tarea, { status: 201 });
   } catch {

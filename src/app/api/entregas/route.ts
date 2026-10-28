@@ -3,6 +3,7 @@ import { crearEntrega, listarEntregas, obtenerEntrega, verificarInscripcion, obt
 import { errorHttp } from "@/lib/db/http";
 import { obtenerUsuarioActual } from "@/lib/db/sesion";
 import { EntradaEntrega, QueryEntregas } from "@/lib/db/validacion-tareas";
+import { rutasDeEntregaValidas } from "@/lib/db/almacenamiento";
 
 export async function GET(peticion: Request) {
   const actual = await obtenerUsuarioActual();
@@ -44,6 +45,17 @@ export async function POST(peticion: Request) {
 
   const inscrito = await verificarInscripcion(actual.db, actual.usuario.id, tareaClase.id);
   if (!inscrito) return errorHttp(403, "no_inscrito", "No puedes entregar en una clase a la que no perteneces.");
+
+  // Los adjuntos deben haberse subido con POST /api/entregas/adjuntos (carpeta del propio estudiante).
+  if (!rutasDeEntregaValidas(entrada.data.adjuntos, tarea_id, actual.usuario.id)) {
+    return errorHttp(400, "adjunto_invalido", "Los archivos de la entrega no son válidos. Vuelve a subirlos.");
+  }
+
+  // Una vez que empieza la verificación, la entrega ya no se puede reemplazar.
+  const previa = await obtenerEntrega(actual.db, tarea_id, actual.usuario.id);
+  if (previa && (previa.estado === "verificando" || previa.estado === "verificada")) {
+    return errorHttp(409, "ya_verificada", "Esta entrega ya está en verificación y no se puede cambiar.");
+  }
 
   try {
     const entrega = await crearEntrega(actual.db, actual.usuario.id, entrada.data);

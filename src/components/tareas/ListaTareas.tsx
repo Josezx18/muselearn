@@ -1,10 +1,10 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useFormatter, useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { Button, Card, Badge, Skeleton } from "@/components/ui";
-import { listarTareas } from "@/lib/api-cliente";
+import { crearTarea, listarTareas, subirAdjuntoTarea, type NuevaTarea } from "@/lib/api-cliente";
 import type { Tarea } from "@/types/contratos";
 import { FormularioTarea } from "./FormularioTarea";
 
@@ -15,10 +15,10 @@ interface ListaTareasProps {
 export function ListaTareas({ claseId }: ListaTareasProps) {
   const t = useTranslations("tareas");
   const router = useRouter();
+  const formato = useFormatter();
   const [tareas, setTareas] = useState<Tarea[] | null>(null);
   const [error, setError] = useState(false);
   const [formularioAbierto, setFormularioAbierto] = useState(false);
-  const [tareaEditando, setTareaEditando] = useState<Tarea | undefined>(undefined);
 
   const cargar = useCallback(async () => {
     try {
@@ -35,15 +35,12 @@ export function ListaTareas({ claseId }: ListaTareasProps) {
     cargar();
   }, [cargar]);
 
-  async function guardarTarea() {
+  // Crea la tarea y luego sube sus adjuntos a Storage. Si falla, FormularioTarea muestra el error y queda abierto.
+  async function guardarTarea(datos: NuevaTarea, archivos: File[]) {
+    const tarea = await crearTarea(datos);
+    for (const archivo of archivos) await subirAdjuntoTarea(tarea.id, archivo);
     setFormularioAbierto(false);
-    setTareaEditando(undefined);
     await cargar();
-  }
-
-  function editar(tarea: Tarea) {
-    setTareaEditando(tarea);
-    setFormularioAbierto(true);
   }
 
   function verEntregas(tareaId: string) {
@@ -67,7 +64,7 @@ export function ListaTareas({ claseId }: ListaTareasProps) {
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between gap-3">
         <h2 className="text-xl font-bold">{t("titulo")}</h2>
-        <Button tamano="sm" onClick={() => { setTareaEditando(undefined); setFormularioAbierto(true); }}>
+        <Button tamano="sm" onClick={() => setFormularioAbierto(true)}>
           {t("nueva.boton")}
         </Button>
       </div>
@@ -75,9 +72,8 @@ export function ListaTareas({ claseId }: ListaTareasProps) {
       {formularioAbierto && (
         <FormularioTarea
           claseId={claseId}
-          tareaExistente={tareaEditando}
           alGuardar={guardarTarea}
-          alCancelar={() => { setFormularioAbierto(false); setTareaEditando(undefined); }}
+          alCancelar={() => setFormularioAbierto(false)}
         />
       )}
 
@@ -101,13 +97,7 @@ export function ListaTareas({ claseId }: ListaTareasProps) {
               <div>
                 <h3 className="text-lg font-semibold">{tarea.titulo}</h3>
                 <p className="text-sm text-tinta-suave">
-                  {t("detalle.fechaEntrega")} {new Date(tarea.fecha_entrega).toLocaleDateString("es-ES", {
-                    day: "2-digit",
-                    month: "2-digit",
-                    year: "numeric",
-                    hour: "2-digit",
-                    minute: "2-digit",
-                  })}
+                  {t("detalle.fechaEntrega")} {formato.dateTime(new Date(tarea.fecha_entrega), { dateStyle: "medium", timeStyle: "short" })}
                 </p>
               </div>
               {tarea.competencias.length > 0 && (
@@ -119,14 +109,9 @@ export function ListaTareas({ claseId }: ListaTareasProps) {
               )}
               <div className="flex flex-wrap items-center justify-between gap-2 pt-2">
                 <Badge tono="primario">{obtenerNivelAyudaTexto(tarea.nivel_ayuda)}</Badge>
-                <div className="flex gap-2">
-                  <Button variante="secundario" tamano="sm" onClick={() => editar(tarea)}>
-                    {t("lista.editar")}
-                  </Button>
-                  <Button variante="primario" tamano="sm" onClick={() => verEntregas(tarea.id)}>
-                    {t("lista.verEntregas")}
-                  </Button>
-                </div>
+                <Button variante="primario" tamano="sm" onClick={() => verEntregas(tarea.id)}>
+                  {t("lista.verEntregas")}
+                </Button>
               </div>
             </Card>
           </li>

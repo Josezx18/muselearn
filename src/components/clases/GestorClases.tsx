@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { Badge, Button, Card, Skeleton, useToast } from "@/components/ui";
 import { listarClases, listarEstudiantes } from "@/lib/api-cliente";
 import type { Clase } from "@/types/contratos";

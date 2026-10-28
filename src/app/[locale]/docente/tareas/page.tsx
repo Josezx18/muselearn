@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useFormatter, useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { Button, Card, Skeleton, Badge } from "@/components/ui";
 import { listarTareas, listarClases } from "@/lib/api-cliente";
@@ -9,6 +9,7 @@ import type { Tarea, Clase } from "@/types/contratos";
 
 export default function PaginaTareasDocente() {
   const t = useTranslations("tareas");
+  const formato = useFormatter();
   const router = useRouter();
   const [tareas, setTareas] = useState<Tarea[] | null>(null);
   const [clases, setClases] = useState<Clase[] | null>(null);
@@ -70,13 +71,7 @@ export default function PaginaTareasDocente() {
                 <h2 className="text-lg font-semibold">{tarea.titulo}</h2>
                 <p className="text-sm text-tinta-suave">{claseNombre(tarea.clase_id)}</p>
                 <p className="text-sm text-tinta-suave mt-1">
-                  {t("detalle.fechaEntrega")} {new Date(tarea.fecha_entrega).toLocaleDateString("es-ES", {
-                    day: "2-digit",
-                    month: "2-digit",
-                    year: "numeric",
-                    hour: "2-digit",
-                    minute: "2-digit",
-                  })}
+                  {t("detalle.fechaEntrega")} {formato.dateTime(new Date(tarea.fecha_entrega), { dateStyle: "medium", timeStyle: "short" })}
                 </p>
               </div>
               {tarea.competencias.length > 0 && (

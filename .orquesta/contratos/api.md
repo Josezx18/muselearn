@@ -52,7 +52,7 @@ Funciones de librería que T03 exporta (para otros módulos del servidor):
 | GET | `/api/tutor?tarea_id=` | estudiante | — | `MensajeChat[]` |
 | POST | `/api/verificacion/iniciar` | estudiante | `{ entrega_id }` | `SesionVerificacion` (con la 1ª pregunta) |
 | POST | `/api/verificacion/responder` | estudiante | `{ sesion_id, pregunta_id, respuesta, via }` | `{ siguiente: PreguntaVerificacion } \| { informe: InformeComprension }` |
-| POST | `/api/voz/transcribir` | estudiante | `multipart (audio)` | `{ texto }` |
+| POST | `/api/voz/transcribir` | estudiante | `multipart (audio WAV 24 kHz mono, tarea_id?)` | `{ texto }` · Muse Voice Transcribe; el audio no se guarda |
 
 Al completar la verificación, T04 guarda `informes.informe` y llama a `generarRuta()` de T06 (si existe; si no, mock).
 

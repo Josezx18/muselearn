@@ -1,1 +1,13 @@
-{}
+{
+  "titulo": "Your tutor",
+  "introduccion": "One step at a time. I will help you find a way to work through your assignment.",
+  "historial": "Tutor conversation",
+  "estudiante": "You",
+  "agente": "Tutor",
+  "pensando": "Thinking…",
+  "error": "We could not complete the conversation. Please try again.",
+  "mensaje": "What have you tried?",
+  "enviar": "Send",
+  "pista": "I need a hint",
+  "pistaMensaje": "I need a hint to continue my assignment."
+}

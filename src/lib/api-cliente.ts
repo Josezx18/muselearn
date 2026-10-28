@@ -198,10 +198,12 @@ export const responderVerificacion = (datos: { sesion_id: string; pregunta_id: s
   return pedir("/api/verificacion/responder", RespuestaVerificacion, json(datos));
 };
 
-export const transcribirVoz = (audio: Blob) => {
+/** Audio WAV (mono, 16 bits, 24 kHz) → texto. Con tareaId, el servidor usa los conceptos de la tarea como palabras clave. */
+export const transcribirVoz = (audio: Blob, tareaId?: string) => {
   if (usarMocks()) return mock({ texto: "Porque está sumando, entonces resto en los dos lados." }, 700);
   const datos = new FormData();
-  datos.append("audio", audio, "respuesta.webm");
+  datos.append("audio", audio, "respuesta.wav");
+  if (tareaId) datos.append("tarea_id", tareaId);
   return pedir("/api/voz/transcribir", z.object({ texto: z.string() }), { method: "POST", body: datos });
 };
 

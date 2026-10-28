@@ -1,1 +1,18 @@
-{}
+{
+  "titulo": "Explícamelo",
+  "tranquilidad": "Buen trabajo entregando. Esto no es un examen: cuéntanos cómo lo hiciste, como se lo explicarías a un compañero. Puedes tomarte tu tiempo.",
+  "empezar": "Empezar",
+  "progreso": "Pregunta {numero} · entre 3 y 5 en total",
+  "escuchar": "Escuchar la pregunta",
+  "respuesta": "Tu explicación",
+  "corregir": "Puedes escribir o corregir la transcripción antes de enviar.",
+  "enviar": "Enviar explicación",
+  "error": "No pudimos avanzar. Comprueba que entregaste la tarea e inténtalo de nuevo.",
+  "grabar": "Grabar mi explicación",
+  "detener": "Terminar grabación",
+  "grabando": "Grabando · máximo dos minutos.",
+  "transcribiendo": "Procesando tu voz…",
+  "vozOpcional": "La voz es opcional. Siempre puedes responder por texto.",
+  "errorVoz": "No pudimos transcribir. Escribe tu explicación o prueba el dictado del navegador.",
+  "dictar": "Probar dictado del navegador"
+}

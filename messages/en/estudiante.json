@@ -29,7 +29,6 @@
   "sinAnalisis": "Analysis is not available yet.",
   "tutor": "Ask the tutor for help",
   "entregar": "Submit",
-  "placeholder": "The submission form will be available when the assignments module is integrated.",
   "volver": "Back to Today",
   "fecha": "Due: {fecha}",
   "materia": "Subject unavailable",
@@ -37,5 +36,7 @@
   "siguiente": "Next week",
   "seleccionar": "Select day",
   "sinAdjuntos": "No attachments.",
-  "adjuntoPrivado": "Attachment: {nombre}. Download awaiting integration."
+  "adjuntoPrivado": "Attachment: {nombre}. Download awaiting integration.",
+  "irVerificar": "Check what I learned",
+  "verInforme": "See my understanding report"
 }

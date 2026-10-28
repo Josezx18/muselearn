@@ -20,13 +20,19 @@ La pantalla que el estudiante ve todos los días. Debe ser clara, bonita y verse
 - [x] Botón "Reorganizar mi semana" → `POST /api/ia/plan`.
 - [x] Página de tarea `/estudiante/tarea/[id]`: instrucciones, adjuntos, análisis, pasos sugeridos, botones "Pedir ayuda al tutor" (→ ruta de T04) y "Entregar" (usa `FormularioEntrega` de T02; si aún no existe, un placeholder).
 - [x] Estados de carga (Skeleton) y vacíos ("No tienes tareas, ¡disfruta!").
-- [ ] Funciona a 380 px sin scroll horizontal; accesible con teclado y lector de pantalla básico.
+- [x] Funciona a 380 px sin scroll horizontal; accesible con teclado y lector de pantalla básico. (T07 lo comprobó con Playwright: Hoy, Semana y Tarea a 380 px en es/en, sin errores de consola.)
 - [ ] Todo funciona con `NEXT_PUBLIC_USAR_MOCKS=true` y también con la API real.
 - [x] Textos en es y en.
 
 ## Notas del integrador (27 oct)
 - T03 ya integrada: `GET/POST /api/ia/plan`, `PATCH /api/ia/plan/bloques/:id`, `GET /api/ia/analisis` y `PUT /api/preferencias` funcionan con datos reales. Usa siempre `@/lib/api-cliente` (mocks o real según `NEXT_PUBLIC_USAR_MOCKS`).
 - El layout del estudiante ya exige sesión y rol (T01) y tiene el botón Salir.
+
+## Revisión del integrador (27 oct, noche)
+- Integrada en main. Código formateado con Prettier (venía comprimido en pocas líneas).
+- La página de tarea usa ya el `FormularioEntrega` real de T02 (con la entrega existente vía `listarEntregas`) y, tras entregar, enlaza a `/estudiante/tarea/[id]/verificar` (T04).
+- `text-white` → token `text-superficie`.
+- Pendiente (no bloquea): URL firmada para descargar adjuntos privados; mock de plan por semana. "Funciona con la API real" se comprueba en la prueba e2e.
 
 ## Decisiones
 - 2026-10-27: identidad obtenida en servidor mediante exigirRol; componentes cliente usan exclusivamente api-cliente. Semana local lunes-domingo, deslizable en celular; errores recuperables sin descartar el plan anterior.

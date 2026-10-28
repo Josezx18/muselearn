@@ -10,7 +10,7 @@ Estados: ⬜ sin empezar · 🟦 trabajando · 🟨 bloqueado · 🟩 lista para
 | T02 | Tareas y entregas | OpenCode | `T02-tareas-opencode` | t02-tareas | ✅ | 27 oct: integrada con correcciones de T07 (subida real a Storage, crear tarea, FormularioEntrega) |
 | T03 | Motor IA | Claude Code | `T03-motor-claude` | t03-motor-ia | ✅ | 27 oct: integrada; falta medir costo con claves reales |
 | T04 | Tutor y verificación | Codex | `T04-tutor-codex` | t04-tutor-verificacion | ⬜ | |
-| T05 | Dashboard estudiante | Codex | `T05-dashboard-codex` | t05-dashboard | ⬜ | |
+| T05 | Dashboard estudiante | Codex | `T05-dashboard-codex` | t05-dashboard | ✅ | 27 oct: integrada; entrega real de T02 conectada; 380 px verificado |
 | T06 | Informes y panel docente | OpenCode | `T06-informes-opencode` | t06-informes | ⬜ | |
 | T07 | Integrador | Claude (chat) | `T07-integrador` | main | 🟦 | 27 oct: integró T01 y T03 |
 | T08 | Demo y entrega | José | — | — | ⬜ | |

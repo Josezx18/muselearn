@@ -1,0 +1,875 @@
+{
+ "analisis": [
+  {
+   "tarea_id": "de000000-0000-4000-8000-000000000101",
+   "estudiante_id": "11111111-1111-4111-8111-111111111111",
+   "dificultad": 3,
+   "minutos_estimados": 30,
+   "prioridad": 65,
+   "conceptos": [
+    "Operaciones inversas",
+    "Despejar x",
+    "Comprobar la solución"
+   ],
+   "pasos_sugeridos": [
+    "Resuelve del 1 al 4",
+    "Descansa 5 minutos",
+    "Resuelve del 5 al 8 y comprueba cada uno"
+   ],
+   "razon": "Ya pasó la fecha de entrega; si te falta algo, entrégalo hoy."
+  },
+  {
+   "tarea_id": "de000000-0000-4000-8000-000000000101",
+   "estudiante_id": "11111111-1111-4111-8111-111111111111",
+   "dificultad": 3,
+   "minutos_estimados": 40,
+   "prioridad": 70,
+   "conceptos": [
+    "Operaciones inversas",
+    "Despejar x",
+    "Comprobar la solución"
+   ],
+   "pasos_sugeridos": [
+    "Resuelve del 1 al 4",
+    "Descansa 5 minutos",
+    "Resuelve del 5 al 8 y comprueba cada uno"
+   ],
+   "razon": "Ya pasó la fecha de entrega; si te falta algo, entrégalo hoy."
+  },
+  {
+   "tarea_id": "de000000-0000-4000-8000-000000000101",
+   "estudiante_id": "11111111-1111-4111-8111-111111111111",
+   "dificultad": 4,
+   "minutos_estimados": 55,
+   "prioridad": 80,
+   "conceptos": [
+    "Operaciones inversas",
+    "Despejar x",
+    "Comprobar la solución"
+   ],
+   "pasos_sugeridos": [
+    "Resuelve del 1 al 4",
+    "Descansa 5 minutos",
+    "Resuelve del 5 al 8 y comprueba cada uno"
+   ],
+   "razon": "Ya pasó la fecha de entrega; si te falta algo, entrégalo hoy."
+  },
+  {
+   "tarea_id": "de000000-0000-4000-8000-000000000101",
+   "estudiante_id": "11111111-1111-4111-8111-111111111111",
+   "dificultad": 3,
+   "minutos_estimados": 45,
+   "prioridad": 70,
+   "conceptos": [
+    "Operaciones inversas",
+    "Despejar x",
+    "Comprobar la solución"
+   ],
+   "pasos_sugeridos": [
+    "Resuelve del 1 al 4",
+    "Descansa 5 minutos",
+    "Resuelve del 5 al 8 y comprueba cada uno"
+   ],
+   "razon": "Ya pasó la fecha de entrega; si te falta algo, entrégalo hoy."
+  },
+  {
+   "tarea_id": "de000000-0000-4000-8000-000000000101",
+   "estudiante_id": "11111111-1111-4111-8111-111111111111",
+   "dificultad": 4,
+   "minutos_estimados": 50,
+   "prioridad": 75,
+   "conceptos": [
+    "Operaciones inversas",
+    "Despejar x",
+    "Comprobar la solución"
+   ],
+   "pasos_sugeridos": [
+    "Resuelve del 1 al 4",
+    "Descansa 5 minutos",
+    "Resuelve del 5 al 8 y comprueba cada uno"
+   ],
+   "razon": "Ya pasó la fecha de entrega; si te falta algo, entrégalo hoy."
+  },
+  {
+   "tarea_id": "de000000-0000-4000-8000-000000000102",
+   "estudiante_id": "11111111-1111-4111-8111-111111111111",
+   "dificultad": 3,
+   "minutos_estimados": 35,
+   "prioridad": 75,
+   "conceptos": [
+    "Razón y proporción",
+    "Regla de tres directa",
+    "Interpretar el resultado"
+   ],
+   "pasos_sugeridos": [
+    "Lee los 6 problemas y marca qué se compara",
+    "Resuelve recetas y precios",
+    "Resuelve los de mapas a escala"
+   ],
+   "razon": "Ya pasó la fecha de entrega; si te falta algo, entrégalo hoy."
+  },
+  {
+   "tarea_id": "de000000-0000-4000-8000-000000000102",
+   "estudiante_id": "11111111-1111-4111-8111-111111111111",
+   "dificultad": 3,
+   "minutos_estimados": 45,
+   "prioridad": 80,
+   "conceptos": [
+    "Razón y proporción",
+    "Regla de tres directa",
+    "Interpretar el resultado"
+   ],
+   "pasos_sugeridos": [
+    "Lee los 6 problemas y marca qué se compara",
+    "Resuelve recetas y precios",
+    "Resuelve los de mapas a escala"
+   ],
+   "razon": "Ya pasó la fecha de entrega; si te falta algo, entrégalo hoy."
+  },
+  {
+   "tarea_id": "de000000-0000-4000-8000-000000000102",
+   "estudiante_id": "11111111-1111-4111-8111-111111111111",
+   "dificultad": 4,
+   "minutos_estimados": 60,
+   "prioridad": 90,
+   "conceptos": [
+    "Razón y proporción",
+    "Regla de tres directa",
+    "Interpretar el resultado"
+   ],
+   "pasos_sugeridos": [
+    "Lee los 6 problemas y marca qué se compara",
+    "Resuelve recetas y precios",
+    "Resuelve los de mapas a escala"
+   ],
+   "razon": "Ya pasó la fecha de entrega; si te falta algo, entrégalo hoy."
+  },
+  {
+   "tarea_id": "de000000-0000-4000-8000-000000000102",
+   "estudiante_id": "11111111-1111-4111-8111-111111111111",
+   "dificultad": 3,
+   "minutos_estimados": 50,
+   "prioridad": 80,
+   "conceptos": [
+    "Razón y proporción",
+    "Regla de tres directa",
+    "Interpretar el resultado"
+   ],
+   "pasos_sugeridos": [
+    "Lee los 6 problemas y marca qué se compara",
+    "Resuelve recetas y precios",
+    "Resuelve los de mapas a escala"
+   ],
+   "razon": "Ya pasó la fecha de entrega; si te falta algo, entrégalo hoy."
+  },
+  {
+   "tarea_id": "de000000-0000-4000-8000-000000000102",
+   "estudiante_id": "11111111-1111-4111-8111-111111111111",
+   "dificultad": 4,
+   "minutos_estimados": 55,
+   "prioridad": 85,
+   "conceptos": [
+    "Razón y proporción",
+    "Regla de tres directa",
+    "Interpretar el resultado"
+   ],
+   "pasos_sugeridos": [
+    "Lee los 6 problemas y marca qué se compara",
+    "Resuelve recetas y precios",
+    "Resuelve los de mapas a escala"
+   ],
+   "razon": "Ya pasó la fecha de entrega; si te falta algo, entrégalo hoy."
+  },
+  {
+   "tarea_id": "de000000-0000-4000-8000-000000000103",
+   "estudiante_id": "11111111-1111-4111-8111-111111111111",
+   "dificultad": 4,
+   "minutos_estimados": 45,
+   "prioridad": 80,
+   "conceptos": [
+    "Sustitución",
+    "Igualación",
+    "Comprobar en ambas ecuaciones"
+   ],
+   "pasos_sugeridos": [
+    "Repasa cómo despejar una variable",
+    "Resuelve del 1 al 3 por sustitución",
+    "Resuelve 4 y 5",
+    "Haz el 6 por igualación y comprueba"
+   ],
+   "razon": "Vence en 3 días y usa el despeje que practicaste: conviene empezar mañana con los primeros sistemas."
+  },
+  {
+   "tarea_id": "de000000-0000-4000-8000-000000000103",
+   "estudiante_id": "11111111-1111-4111-8111-111111111111",
+   "dificultad": 4,
+   "minutos_estimados": 55,
+   "prioridad": 85,
+   "conceptos": [
+    "Sustitución",
+    "Igualación",
+    "Comprobar en ambas ecuaciones"
+   ],
+   "pasos_sugeridos": [
+    "Repasa cómo despejar una variable",
+    "Resuelve del 1 al 3 por sustitución",
+    "Resuelve 4 y 5",
+    "Haz el 6 por igualación y comprueba"
+   ],
+   "razon": "Vence en 3 días y usa el despeje que practicaste: conviene empezar mañana con los primeros sistemas."
+  },
+  {
+   "tarea_id": "de000000-0000-4000-8000-000000000103",
+   "estudiante_id": "11111111-1111-4111-8111-111111111111",
+   "dificultad": 5,
+   "minutos_estimados": 70,
+   "prioridad": 95,
+   "conceptos": [
+    "Sustitución",
+    "Igualación",
+    "Comprobar en ambas ecuaciones"
+   ],
+   "pasos_sugeridos": [
+    "Repasa cómo despejar una variable",
+    "Resuelve del 1 al 3 por sustitución",
+    "Resuelve 4 y 5",
+    "Haz el 6 por igualación y comprueba"
+   ],
+   "razon": "Vence en 3 días y usa el despeje que practicaste: conviene empezar mañana con los primeros sistemas."
+  },
+  {
+   "tarea_id": "de000000-0000-4000-8000-000000000103",
+   "estudiante_id": "11111111-1111-4111-8111-111111111111",
+   "dificultad": 4,
+   "minutos_estimados": 60,
+   "prioridad": 85,
+   "conceptos": [
+    "Sustitución",
+    "Igualación",
+    "Comprobar en ambas ecuaciones"
+   ],
+   "pasos_sugeridos": [
+    "Repasa cómo despejar una variable",
+    "Resuelve del 1 al 3 por sustitución",
+    "Resuelve 4 y 5",
+    "Haz el 6 por igualación y comprueba"
+   ],
+   "razon": "Vence en 3 días y usa el despeje que practicaste: conviene empezar mañana con los primeros sistemas."
+  },
+  {
+   "tarea_id": "de000000-0000-4000-8000-000000000103",
+   "estudiante_id": "11111111-1111-4111-8111-111111111111",
+   "dificultad": 5,
+   "minutos_estimados": 65,
+   "prioridad": 90,
+   "conceptos": [
+    "Sustitución",
+    "Igualación",
+    "Comprobar en ambas ecuaciones"
+   ],
+   "pasos_sugeridos": [
+    "Repasa cómo despejar una variable",
+    "Resuelve del 1 al 3 por sustitución",
+    "Resuelve 4 y 5",
+    "Haz el 6 por igualación y comprueba"
+   ],
+   "razon": "Vence en 3 días y usa el despeje que practicaste: conviene empezar mañana con los primeros sistemas."
+  },
+  {
+   "tarea_id": "de000000-0000-4000-8000-000000000104",
+   "estudiante_id": "11111111-1111-4111-8111-111111111111",
+   "dificultad": 3,
+   "minutos_estimados": 35,
+   "prioridad": 35,
+   "conceptos": [
+    "Tabla de valores",
+    "Pendiente",
+    "Punto de corte"
+   ],
+   "pasos_sugeridos": [
+    "Completa las dos tablas",
+    "Grafica la primera recta",
+    "Grafica la segunda y busca el corte"
+   ],
+   "razon": "Vence en 6 días y es más corta: puedes hacerla el fin de semana sin apuro."
+  },
+  {
+   "tarea_id": "de000000-0000-4000-8000-000000000104",
+   "estudiante_id": "11111111-1111-4111-8111-111111111111",
+   "dificultad": 3,
+   "minutos_estimados": 45,
+   "prioridad": 40,
+   "conceptos": [
+    "Tabla de valores",
+    "Pendiente",
+    "Punto de corte"
+   ],
+   "pasos_sugeridos": [
+    "Completa las dos tablas",
+    "Grafica la primera recta",
+    "Grafica la segunda y busca el corte"
+   ],
+   "razon": "Vence en 6 días y es más corta: puedes hacerla el fin de semana sin apuro."
+  },
+  {
+   "tarea_id": "de000000-0000-4000-8000-000000000104",
+   "estudiante_id": "11111111-1111-4111-8111-111111111111",
+   "dificultad": 4,
+   "minutos_estimados": 60,
+   "prioridad": 50,
+   "conceptos": [
+    "Tabla de valores",
+    "Pendiente",
+    "Punto de corte"
+   ],
+   "pasos_sugeridos": [
+    "Completa las dos tablas",
+    "Grafica la primera recta",
+    "Grafica la segunda y busca el corte"
+   ],
+   "razon": "Vence en 6 días y es más corta: puedes hacerla el fin de semana sin apuro."
+  },
+  {
+   "tarea_id": "de000000-0000-4000-8000-000000000104",
+   "estudiante_id": "11111111-1111-4111-8111-111111111111",
+   "dificultad": 3,
+   "minutos_estimados": 50,
+   "prioridad": 40,
+   "conceptos": [
+    "Tabla de valores",
+    "Pendiente",
+    "Punto de corte"
+   ],
+   "pasos_sugeridos": [
+    "Completa las dos tablas",
+    "Grafica la primera recta",
+    "Grafica la segunda y busca el corte"
+   ],
+   "razon": "Vence en 6 días y es más corta: puedes hacerla el fin de semana sin apuro."
+  },
+  {
+   "tarea_id": "de000000-0000-4000-8000-000000000104",
+   "estudiante_id": "11111111-1111-4111-8111-111111111111",
+   "dificultad": 4,
+   "minutos_estimados": 55,
+   "prioridad": 45,
+   "conceptos": [
+    "Tabla de valores",
+    "Pendiente",
+    "Punto de corte"
+   ],
+   "pasos_sugeridos": [
+    "Completa las dos tablas",
+    "Grafica la primera recta",
+    "Grafica la segunda y busca el corte"
+   ],
+   "razon": "Vence en 6 días y es más corta: puedes hacerla el fin de semana sin apuro."
+  }
+ ],
+ "informes": [
+  {
+   "entrega_id": "de000000-0000-4000-8000-000000000200",
+   "nivel_global": 3,
+   "por_concepto": [
+    {
+     "concepto": "Operaciones inversas",
+     "competencia": "Resuelve problemas con ecuaciones lineales",
+     "nivel": 4,
+     "evidencia": "para quitar el 5 hago lo contrario, resto 5 en los dos lados"
+    },
+    {
+     "concepto": "Despejar x",
+     "competencia": "Resuelve problemas con ecuaciones lineales",
+     "nivel": 3,
+     "evidencia": "divido entre 3 porque el 3 está multiplicando a la x"
+    },
+    {
+     "concepto": "Comprobar la solución",
+     "competencia": "Resuelve problemas con ecuaciones lineales",
+     "nivel": 2,
+     "evidencia": "comprobar no lo hice en todos, solo en el primero"
+    }
+   ],
+   "fortalezas": [
+    "Entiende por qué se usa la operación inversa",
+    "Despeja con orden y explica cada paso"
+   ],
+   "debilidades": [
+    "Comprobar el resultado en todos los ejercicios"
+   ],
+   "resumen_estudiante": "¡Buen trabajo! Explicaste bien la mayoría de los pasos. Te falta un detalle que puedes reforzar con unos minutos de práctica.",
+   "resumen_docente": "Comprende y explica la mayoría de los pasos; un concepto aún débil.",
+   "generado_en": "2026-10-25T21:00:00Z"
+  },
+  {
+   "entrega_id": "de000000-0000-4000-8000-000000000201",
+   "nivel_global": 3,
+   "por_concepto": [
+    {
+     "concepto": "Operaciones inversas",
+     "competencia": "Resuelve problemas con ecuaciones lineales",
+     "nivel": 3,
+     "evidencia": "resto el 5 para que la x quede sola"
+    },
+    {
+     "concepto": "Despejar x",
+     "competencia": "Resuelve problemas con ecuaciones lineales",
+     "nivel": 3,
+     "evidencia": "paso el 3 dividiendo al otro lado"
+    },
+    {
+     "concepto": "Comprobar la solución",
+     "competencia": "Resuelve problemas con ecuaciones lineales",
+     "nivel": 3,
+     "evidencia": "cambio la x por 5 y me da 20, entonces está bien"
+    }
+   ],
+   "fortalezas": [
+    "Resuelve y comprueba correctamente"
+   ],
+   "debilidades": [
+    "Explica el despeje como regla ('pasa dividiendo') más que por qué funciona"
+   ],
+   "resumen_estudiante": "¡Buen trabajo! Explicaste bien la mayoría de los pasos. Te falta un detalle que puedes reforzar con unos minutos de práctica.",
+   "resumen_docente": "Comprende y explica la mayoría de los pasos; un concepto aún débil.",
+   "generado_en": "2026-10-25T21:00:00Z"
+  },
+  {
+   "entrega_id": "de000000-0000-4000-8000-000000000202",
+   "nivel_global": 1,
+   "por_concepto": [
+    {
+     "concepto": "Operaciones inversas",
+     "competencia": "Resuelve problemas con ecuaciones lineales",
+     "nivel": 1,
+     "evidencia": "no sé, así lo hice"
+    },
+    {
+     "concepto": "Despejar x",
+     "competencia": "Resuelve problemas con ecuaciones lineales",
+     "nivel": 1,
+     "evidencia": "creo que se divide pero no me acuerdo por qué"
+    },
+    {
+     "concepto": "Comprobar la solución",
+     "competencia": "Resuelve problemas con ecuaciones lineales",
+     "nivel": 1,
+     "evidencia": "puse verificado porque así venía"
+    }
+   ],
+   "fortalezas": [
+    "Entregó a tiempo y con buena presentación"
+   ],
+   "debilidades": [
+    "No puede explicar los pasos que escribió",
+    "No sabe qué significa comprobar"
+   ],
+   "resumen_estudiante": "Entregaste a tiempo, pero cuando te preguntamos cómo lo hiciste no pudiste explicarlo todavía. No pasa nada: la ruta de abajo te ayuda a entender cada paso con tus propias palabras.",
+   "resumen_docente": "Entregó la tarea completa, pero no pudo explicar ninguno de los pasos escritos. Posible copia o ayuda externa; conviene una conversación breve y repaso guiado.",
+   "generado_en": "2026-10-25T21:00:00Z"
+  },
+  {
+   "entrega_id": "de000000-0000-4000-8000-000000000203",
+   "nivel_global": 3,
+   "por_concepto": [
+    {
+     "concepto": "Operaciones inversas",
+     "competencia": "Resuelve problemas con ecuaciones lineales",
+     "nivel": 3,
+     "evidencia": "resto 5 a los dos lados para que se mantenga igual"
+    },
+    {
+     "concepto": "Despejar x",
+     "competencia": "Resuelve problemas con ecuaciones lineales",
+     "nivel": 2,
+     "evidencia": "el 2x − 3x no sé si es 2x o x"
+    },
+    {
+     "concepto": "Comprobar la solución",
+     "competencia": "Resuelve problemas con ecuaciones lineales",
+     "nivel": 3,
+     "evidencia": "sustituyo y veo si da lo mismo"
+    }
+   ],
+   "fortalezas": [
+    "Comprende la idea de equilibrio de la ecuación"
+   ],
+   "debilidades": [
+    "Se confunde al agrupar términos con x en ambos lados"
+   ],
+   "resumen_estudiante": "¡Buen trabajo! Explicaste bien la mayoría de los pasos. Te falta un detalle que puedes reforzar con unos minutos de práctica.",
+   "resumen_docente": "Comprende y explica la mayoría de los pasos; un concepto aún débil.",
+   "generado_en": "2026-10-25T21:00:00Z"
+  },
+  {
+   "entrega_id": "de000000-0000-4000-8000-000000000204",
+   "nivel_global": 2,
+   "por_concepto": [
+    {
+     "concepto": "Operaciones inversas",
+     "competencia": "Resuelve problemas con ecuaciones lineales",
+     "nivel": 2,
+     "evidencia": "le sumé 5 en vez de restarlo y luego lo arreglé"
+    },
+    {
+     "concepto": "Despejar x",
+     "competencia": "Resuelve problemas con ecuaciones lineales",
+     "nivel": 2,
+     "evidencia": "divido entre 3 pero no estoy segura cuándo"
+    },
+    {
+     "concepto": "Comprobar la solución",
+     "competencia": "Resuelve problemas con ecuaciones lineales",
+     "nivel": 1,
+     "evidencia": "no comprobé ninguno"
+    }
+   ],
+   "fortalezas": [
+    "Detecta y corrige algunos errores propios"
+   ],
+   "debilidades": [
+    "Elige la operación inversa equivocada",
+    "No comprueba resultados"
+   ],
+   "resumen_estudiante": "Vas en camino: entiendes partes de la tarea, pero algunos pasos todavía los haces sin estar seguro de por qué. Con la práctica de abajo los vas a dominar.",
+   "resumen_docente": "Comprensión parcial: resuelve con errores de procedimiento y no justifica las decisiones. Requiere práctica guiada en los conceptos marcados.",
+   "generado_en": "2026-10-25T21:00:00Z"
+  },
+  {
+   "entrega_id": "de000000-0000-4000-8000-000000000210",
+   "nivel_global": 4,
+   "por_concepto": [
+    {
+     "concepto": "Razón y proporción",
+     "competencia": "Aplica razones y proporciones en situaciones cotidianas",
+     "nivel": 4,
+     "evidencia": "es directa porque si hay más personas se usa más harina en la misma razón"
+    },
+    {
+     "concepto": "Regla de tres directa",
+     "competencia": "Aplica razones y proporciones en situaciones cotidianas",
+     "nivel": 4,
+     "evidencia": "multiplico en cruz: 300 por 10 y divido entre 4"
+    },
+    {
+     "concepto": "Interpretar el resultado",
+     "competencia": "Aplica razones y proporciones en situaciones cotidianas",
+     "nivel": 3,
+     "evidencia": "750 gramos tiene sentido porque es más del doble de 300"
+    }
+   ],
+   "fortalezas": [
+    "Justifica por qué la relación es directa",
+    "Revisa si el resultado es razonable"
+   ],
+   "debilidades": [],
+   "resumen_estudiante": "¡Excelente! Explicaste con claridad por qué funciona cada paso y revisaste tus resultados. Sigue con un reto para ir más allá.",
+   "resumen_docente": "Dominio sólido: justifica el procedimiento y valida sus resultados.",
+   "generado_en": "2026-10-25T21:00:00Z"
+  },
+  {
+   "entrega_id": "de000000-0000-4000-8000-000000000211",
+   "nivel_global": 2,
+   "por_concepto": [
+    {
+     "concepto": "Razón y proporción",
+     "competencia": "Aplica razones y proporciones en situaciones cotidianas",
+     "nivel": 3,
+     "evidencia": "más personas, más harina"
+    },
+    {
+     "concepto": "Regla de tres directa",
+     "competencia": "Aplica razones y proporciones en situaciones cotidianas",
+     "nivel": 2,
+     "evidencia": "multiplico los de abajo y divido, no sé bien cuál va arriba"
+    },
+    {
+     "concepto": "Interpretar el resultado",
+     "competencia": "Aplica razones y proporciones en situaciones cotidianas",
+     "nivel": 2,
+     "evidencia": "17,5 kilómetros, no sé si es mucho"
+    }
+   ],
+   "fortalezas": [
+    "Reconoce relaciones directas"
+   ],
+   "debilidades": [
+    "Duda al ubicar los datos en la regla de tres",
+    "No valora si el resultado es razonable"
+   ],
+   "resumen_estudiante": "Vas en camino: entiendes partes de la tarea, pero algunos pasos todavía los haces sin estar seguro de por qué. Con la práctica de abajo los vas a dominar.",
+   "resumen_docente": "Comprensión parcial: resuelve con errores de procedimiento y no justifica las decisiones. Requiere práctica guiada en los conceptos marcados.",
+   "generado_en": "2026-10-25T21:00:00Z"
+  },
+  {
+   "entrega_id": "de000000-0000-4000-8000-000000000212",
+   "nivel_global": 2,
+   "por_concepto": [
+    {
+     "concepto": "Razón y proporción",
+     "competencia": "Aplica razones y proporciones en situaciones cotidianas",
+     "nivel": 2,
+     "evidencia": "es directa porque es regla de tres"
+    },
+    {
+     "concepto": "Regla de tres directa",
+     "competencia": "Aplica razones y proporciones en situaciones cotidianas",
+     "nivel": 1,
+     "evidencia": "no sé de dónde salió el 1,260"
+    },
+    {
+     "concepto": "Interpretar el resultado",
+     "competencia": "Aplica razones y proporciones en situaciones cotidianas",
+     "nivel": 2,
+     "evidencia": "el precio sube si compro más"
+    }
+   ],
+   "fortalezas": [],
+   "debilidades": [
+    "No sabe cómo obtuvo los resultados escritos",
+    "Confunde el método con la razón por la que funciona"
+   ],
+   "resumen_estudiante": "Vas en camino: entiendes partes de la tarea, pero algunos pasos todavía los haces sin estar seguro de por qué. Con la práctica de abajo los vas a dominar.",
+   "resumen_docente": "Comprensión parcial: resuelve con errores de procedimiento y no justifica las decisiones. Requiere práctica guiada en los conceptos marcados.",
+   "generado_en": "2026-10-25T21:00:00Z"
+  }
+ ],
+ "rutas": [
+  {
+   "entrega_id": "de000000-0000-4000-8000-000000000200",
+   "pasos": [
+    {
+     "titulo": "Idea clave: Comprobar la solución",
+     "tipo": "repaso",
+     "concepto": "Comprobar la solución",
+     "minutos": 5,
+     "descripcion": "Escribe en 3 líneas, con tus palabras, qué significa «Comprobar la solución» y para qué sirve en esta tarea."
+    },
+    {
+     "titulo": "Practica: Comprobar la solución",
+     "tipo": "ejercicio",
+     "concepto": "Comprobar la solución",
+     "minutos": 10,
+     "descripcion": "Resuelve 3 ejercicios nuevos de la guía y explica en voz alta un paso de cada uno."
+    }
+   ]
+  },
+  {
+   "entrega_id": "de000000-0000-4000-8000-000000000201",
+   "pasos": [
+    {
+     "titulo": "Reto: crea tu propio problema",
+     "tipo": "ejercicio",
+     "concepto": "Comprobar la solución",
+     "minutos": 15,
+     "descripcion": "Inventa un problema parecido a «Ecuaciones de primer grado: ejercicios 1-8», resuélvelo y explica cómo sabes que tu resultado es correcto."
+    }
+   ]
+  },
+  {
+   "entrega_id": "de000000-0000-4000-8000-000000000202",
+   "pasos": [
+    {
+     "titulo": "Idea clave: Operaciones inversas",
+     "tipo": "repaso",
+     "concepto": "Operaciones inversas",
+     "minutos": 5,
+     "descripcion": "Escribe en 3 líneas, con tus palabras, qué significa «Operaciones inversas» y para qué sirve en esta tarea."
+    },
+    {
+     "titulo": "Practica: Operaciones inversas",
+     "tipo": "ejercicio",
+     "concepto": "Operaciones inversas",
+     "minutos": 10,
+     "descripcion": "Resuelve 3 ejercicios nuevos de la guía y explica en voz alta un paso de cada uno."
+    },
+    {
+     "titulo": "Idea clave: Despejar x",
+     "tipo": "repaso",
+     "concepto": "Despejar x",
+     "minutos": 5,
+     "descripcion": "Escribe en 3 líneas, con tus palabras, qué significa «Despejar x» y para qué sirve en esta tarea."
+    },
+    {
+     "titulo": "Practica: Despejar x",
+     "tipo": "ejercicio",
+     "concepto": "Despejar x",
+     "minutos": 10,
+     "descripcion": "Resuelve 3 ejercicios nuevos de la guía y explica en voz alta un paso de cada uno."
+    },
+    {
+     "titulo": "Idea clave: Comprobar la solución",
+     "tipo": "repaso",
+     "concepto": "Comprobar la solución",
+     "minutos": 5,
+     "descripcion": "Escribe en 3 líneas, con tus palabras, qué significa «Comprobar la solución» y para qué sirve en esta tarea."
+    },
+    {
+     "titulo": "Practica: Comprobar la solución",
+     "tipo": "ejercicio",
+     "concepto": "Comprobar la solución",
+     "minutos": 10,
+     "descripcion": "Resuelve 3 ejercicios nuevos de la guía y explica en voz alta un paso de cada uno."
+    }
+   ]
+  },
+  {
+   "entrega_id": "de000000-0000-4000-8000-000000000203",
+   "pasos": [
+    {
+     "titulo": "Idea clave: Despejar x",
+     "tipo": "repaso",
+     "concepto": "Despejar x",
+     "minutos": 5,
+     "descripcion": "Escribe en 3 líneas, con tus palabras, qué significa «Despejar x» y para qué sirve en esta tarea."
+    },
+    {
+     "titulo": "Practica: Despejar x",
+     "tipo": "ejercicio",
+     "concepto": "Despejar x",
+     "minutos": 10,
+     "descripcion": "Resuelve 3 ejercicios nuevos de la guía y explica en voz alta un paso de cada uno."
+    }
+   ]
+  },
+  {
+   "entrega_id": "de000000-0000-4000-8000-000000000204",
+   "pasos": [
+    {
+     "titulo": "Idea clave: Operaciones inversas",
+     "tipo": "repaso",
+     "concepto": "Operaciones inversas",
+     "minutos": 5,
+     "descripcion": "Escribe en 3 líneas, con tus palabras, qué significa «Operaciones inversas» y para qué sirve en esta tarea."
+    },
+    {
+     "titulo": "Practica: Operaciones inversas",
+     "tipo": "ejercicio",
+     "concepto": "Operaciones inversas",
+     "minutos": 10,
+     "descripcion": "Resuelve 3 ejercicios nuevos de la guía y explica en voz alta un paso de cada uno."
+    },
+    {
+     "titulo": "Idea clave: Despejar x",
+     "tipo": "repaso",
+     "concepto": "Despejar x",
+     "minutos": 5,
+     "descripcion": "Escribe en 3 líneas, con tus palabras, qué significa «Despejar x» y para qué sirve en esta tarea."
+    },
+    {
+     "titulo": "Practica: Despejar x",
+     "tipo": "ejercicio",
+     "concepto": "Despejar x",
+     "minutos": 10,
+     "descripcion": "Resuelve 3 ejercicios nuevos de la guía y explica en voz alta un paso de cada uno."
+    },
+    {
+     "titulo": "Idea clave: Comprobar la solución",
+     "tipo": "repaso",
+     "concepto": "Comprobar la solución",
+     "minutos": 5,
+     "descripcion": "Escribe en 3 líneas, con tus palabras, qué significa «Comprobar la solución» y para qué sirve en esta tarea."
+    },
+    {
+     "titulo": "Practica: Comprobar la solución",
+     "tipo": "ejercicio",
+     "concepto": "Comprobar la solución",
+     "minutos": 10,
+     "descripcion": "Resuelve 3 ejercicios nuevos de la guía y explica en voz alta un paso de cada uno."
+    }
+   ]
+  },
+  {
+   "entrega_id": "de000000-0000-4000-8000-000000000210",
+   "pasos": [
+    {
+     "titulo": "Reto: crea tu propio problema",
+     "tipo": "ejercicio",
+     "concepto": "Interpretar el resultado",
+     "minutos": 15,
+     "descripcion": "Inventa un problema parecido a «Proporciones y regla de tres», resuélvelo y explica cómo sabes que tu resultado es correcto."
+    }
+   ]
+  },
+  {
+   "entrega_id": "de000000-0000-4000-8000-000000000211",
+   "pasos": [
+    {
+     "titulo": "Idea clave: Regla de tres directa",
+     "tipo": "repaso",
+     "concepto": "Regla de tres directa",
+     "minutos": 5,
+     "descripcion": "Escribe en 3 líneas, con tus palabras, qué significa «Regla de tres directa» y para qué sirve en esta tarea."
+    },
+    {
+     "titulo": "Practica: Regla de tres directa",
+     "tipo": "ejercicio",
+     "concepto": "Regla de tres directa",
+     "minutos": 10,
+     "descripcion": "Resuelve 3 ejercicios nuevos de la guía y explica en voz alta un paso de cada uno."
+    },
+    {
+     "titulo": "Idea clave: Interpretar el resultado",
+     "tipo": "repaso",
+     "concepto": "Interpretar el resultado",
+     "minutos": 5,
+     "descripcion": "Escribe en 3 líneas, con tus palabras, qué significa «Interpretar el resultado» y para qué sirve en esta tarea."
+    },
+    {
+     "titulo": "Practica: Interpretar el resultado",
+     "tipo": "ejercicio",
+     "concepto": "Interpretar el resultado",
+     "minutos": 10,
+     "descripcion": "Resuelve 3 ejercicios nuevos de la guía y explica en voz alta un paso de cada uno."
+    }
+   ]
+  },
+  {
+   "entrega_id": "de000000-0000-4000-8000-000000000212",
+   "pasos": [
+    {
+     "titulo": "Idea clave: Razón y proporción",
+     "tipo": "repaso",
+     "concepto": "Razón y proporción",
+     "minutos": 5,
+     "descripcion": "Escribe en 3 líneas, con tus palabras, qué significa «Razón y proporción» y para qué sirve en esta tarea."
+    },
+    {
+     "titulo": "Practica: Razón y proporción",
+     "tipo": "ejercicio",
+     "concepto": "Razón y proporción",
+     "minutos": 10,
+     "descripcion": "Resuelve 3 ejercicios nuevos de la guía y explica en voz alta un paso de cada uno."
+    },
+    {
+     "titulo": "Idea clave: Regla de tres directa",
+     "tipo": "repaso",
+     "concepto": "Regla de tres directa",
+     "minutos": 5,
+     "descripcion": "Escribe en 3 líneas, con tus palabras, qué significa «Regla de tres directa» y para qué sirve en esta tarea."
+    },
+    {
+     "titulo": "Practica: Regla de tres directa",
+     "tipo": "ejercicio",
+     "concepto": "Regla de tres directa",
+     "minutos": 10,
+     "descripcion": "Resuelve 3 ejercicios nuevos de la guía y explica en voz alta un paso de cada uno."
+    },
+    {
+     "titulo": "Idea clave: Interpretar el resultado",
+     "tipo": "repaso",
+     "concepto": "Interpretar el resultado",
+     "minutos": 5,
+     "descripcion": "Escribe en 3 líneas, con tus palabras, qué significa «Interpretar el resultado» y para qué sirve en esta tarea."
+    },
+    {
+     "titulo": "Practica: Interpretar el resultado",
+     "tipo": "ejercicio",
+     "concepto": "Interpretar el resultado",
+     "minutos": 10,
+     "descripcion": "Resuelve 3 ejercicios nuevos de la guía y explica en voz alta un paso de cada uno."
+    }
+   ]
+  }
+ ]
+}

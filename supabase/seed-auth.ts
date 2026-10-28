@@ -10,6 +10,8 @@ const estudiantes = [
   { correo: "camila@demo.muselearn", nombre: "Camila Pérez", rol: "estudiante" },
   { correo: "luis@demo.muselearn", nombre: "Luis Martínez", rol: "estudiante" },
   { correo: "sofia@demo.muselearn", nombre: "Sofía Gómez", rol: "estudiante" },
+  { correo: "diego@demo.muselearn", nombre: "Diego Fernández", rol: "estudiante" },
+  { correo: "valeria@demo.muselearn", nombre: "Valeria Santos", rol: "estudiante" },
 ] as const;
 
 const url = process.env.NEXT_PUBLIC_SUPABASE_URL;

@@ -2,6 +2,8 @@
 
 **An AI study companion that plans each student's week, tutors without doing the homework, and checks that the student really understood.**
 
+**Live demo:** https://muselearn-five.vercel.app · demo accounts are listed in [`supabase/seed-auth.ts`](supabase/seed-auth.ts) (fictional data only).
+
 Built for the **Meta AI Developer Hackathon 2026** — Indie track, theme *Build for Your World*.
 
 > *Español:* MuseLearn es una plataforma para docentes y estudiantes de secundaria. La interfaz está en español e inglés.
@@ -58,7 +60,8 @@ Work in progress during the hackathon (Oct 27 – Nov 4, 2026).
 - [x] Student dashboard (*Today*, *Week*, task page)
 - [x] Understanding report, practice route and teacher heatmap ("submitted" vs. "understood")
 - [ ] Notebook-photo reading tested with real handwriting
-- [ ] Public deployment and demo video
+- [x] Public deployment (Vercel)
+- [ ] Demo video
 
 ## Run it locally
 

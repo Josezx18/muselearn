@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { iniciarVerificacion, listarEntregas, responderVerificacion } from "@/lib/api-cliente";
+import { iniciarVerificacion, listarEntregas, responderVerificacion, ErrorApi } from "@/lib/api-cliente";
 import { useRouter } from "@/i18n/navigation";
 import { Button, Textarea } from "@/components/ui";
 import type { SesionVerificacion } from "@/types/contratos";
@@ -16,7 +16,7 @@ export function Verificacion({ tareaId, entregaId }: { tareaId: string; entregaI
   const [via, setVia] = useState<"voz" | "texto">("texto");
   const [ocupado, setOcupado] = useState(false);
   const [vozOcupada, setVozOcupada] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState<false | "general" | "limite">(false);
   const vozDisponible = useSyncExternalStore(
     suscribir,
     () => "speechSynthesis" in window,
@@ -47,8 +47,8 @@ export function Verificacion({ tareaId, entregaId }: { tareaId: string; entregaI
         return;
       }
       cargarSesion(await iniciarVerificacion(entrega.id));
-    } catch {
-      setError(true);
+    } catch (e) {
+      setError(e instanceof ErrorApi && e.codigo.startsWith("limite_diario") ? "limite" : "general");
     } finally {
       activo.current = false;
       setOcupado(false);
@@ -71,8 +71,8 @@ export function Verificacion({ tareaId, entregaId }: { tareaId: string; entregaI
         setRespuesta("");
         setVia("texto");
       }
-    } catch {
-      setError(true);
+    } catch (e) {
+      setError(e instanceof ErrorApi && e.codigo.startsWith("limite_diario") ? "limite" : "general");
     } finally {
       activo.current = false;
       setOcupado(false);
@@ -94,7 +94,7 @@ export function Verificacion({ tareaId, entregaId }: { tareaId: string; entregaI
       </header>
       {error && (
         <p role="alert" className="rounded-2xl border-2 border-peligro bg-peligro-claro p-4 font-bold text-peligro">
-          {t("error")}
+          {t(error === "limite" ? "limite" : "error")}
         </p>
       )}
       {!pregunta ? (

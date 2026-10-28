@@ -3,6 +3,7 @@ import { crearTarea, listarTareas } from "@/lib/db/tareas";
 import { errorHttp } from "@/lib/db/http";
 import { obtenerUsuarioActual } from "@/lib/db/sesion";
 import { NuevaTarea } from "@/lib/db/validacion-tareas";
+import { LIMITES, tareasCreadasHoy } from "@/lib/db/limites";
 import { analizarYGuardar, cargarContextoTarea, estaInscrito } from "@/lib/ia/analizador/servicio";
 import { crearClienteAdmin } from "@/lib/supabase/servidor";
 
@@ -41,6 +42,9 @@ export async function POST(peticion: Request) {
     .eq("docente_id", actual.usuario.id)
     .maybeSingle();
   if (!clase) return errorHttp(403, "no_tu_clase", "No puedes crear tareas en una clase ajena.");
+  if ((await tareasCreadasHoy(actual.db, actual.usuario.id)) >= LIMITES.tareas) {
+    return errorHttp(429, "limite_diario_tareas", `Llegaste al máximo de ${LIMITES.tareas} tareas nuevas por día.`);
+  }
 
   try {
     const tarea = await crearTarea(actual.db, actual.usuario.id, entrada.data);

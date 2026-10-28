@@ -2,7 +2,8 @@ import { z } from "zod";
 import { llamarMuseStream } from "@/lib/ia/cliente";
 import { sistemaTutor } from "@/lib/ia/conversacion/prompts";
 import { comprobarEscritura, contextoTarea } from "@/lib/ia/conversacion/servidor";
-import { EntradaTutor, Historial, errorConversacion } from "@/lib/ia/conversacion/validacion";
+import { EntradaTutor, ErrorConversacion, Historial, errorConversacion } from "@/lib/ia/conversacion/validacion";
+import { LIMITES, mensajesTutorHoy } from "@/lib/db/limites";
 import { MensajeChat } from "@/types/contratos";
 
 async function cargar(tareaId: string) {
@@ -32,6 +33,7 @@ export async function POST(request: Request) {
   try {
     const entrada = EntradaTutor.parse(await request.json().catch(() => null));
     const ctx = await cargar(entrada.tarea_id);
+    if ((await mensajesTutorHoy(ctx.db, ctx.usuario.id)) >= LIMITES.tutor) throw new ErrorConversacion(429, "limite_diario_tutor");
     const mensajes = [
       ...ctx.mensajes,
       MensajeChat.parse({ rol: "estudiante", contenido: entrada.mensaje, creado_en: new Date().toISOString() }),

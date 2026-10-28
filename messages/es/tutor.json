@@ -9,5 +9,6 @@
   "mensaje": "¿Qué has intentado?",
   "enviar": "Enviar",
   "pista": "Necesito una pista",
-  "pistaMensaje": "Necesito una pista para continuar con mi tarea."
+  "pistaMensaje": "Necesito una pista para continuar con mi tarea.",
+  "limite": "Llegaste al límite de mensajes al tutor por hoy. Mañana puedes seguir; mientras, intenta un paso por tu cuenta."
 }

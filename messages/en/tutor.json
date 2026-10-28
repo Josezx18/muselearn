@@ -9,5 +9,6 @@
   "mensaje": "What have you tried?",
   "enviar": "Send",
   "pista": "I need a hint",
-  "pistaMensaje": "I need a hint to continue my assignment."
+  "pistaMensaje": "I need a hint to continue my assignment.",
+  "limite": "You reached today's limit of messages to the tutor. You can continue tomorrow; meanwhile, try a step on your own."
 }

@@ -1,4 +1,5 @@
 import { SesionVerificacion } from "@/types/contratos";
+import { LIMITES, verificacionesHoy } from "@/lib/db/limites";
 import { comprobarEscritura, contextoEntrega } from "@/lib/ia/conversacion/servidor";
 import { contenidoEntrega, siguientePregunta } from "@/lib/ia/conversacion/verificador";
 import { EntradaInicio, ErrorConversacion, errorConversacion } from "@/lib/ia/conversacion/validacion";
@@ -21,6 +22,9 @@ export async function POST(request: Request) {
       .maybeSingle();
     if (error) throw error;
     if (previa) return Response.json(SesionVerificacion.parse(previa));
+    if ((await verificacionesHoy(ctx.admin, ctx.usuario.id)) >= LIMITES.verificaciones) {
+      throw new ErrorConversacion(429, "limite_diario_verificaciones");
+    }
     const pregunta = await siguientePregunta(await contenidoEntrega(ctx), [], ctx.usuario.idioma);
     const sesion = SesionVerificacion.parse({
       id: crypto.randomUUID(),

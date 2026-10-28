@@ -80,7 +80,7 @@ export function ChatTutor({ tareaId }: { tareaId: string }) {
       </div>
       {error && (
         <p role="alert" className="text-peligro">
-          {t("error")} <span className="text-xs text-tinta-suave">({error})</span>
+          {error.includes("limite_diario") ? t("limite") : t("error")} <span className="text-xs text-tinta-suave">({error})</span>
         </p>
       )}
       <form

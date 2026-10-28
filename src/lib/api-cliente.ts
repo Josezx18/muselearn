@@ -102,6 +102,15 @@ export const subirAdjuntoTarea = (tareaId: string, archivo: File) => {
   return pedir(`/api/tareas/${tareaId}/adjuntos`, Adjunto, { method: "POST", body: datos });
 };
 
+/** El estudiante sube una foto del cuaderno o un archivo antes de entregar. Devuelve el Adjunto para `entregar`. */
+export const subirAdjuntoEntrega = (tareaId: string, archivo: File) => {
+  if (usarMocks()) return mock({ nombre: archivo.name, ruta: `entregas/${tareaId}/${ESTUDIANTE_ACTUAL}/${archivo.name}`, tipo_mime: archivo.type });
+  const datos = new FormData();
+  datos.append("tarea_id", tareaId);
+  datos.append("archivo", archivo);
+  return pedir("/api/entregas/adjuntos", Adjunto, { method: "POST", body: datos });
+};
+
 export const entregar = (datos: { tarea_id: string; contenido_texto: string; adjuntos: Adjunto[] }) =>
   usarMocks()
     ? mock({

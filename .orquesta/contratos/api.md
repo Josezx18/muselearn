@@ -24,6 +24,7 @@ Reglas comunes:
 | GET | `/api/tareas?clase_id=` | ambos | — | `Tarea[]` |
 | GET | `/api/tareas/:id` | ambos | — | `Tarea` |
 | POST | `/api/tareas/:id/adjuntos` | docente | `multipart` | `Adjunto` |
+| POST | `/api/entregas/adjuntos` | estudiante | `multipart (tarea_id, archivo)` | `Adjunto` · ruta `entregas/<tarea>/<estudiante>/…`; máx. 10 MB, PDF o imagen |
 | POST | `/api/entregas` | estudiante | `{ tarea_id, contenido_texto, adjuntos }` | `Entrega` (estado `entregada`) |
 | GET | `/api/entregas?tarea_id=` | ambos | — | `Entrega[]` (docente: todas; estudiante: la suya) |
 

@@ -18,7 +18,8 @@ Formato: `- AAAA-MM-DD HH:MM [Txx] qué se hizo / qué falta / decisión tomada`
 - [T01] Permitir al docente quitar estudiantes de la clase y regenerar el código.
 - [T01] Enlace de invitación `/unirse?codigo=XXXXXX` que rellene el código.
 - (T03) Guardar minutos reales por tarea (tabla o columna) para que el historial del analizador sea exacto.
-- (T03) Extraer texto de los PDFs adjuntos antes de analizar.
+- (T03) Extraer texto de los PDFs adjuntos antes de analizar (T02 no lo hizo; los PDFs ya se suben a Storage).
+- (T02) Editar una tarea existente (falta `PATCH /api/tareas/:id`).
 - (T03) Mostrar en Hoy los `avisos` del plan como notificación al reorganizarse.
 
 ## Decisiones tomadas
@@ -32,3 +33,5 @@ Formato: `- AAAA-MM-DD HH:MM [Txx] qué se hizo / qué falta / decisión tomada`
 - 2026-10-27 [T01] Auth (registro/login/salir), rutas por rol, clases con código, unirse, 3 endpoints, RLS en supabase/politicas/rls.sql, seed-auth.ts, textos es/en y 20 pruebas. Falta: aplicar RLS y seed en Supabase (ver Solicitudes en la ficha).
 - 2026-10-27 [T03] Analizador, planificador determinista (+avisos con Muse), `llamarMuseStream`, endpoints `/api/ia/*` y `/api/preferencias`. lint/typecheck/test OK (57 pruebas). Pendiente: salidas reales y costo (faltan claves) — ver Bloqueos en la ficha.
 - 2026-10-27 [T07] Integradas T01 y T03 en main: lint, typecheck y 77 pruebas OK. Migraciones 0003 (RLS) y 0004 aplicadas en Supabase. Las ramas nuevas salen de este main.
+- 2026-10-27 [T02] Tareas y entregas: formularios (título, instrucciones, fecha, competencias, nivel ayuda, adjuntos), lista de tareas por clase, detalle con entregas por estudiante, FormularioEntrega con foto de cuaderno (cámara, compresión 1600px, máx 4), endpoints /api/tareas y /api/entregas con validación Zod, análisis IA en background al crear tarea. lint/typecheck/test OK (80 pruebas).
+- 2026-10-27 [T07] Integrada T02 con correcciones: crear tarea ahora guarda, subida real de adjuntos y fotos (nuevo `POST /api/entregas/adjuntos`), `after()` para el análisis, FormularioEntrega rehecho. lint, typecheck, 83 pruebas y build OK; RLS de entregas y Storage verificado.

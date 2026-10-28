@@ -1,1 +1,96 @@
-{}
+{
+  "titulo": "Tareas",
+  "nueva": {
+    "boton": "Nueva tarea",
+    "titulo": "Crear nueva tarea",
+    "guardando": "Guardando...",
+    "guardar": "Guardar",
+    "cancelar": "Cancelar",
+    "exito": "Tarea creada correctamente",
+    "error": "No se pudo crear la tarea"
+  },
+  "formulario": {
+    "titulo": "Título de la tarea",
+    "tituloPlaceholder": "Ej: Práctica de ecuaciones de primer grado",
+    "instrucciones": "Instrucciones",
+    "instruccionesPlaceholder": "Describe los pasos, ejercicios, formato de entrega...",
+    "fechaEntrega": "Fecha y hora de entrega",
+    "competencias": "Competencias (chips)",
+    "competenciasPlaceholder": "Escribe y presiona Enter para agregar",
+    "nivelAyuda": "Nivel de ayuda del tutor",
+    "nivelAyudaPistas": "Solo pistas",
+    "nivelAyudaPistasDesc": "El tutor hace preguntas guía y da pistas, nunca la respuesta.",
+    "nivelAyudaEjemplos": "Pistas + ejemplos",
+    "nivelAyudaEjemplosDesc": "Pistas + ejemplos parecidos resueltos (nunca el ejercicio de la tarea).",
+    "nivelAyudaExplicacion": "Explicación completa",
+    "nivelAyudaExplicacionDesc": "Explica el concepto completo, pero no resuelve la tarea.",
+    "adjuntos": "Adjuntos (PDF/imagen, máx. 10 MB)",
+    "adjuntosAgregar": "Agregar archivo",
+    "adjuntosErrorTamano": "El archivo supera el límite de 10 MB",
+    "adjuntosErrorTipo": "Solo se permiten PDF e imágenes"
+  },
+  "lista": {
+    "vacio": "No hay tareas en esta clase. Crea la primera.",
+    "cargando": "Cargando tareas...",
+    "error": "No se pudieron cargar las tareas",
+    "verEntregas": "Ver entregas",
+    "editar": "Editar",
+    "eliminar": "Eliminar",
+    "sinEntregas": "Sin entregas",
+    "pendientes": "Pendientes",
+    "entregadas": "Entregadas",
+    "verificando": "Verificando",
+    "verificadas": "Verificadas"
+  },
+  "detalle": {
+    "titulo": "Detalle de la tarea",
+    "instrucciones": "Instrucciones",
+    "fechaEntrega": "Entrega el",
+    "competencias": "Competencias",
+    "nivelAyuda": "Nivel de ayuda del tutor",
+    "adjuntos": "Adjuntos",
+    "estudiantes": "Estudiantes",
+    "estado": "Estado",
+    "entrega": "Entrega",
+    "verEntrega": "Ver entrega",
+    "sinEntrega": "Sin entregar"
+  },
+  "entrega": {
+    "titulo": "Entregar tarea",
+    "contenidoTexto": "Tu respuesta (texto)",
+    "contenidoTextoPlaceholder": "Escribe aquí tu solución...",
+    "adjuntos": "Adjuntos (fotos del cuaderno, PDF...)",
+    "adjuntosAgregar": "Agregar archivo",
+    "tomarFoto": "Tomar foto del cuaderno",
+    "comprimiendo": "Comprimiendo imagen...",
+    "entregando": "Entregando...",
+    "entregar": "Entregar",
+    "exito": "¡Tarea entregada correctamente!",
+    "error": "No se pudo entregar la tarea",
+    "yaEntregada": "Ya has entregado esta tarea",
+    "noPermitido": "No puedes entregar en una clase ajena",
+    "vacia": "Escribe tu respuesta o agrega al menos una foto o archivo.",
+    "quitar": "Quitar",
+    "fotoAlt": "Foto {numero} del cuaderno",
+    "fotosLlenas": "Ya agregaste el máximo de 4 fotos.",
+    "contadorFotos": "Fotos: {fotos}/{maximo}",
+    "errorCompresion": "No se pudo procesar la foto. Intenta de nuevo.",
+    "adjuntosErrorTipo": "Solo se aceptan fotos (JPG, PNG, WebP) o PDF.",
+    "adjuntosErrorTamano": "El archivo supera 10 MB."
+  },
+  "estados": {
+    "pendiente": "Pendiente",
+    "entregada": "Entregada",
+    "verificando": "Verificando",
+    "verificada": "Verificada"
+  },
+  "errores": {
+    "tituloRequerido": "El título es obligatorio",
+    "fechaRequerida": "La fecha de entrega es obligatoria",
+    "fechaPasado": "La fecha de entrega debe ser futura",
+    "adjuntoDemasiadoGrande": "El archivo es demasiado grande (máx. 10 MB)",
+    "adjuntoTipoInvalido": "Tipo de archivo no permitido",
+    "sinPermiso": "No tienes permiso para esta acción",
+    "noEncontrado": "Tarea no encontrada"
+  }
+}

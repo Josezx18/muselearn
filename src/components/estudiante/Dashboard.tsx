@@ -9,7 +9,7 @@ import type { Usuario, PlanSemanal, Tarea, AnalisisTarea, Clase, BloquePlan, Est
 import { TarjetaTarea } from "./TarjetaTarea";
 import { enlaceDeBloque } from "@/lib/practica";
 import { Mascota } from "@/components/comun/mascotas/Mascota";
-import { ConMascota } from "@/components/comun/mascotas/ConMascota";
+import { ConMascota, MascotaBoton } from "@/components/comun/mascotas/ConMascota";
 export function Dashboard({ vista, usuario }: { vista: "hoy" | "semana"; usuario: Usuario }) {
   const t = useTranslations("estudiante");
   const locale = useLocale();
@@ -151,13 +151,14 @@ export function Dashboard({ vista, usuario }: { vista: "hoy" | "semana"; usuario
 
   const avisos = plan?.avisos.filter((a) => !cerrados.includes(a)) ?? [];
 
+  const conversar = proximo ? `/estudiante/tarea/${proximo.tarea_id}/conversar` : undefined;
   const mensajeMascota = proximo ? tm("conProximo", { titulo: proximo.titulo }) : tm("sinPendientes");
   return (
-    <ConMascota expresion={proximo ? "hola" : "lograste"} mensaje={mensajeMascota}>
+    <ConMascota expresion={proximo ? "hola" : "lograste"} mensaje={mensajeMascota} hrefConversar={conversar}>
       <div className="min-w-0 space-y-8">
         <header className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div className="flex items-end gap-3">
-            <Mascota expresion="hola" viva flota className="size-16 sm:size-20 lg:hidden" />
+            <MascotaBoton expresion="hola" viva flota hrefConversar={conversar} className="size-16 sm:size-20 lg:hidden" />
             <div>
               <p className="font-bold text-primario-fuerte">{t("saludo", { nombre: usuario.nombre.split(" ")[0] })}</p>
               <h1 className="text-4xl font-extrabold">{t(vista)}</h1>

@@ -2,6 +2,7 @@
 
 import { useState, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
+import { useRouter } from "@/i18n/navigation";
 import { cn } from "@/components/ui";
 import { Mascota, type Expresion } from "./Mascota";
 
@@ -15,20 +16,30 @@ export function ConMascota({
   expresion = "hola",
   mensaje,
   hablando = false,
+  hrefConversar,
+  alTocar,
 }: {
   children: ReactNode;
   expresion?: Expresion;
   mensaje?: string;
   hablando?: boolean;
+  /** Al tocar la mascota se abre la conversación por voz con ella. */
+  hrefConversar?: string;
+  /** O hace algo en la misma pantalla (p. ej. leer la pregunta en voz alta). */
+  alTocar?: () => void;
 }) {
   const t = useTranslations("mascota");
+  const router = useRouter();
   const [animo, setAnimo] = useState<string | null>(null);
   const [toque, setToque] = useState(0);
+  const accionable = Boolean(hrefConversar || alTocar);
 
   function tocar() {
+    setToque((n) => n + 1);
+    if (hrefConversar) return router.push(hrefConversar);
+    if (alTocar) return alTocar();
     const frases = t.raw("animo") as string[];
     setAnimo(frases[Math.floor(Math.random() * frases.length)]);
-    setToque((n) => n + 1);
   }
 
   const texto = animo ?? mensaje;
@@ -48,7 +59,7 @@ export function ConMascota({
             />
           </p>
         )}
-        <button key={toque} type="button" onClick={tocar} aria-label={t("tocar")} className="rounded-full">
+        <button key={toque} type="button" onClick={tocar} aria-label={accionable ? t("hablar") : t("tocar")} className="rounded-full">
           <Mascota
             expresion={expresion}
             viva
@@ -57,7 +68,38 @@ export function ConMascota({
             className={cn("size-56", toque > 0 && "mascota-toque")}
           />
         </button>
+        {accionable && (
+          <p className="mt-2 rounded-full bg-primario-claro px-3 py-1 text-sm font-bold text-primario-fuerte">🎙 {t("hablar")}</p>
+        )}
       </aside>
     </div>
+  );
+}
+
+/** La mascota pequeña de las pantallas en el celular, tocable: abre la conversación o hace la acción dada. */
+export function MascotaBoton({
+  hrefConversar,
+  alTocar,
+  className,
+  ...mascota
+}: React.ComponentProps<typeof Mascota> & { hrefConversar?: string; alTocar?: () => void }) {
+  const t = useTranslations("mascota");
+  const router = useRouter();
+  const [toque, setToque] = useState(0);
+  if (!hrefConversar && !alTocar) return <Mascota {...mascota} className={className} />;
+  return (
+    <button
+      key={toque}
+      type="button"
+      aria-label={t("hablar")}
+      className="shrink-0 rounded-full"
+      onClick={() => {
+        setToque((n) => n + 1);
+        if (hrefConversar) router.push(hrefConversar);
+        else alTocar?.();
+      }}
+    >
+      <Mascota {...mascota} className={cn(className, toque > 0 && "mascota-toque")} />
+    </button>
   );
 }

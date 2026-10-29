@@ -6,10 +6,9 @@ import { useRouter } from "@/i18n/navigation";
 import { Button, Textarea } from "@/components/ui";
 import type { SesionVerificacion } from "@/types/contratos";
 import { EntradaVoz } from "./voz";
-import { ConMascota } from "@/components/comun/mascotas/ConMascota";
+import { ConMascota, MascotaBoton } from "@/components/comun/mascotas/ConMascota";
 import { BotonVoz } from "@/components/comun/BotonVoz";
 import { useVozSalida } from "@/lib/voz-salida";
-import { Mascota } from "@/components/comun/mascotas/Mascota";
 
 export function Verificacion({ tareaId, entregaId }: { tareaId: string; entregaId?: string }) {
   const t = useTranslations("verificacion");
@@ -89,6 +88,11 @@ export function Verificacion({ tareaId, entregaId }: { tareaId: string; entregaI
     else voz.hablar(pregunta.texto, { forzar: true });
   }
   const numero = sesion?.preguntas.length ?? 0;
+  // Tocar la mascota: lee la pregunta en voz alta (o empieza la verificación si aún no empezó).
+  function tocarMascota() {
+    if (pregunta) escuchar();
+    else void empezar();
+  }
   const expresion = vozOcupada ? "escucho" : ocupado ? "pensando" : voz.hablando ? "hola" : pregunta ? "pista" : "hola";
   const mensajeMascota = vozOcupada
     ? tm("escuchando")
@@ -100,7 +104,7 @@ export function Verificacion({ tareaId, entregaId }: { tareaId: string; entregaI
           ? tm("pregunta")
           : tm("inicio");
   return (
-    <ConMascota expresion={expresion} mensaje={mensajeMascota} hablando={voz.hablando}>
+    <ConMascota expresion={expresion} mensaje={mensajeMascota} hablando={voz.hablando} alTocar={tocarMascota}>
       <section className="mx-auto flex w-full min-w-0 max-w-2xl flex-col gap-5">
         <header className="flex items-start justify-between gap-3">
           <div>
@@ -115,7 +119,14 @@ export function Verificacion({ tareaId, entregaId }: { tareaId: string; entregaI
               />
             )}
           </div>
-          <Mascota expresion={expresion} viva hablando={voz.hablando} flota={ocupado || vozOcupada} className="size-20 lg:hidden" />
+          <MascotaBoton
+            expresion={expresion}
+            viva
+            hablando={voz.hablando}
+            flota={ocupado || vozOcupada}
+            alTocar={tocarMascota}
+            className="size-20 lg:hidden"
+          />
         </header>
         {error && (
           <p role="alert" className="rounded-2xl border-2 border-peligro bg-peligro-claro p-4 font-bold text-peligro">

@@ -5,8 +5,7 @@ import { enviarAlTutor, historialTutor } from "@/lib/api-cliente";
 import { Button, Textarea } from "@/components/ui";
 import type { MensajeChat } from "@/types/contratos";
 import { ErrorApi } from "@/lib/api-cliente";
-import { Mascota } from "@/components/comun/mascotas/Mascota";
-import { ConMascota } from "@/components/comun/mascotas/ConMascota";
+import { ConMascota, MascotaBoton } from "@/components/comun/mascotas/ConMascota";
 import { BotonVoz } from "@/components/comun/BotonVoz";
 import { EntradaVoz } from "@/components/verificacion/voz";
 import { useVozSalida } from "@/lib/voz-salida";
@@ -77,7 +76,12 @@ export function ChatTutor({ tareaId }: { tareaId: string }) {
   const expresion = escuchando ? "escucho" : pensando ? "pensando" : voz.hablando ? "hola" : mensajes.length ? "pista" : "hola";
   const mensajeMascota = escuchando ? tm("escuchando") : pensando ? tm("pensando") : voz.hablando ? tm("hablando") : tm("inicio");
   return (
-    <ConMascota expresion={expresion} mensaje={mensajeMascota} hablando={voz.hablando}>
+    <ConMascota
+      expresion={expresion}
+      mensaje={mensajeMascota}
+      hablando={voz.hablando}
+      hrefConversar={`/estudiante/tarea/${tareaId}/conversar`}
+    >
       <section className="mx-auto flex w-full min-w-0 max-w-2xl flex-col gap-4">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <h1 className="text-4xl font-extrabold">{t("titulo")}</h1>
@@ -133,11 +137,12 @@ export function ChatTutor({ tareaId }: { tareaId: string }) {
               <div key={i}>{burbuja}</div>
             ) : (
               <div key={i} className="mr-auto flex max-w-[94%] items-end gap-2">
-                <Mascota
+                <MascotaBoton
                   expresion={m.contenido ? (i === mensajes.length - 1 ? "pista" : "hola") : "pensando"}
                   flota={!m.contenido}
                   hablando={voz.hablando && i === mensajes.length - 1}
                   viva={i === mensajes.length - 1}
+                  hrefConversar={`/estudiante/tarea/${tareaId}/conversar`}
                   className="size-11"
                 />
                 {burbuja}

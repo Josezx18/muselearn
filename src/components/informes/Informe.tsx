@@ -6,8 +6,7 @@ import type { PracticaAgregada } from "@/types/contratos";
 import { Link } from "@/i18n/navigation";
 import { Card, Button, NivelDominio } from "@/components/ui";
 import { z } from "zod";
-import { Mascota } from "@/components/comun/mascotas/Mascota";
-import { ConMascota } from "@/components/comun/mascotas/ConMascota";
+import { ConMascota, MascotaBoton } from "@/components/comun/mascotas/ConMascota";
 type Datos = z.infer<typeof InformeConRuta>;
 export function Informe({ id }: { id: string }) {
   const t = useTranslations("informes");
@@ -78,8 +77,9 @@ export function Informe({ id }: { id: string }) {
   if (!datos) return <p role="status">{t("cargando")}</p>;
   const { informe, ruta } = datos;
   const logrado = informe.nivel_global >= 3;
+  const conversar = datos.tarea_id ? `/estudiante/tarea/${datos.tarea_id}/conversar` : undefined;
   return (
-    <ConMascota expresion={logrado ? "lograste" : "pista"} mensaje={tm(logrado ? "logrado" : "enProceso")}>
+    <ConMascota expresion={logrado ? "lograste" : "pista"} mensaje={tm(logrado ? "logrado" : "enProceso")} hrefConversar={conversar}>
       <div className="mx-auto grid w-full min-w-0 max-w-3xl gap-5">
         <Link
           className="inline-flex min-h-9 items-center font-bold text-primario-fuerte underline-offset-4 hover:underline"
@@ -89,7 +89,7 @@ export function Informe({ id }: { id: string }) {
         </Link>
         <div className="flex items-end justify-between gap-3">
           <h1 className="text-4xl font-extrabold">{t("titulo")}</h1>
-          <Mascota expresion={logrado ? "lograste" : "pista"} viva className="size-20 lg:hidden" />
+          <MascotaBoton expresion={logrado ? "lograste" : "pista"} viva hrefConversar={conversar} className="size-20 lg:hidden" />
         </div>
         <section className="rounded-2xl border-2 border-tinta bg-superficie p-5 shadow-[4px_4px_0_0_var(--sombra-fuerte)]">
           <h2 className="text-sm font-bold text-tinta-suave">{t("nivel")}</h2>

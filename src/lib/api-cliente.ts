@@ -222,10 +222,16 @@ export const transcribirVoz = (audio: Blob, tareaId?: string) => {
 };
 
 // ---------------- T06 — informes y panel docente ----------------
-export const InformeConRuta = z.object({ informe: InformeComprension, ruta: RutaPractica.nullable() });
+export const InformeConRuta = z.object({
+  informe: InformeComprension,
+  ruta: RutaPractica.nullable(),
+  tarea_id: z.string().uuid().optional(),
+});
 
 export const obtenerInforme = (entrega_id: string) =>
-  usarMocks() ? mock({ informe: informeMock, ruta: rutaMock }) : pedir(`/api/informes/${entrega_id}`, InformeConRuta);
+  usarMocks()
+    ? mock({ informe: informeMock, ruta: rutaMock, tarea_id: tareasMock[0].id })
+    : pedir(`/api/informes/${entrega_id}`, InformeConRuta);
 
 /** "Agregar a mi semana": coloca los pasos de la ruta de práctica en el plan del estudiante. */
 export const agregarRutaASemana = (entrega_id: string) =>

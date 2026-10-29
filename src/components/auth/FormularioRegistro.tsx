@@ -5,10 +5,11 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Button, Card, Input } from "@/components/ui";
 import { registrarse, type EstadoForm } from "./acciones";
+import { BotonGoogleEnFormulario, SeparadorO } from "./BotonGoogle";
 
 const ROLES = ["estudiante", "docente"] as const;
 
-export function FormularioRegistro() {
+export function FormularioRegistro({ conGoogle = false }: { conGoogle?: boolean }) {
   const t = useTranslations("auth");
   const [estado, accion, cargando] = useActionState<EstadoForm, FormData>(registrarse, {});
 
@@ -31,6 +32,12 @@ export function FormularioRegistro() {
             ))}
           </div>
         </fieldset>
+        {conGoogle && (
+          <>
+            <BotonGoogleEnFormulario />
+            <SeparadorO />
+          </>
+        )}
         <Input name="nombre" etiqueta={t("campos.nombre")} autoComplete="name" required minLength={2} maxLength={80} />
         <Input name="correo" type="email" etiqueta={t("campos.correo")} autoComplete="email" required />
         <Input

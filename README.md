@@ -26,6 +26,7 @@ MuseLearn keeps the classroom flow teachers already know (classes, tasks, submis
 | **2. Tutor** | A Socratic tutor answers with questions and hints at the help level the teacher chose — it **never solves the task**. | Chooses the help level per task: hints, worked examples, or explanation. |
 | **3. Verify** | After submitting — including **photos of the handwritten notebook** — the student answers 3–5 short questions about *their own* work, by **voice** or text. | Gets a comprehension report per student and concept, not just "submitted". |
 | **4. Improve** | A personalized practice route of 2–6 steps for the weak concepts. | A **heatmap** (student × concept) with the concepts the class needs to review. |
+| **5. Teach** | Reads the teacher's comment on each submission. | **AI for the teacher:** drafts a full task from a topic, suggests a review plan from the heatmap (anonymous, aggregated data only), and drafts feedback for each submission that the teacher edits before sending. |
 
 ### Screens
 
@@ -75,6 +76,9 @@ Work in progress during the hackathon (Oct 27 – Nov 4, 2026).
 - [x] Understanding report, practice route and teacher heatmap ("submitted" vs. "understood")
 - [x] "Add to my week": the practice route becomes study blocks (one step per day) that re-planning keeps
 - [x] Daily AI usage limits per account, so a public demo can't drain the model credits
+- [x] AI for the teacher: create a task with AI, review suggestions from the heatmap, feedback drafts
+- [x] Google Classroom import (test mode): bring a course and its students into MuseLearn
+- [x] Sign in with Google and password recovery by email
 - [ ] Notebook-photo reading tested with real handwriting
 - [x] Public deployment (Vercel)
 - [ ] Demo video

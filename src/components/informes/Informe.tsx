@@ -6,6 +6,7 @@ import type { PracticaAgregada } from "@/types/contratos";
 import { Link } from "@/i18n/navigation";
 import { Card, Button, NivelDominio } from "@/components/ui";
 import { z } from "zod";
+import { Pagi } from "@/components/comun/Pagi";
 type Datos = z.infer<typeof InformeConRuta>;
 export function Informe({ id }: { id: string }) {
   const t = useTranslations("informes");
@@ -82,7 +83,10 @@ export function Informe({ id }: { id: string }) {
       >
         {t("volver")}
       </Link>
-      <h1 className="text-4xl font-extrabold">{t("titulo")}</h1>
+      <div className="flex items-end justify-between gap-3">
+        <h1 className="text-4xl font-extrabold">{t("titulo")}</h1>
+        <Pagi expresion={informe.nivel_global >= 3 ? "lograste" : "pista"} className="size-20" />
+      </div>
       <section className="rounded-2xl border-2 border-tinta bg-superficie p-5 shadow-[4px_4px_0_0_var(--sombra-fuerte)]">
         <h2 className="text-sm font-bold text-tinta-suave">{t("nivel")}</h2>
         <p className="font-titulo text-3xl font-extrabold">{t(`niveles.${informe.nivel_global}`)}</p>

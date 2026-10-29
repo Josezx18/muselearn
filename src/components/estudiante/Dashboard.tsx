@@ -8,6 +8,7 @@ import { Button, Card, Skeleton } from "@/components/ui";
 import type { Usuario, PlanSemanal, Tarea, AnalisisTarea, Clase, BloquePlan, EstadoBloque } from "@/types/contratos";
 import { TarjetaTarea } from "./TarjetaTarea";
 import { enlaceDeBloque } from "@/lib/practica";
+import { Pagi } from "@/components/comun/Pagi";
 export function Dashboard({ vista, usuario }: { vista: "hoy" | "semana"; usuario: Usuario }) {
   const t = useTranslations("estudiante");
   const locale = useLocale();
@@ -89,7 +90,12 @@ export function Dashboard({ vista, usuario }: { vista: "hoy" | "semana"; usuario
   const minutos = (b: BloquePlan) => Math.round((Date.parse(b.fin) - Date.parse(b.inicio)) / 60000);
   const materiaDe = (tareaId: string) => clases.find((c) => c.id === tareas.find((x) => x.id === tareaId)?.clase_id)?.materia;
   const tarjeta = (ta: Tarea) => (
-    <TarjetaTarea key={ta.id} tarea={ta} analisis={analisis.find((a) => a.tarea_id === ta.id)} materia={clases.find((c) => c.id === ta.clase_id)?.materia} />
+    <TarjetaTarea
+      key={ta.id}
+      tarea={ta}
+      analisis={analisis.find((a) => a.tarea_id === ta.id)}
+      materia={clases.find((c) => c.id === ta.clase_id)?.materia}
+    />
   );
 
   /** Una fila del horario: hora a la izquierda, bloque a la derecha (como el horario de clases). */
@@ -146,10 +152,13 @@ export function Dashboard({ vista, usuario }: { vista: "hoy" | "semana"; usuario
   return (
     <div className="min-w-0 space-y-8">
       <header className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <p className="font-bold text-primario-fuerte">{t("saludo", { nombre: usuario.nombre.split(" ")[0] })}</p>
-          <h1 className="text-4xl font-extrabold">{t(vista)}</h1>
-          <p className="mt-1 text-tinta-suave">{t("subtitulo")}</p>
+        <div className="flex items-end gap-3">
+          <Pagi expresion="hola" flota className="size-16 sm:size-20" />
+          <div>
+            <p className="font-bold text-primario-fuerte">{t("saludo", { nombre: usuario.nombre.split(" ")[0] })}</p>
+            <h1 className="text-4xl font-extrabold">{t(vista)}</h1>
+            <p className="mt-1 text-tinta-suave">{t("subtitulo")}</p>
+          </div>
         </div>
         <Button variante="secundario" cargando={ocupado} disabled={cargando || !plan} onClick={() => void reorganizar()}>
           {t("reorganizar")}
@@ -184,7 +193,10 @@ export function Dashboard({ vista, usuario }: { vista: "hoy" | "semana"; usuario
           {avisos.length > 0 && (
             <ul aria-live="polite" className="space-y-2">
               {avisos.map((a, i) => (
-                <li key={`${i}-${a}`} className="flex items-start gap-3 rounded-xl border-l-[6px] border-resaltador bg-resaltador-claro p-3 pl-4">
+                <li
+                  key={`${i}-${a}`}
+                  className="flex items-start gap-3 rounded-xl border-l-[6px] border-resaltador bg-resaltador-claro p-3 pl-4"
+                >
                   <p className="flex-1">{a}</p>
                   <button
                     type="button"
@@ -199,7 +211,12 @@ export function Dashboard({ vista, usuario }: { vista: "hoy" | "semana"; usuario
             </ul>
           )}
 
-          {!tareas.length && <Card className="papel text-center text-lg">{t("vacio")}</Card>}
+          {!tareas.length && (
+            <Card className="papel flex flex-col items-center gap-2 text-center text-lg">
+              <Pagi expresion="lograste" className="size-24" />
+              {t("vacio")}
+            </Card>
+          )}
 
           {vista === "hoy" ? (
             <>
@@ -214,7 +231,9 @@ export function Dashboard({ vista, usuario }: { vista: "hoy" | "semana"; usuario
                       <span className="resaltado">{proximo.titulo}</span>
                     </p>
                     <p className="mt-2 text-tinta-suave tabular-nums">
-                      {isSameDay(new Date(proximo.inicio), hoy) ? "" : `${new Date(proximo.inicio).toLocaleDateString(locale, { weekday: "long" })}, `}
+                      {isSameDay(new Date(proximo.inicio), hoy)
+                        ? ""
+                        : `${new Date(proximo.inicio).toLocaleDateString(locale, { weekday: "long" })}, `}
                       {hora(proximo.inicio)} – {hora(proximo.fin)} ({t("minutos", { n: minutos(proximo) })})
                     </p>
                     <div className="mt-4 flex flex-wrap gap-2">
@@ -262,13 +281,24 @@ export function Dashboard({ vista, usuario }: { vista: "hoy" | "semana"; usuario
                   {t("siguiente")} ›
                 </Button>
               </nav>
-              <div role="region" aria-label={t("semana")} tabIndex={0} className="-mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-4 lg:mx-0 lg:grid lg:grid-cols-7 lg:px-0">
+              <div
+                role="region"
+                aria-label={t("semana")}
+                tabIndex={0}
+                className="-mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-4 lg:mx-0 lg:grid lg:grid-cols-7 lg:px-0"
+              >
                 {Array.from({ length: 7 }, (_, i) => addDays(new Date(`${semana}T12:00:00`), i)).map((d) => {
                   const esHoy = isSameDay(d, hoy);
                   const entregasDia = tareas.filter((ta) => isSameDay(new Date(ta.fecha_entrega), d));
                   return (
-                    <section key={d.toISOString()} ref={esHoy ? refHoy : undefined} className="w-[85%] min-w-0 shrink-0 snap-start space-y-2 sm:w-[45%] lg:w-auto">
-                      <h2 className={`rounded-xl px-3 py-2 text-base font-extrabold capitalize ${esHoy ? "bg-tinta text-white" : "bg-superficie border-2 border-borde"}`}>
+                    <section
+                      key={d.toISOString()}
+                      ref={esHoy ? refHoy : undefined}
+                      className="w-[85%] min-w-0 shrink-0 snap-start space-y-2 sm:w-[45%] lg:w-auto"
+                    >
+                      <h2
+                        className={`rounded-xl px-3 py-2 text-base font-extrabold capitalize ${esHoy ? "bg-tinta text-white" : "bg-superficie border-2 border-borde"}`}
+                      >
                         {d.toLocaleDateString(locale, { weekday: "long", day: "numeric" })}
                       </h2>
                       {entregasDia.map((ta) => (

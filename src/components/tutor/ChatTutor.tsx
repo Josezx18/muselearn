@@ -5,6 +5,7 @@ import { enviarAlTutor, historialTutor } from "@/lib/api-cliente";
 import { Button, Textarea } from "@/components/ui";
 import type { MensajeChat } from "@/types/contratos";
 import { ErrorApi } from "@/lib/api-cliente";
+import { Pagi } from "@/components/comun/Pagi";
 
 /** Código corto del error para mostrar junto al mensaje (ayuda a diagnosticar). */
 function codigoDe(e: unknown): string {
@@ -63,20 +64,38 @@ export function ChatTutor({ tareaId }: { tareaId: string }) {
     <section className="mx-auto flex w-full min-w-0 max-w-2xl flex-col gap-4">
       <h1 className="text-4xl font-extrabold">{t("titulo")}</h1>
       <p className="text-tinta-suave">{t("introduccion")}</p>
-      <div role="log" aria-label={t("historial")} aria-live="polite" className="papel flex max-h-[58vh] min-h-48 flex-col gap-3 overflow-y-auto rounded-2xl border-2 border-borde p-3">
-        {mensajes.map((m, i) => (
-          <div
-            key={i}
-            className={`max-w-[88%] whitespace-pre-wrap break-words rounded-2xl px-4 py-3 ${
-              m.rol === "estudiante"
-                ? "ml-auto rounded-br-md bg-tinta text-white"
-                : "mr-auto rounded-bl-md border-2 border-borde bg-superficie"
-            }`}
-          >
-            <p className={`mb-0.5 text-xs font-bold ${m.rol === "estudiante" ? "text-white/70" : "text-primario-fuerte"}`}>{t(m.rol)}</p>
-            {m.contenido || t("pensando")}
-          </div>
-        ))}
+      <div
+        role="log"
+        aria-label={t("historial")}
+        aria-live="polite"
+        className="papel flex max-h-[58vh] min-h-48 flex-col gap-3 overflow-y-auto rounded-2xl border-2 border-borde p-3"
+      >
+        {mensajes.map((m, i) => {
+          const burbuja = (
+            <div
+              className={`max-w-[88%] whitespace-pre-wrap break-words rounded-2xl px-4 py-3 ${
+                m.rol === "estudiante"
+                  ? "ml-auto rounded-br-md bg-tinta text-white"
+                  : "min-w-0 rounded-bl-md border-2 border-borde bg-superficie"
+              }`}
+            >
+              <p className={`mb-0.5 text-xs font-bold ${m.rol === "estudiante" ? "text-white/70" : "text-primario-fuerte"}`}>{t(m.rol)}</p>
+              {m.contenido || t("pensando")}
+            </div>
+          );
+          return m.rol === "estudiante" ? (
+            <div key={i}>{burbuja}</div>
+          ) : (
+            <div key={i} className="mr-auto flex max-w-[94%] items-end gap-2">
+              <Pagi
+                expresion={m.contenido ? (i === mensajes.length - 1 ? "pista" : "hola") : "pensando"}
+                flota={!m.contenido}
+                className="size-11"
+              />
+              {burbuja}
+            </div>
+          );
+        })}
       </div>
       {error && (
         <p role="alert" className="text-peligro">
@@ -90,7 +109,14 @@ export function ChatTutor({ tareaId }: { tareaId: string }) {
           void enviar(texto);
         }}
       >
-        <Textarea etiqueta={t("mensaje")} rows={3} value={texto} onChange={(e) => setTexto(e.target.value)} maxLength={6000} disabled={ocupado} />
+        <Textarea
+          etiqueta={t("mensaje")}
+          rows={3}
+          value={texto}
+          onChange={(e) => setTexto(e.target.value)}
+          maxLength={6000}
+          disabled={ocupado}
+        />
         <div className="flex flex-wrap gap-2">
           <Button type="submit" cargando={ocupado} disabled={!texto.trim()}>
             {t("enviar")}

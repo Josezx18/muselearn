@@ -6,6 +6,7 @@ import { useRouter } from "@/i18n/navigation";
 import { Button, Textarea } from "@/components/ui";
 import type { SesionVerificacion } from "@/types/contratos";
 import { EntradaVoz } from "./voz";
+import { Pagi } from "@/components/comun/Pagi";
 
 export function Verificacion({ tareaId, entregaId }: { tareaId: string; entregaId?: string }) {
   const t = useTranslations("verificacion");
@@ -88,9 +89,16 @@ export function Verificacion({ tareaId, entregaId }: { tareaId: string; entregaI
   const numero = sesion?.preguntas.length ?? 0;
   return (
     <section className="mx-auto flex w-full min-w-0 max-w-2xl flex-col gap-5">
-      <header>
-        <h1 className="text-4xl font-extrabold">{t("titulo")}</h1>
-        {!pregunta && <p className="mt-3 max-w-prose text-lg text-tinta-suave">{t("tranquilidad")}</p>}
+      <header className="flex items-start justify-between gap-3">
+        <div>
+          <h1 className="text-4xl font-extrabold">{t("titulo")}</h1>
+          {!pregunta && <p className="mt-3 max-w-prose text-lg text-tinta-suave">{t("tranquilidad")}</p>}
+        </div>
+        <Pagi
+          expresion={vozOcupada ? "escucho" : ocupado ? "pensando" : "hola"}
+          flota={ocupado || vozOcupada}
+          className="size-16 sm:size-20"
+        />
       </header>
       {error && (
         <p role="alert" className="rounded-2xl border-2 border-peligro bg-peligro-claro p-4 font-bold text-peligro">
@@ -113,7 +121,10 @@ export function Verificacion({ tareaId, entregaId }: { tareaId: string; entregaI
           <div className="flex items-center gap-3">
             <div className="flex gap-1.5" aria-hidden>
               {[1, 2, 3].map((n) => (
-                <span key={n} className={`h-2.5 w-8 rounded-full ${n < numero ? "bg-primario" : n === numero ? "bg-resaltador" : "bg-nivel-vacio"}`} />
+                <span
+                  key={n}
+                  className={`h-2.5 w-8 rounded-full ${n < numero ? "bg-primario" : n === numero ? "bg-resaltador" : "bg-nivel-vacio"}`}
+                />
               ))}
             </div>
             <p className="text-sm font-bold text-tinta-suave">{t("progreso", { numero })}</p>
@@ -126,7 +137,13 @@ export function Verificacion({ tareaId, entregaId }: { tareaId: string; entregaI
               <Button variante="fantasma" tamano="sm" className="mt-3 -ml-2" onClick={escuchar}>
                 <svg viewBox="0 0 24 24" className="size-5" aria-hidden>
                   <path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor" />
-                  <path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                  <path
+                    d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  />
                 </svg>
                 {t("escuchar")}
               </Button>

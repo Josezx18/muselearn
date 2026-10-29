@@ -188,3 +188,17 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Pagi flota suavemente (la regla de "reducir movimiento" de arriba la detiene). */
+.pagi-flota {
+  animation: pagi-flota 3.2s ease-in-out infinite;
+}
+@keyframes pagi-flota {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}

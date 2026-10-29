@@ -12,5 +12,49 @@
   "sinInforme": "Sin informe de comprensión",
   "seleccionar": "Selecciona un estudiante en el mapa",
   "vacio": "Todavía no hay conceptos evaluados.",
-  "resumen": "Resumen docente"
+  "resumen": "Resumen docente",
+  "integraciones": {
+    "titulo": "Integraciones",
+    "intro": "Pronto podrás conectar MuseLearn con la plataforma que ya usa tu centro: traer tus clases y estudiantes, y devolver lo que cada uno comprendió.",
+    "hoy": "Mientras tanto, tus estudiantes entran a cada clase con su código de 6 letras.",
+    "proximamente": "Próximamente",
+    "traer": "Trae",
+    "devolver": "Devuelve",
+    "enlace": "Conectar con Classroom, Teams, Moodle…",
+    "enlaceDetalle": "Mira qué plataformas educativas podrás conectar.",
+    "plataformas": {
+      "classroom": {
+        "nombre": "Google Classroom",
+        "traer": "clases, estudiantes y tareas",
+        "devolver": "comprensión como comentario privado y nota"
+      },
+      "teams": {
+        "nombre": "Microsoft Teams",
+        "traer": "equipos de clase y estudiantes",
+        "devolver": "comprensión en la tarea de Teams"
+      },
+      "moodle": {
+        "nombre": "Moodle",
+        "traer": "cursos y participantes",
+        "devolver": "calificación y retroalimentación"
+      },
+      "canvas": {
+        "nombre": "Canvas",
+        "traer": "cursos y estudiantes (LTI 1.3)",
+        "devolver": "calificación en el libro de notas"
+      },
+      "schoology": {
+        "nombre": "Schoology",
+        "traer": "cursos y estudiantes (LTI 1.3)",
+        "devolver": "calificación"
+      },
+      "csv": {
+        "nombre": "Exportar a CSV",
+        "traer": "—",
+        "devolver": "un archivo con entregas y comprensión, para cualquier plataforma"
+      }
+    },
+    "nota": "Usamos los estándares de cada plataforma (sus API oficiales y LTI 1.3). Tu centro decide qué se conecta.",
+    "volver": "Volver a mis clases"
+  }
 }

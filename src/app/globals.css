@@ -215,3 +215,78 @@
 :root[data-mascota="orbi"] .mascota > .mascota-orbi {
   display: block;
 }
+
+/* Mascota virtual: parpadea, saluda, salta, se balancea y mueve la boca al hablar.
+   Todo se detiene con "reducir movimiento" (regla general de arriba). */
+.mascota .mascota-ojos,
+.mascota .mascota-boca,
+.mascota .mascota-brazo {
+  transform-box: fill-box;
+}
+.mascota-viva .mascota-ojos {
+  transform-origin: center;
+  animation: ml-parpadeo 4.8s infinite;
+}
+.mascota-viva.exp-hola .mascota-brazo {
+  transform-origin: 0% 100%;
+  animation: ml-saludo 2.6s ease-in-out infinite;
+}
+.mascota-habla .mascota-boca {
+  transform-origin: center top;
+  animation: ml-habla 0.26s ease-in-out infinite alternate;
+}
+.mascota-viva.exp-lograste > svg {
+  animation: ml-salto 1.2s cubic-bezier(0.3, 0.7, 0.3, 1) infinite;
+}
+.mascota-viva.exp-pensando > svg {
+  transform-origin: 50% 90%;
+  animation: ml-balanceo 2.8s ease-in-out infinite;
+}
+.mascota-viva.exp-escucho > svg {
+  animation: ml-latido 1.3s ease-in-out infinite;
+}
+.mascota-viva.exp-pista > svg {
+  transform-origin: 50% 90%;
+  animation: ml-asiente 1.8s ease-in-out infinite;
+}
+.mascota-toque > svg {
+  animation: ml-giro 0.7s cubic-bezier(0.3, 0.7, 0.3, 1) !important;
+}
+@keyframes ml-parpadeo {
+  0%, 93%, 100% { transform: scaleY(1); }
+  96% { transform: scaleY(0.1); }
+}
+@keyframes ml-saludo {
+  0%, 55%, 100% { rotate: 0deg; }
+  65% { rotate: -22deg; }
+  75% { rotate: 6deg; }
+  85% { rotate: -16deg; }
+}
+@keyframes ml-habla {
+  from { transform: scaleY(0.55); }
+  to { transform: scaleY(1.45); }
+}
+@keyframes ml-salto {
+  0%, 100% { transform: translateY(0) scale(1, 1); }
+  20% { transform: translateY(0) scale(1.06, 0.94); }
+  45% { transform: translateY(-14%) scale(0.97, 1.04); }
+  70% { transform: translateY(0) scale(1.04, 0.96); }
+}
+@keyframes ml-balanceo {
+  0%, 100% { rotate: -4deg; }
+  50% { rotate: 4deg; }
+}
+@keyframes ml-latido {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+@keyframes ml-asiente {
+  0%, 60%, 100% { rotate: 0deg; }
+  70% { rotate: -6deg; }
+  85% { rotate: 4deg; }
+}
+@keyframes ml-giro {
+  0% { transform: scale(1) rotate(0); }
+  40% { transform: scale(1.12) rotate(-10deg); }
+  100% { transform: scale(1) rotate(0); }
+}

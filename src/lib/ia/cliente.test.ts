@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 import { z } from "zod";
-import { crearLlamador, crearLlamadorStream, crearTranscriptor, extraerJson, proveedoresDesdeEntorno, type ClienteChat, type Proveedor } from "./cliente";
+import { crearLlamador, crearLlamadorStream, crearTranscriptor, extraerJson, palabrasClaveVoz, proveedoresDesdeEntorno, type ClienteChat, type Proveedor } from "./cliente";
 
 const meta: Proveedor = { id: "meta", baseURL: "https://api.meta.ai/v1", apiKey: "k", modelo: "muse-spark-1.3", avanzado: true };
 const abierto: Proveedor = { id: "abierto", baseURL: "https://inference.baseten.co/v1", apiKey: "k", modelo: "meta-models/muse-spark-open-1026", avanzado: false };
@@ -160,6 +160,24 @@ describe("transcribirAudio", () => {
     const falso = (async () => (n++, respuesta(400, "wav"))) as unknown as typeof fetch;
     await expect(crearTranscriptor(env, falso)({ wav })).rejects.toThrow(/No se pudo transcribir/);
     expect(n).toBe(1);
+  });
+
+  it("las palabras clave nunca pasan de 30 caracteres (las competencias largas se parten)", () => {
+    const claves = palabrasClaveVoz(["despeje", "Resuelve problemas con ecuaciones lineales", "Despeje", "x"]);
+    expect(claves).toEqual(["despeje", "Resuelve", "problemas", "ecuaciones", "lineales", "x"]);
+    expect(claves.every((c) => c.length <= 30)).toBe(true);
+    expect(palabrasClaveVoz(Array.from({ length: 50 }, (_, i) => `palabra${i}`))).toHaveLength(30);
+  });
+
+  it("si Meta rechaza las palabras clave (400), reintenta sin ellas", async () => {
+    const enviados: Record<string, unknown>[] = [];
+    const falso = (async (_url: string, init: RequestInit) => {
+      const ajustes = JSON.parse(await ((init.body as FormData).get("request") as Blob).text());
+      enviados.push(ajustes);
+      return ajustes.keywords ? respuesta(400, "ASR keyword 0 exceeds the maximum length") : respuesta(200, { transcript: "ok" });
+    }) as unknown as typeof fetch;
+    expect(await crearTranscriptor(env, falso)({ wav, palabrasClave: ["despeje"] })).toBe("ok");
+    expect(enviados.map((a) => "keywords" in a)).toEqual([true, false]);
   });
 
   it("sin clave no llama a nadie", async () => {

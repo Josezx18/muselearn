@@ -20,11 +20,14 @@ export function EntradaVoz({
   onTexto,
   onOcupado,
   tareaId,
+  etiquetaGrabar,
 }: {
   disabled: boolean;
   onTexto: (texto: string) => void;
   onOcupado: (valor: boolean) => void;
   tareaId?: string;
+  /** Texto del botón cuando no graba (por defecto "Grabar mi explicación"). */
+  etiquetaGrabar?: string;
 }) {
   const t = useTranslations("verificacion");
   const locale = useLocale();
@@ -123,7 +126,9 @@ export function EntradaVoz({
               : "border-tinta bg-superficie shadow-[0_3px_0_0_var(--color-tinta)] active:translate-y-[2px] active:shadow-none"
           }`}
         >
-          <span className={`relative grid size-12 shrink-0 place-items-center rounded-full text-white ${grabando ? "bg-peligro" : "fondo-ia"}`}>
+          <span
+            className={`relative grid size-12 shrink-0 place-items-center rounded-full text-white ${grabando ? "bg-peligro" : "fondo-ia"}`}
+          >
             {grabando && <span aria-hidden className="absolute inset-0 animate-ping rounded-full bg-peligro/40" />}
             <svg viewBox="0 0 24 24" className="relative size-6" aria-hidden>
               {grabando ? (
@@ -136,7 +141,7 @@ export function EntradaVoz({
               )}
             </svg>
           </span>
-          {t(grabando ? "detener" : "grabar")}
+          {grabando ? t("detener") : (etiquetaGrabar ?? t("grabar"))}
         </button>
       )}
       <p className="text-sm text-tinta-suave" role="status">

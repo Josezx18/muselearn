@@ -16,15 +16,28 @@ export function Mascota({
   className,
   flota = false,
   etiqueta,
+  hablando = false,
+  viva = false,
 }: {
   expresion?: Expresion;
   className?: string;
   flota?: boolean;
   etiqueta?: string;
+  /** Mueve la boca mientras la voz del tutor habla. */
+  hablando?: boolean;
+  /** Animaciones de mascota virtual: parpadea, saluda, salta al celebrar, se balancea al pensar. */
+  viva?: boolean;
 }) {
   return (
     <span
-      className={cn("mascota inline-block shrink-0", flota && "pagi-flota", className)}
+      className={cn(
+        "mascota inline-block shrink-0",
+        `exp-${expresion}`,
+        viva && "mascota-viva",
+        hablando && "mascota-habla",
+        flota && "pagi-flota",
+        className,
+      )}
       role={etiqueta ? "img" : undefined}
       aria-label={etiqueta}
       aria-hidden={etiqueta ? undefined : true}

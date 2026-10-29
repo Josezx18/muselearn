@@ -128,8 +128,12 @@ export function Cara({
   const dy = { hola: 18, pensando: 20, pista: 18, lograste: 16, escucho: 19 }[expresion];
   return (
     <>
-      <Ojos tipo={ojo[expresion]} cx={cx} cy={cy} sep={sep} r={r} color={color} brillo={brillo} />
-      <Boca tipo={boca[expresion]} cx={cx} cy={cy + dy} w={expresion === "lograste" && color === "#fff" ? w * 1.3 : w} color={color} />
+      <g className={expresion === "lograste" ? undefined : "mascota-ojos"}>
+        <Ojos tipo={ojo[expresion]} cx={cx} cy={cy} sep={sep} r={r} color={color} brillo={brillo} />
+      </g>
+      <g className="mascota-boca">
+        <Boca tipo={boca[expresion]} cx={cx} cy={cy + dy} w={expresion === "lograste" && color === "#fff" ? w * 1.3 : w} color={color} />
+      </g>
     </>
   );
 }

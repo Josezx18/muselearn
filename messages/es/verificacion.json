@@ -15,5 +15,12 @@
   "vozOpcional": "La voz es opcional. Siempre puedes responder por texto.",
   "errorVoz": "No pudimos transcribir. Escribe tu explicación o prueba el dictado del navegador.",
   "dictar": "Probar dictado del navegador",
-  "limite": "Llegaste al límite de verificaciones por hoy. Vuelve mañana para explicar esta tarea."
+  "limite": "Llegaste al límite de verificaciones por hoy. Vuelve mañana para explicar esta tarea.",
+  "voz": {
+    "encendida": "Voz del tutor: sí",
+    "apagada": "Voz del tutor: no",
+    "escuchar": "Escuchar",
+    "callar": "Detener",
+    "hablale": "Háblale al tutor"
+  }
 }

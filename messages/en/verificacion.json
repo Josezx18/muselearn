@@ -15,5 +15,12 @@
   "vozOpcional": "Voice is optional. You can always type your answer.",
   "errorVoz": "We could not transcribe. Type your explanation or try browser dictation.",
   "dictar": "Try browser dictation",
-  "limite": "You reached today's limit of checks. Come back tomorrow to explain this assignment."
+  "limite": "You reached today's limit of checks. Come back tomorrow to explain this assignment.",
+  "voz": {
+    "encendida": "Tutor voice: on",
+    "apagada": "Tutor voice: off",
+    "escuchar": "Listen",
+    "callar": "Stop",
+    "hablale": "Talk to the tutor"
+  }
 }

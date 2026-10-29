@@ -10,5 +10,12 @@
   "enviar": "Enviar",
   "pista": "Necesito una pista",
   "pistaMensaje": "Necesito una pista para continuar con mi tarea.",
-  "limite": "Llegaste al límite de mensajes al tutor por hoy. Mañana puedes seguir; mientras, intenta un paso por tu cuenta."
+  "limite": "Llegaste al límite de mensajes al tutor por hoy. Mañana puedes seguir; mientras, intenta un paso por tu cuenta.",
+  "voz": {
+    "encendida": "Voz del tutor: sí",
+    "apagada": "Voz del tutor: no",
+    "escuchar": "Escuchar",
+    "callar": "Detener",
+    "hablale": "Háblale al tutor"
+  }
 }

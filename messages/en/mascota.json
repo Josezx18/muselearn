@@ -1,0 +1,31 @@
+{
+  "verificacion": {
+    "inicio": "Tell me how you did it, in your own words. There are no perfect answers.",
+    "pregunta": "Take your time. You can talk or type.",
+    "escuchando": "I'm listening…",
+    "pensando": "Let me think…",
+    "hablando": "Reading you the question…"
+  },
+  "tutor": {
+    "inicio": "Tell me what you tried and we'll work it out together.",
+    "pensando": "Let me think…",
+    "hablando": "Let me explain…",
+    "escuchando": "I'm listening…"
+  },
+  "hoy": {
+    "conProximo": "Next up: {titulo}. Let's go!",
+    "sinPendientes": "Nothing left for today! You earned a break."
+  },
+  "informe": {
+    "logrado": "You did it! Your practice path takes you further.",
+    "enProceso": "Good progress. Your practice path will get you there."
+  },
+  "animo": [
+    "You can do it!",
+    "Step by step gets you far.",
+    "Mistakes are part of learning.",
+    "Water break, then keep going?",
+    "Explaining is the best way to learn."
+  ],
+  "tocar": "Tap the mascot"
+}

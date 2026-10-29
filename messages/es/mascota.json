@@ -1,0 +1,31 @@
+{
+  "verificacion": {
+    "inicio": "Cuéntame cómo lo hiciste, con tus palabras. No hay respuestas perfectas.",
+    "pregunta": "Tómate tu tiempo. Puedes hablarme o escribirme.",
+    "escuchando": "Te escucho…",
+    "pensando": "Déjame pensar…",
+    "hablando": "Te leo la pregunta…"
+  },
+  "tutor": {
+    "inicio": "Cuéntame qué intentaste y lo vemos juntos.",
+    "pensando": "Déjame pensar…",
+    "hablando": "Te explico…",
+    "escuchando": "Te escucho…"
+  },
+  "hoy": {
+    "conProximo": "Lo próximo: {titulo}. ¡Vamos!",
+    "sinPendientes": "¡Hoy no tienes pendientes! Te ganaste el descanso."
+  },
+  "informe": {
+    "logrado": "¡Lo lograste! Tu ruta de práctica te lleva más lejos.",
+    "enProceso": "Vas bien. Con tu ruta de práctica lo vas a dominar."
+  },
+  "animo": [
+    "¡Tú puedes!",
+    "Paso a paso se llega lejos.",
+    "Equivocarse también es aprender.",
+    "¿Una pausa de agua y seguimos?",
+    "Explicar es la mejor forma de aprender."
+  ],
+  "tocar": "Tocar a la mascota"
+}

@@ -285,6 +285,23 @@ export interface OpcionesTranscripcion {
 
 const IDIOMAS_VOZ: Record<"es" | "en", string[]> = { es: ["Spanish", "English"], en: ["English", "Spanish"] };
 
+/**
+ * Palabras clave para Muse Voice Transcribe: máximo 30, de hasta 30 caracteres cada una.
+ * Las competencias son frases largas: se usan sus palabras importantes (≥ 5 letras) en vez de la frase entera.
+ */
+export function palabrasClaveVoz(fuentes: string[]): string[] {
+  const salida: string[] = [];
+  const agregar = (p: string) => {
+    const limpia = p.trim().replace(/[.,;:()"«»]+/g, "");
+    if (limpia && limpia.length <= 30 && !salida.some((x) => x.toLowerCase() === limpia.toLowerCase())) salida.push(limpia);
+  };
+  for (const f of fuentes) {
+    if (f.trim().length <= 30) agregar(f);
+    else for (const palabra of f.split(/\s+/)) if (palabra.replace(/[^\p{L}]/gu, "").length >= 5) agregar(palabra);
+  }
+  return salida.slice(0, 30);
+}
+
 export function crearTranscriptor(env: NodeJS.ProcessEnv = process.env, hacerFetch: typeof fetch = fetch) {
   return async function transcribirAudio(op: OpcionesTranscripcion): Promise<string> {
     if (!env.MODEL_API_KEY) throw new ErrorIA("No hay MODEL_API_KEY para transcribir voz. Revisa .env.local");
@@ -296,11 +313,12 @@ export function crearTranscriptor(env: NodeJS.ProcessEnv = process.env, hacerFet
       audioEncoding: "WAV",
       languageBias: IDIOMAS_VOZ[op.idioma ?? "es"],
     };
-    const claves = (op.palabrasClave ?? []).map((p) => p.trim()).filter(Boolean).slice(0, 30);
+    const claves = palabrasClaveVoz(op.palabrasClave ?? []);
     if (claves.length) ajustes.keywords = claves;
 
     let ultimoError = "";
-    // 2 intentos: el segundo solo si el servicio respondió 429 o 5xx (según la documentación de Meta).
+    // 2 intentos: el segundo si el servicio respondió 429 o 5xx (según la documentación de Meta),
+    // o si rechazó la petición por las palabras clave: se reintenta sin ellas (la voz es más importante).
     for (let intento = 0; intento < 2; intento++) {
       const cuerpo = new FormData();
       cuerpo.append("request", new Blob([JSON.stringify(ajustes)], { type: "application/json" }));
@@ -316,6 +334,10 @@ export function crearTranscriptor(env: NodeJS.ProcessEnv = process.env, hacerFet
         return typeof datos.transcript === "string" ? datos.transcript.trim() : "";
       }
       ultimoError = `${r.status} ${(await r.text().catch(() => "")).slice(0, 200)}`;
+      if (r.status === 400 && ajustes.keywords) {
+        delete ajustes.keywords;
+        continue;
+      }
       if (r.status !== 429 && r.status < 500) break;
       await new Promise((listo) => setTimeout(listo, 800 * (intento + 1)));
     }

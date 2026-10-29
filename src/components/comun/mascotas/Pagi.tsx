@@ -36,7 +36,14 @@ export function Pagi({
       {/* Brazos */}
       <path d="M50 124q-14 6-16 20" fill="none" stroke={TINTA} strokeWidth={ANCHO_TRAZO} strokeLinecap="round" />
       {expresion === "hola" ? (
-        <path d="M150 116q20-6 24-30" fill="none" stroke={TINTA} strokeWidth={ANCHO_TRAZO} strokeLinecap="round" />
+        <path
+          className="mascota-brazo"
+          d="M150 116q20-6 24-30"
+          fill="none"
+          stroke={TINTA}
+          strokeWidth={ANCHO_TRAZO}
+          strokeLinecap="round"
+        />
       ) : (
         <path d="M150 124q14 6 16 22" fill="none" stroke={TINTA} strokeWidth={ANCHO_TRAZO} strokeLinecap="round" />
       )}
@@ -85,17 +92,25 @@ function Cara({ expresion }: { expresion: ExpresionPagi }) {
     case "pensando":
       return (
         <>
-          <Ojo x={82} tipo="arriba" />
-          <Ojo x={118} tipo="arriba" />
-          <path d="M94 125q8.4 3 15-5" {...trazo} strokeWidth="3" />
+          <g className="mascota-ojos">
+            <Ojo x={82} tipo="arriba" />
+            <Ojo x={118} tipo="arriba" />
+          </g>
+          <g className="mascota-boca">
+            <path d="M94 125q8.4 3 15-5" {...trazo} strokeWidth="3" />
+          </g>
         </>
       );
     case "pista":
       return (
         <>
-          <Ojo x={82} tipo="normal" />
-          <path d="M110 100Q118 92.8 126 100" {...trazo} strokeWidth="4.4" />
-          <path d="M91 120q9 10.4 18 0" {...trazo} strokeWidth="3.1" />
+          <g className="mascota-ojos">
+            <Ojo x={82} tipo="normal" />
+            <path d="M110 100Q118 92.8 126 100" {...trazo} strokeWidth="4.4" />
+          </g>
+          <g className="mascota-boca">
+            <path d="M91 120q9 10.4 18 0" {...trazo} strokeWidth="3.1" />
+          </g>
         </>
       );
     case "lograste":
@@ -103,24 +118,34 @@ function Cara({ expresion }: { expresion: ExpresionPagi }) {
         <>
           <path d={arcoOjo(82)} {...trazo} strokeWidth="4.4" />
           <path d={arcoOjo(118)} {...trazo} strokeWidth="4.4" />
-          <path d="M85 116Q100 138.5 115 116Z" fill={TINTA} />
-          <path d="M93.4 125Q100 131 106.6 125" fill="#ff8a8a" />
+          <g className="mascota-boca">
+            <path d="M85 116Q100 138.5 115 116Z" fill={TINTA} />
+            <path d="M93.4 125Q100 131 106.6 125" fill="#ff8a8a" />
+          </g>
         </>
       );
     case "escucho":
       return (
         <>
-          <Ojo x={82} tipo="grande" />
-          <Ojo x={118} tipo="grande" />
-          <ellipse cx="100" cy="123" rx="5.7" ry="7.3" fill={TINTA} />
+          <g className="mascota-ojos">
+            <Ojo x={82} tipo="grande" />
+            <Ojo x={118} tipo="grande" />
+          </g>
+          <g className="mascota-boca">
+            <ellipse cx="100" cy="123" rx="5.7" ry="7.3" fill={TINTA} />
+          </g>
         </>
       );
     default:
       return (
         <>
-          <Ojo x={82} tipo="normal" />
-          <Ojo x={118} tipo="normal" />
-          <path d="M91 120q9 10.4 18 0" {...trazo} strokeWidth="3.1" />
+          <g className="mascota-ojos">
+            <Ojo x={82} tipo="normal" />
+            <Ojo x={118} tipo="normal" />
+          </g>
+          <g className="mascota-boca">
+            <path d="M91 120q9 10.4 18 0" {...trazo} strokeWidth="3.1" />
+          </g>
         </>
       );
   }

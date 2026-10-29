@@ -2,7 +2,7 @@
 // La elección vive en una cookie (no es un dato sensible) y un script en <head> la aplica antes de pintar.
 export const TEMAS = ["cuaderno", "meta", "muse"] as const;
 export type Tema = (typeof TEMAS)[number];
-export const TEMA_POR_DEFECTO: Tema = "cuaderno";
+export const TEMA_POR_DEFECTO: Tema = "muse";
 export const COOKIE_TEMA = "tema";
 
 export function esTema(valor: unknown): valor is Tema {
@@ -13,7 +13,8 @@ export function esTema(valor: unknown): valor is Tema {
 export const COLOR_BARRA: Record<Tema, string> = { cuaderno: "#1f6f5c", meta: "#0668e1", muse: "#4b39d8" };
 
 /** Script que corre en <head> antes del primer pintado: evita que la página parpadee con otro tema. */
-export const SCRIPT_TEMA = `try{var m=document.cookie.match(/(?:^|; )${COOKIE_TEMA}=(meta|muse)(?:;|$)/);if(m){document.documentElement.dataset.tema=m[1];var c=${JSON.stringify(
+// El HTML llega con el tema por defecto; si la cookie dice otro, se cambia aquí.
+export const SCRIPT_TEMA = `try{var m=document.cookie.match(/(?:^|; )${COOKIE_TEMA}=(${TEMAS.join("|")})(?:;|$)/);if(m){document.documentElement.dataset.tema=m[1];var c=${JSON.stringify(
   COLOR_BARRA,
 )}[m[1]],t=document.querySelector('meta[name="theme-color"]');if(t)t.setAttribute("content",c)}}catch(e){}`;
 

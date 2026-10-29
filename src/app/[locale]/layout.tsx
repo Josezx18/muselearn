@@ -4,7 +4,7 @@ import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { ProveedorToast } from "@/components/ui";
-import { SCRIPT_TEMA } from "@/lib/tema";
+import { COLOR_BARRA, SCRIPT_TEMA, TEMA_POR_DEFECTO } from "@/lib/tema";
 import "../globals.css";
 
 export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Promise<Metadata> {
@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Pr
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#1f6f5c",
+  themeColor: COLOR_BARRA[TEMA_POR_DEFECTO],
 };
 
 export default async function LayoutRaiz({ children, params }: LayoutProps<"/[locale]">) {
@@ -25,7 +25,7 @@ export default async function LayoutRaiz({ children, params }: LayoutProps<"/[lo
 
   return (
     // suppressHydrationWarning: el script de <head> pone data-tema antes de que React hidrate.
-    <html lang={locale} className="h-full antialiased" suppressHydrationWarning>
+    <html lang={locale} data-tema={TEMA_POR_DEFECTO} className="h-full antialiased" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: SCRIPT_TEMA }} />
       </head>

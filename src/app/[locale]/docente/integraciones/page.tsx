@@ -1,6 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { Pagi } from "@/components/comun/Pagi";
+import { Mascota } from "@/components/comun/mascotas/Mascota";
 
 // Pantalla informativa: las integraciones con plataformas educativas aún no están conectadas.
 // Los nombres van como texto (sin logos de terceros) y cada tarjeta dice qué se traerá y qué se devolverá.
@@ -29,7 +29,7 @@ export default async function Pagina({ params }: PageProps<"/[locale]/docente/in
           <h1 className="text-4xl font-extrabold">{t("titulo")}</h1>
           <p className="mt-2 max-w-prose text-lg text-tinta-suave">{t("intro")}</p>
         </div>
-        <Pagi expresion="pensando" flota className="hidden size-24 sm:block" />
+        <Mascota expresion="pensando" flota className="hidden size-24 sm:block" />
       </header>
 
       <ul className="grid gap-3 sm:grid-cols-2">

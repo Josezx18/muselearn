@@ -5,7 +5,7 @@ import { enviarAlTutor, historialTutor } from "@/lib/api-cliente";
 import { Button, Textarea } from "@/components/ui";
 import type { MensajeChat } from "@/types/contratos";
 import { ErrorApi } from "@/lib/api-cliente";
-import { Pagi } from "@/components/comun/Pagi";
+import { Mascota } from "@/components/comun/mascotas/Mascota";
 
 /** Código corto del error para mostrar junto al mensaje (ayuda a diagnosticar). */
 function codigoDe(e: unknown): string {
@@ -87,7 +87,7 @@ export function ChatTutor({ tareaId }: { tareaId: string }) {
             <div key={i}>{burbuja}</div>
           ) : (
             <div key={i} className="mr-auto flex max-w-[94%] items-end gap-2">
-              <Pagi
+              <Mascota
                 expresion={m.contenido ? (i === mensajes.length - 1 ? "pista" : "hola") : "pensando"}
                 flota={!m.contenido}
                 className="size-11"

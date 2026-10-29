@@ -6,7 +6,7 @@ import { useRouter } from "@/i18n/navigation";
 import { Button, Textarea } from "@/components/ui";
 import type { SesionVerificacion } from "@/types/contratos";
 import { EntradaVoz } from "./voz";
-import { Pagi } from "@/components/comun/Pagi";
+import { Mascota } from "@/components/comun/mascotas/Mascota";
 
 export function Verificacion({ tareaId, entregaId }: { tareaId: string; entregaId?: string }) {
   const t = useTranslations("verificacion");
@@ -94,7 +94,7 @@ export function Verificacion({ tareaId, entregaId }: { tareaId: string; entregaI
           <h1 className="text-4xl font-extrabold">{t("titulo")}</h1>
           {!pregunta && <p className="mt-3 max-w-prose text-lg text-tinta-suave">{t("tranquilidad")}</p>}
         </div>
-        <Pagi
+        <Mascota
           expresion={vozOcupada ? "escucho" : ocupado ? "pensando" : "hola"}
           flota={ocupado || vozOcupada}
           className="size-16 sm:size-20"

@@ -104,6 +104,13 @@
     "muse": {
       "nombre": "Muse",
       "detalle": "Azul con degradado de IA"
-    }
+    },
+    "mascota": "Mascota",
+    "mascotas": {
+      "pagi": "Pagi",
+      "chispa": "Chispa",
+      "orbi": "Orbi"
+    },
+    "colores": "Colores"
   }
 }

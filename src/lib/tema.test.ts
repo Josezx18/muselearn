@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { COLOR_BARRA, SCRIPT_TEMA, TEMAS, TEMA_POR_DEFECTO, esTema } from "./tema";
+import { COLOR_BARRA, MASCOTAS, MASCOTA_POR_DEFECTO, SCRIPT_TEMA, TEMAS, TEMA_POR_DEFECTO, esMascota, esTema } from "./tema";
 
 describe("temas", () => {
   it("reconoce solo los tres temas", () => {
@@ -23,5 +23,21 @@ describe("temas", () => {
     new Function("document", SCRIPT_TEMA)(malo);
     expect(malo.documentElement.dataset.tema).toBe("muse");
     expect(Object.keys(COLOR_BARRA)).toEqual([...TEMAS]);
+  });
+
+  it("la mascota de la cookie también se aplica, y solo si es una de las tres", () => {
+    expect(MASCOTAS).toEqual(["pagi", "chispa", "orbi"]);
+    expect(MASCOTA_POR_DEFECTO).toBe("pagi");
+    expect(esMascota("orbi")).toBe(true);
+    const doc = {
+      cookie: "tema=meta; mascota=orbi",
+      documentElement: { dataset: {} as Record<string, string> },
+      querySelector: () => null,
+    };
+    new Function("document", SCRIPT_TEMA)(doc);
+    expect(doc.documentElement.dataset).toEqual({ tema: "meta", mascota: "orbi" });
+    const malo = { ...doc, cookie: "mascota=gato", documentElement: { dataset: { mascota: "pagi" } as Record<string, string> } };
+    new Function("document", SCRIPT_TEMA)(malo);
+    expect(malo.documentElement.dataset.mascota).toBe("pagi");
   });
 });

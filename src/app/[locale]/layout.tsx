@@ -4,7 +4,8 @@ import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { ProveedorToast } from "@/components/ui";
-import { COLOR_BARRA, SCRIPT_TEMA, TEMA_POR_DEFECTO } from "@/lib/tema";
+import { COLOR_BARRA, MASCOTA_POR_DEFECTO, SCRIPT_TEMA, TEMA_POR_DEFECTO } from "@/lib/tema";
+import { DefsMascotas } from "@/components/comun/mascotas/Mascota";
 import "../globals.css";
 
 export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Promise<Metadata> {
@@ -25,11 +26,18 @@ export default async function LayoutRaiz({ children, params }: LayoutProps<"/[lo
 
   return (
     // suppressHydrationWarning: el script de <head> pone data-tema antes de que React hidrate.
-    <html lang={locale} data-tema={TEMA_POR_DEFECTO} className="h-full antialiased" suppressHydrationWarning>
+    <html
+      lang={locale}
+      data-tema={TEMA_POR_DEFECTO}
+      data-mascota={MASCOTA_POR_DEFECTO}
+      className="h-full antialiased"
+      suppressHydrationWarning
+    >
       <head>
         <script dangerouslySetInnerHTML={{ __html: SCRIPT_TEMA }} />
       </head>
       <body className="flex min-h-full flex-col">
+        <DefsMascotas />
         <NextIntlClientProvider>
           <ProveedorToast>{children}</ProveedorToast>
         </NextIntlClientProvider>

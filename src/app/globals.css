@@ -202,3 +202,16 @@
     transform: translateY(-4px);
   }
 }
+
+/* Mascota elegida (Apariencia → Mascota). Pagi es la de por defecto. */
+.mascota > svg {
+  display: none;
+  width: 100%;
+  height: 100%;
+}
+:root:not([data-mascota]) .mascota > .mascota-pagi,
+:root[data-mascota="pagi"] .mascota > .mascota-pagi,
+:root[data-mascota="chispa"] .mascota > .mascota-chispa,
+:root[data-mascota="orbi"] .mascota > .mascota-orbi {
+  display: block;
+}

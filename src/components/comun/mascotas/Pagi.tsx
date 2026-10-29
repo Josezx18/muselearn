@@ -1,12 +1,13 @@
 import { cn } from "@/components/ui";
+import type { Expresion } from "./partes";
 
-export type ExpresionPagi = "hola" | "pensando" | "pista" | "lograste" | "escucho";
+export type ExpresionPagi = Expresion;
 
 const TINTA = "var(--color-tinta)";
 const ANCHO_TRAZO = 6;
 
 /**
- * Pagi, la mascota de MuseLearn: una hojita de cuaderno con su lápiz.
+ * Pagi: una hojita de cuaderno con su lápiz (mascota por defecto de MuseLearn).
  * Dibujo original en SVG (200×200). Es decorativa: por defecto se oculta a los lectores de pantalla;
  * pasa `etiqueta` si la imagen comunica algo que no está en el texto.
  */

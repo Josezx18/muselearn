@@ -5,7 +5,7 @@ test("la portada carga en español y cambia a inglés", async ({ page }) => {
   await page.goto("/");
   await expect(page).toHaveURL(/\/es$/);
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Entregar no es aprender");
-  await page.getByRole("button", { name: "en" }).first().click();
+  await page.getByRole("button", { name: "en", exact: true }).first().click();
   await expect(page).toHaveURL(/\/en$/);
 });
 

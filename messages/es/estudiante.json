@@ -42,5 +42,14 @@
   "entregaDia": "Se entrega: {titulo}",
   "comentario": {
     "titulo": "Comentario de tu docente"
+  },
+  "modalidad": {
+    "muselearn": "Se entrega en MuseLearn",
+    "cuaderno": "Se hace en el cuaderno",
+    "classroom": "Se entrega en Google Classroom",
+    "otra": "Se entrega en otra plataforma",
+    "marcada": "ya la marcaste como entregada",
+    "abrir": "Abrir la tarea",
+    "abrirClassroom": "Abrir en Classroom"
   }
 }

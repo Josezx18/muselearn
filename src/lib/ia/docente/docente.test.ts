@@ -208,6 +208,7 @@ describe("borradorComentario", () => {
         adjuntos: [],
         estado: "verificada",
         entregada_en: "2026-10-02T10:00:00Z",
+        entregada_externamente: false,
       },
       estudiante: { id: E1, rol: "estudiante", nombre: "Camila", idioma: "es" },
       adjuntos: [],

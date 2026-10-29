@@ -75,11 +75,16 @@ test.describe("docente", () => {
     await expect(page.getByRole("heading", { name: "Comprensión de la clase" })).toBeVisible();
     await expect(page.getByText("Entregó")).toBeVisible();
     await expect(page.getByText("Demostró comprensión")).toBeVisible();
+    // Vista general: la clase por concepto, por tarea y quién necesita apoyo.
+    await expect(page.getByRole("heading", { name: "Cómo va la clase en cada concepto" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Necesitan apoyo" })).toBeVisible();
+    await page.getByRole("tab", { name: "Mapa" }).click();
     const mapa = page.getByRole("region", { name: "Comprensión de la clase" });
     await expect(mapa.getByRole("table")).toBeVisible();
-    // El detalle por estudiante aparece al tocar su nombre.
+    // La ficha del estudiante aparece al tocar su nombre.
     await mapa.getByRole("rowheader").first().getByRole("button").click();
     await expect(page.getByRole("heading", { name: "Detalle por estudiante" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Sus tareas" })).toBeVisible();
     await sinScrollHorizontal(page);
     expect(errores).toEqual([]);
   });

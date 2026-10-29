@@ -23,6 +23,7 @@ import { Chispa } from "@/components/comun/mascotas/Chispa";
 import { Orbi } from "@/components/comun/mascotas/Orbi";
 import type { PreferenciasEstudio } from "@/types/contratos";
 import { franjasValidas, minutosSemana } from "@/lib/horas";
+import { PrivacidadDatos } from "./PrivacidadDatos";
 
 const MUESTRA: Record<Tema, string> = {
   cuaderno: "linear-gradient(135deg, #1f6f5c 0 60%, #ffd84d 60%)",
@@ -49,6 +50,7 @@ export function PaginaConfiguracion({ rol }: { rol: "docente" | "estudiante" }) 
       <Apariencia />
       <Idioma />
       {rol === "estudiante" && <HorasDeEstudio />}
+      <PrivacidadDatos rol={rol} />
     </div>
   );
 }

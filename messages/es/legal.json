@@ -1,0 +1,170 @@
+{
+  "volver": "Volver",
+  "actualizada": "Versión del {fecha}",
+  "contacto": "Contacto de privacidad: ",
+  "otro": {
+    "privacidad": "Ver los Términos de uso",
+    "terminos": "Ver la Política de privacidad"
+  },
+  "aviso": "Este texto explica en lenguaje claro cómo funciona MuseLearn. Si tu centro educativo tiene sus propias normas sobre datos de estudiantes, también aplican.",
+  "privacidad": {
+    "titulo": "Política de privacidad",
+    "intro": "MuseLearn es una plataforma de estudio para docentes y estudiantes de secundaria. Esta política explica qué datos usamos, para qué, con quién los compartimos y qué derechos tienes. Se rige por la Ley 172-13 de la República Dominicana sobre protección de datos personales.",
+    "secciones": [
+      {
+        "titulo": "1. Quién es responsable",
+        "parrafos": [
+          "MuseLearn es un proyecto educativo desarrollado por José Enrique Ulloa, docente de Tecnología en la República Dominicana. Cuando un centro educativo usa MuseLearn con sus estudiantes, el centro y sus docentes deciden qué clases y tareas se crean; MuseLearn guarda y procesa esos datos para prestar el servicio."
+        ]
+      },
+      {
+        "titulo": "2. Qué datos usamos",
+        "parrafos": [
+          "Datos de la cuenta: nombre, correo, rol (docente o estudiante), idioma y preferencias de apariencia y de horario de estudio.",
+          "Trabajo escolar: clases, tareas, entregas (texto, archivos y fotos del cuaderno), conversaciones con el tutor, respuestas de la verificación, informes de comprensión, rutas de práctica y comentarios del docente.",
+          "Voz: cuando respondes por voz, el audio se envía para convertirlo en texto y no se guarda. Guardamos solo el texto de tu respuesta.",
+          "Datos técnicos mínimos para que la app funcione y sea segura (por ejemplo, la sesión y registros de errores sin el contenido de tus tareas)."
+        ]
+      },
+      {
+        "titulo": "3. Para qué los usamos",
+        "parrafos": [
+          "Para organizar tu semana de estudio, darte ayuda del tutor sin resolverte la tarea, comprobar que entendiste lo que entregaste y mostrarle a tu docente tu avance.",
+          "No vendemos tus datos, no mostramos publicidad y no los usamos para crear perfiles comerciales."
+        ]
+      },
+      {
+        "titulo": "4. Inteligencia artificial",
+        "parrafos": [
+          "MuseLearn usa modelos de Meta (Muse) para analizar tareas, conversar como tutor, hacer preguntas de verificación y escribir informes. Solo se envía lo necesario para cada función.",
+          "No usamos el nivel “Contributor” de Meta, en el que los datos pueden usarse para entrenar modelos. Las sugerencias de repaso para el docente usan solo datos agregados, sin nombres de estudiantes.",
+          "La IA puede equivocarse. Las calificaciones y las decisiones sobre los estudiantes las toma siempre el docente."
+        ]
+      },
+      {
+        "titulo": "5. Con quién los compartimos",
+        "parrafos": [
+          "Con tu docente y tu clase, según tu rol: cada estudiante ve solo su trabajo; cada docente ve solo el de sus clases.",
+          "Con los proveedores que hacen funcionar el servicio: Supabase (base de datos y archivos), Vercel (alojamiento de la app), Meta (modelos de IA) y Google, solo si tú o tu docente conectan una cuenta de Google o Google Classroom.",
+          "Con autoridades, solo si la ley lo exige."
+        ]
+      },
+      {
+        "titulo": "6. Estudiantes menores de edad",
+        "parrafos": [
+          "MuseLearn está pensado para estudiantes de secundaria y se usa a través de su centro educativo y su docente. Si eres menor de edad, usa MuseLearn con la autorización de tu madre, padre o tutor, o del centro según sus normas.",
+          "Si eres madre, padre o tutor y quieres revisar o eliminar los datos de tu hijo o hija, escríbenos al correo de contacto."
+        ]
+      },
+      {
+        "titulo": "7. Cuánto tiempo los guardamos",
+        "parrafos": [
+          "Mientras tu cuenta exista. Si eliminas tu cuenta, se borran tus datos y tus archivos. Si un docente elimina una clase o una tarea, se borra lo que depende de ellas.",
+          "El audio de voz no se guarda: se transcribe y se descarta."
+        ]
+      },
+      {
+        "titulo": "8. Tus derechos",
+        "parrafos": [
+          "Puedes acceder a tus datos, corregirlos, pedir que se eliminen y oponerte a su uso.",
+          "Desde Configuración → Privacidad y datos puedes descargar tus datos y eliminar tu cuenta. Tu nombre y tu idioma se cambian en Mi perfil. Para cualquier otra solicitud, escríbenos."
+        ]
+      },
+      {
+        "titulo": "9. Seguridad",
+        "parrafos": [
+          "Las conexiones van cifradas y la base de datos aplica reglas de acceso por usuario: nadie puede ver el trabajo de otro estudiante ni las clases de otro docente. Ningún sistema es perfecto: si detectamos un problema que afecte tus datos, te lo informaremos."
+        ]
+      },
+      {
+        "titulo": "10. Cambios",
+        "parrafos": [
+          "Si cambiamos esta política, actualizaremos la fecha de la versión y te pediremos que la aceptes de nuevo al entrar."
+        ]
+      }
+    ]
+  },
+  "terminos": {
+    "titulo": "Términos de uso",
+    "intro": "Al crear una cuenta o usar MuseLearn aceptas estos términos. Léelos con calma: son cortos.",
+    "secciones": [
+      {
+        "titulo": "1. Qué es MuseLearn",
+        "parrafos": [
+          "Un compañero de estudio que organiza tu semana, te ayuda con preguntas y pistas sin hacerte la tarea, y comprueba que entendiste lo que entregaste. Para docentes, es una herramienta para asignar tareas y ver la comprensión de su clase."
+        ]
+      },
+      {
+        "titulo": "2. Tu cuenta",
+        "parrafos": [
+          "Usa tu nombre real y un correo tuyo. Una cuenta por persona. Cuida tu contraseña y no la compartas.",
+          "Elige el rol correcto: docente o estudiante. Las cuentas de docente son para docentes de verdad."
+        ]
+      },
+      {
+        "titulo": "3. Uso honesto",
+        "parrafos": [
+          "MuseLearn existe para aprender. No intentes que el tutor te dé las respuestas, no entregues trabajo de otra persona como tuyo y responde la verificación tú mismo.",
+          "No subas contenido ofensivo, violento o que no sea tuyo, ni datos personales de otras personas que no hagan falta para la tarea.",
+          "No intentes entrar a cuentas o datos ajenos ni afectar el funcionamiento de la app."
+        ]
+      },
+      {
+        "titulo": "4. Responsabilidades del docente",
+        "parrafos": [
+          "Usa MuseLearn con tus estudiantes de acuerdo con las normas de tu centro educativo, incluida la autorización de las familias cuando haga falta.",
+          "Revisa las sugerencias de la IA (tareas, repasos y comentarios) antes de usarlas. La evaluación y las calificaciones son tu decisión."
+        ]
+      },
+      {
+        "titulo": "5. Tu contenido",
+        "parrafos": [
+          "Lo que escribes y subes sigue siendo tuyo. Nos das permiso para guardarlo y procesarlo solo para prestarte el servicio, como explica la Política de privacidad."
+        ]
+      },
+      {
+        "titulo": "6. Inteligencia artificial",
+        "parrafos": [
+          "Las respuestas, preguntas e informes de la IA pueden tener errores. Úsalos como apoyo, no como verdad absoluta. Si algo te parece incorrecto o inapropiado, avísale a tu docente."
+        ]
+      },
+      {
+        "titulo": "7. Disponibilidad",
+        "parrafos": [
+          "MuseLearn está en desarrollo activo. Hacemos lo posible para que funcione bien, pero puede tener fallas, cambios o pausas. Hay límites diarios de uso de la IA para que el servicio alcance para todos."
+        ]
+      },
+      {
+        "titulo": "8. Suspensión y baja",
+        "parrafos": [
+          "Puedes eliminar tu cuenta cuando quieras desde Configuración. Podemos suspender una cuenta que incumpla estos términos o ponga en riesgo a otros usuarios."
+        ]
+      },
+      {
+        "titulo": "9. Responsabilidad",
+        "parrafos": [
+          "MuseLearn se ofrece tal como está. En la medida que permite la ley, no somos responsables de pérdidas causadas por fallas del servicio o por el uso de las sugerencias de la IA."
+        ]
+      },
+      {
+        "titulo": "10. Ley aplicable y cambios",
+        "parrafos": [
+          "Estos términos se rigen por las leyes de la República Dominicana. Si los cambiamos, actualizaremos la fecha de la versión y te pediremos aceptarlos de nuevo."
+        ]
+      }
+    ]
+  },
+  "aceptar": {
+    "titulo": "Antes de seguir",
+    "intro": "Para usar MuseLearn necesitas aceptar los Términos de uso y la Política de privacidad.",
+    "actualizados": "Actualizamos los Términos de uso y la Política de privacidad. Revísalos y acéptalos para seguir.",
+    "casilla": "He leído y acepto los <terminos>Términos de uso</terminos> y la <privacidad>Política de privacidad</privacidad>.",
+    "menor": "Si soy menor de edad, uso MuseLearn con la autorización de mi madre, padre, tutor o de mi centro educativo.",
+    "terminos": "Términos de uso",
+    "privacidad": "Política de privacidad",
+    "continuar": "Aceptar y continuar",
+    "salir": "Ahora no (cerrar sesión)",
+    "falta": "Marca la casilla para aceptar.",
+    "error": "No se pudo guardar. Inténtalo de nuevo."
+  }
+}

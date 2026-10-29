@@ -76,7 +76,20 @@
     "contadorFotos": "Photos: {fotos}/{maximo}",
     "errorCompresion": "The photo could not be processed. Try again.",
     "adjuntosErrorTipo": "Only photos (JPG, PNG, WebP) or PDF are accepted.",
-    "adjuntosErrorTamano": "The file is larger than 10 MB."
+    "adjuntosErrorTamano": "The file is larger than 10 MB.",
+    "tituloEvidencia": "Your evidence",
+    "evidenciaPlaceholder": "Tell how you did it or paste your answer here…",
+    "vaciaEvidencia": "Upload a photo or write how you did it: Muse uses it to ask you questions.",
+    "marcarExterna": "Check that you already handed it in on the other platform.",
+    "ayuda": {
+      "cuaderno": "This task is done in your notebook: take a clear photo of your pages.",
+      "classroom": "This task is handed in on Google Classroom. Here, upload a photo or write how you did it, so you can explain it.",
+      "otra": "This task is handed in on another platform. Here, upload a photo or write how you did it, so you can explain it."
+    },
+    "confirmarExterna": {
+      "classroom": "I already handed it in on Google Classroom.",
+      "otra": "I already handed it in on the other platform."
+    }
   },
   "estados": {
     "pendiente": "Pending",
@@ -94,7 +107,8 @@
     "adjuntoDemasiadoGrande": "File is too large (max 10 MB)",
     "adjuntoTipoInvalido": "File type not allowed",
     "sinPermiso": "You don't have permission for this action",
-    "noEncontrado": "Task not found"
+    "noEncontrado": "Task not found",
+    "enlaceInvalido": "The link must start with https://"
   },
   "ia": {
     "abrir": "Create the task with AI",
@@ -113,6 +127,20 @@
       "tema": "Write the topic (at least 3 characters).",
       "limite": "You reached today's limit of AI help. Try again tomorrow.",
       "general": "The AI didn't respond. Try again in a moment."
+    }
+  },
+  "modalidad": {
+    "titulo": "Where is it done and handed in?",
+    "muselearn": "In MuseLearn",
+    "cuaderno": "In the notebook",
+    "classroom": "In Classroom",
+    "otra": "Another platform",
+    "enlace": "Link to the task (optional)",
+    "ayuda": {
+      "muselearn": "The student writes or uploads their work here.",
+      "cuaderno": "The student works in their notebook and uploads a photo as evidence.",
+      "classroom": "The student hands it in on Classroom, then uploads evidence here and marks it as handed in, so they can do the comprehension check.",
+      "otra": "Moodle, Teams or another: the student hands it in there, then uploads evidence here and marks it as handed in."
     }
   }
 }

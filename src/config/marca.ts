@@ -2,6 +2,8 @@
 // cambia solo este archivo y los textos de messages/*/comun.json.
 export const marca = {
   nombre: "MuseLearn",
+  /** Correo para privacidad y solicitudes sobre datos (Política de privacidad, Términos de uso). */
+  contactoPrivacidad: "josejx18@gmail.com",
   lema: {
     es: "Entregar no es aprender. Demuéstralo.",
     en: "Proof of learning, not just proof of delivery.",

@@ -76,7 +76,20 @@
     "contadorFotos": "Fotos: {fotos}/{maximo}",
     "errorCompresion": "No se pudo procesar la foto. Intenta de nuevo.",
     "adjuntosErrorTipo": "Solo se aceptan fotos (JPG, PNG, WebP) o PDF.",
-    "adjuntosErrorTamano": "El archivo supera 10 MB."
+    "adjuntosErrorTamano": "El archivo supera 10 MB.",
+    "tituloEvidencia": "Tu evidencia",
+    "evidenciaPlaceholder": "Cuenta cómo lo hiciste o pega aquí tu respuesta…",
+    "vaciaEvidencia": "Sube una foto o escribe cómo lo hiciste: Muse la usa para hacerte las preguntas.",
+    "marcarExterna": "Marca que ya la entregaste en la otra plataforma.",
+    "ayuda": {
+      "cuaderno": "Esta tarea se hace en el cuaderno: toma una foto clara de tus páginas.",
+      "classroom": "Esta tarea se entrega en Google Classroom. Aquí sube una foto o escribe cómo la hiciste, para poder explicarla.",
+      "otra": "Esta tarea se entrega en otra plataforma. Aquí sube una foto o escribe cómo la hiciste, para poder explicarla."
+    },
+    "confirmarExterna": {
+      "classroom": "Ya la entregué en Google Classroom.",
+      "otra": "Ya la entregué en la otra plataforma."
+    }
   },
   "estados": {
     "pendiente": "Pendiente",
@@ -94,7 +107,8 @@
     "adjuntoDemasiadoGrande": "El archivo es demasiado grande (máx. 10 MB)",
     "adjuntoTipoInvalido": "Tipo de archivo no permitido",
     "sinPermiso": "No tienes permiso para esta acción",
-    "noEncontrado": "Tarea no encontrada"
+    "noEncontrado": "Tarea no encontrada",
+    "enlaceInvalido": "El enlace debe empezar con https://"
   },
   "ia": {
     "abrir": "Crear la tarea con IA",
@@ -113,6 +127,20 @@
       "tema": "Escribe el tema (mínimo 3 caracteres).",
       "limite": "Llegaste al máximo de ayudas de IA por hoy. Vuelve a intentarlo mañana.",
       "general": "La IA no respondió. Inténtalo de nuevo en un momento."
+    }
+  },
+  "modalidad": {
+    "titulo": "¿Dónde se hace y se entrega?",
+    "muselearn": "En MuseLearn",
+    "cuaderno": "En el cuaderno",
+    "classroom": "En Classroom",
+    "otra": "Otra plataforma",
+    "enlace": "Enlace a la tarea (opcional)",
+    "ayuda": {
+      "muselearn": "El estudiante escribe o sube su trabajo aquí.",
+      "cuaderno": "El estudiante trabaja en su cuaderno y sube una foto como evidencia.",
+      "classroom": "El estudiante la entrega en Classroom y aquí sube una evidencia y marca que ya la entregó. Así puede hacer la verificación.",
+      "otra": "Moodle, Teams u otra: el estudiante la entrega allá y aquí sube una evidencia y marca que ya la entregó."
     }
   }
 }

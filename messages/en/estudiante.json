@@ -42,5 +42,14 @@
   "entregaDia": "Due: {titulo}",
   "comentario": {
     "titulo": "Your teacher's comment"
+  },
+  "modalidad": {
+    "muselearn": "Handed in on MuseLearn",
+    "cuaderno": "Done in the notebook",
+    "classroom": "Handed in on Google Classroom",
+    "otra": "Handed in on another platform",
+    "marcada": "you marked it as handed in",
+    "abrir": "Open the task",
+    "abrirClassroom": "Open in Classroom"
   }
 }

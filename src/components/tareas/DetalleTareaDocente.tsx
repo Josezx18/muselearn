@@ -132,6 +132,7 @@ export function DetalleTareaDocente({ tarea: inicial }: DetalleTareaDocenteProps
         </div>
         <div className="flex flex-wrap items-center gap-2">
           <Badge tono="primario">{obtenerNivelAyudaTexto(tarea.nivel_ayuda)}</Badge>
+          <Badge tono="neutro">{t(`modalidad.${tarea.modalidad}`)}</Badge>
           <Button variante="secundario" tamano="sm" onClick={() => setEditando(true)}>
             {tg("editar")}
           </Button>
@@ -154,6 +155,8 @@ export function DetalleTareaDocente({ tarea: inicial }: DetalleTareaDocenteProps
               fecha_entrega: datos.fecha_entrega,
               competencias: datos.competencias,
               nivel_ayuda: datos.nivel_ayuda,
+              modalidad: datos.modalidad,
+              enlace_externo: datos.enlace_externo,
             });
             setTarea({
               ...editada,

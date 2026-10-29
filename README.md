@@ -79,6 +79,10 @@ Work in progress during the hackathon (Oct 27 – Nov 4, 2026).
 - [x] AI for the teacher: create a task with AI, review suggestions from the heatmap, feedback drafts
 - [x] Google Classroom import (test mode): bring a course and its students into MuseLearn
 - [x] Sign in with Google and password recovery by email
+- [x] Tasks can be done in MuseLearn, in the notebook, on Google Classroom or another platform (Moodle, Teams…): the student uploads evidence and still does the comprehension check
+- [x] Classroom import brings the course's upcoming tasks too, and students who join late get their pending tasks planned
+- [x] Privacy policy and Terms of use (Dominican Law 172-13), required acceptance, data download and account deletion
+- [x] Teacher comprehension panel with overview (by concept, by task, who needs support), per-student profile and heatmap
 - [ ] Notebook-photo reading tested with real handwriting
 - [x] Public deployment (Vercel)
 - [ ] Demo video
@@ -105,6 +109,7 @@ npm run dev                     # http://localhost:3000
 - Only fictional data in this repository and in the seeds.
 - Each student sees only their own work; teachers see only their own classes (enforced by RLS in the database, not just in the UI).
 - Verification audio is deleted after transcription.
+- Users can download all their data and delete their account from Settings → Privacy and data.
 - Student data is never sent to Meta's *Contributor* tier.
 
 ## How it was built

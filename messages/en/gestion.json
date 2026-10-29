@@ -58,7 +58,8 @@
     "entregada": "Submitted on {fecha}",
     "cargando": "Loading the submission…",
     "error": "The submission could not be loaded.",
-    "cerrar": "Close"
+    "cerrar": "Close",
+    "externa": "The student marked it as handed in on the other platform (Classroom or another). Below is their evidence."
   },
   "comentario": {
     "titulo": "Comment for the student",

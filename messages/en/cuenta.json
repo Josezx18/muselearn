@@ -75,5 +75,28 @@
       "5": "Friday",
       "6": "Saturday"
     }
+  },
+  "privacidad": {
+    "titulo": "Privacy and data",
+    "intro": "Your data is yours. Here you can review it, download it or delete your account.",
+    "aceptaste": "You accepted the Terms of use and the Privacy policy on {fecha}.",
+    "documentos": "These are the documents that explain how we use your data.",
+    "verPrivacidad": "Privacy policy",
+    "verTerminos": "Terms of use",
+    "descargar": "Download my data",
+    "descargarAyuda": "A file with your profile, your classes and all your work in MuseLearn.",
+    "descargarBoton": "Download",
+    "eliminar": "Delete my account",
+    "eliminarAyudaEstudiante": "Deletes your account, submissions, conversations and reports.",
+    "eliminarAyudaDocente": "Deletes your account and your classes, with their tasks and your students' submissions in them.",
+    "eliminarBoton": "Delete account",
+    "confirmarTitulo": "Delete your account?",
+    "confirmarEstudiante": "Your account, submissions and files, tutor conversations, checks and reports will be deleted. Your teacher will no longer see your work.",
+    "confirmarDocente": "Your account and ALL your classes will be deleted, with their tasks, files and your students' submissions and reports in those classes. If you only want to remove one class, delete it from the class.",
+    "noSeDeshace": "This can't be undone. If you want a copy, download your data first.",
+    "escribe": "To confirm, type DELETE",
+    "cancelar": "Cancel",
+    "eliminarDefinitivo": "Delete forever",
+    "error": "The account couldn't be deleted. Try again."
   }
 }

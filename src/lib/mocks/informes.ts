@@ -104,6 +104,7 @@ export function panelComprensionMock(claseId: string, tareaId?: string) {
           estado: i < 3 ? "verificada" : "entregada",
           adjuntos: [],
           entregada_en: enSemana(1, 18),
+          entregada_externamente: false,
         }),
       )
     : [];

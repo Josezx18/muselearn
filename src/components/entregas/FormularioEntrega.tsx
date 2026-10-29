@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Badge, Button, Card, Textarea, useToast } from "@/components/ui";
 import { entregar, subirAdjuntoEntrega } from "@/lib/api-cliente";
-import type { Adjunto, Entrega } from "@/types/contratos";
+import type { Adjunto, Entrega, Modalidad } from "@/types/contratos";
 
 const MAX_FOTOS = 4;
 const MAX_ARCHIVOS = 8;
@@ -21,6 +21,8 @@ interface Elemento {
 
 export interface FormularioEntregaProps {
   tareaId: string;
+  /** Dónde se entrega la tarea: fuera de MuseLearn, aquí se sube una evidencia y se marca "ya la entregué". */
+  modalidad?: Modalidad;
   entregaExistente?: Pick<Entrega, "estado" | "adjuntos" | "contenido_texto"> | null;
   alEntregar: (entrega: Entrega) => void;
 }
@@ -53,13 +55,15 @@ function comprimir(archivo: File): Promise<File> {
   });
 }
 
-export function FormularioEntrega({ tareaId, entregaExistente, alEntregar }: FormularioEntregaProps) {
+export function FormularioEntrega({ tareaId, modalidad = "muselearn", entregaExistente, alEntregar }: FormularioEntregaProps) {
   const t = useTranslations("tareas");
   const avisar = useToast();
   const [texto, setTexto] = useState(entregaExistente?.contenido_texto ?? "");
   const [elementos, setElementos] = useState<Elemento[]>([]);
   const [comprimiendo, setComprimiendo] = useState(false);
   const [enviando, setEnviando] = useState(false);
+  const externa = modalidad === "classroom" || modalidad === "otra";
+  const [yaEntregada, setYaEntregada] = useState(false);
   const archivosRef = useRef<HTMLInputElement>(null);
   const camaraRef = useRef<HTMLInputElement>(null);
 
@@ -120,13 +124,14 @@ export function FormularioEntrega({ tareaId, entregaExistente, alEntregar }: For
   async function enviar(evento: React.FormEvent) {
     evento.preventDefault();
     if (bloqueada) return avisar(t("entrega.yaEntregada"), "info");
-    if (!texto.trim() && elementos.length === 0) return avisar(t("entrega.vacia"), "error");
+    if (!texto.trim() && elementos.length === 0) return avisar(t(externa ? "entrega.vaciaEvidencia" : "entrega.vacia"), "error");
+    if (externa && !yaEntregada) return avisar(t("entrega.marcarExterna"), "error");
     setEnviando(true);
     try {
       // 1) Subir cada archivo a Storage (carpeta del estudiante).  2) Entregar con las rutas reales.
       const adjuntos: Adjunto[] = [];
       for (const e of elementos) adjuntos.push(await subirAdjuntoEntrega(tareaId, e.archivo));
-      const entrega = await entregar({ tarea_id: tareaId, contenido_texto: texto.trim(), adjuntos });
+      const entrega = await entregar({ tarea_id: tareaId, contenido_texto: texto.trim(), adjuntos, entregada_externamente: externa && yaEntregada });
       avisar(t("entrega.exito"), "exito");
       alEntregar(entrega);
     } catch (err) {
@@ -139,7 +144,8 @@ export function FormularioEntrega({ tareaId, entregaExistente, alEntregar }: For
 
   return (
     <Card className="flex flex-col gap-4">
-      <h2 className="text-xl font-bold">{t("entrega.titulo")}</h2>
+      <h2 className="text-xl font-bold">{t(externa ? "entrega.tituloEvidencia" : "entrega.titulo")}</h2>
+      {modalidad !== "muselearn" && !bloqueada && <p className="-mt-2 text-sm text-tinta-suave">{t(`entrega.ayuda.${modalidad}`)}</p>}
 
       {bloqueada && entregaExistente && (
         <div className="flex items-center gap-2 rounded-xl border border-borde bg-primario-claro p-3 text-sm text-primario-fuerte">
@@ -157,7 +163,7 @@ export function FormularioEntrega({ tareaId, entregaExistente, alEntregar }: For
             id="entrega-texto"
             value={texto}
             onChange={(e) => setTexto(e.target.value)}
-            placeholder={t("entrega.contenidoTextoPlaceholder")}
+            placeholder={t(externa ? "entrega.evidenciaPlaceholder" : "entrega.contenidoTextoPlaceholder")}
             rows={6}
             maxLength={20000}
             disabled={bloqueada}
@@ -236,6 +242,13 @@ export function FormularioEntrega({ tareaId, entregaExistente, alEntregar }: For
           )}
           {comprimiendo && <p className="text-sm text-tinta-suave">{t("entrega.comprimiendo")}</p>}
         </div>
+
+        {externa && !bloqueada && (
+          <label className="flex items-start gap-3 rounded-xl border-2 border-borde p-3 has-[:checked]:border-primario has-[:checked]:bg-primario-claro">
+            <input type="checkbox" checked={yaEntregada} onChange={(e) => setYaEntregada(e.target.checked)} className="mt-1 size-5 accent-[var(--color-primario)]" />
+            <span className="text-sm font-medium">{t(`entrega.confirmarExterna.${modalidad}`)}</span>
+          </label>
+        )}
 
         {!bloqueada && (
           <div className="flex justify-end">

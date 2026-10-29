@@ -4,6 +4,7 @@ import { SelectorIdioma } from "@/components/comun/SelectorIdioma";
 import { SelectorTema } from "@/components/comun/SelectorTema";
 import { marca } from "@/config/marca";
 import { Logo } from "@/components/comun/Logo";
+import { EnlacesLegales } from "@/components/legal/EnlacesLegales";
 
 // Pantallas públicas: login, registro y unirse a una clase (contenido: T01).
 export default function LayoutPublico({ children }: { children: ReactNode }) {
@@ -19,6 +20,9 @@ export default function LayoutPublico({ children }: { children: ReactNode }) {
         </div>
       </div>
       <main className="flex-1 [&>*]:rounded-2xl">{children}</main>
+      <footer className="mt-8 text-sm text-tinta-suave">
+        <EnlacesLegales className="justify-center" />
+      </footer>
     </div>
   );
 }

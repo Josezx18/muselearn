@@ -3,8 +3,9 @@ import { z } from "zod";
 import { Tarea, Adjunto, Entrega } from "@/types/contratos";
 import { NuevaTarea, AdjuntoSubida } from "./validacion-tareas";
 
-const COLUMNAS_TAREA = "id, clase_id, titulo, instrucciones, adjuntos, fecha_entrega, competencias, nivel_ayuda, creada_en";
-const COLUMNAS_ENTREGA = "id, tarea_id, estudiante_id, contenido_texto, adjuntos, estado, entregada_en";
+// "*": zod descarta lo que sobra y pone los valores por defecto de las columnas nuevas (modalidad, enlace…).
+const COLUMNAS_TAREA = "*";
+const COLUMNAS_ENTREGA = "*";
 
 export async function crearTarea(db: SupabaseClient, docenteId: string, datos: NuevaTarea) {
   const { data, error } = await db
@@ -50,7 +51,11 @@ export async function agregarAdjuntoTarea(db: SupabaseClient, tareaId: string, a
   return adjunto;
 }
 
-export async function crearEntrega(db: SupabaseClient, estudianteId: string, datos: { tarea_id: string; contenido_texto: string; adjuntos: AdjuntoSubida[] }) {
+export async function crearEntrega(
+  db: SupabaseClient,
+  estudianteId: string,
+  datos: { tarea_id: string; contenido_texto: string; adjuntos: AdjuntoSubida[]; entregada_externamente?: boolean },
+) {
   const ahora = new Date().toISOString();
   const { data, error } = await db
     .from("entregas")
@@ -60,6 +65,8 @@ export async function crearEntrega(db: SupabaseClient, estudianteId: string, dat
         estudiante_id: estudianteId,
         contenido_texto: datos.contenido_texto,
         adjuntos: datos.adjuntos,
+        // Solo se escribe cuando es verdadero: así la entrega normal no depende de la columna nueva.
+        ...(datos.entregada_externamente ? { entregada_externamente: true } : {}),
         estado: "entregada",
         entregada_en: ahora,
       },

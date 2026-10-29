@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server";
+import { EnlacesLegales } from "@/components/legal/EnlacesLegales";
 import { Link } from "@/i18n/navigation";
 import { SelectorIdioma } from "@/components/comun/SelectorIdioma";
 import { SelectorTema } from "@/components/comun/SelectorTema";
@@ -161,7 +162,10 @@ export default async function Portada() {
         </section>
       </main>
 
-      <footer className="mx-auto w-full max-w-6xl px-4 pb-8 text-sm text-tinta-suave">{t("inicio.pie")}</footer>
+      <footer className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-3 px-4 pb-8 text-sm text-tinta-suave">
+        <span>{t("inicio.pie")}</span>
+        <EnlacesLegales />
+      </footer>
     </div>
   );
 }

@@ -1,0 +1,170 @@
+{
+  "volver": "Back",
+  "actualizada": "Version of {fecha}",
+  "contacto": "Privacy contact: ",
+  "otro": {
+    "privacidad": "See the Terms of use",
+    "terminos": "See the Privacy policy"
+  },
+  "aviso": "This text explains in plain language how MuseLearn works. If your school has its own rules about student data, they also apply.",
+  "privacidad": {
+    "titulo": "Privacy policy",
+    "intro": "MuseLearn is a study platform for secondary school teachers and students. This policy explains what data we use, what for, who we share it with and what your rights are. It is governed by Dominican Republic Law 172-13 on personal data protection.",
+    "secciones": [
+      {
+        "titulo": "1. Who is responsible",
+        "parrafos": [
+          "MuseLearn is an educational project developed by José Enrique Ulloa, a Technology teacher in the Dominican Republic. When a school uses MuseLearn with its students, the school and its teachers decide which classes and tasks are created; MuseLearn stores and processes that data to provide the service."
+        ]
+      },
+      {
+        "titulo": "2. What data we use",
+        "parrafos": [
+          "Account data: name, email, role (teacher or student), language and appearance and study-hours preferences.",
+          "Schoolwork: classes, tasks, submissions (text, files and notebook photos), tutor conversations, comprehension-check answers, comprehension reports, practice routes and teacher comments.",
+          "Voice: when you answer by voice, the audio is sent to be turned into text and is not stored. We only keep the text of your answer.",
+          "Minimal technical data needed for the app to work securely (for example, your session and error logs without the content of your tasks)."
+        ]
+      },
+      {
+        "titulo": "3. What we use it for",
+        "parrafos": [
+          "To organize your study week, give you tutor help without solving your task, check that you understood what you handed in, and show your teacher your progress.",
+          "We don't sell your data, we don't show ads and we don't use it to build commercial profiles."
+        ]
+      },
+      {
+        "titulo": "4. Artificial intelligence",
+        "parrafos": [
+          "MuseLearn uses Meta models (Muse) to analyze tasks, chat as a tutor, ask comprehension questions and write reports. Only what each feature needs is sent.",
+          "We don't use Meta's “Contributor” tier, where data may be used to train models. Review suggestions for teachers use only aggregated data, without student names.",
+          "AI can make mistakes. Grades and decisions about students are always made by the teacher."
+        ]
+      },
+      {
+        "titulo": "5. Who we share it with",
+        "parrafos": [
+          "With your teacher and your class, according to your role: each student sees only their own work; each teacher sees only their classes.",
+          "With the providers that run the service: Supabase (database and files), Vercel (app hosting), Meta (AI models) and Google, only if you or your teacher connect a Google or Google Classroom account.",
+          "With authorities, only if the law requires it."
+        ]
+      },
+      {
+        "titulo": "6. Students under 18",
+        "parrafos": [
+          "MuseLearn is designed for secondary school students and is used through their school and teacher. If you are under 18, use MuseLearn with permission from your parent or guardian, or from your school according to its rules.",
+          "If you are a parent or guardian and want to review or delete your child's data, write to the contact email."
+        ]
+      },
+      {
+        "titulo": "7. How long we keep it",
+        "parrafos": [
+          "As long as your account exists. If you delete your account, your data and files are deleted. If a teacher deletes a class or a task, whatever depends on it is deleted.",
+          "Voice audio is not stored: it is transcribed and discarded."
+        ]
+      },
+      {
+        "titulo": "8. Your rights",
+        "parrafos": [
+          "You can access your data, correct it, ask for it to be deleted and object to its use.",
+          "In Settings → Privacy and data you can download your data and delete your account. You change your name and language in My profile. For anything else, write to us."
+        ]
+      },
+      {
+        "titulo": "9. Security",
+        "parrafos": [
+          "Connections are encrypted and the database enforces per-user access rules: nobody can see another student's work or another teacher's classes. No system is perfect: if we detect a problem affecting your data, we will let you know."
+        ]
+      },
+      {
+        "titulo": "10. Changes",
+        "parrafos": [
+          "If we change this policy, we will update the version date and ask you to accept it again when you sign in."
+        ]
+      }
+    ]
+  },
+  "terminos": {
+    "titulo": "Terms of use",
+    "intro": "By creating an account or using MuseLearn you accept these terms. Take your time: they are short.",
+    "secciones": [
+      {
+        "titulo": "1. What MuseLearn is",
+        "parrafos": [
+          "A study companion that organizes your week, helps you with questions and hints without doing your homework, and checks that you understood what you handed in. For teachers, it is a tool to assign tasks and see their class's comprehension."
+        ]
+      },
+      {
+        "titulo": "2. Your account",
+        "parrafos": [
+          "Use your real name and your own email. One account per person. Keep your password safe and don't share it.",
+          "Choose the right role: teacher or student. Teacher accounts are for real teachers."
+        ]
+      },
+      {
+        "titulo": "3. Honest use",
+        "parrafos": [
+          "MuseLearn exists for learning. Don't try to get answers from the tutor, don't hand in someone else's work as yours, and answer the comprehension check yourself.",
+          "Don't upload offensive or violent content, content that isn't yours, or other people's personal data that the task doesn't need.",
+          "Don't try to access other people's accounts or data or disrupt the app."
+        ]
+      },
+      {
+        "titulo": "4. Teacher responsibilities",
+        "parrafos": [
+          "Use MuseLearn with your students according to your school's rules, including family consent when needed.",
+          "Review the AI's suggestions (tasks, reviews and comments) before using them. Assessment and grades are your decision."
+        ]
+      },
+      {
+        "titulo": "5. Your content",
+        "parrafos": [
+          "What you write and upload is still yours. You give us permission to store and process it only to provide the service, as the Privacy policy explains."
+        ]
+      },
+      {
+        "titulo": "6. Artificial intelligence",
+        "parrafos": [
+          "The AI's answers, questions and reports may contain errors. Use them as support, not as absolute truth. If something seems wrong or inappropriate, tell your teacher."
+        ]
+      },
+      {
+        "titulo": "7. Availability",
+        "parrafos": [
+          "MuseLearn is under active development. We do our best for it to work well, but it may have failures, changes or pauses. There are daily AI usage limits so the service is enough for everyone."
+        ]
+      },
+      {
+        "titulo": "8. Suspension and leaving",
+        "parrafos": [
+          "You can delete your account at any time from Settings. We may suspend an account that breaks these terms or puts other users at risk."
+        ]
+      },
+      {
+        "titulo": "9. Liability",
+        "parrafos": [
+          "MuseLearn is provided as is. To the extent the law allows, we are not responsible for losses caused by service failures or by the use of the AI's suggestions."
+        ]
+      },
+      {
+        "titulo": "10. Governing law and changes",
+        "parrafos": [
+          "These terms are governed by the laws of the Dominican Republic. If we change them, we will update the version date and ask you to accept them again."
+        ]
+      }
+    ]
+  },
+  "aceptar": {
+    "titulo": "Before you continue",
+    "intro": "To use MuseLearn you need to accept the Terms of use and the Privacy policy.",
+    "actualizados": "We updated the Terms of use and the Privacy policy. Review and accept them to continue.",
+    "casilla": "I have read and accept the <terminos>Terms of use</terminos> and the <privacidad>Privacy policy</privacidad>.",
+    "menor": "If I am under 18, I use MuseLearn with permission from my parent, guardian or school.",
+    "terminos": "Terms of use",
+    "privacidad": "Privacy policy",
+    "continuar": "Accept and continue",
+    "salir": "Not now (sign out)",
+    "falta": "Check the box to accept.",
+    "error": "It couldn't be saved. Try again."
+  }
+}

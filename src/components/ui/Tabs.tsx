@@ -12,14 +12,17 @@ export interface Pestana {
 export interface TabsProps {
   pestanas: Pestana[];
   inicial?: string;
+  /** Pestaña activa controlada desde fuera (si se pasa, manda sobre la interna). */
+  activa?: string;
   alCambiar?: (id: string) => void;
   className?: string;
 }
 
 /** Pestañas accesibles (flechas izquierda/derecha para moverse). */
-export function Tabs({ pestanas, inicial, alCambiar, className }: TabsProps) {
+export function Tabs({ pestanas, inicial, activa: controlada, alCambiar, className }: TabsProps) {
   const base = useId();
-  const [activa, setActiva] = useState(inicial ?? pestanas[0]?.id);
+  const [interna, setActiva] = useState(inicial ?? pestanas[0]?.id);
+  const activa = controlada ?? interna;
 
   const elegir = (id: string) => {
     setActiva(id);

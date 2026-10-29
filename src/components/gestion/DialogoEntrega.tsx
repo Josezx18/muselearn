@@ -47,6 +47,9 @@ export function DialogoEntrega({ entregaId, nombre, alCerrar }: { entregaId: str
               {t("entregada", {
                 fecha: formato.dateTime(new Date(detalle.entrega.entregada_en), { dateStyle: "medium", timeStyle: "short" }),
               })}
+          {detalle.entrega.entregada_externamente && (
+            <p className="rounded-xl bg-resaltador-claro p-2 text-sm font-bold">{t("externa")}</p>
+          )}
             </p>
           )}
           <section>

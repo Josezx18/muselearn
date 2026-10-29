@@ -4,7 +4,14 @@ import { errorHttp } from "@/lib/db/http";
 import { obtenerUsuarioActual } from "@/lib/db/sesion";
 
 type Actual = NonNullable<Awaited<ReturnType<typeof obtenerUsuarioActual>>>;
-const perfilDe = (a: Actual) => PerfilUsuario.parse({ ...a.usuario, ...a.apariencia, correo: a.correo });
+const perfilDe = (a: Actual) =>
+  PerfilUsuario.parse({
+    ...a.usuario,
+    ...a.apariencia,
+    correo: a.correo,
+    terminos_version: a.terminos.version,
+    terminos_aceptados_en: a.terminos.aceptados_en,
+  });
 
 // GET /api/perfil — el perfil del usuario con sesión (incluye correo y apariencia).
 export async function GET() {

@@ -89,6 +89,24 @@ export function ImportarClassroom({ errorInicial }: { errorInicial?: string }) {
             {t("resultado.inscritos", { n: resultado.inscritos.length })} {t("resultado.yaEstaban", { n: resultado.yaEstaban })}
           </p>
           {resultado.inscritos.length > 0 && <p className="mt-1 text-sm text-tinta-suave">{resultado.inscritos.join(", ")}</p>}
+          {resultado.tareas && (
+            <div className="mt-3 rounded-xl bg-superficie p-3 text-sm">
+              {resultado.tareas.sinPermiso ? (
+                <p>{t("resultado.tareasSinPermiso")}</p>
+              ) : (
+                <>
+                  <p className="font-bold">
+                    {t("resultado.tareas", { n: resultado.tareas.nuevas.length })}{" "}
+                    {resultado.tareas.yaEstaban > 0 && t("resultado.tareasYaEstaban", { n: resultado.tareas.yaEstaban })}
+                  </p>
+                  {resultado.tareas.nuevas.length > 0 && <p className="mt-1 text-tinta-suave">{resultado.tareas.nuevas.join(" · ")}</p>}
+                  {resultado.tareas.vencidas > 0 && <p className="mt-1 text-tinta-suave">{t("resultado.tareasVencidas", { n: resultado.tareas.vencidas })}</p>}
+                  {resultado.tareas.porLimite > 0 && <p className="mt-1 text-tinta-suave">{t("resultado.tareasLimite", { n: resultado.tareas.porLimite })}</p>}
+                  {resultado.tareas.nuevas.length > 0 && <p className="mt-1 text-tinta-suave">{t("resultado.tareasPlan")}</p>}
+                </>
+              )}
+            </div>
+          )}
           {resultado.sinCuenta.length > 0 && (
             <div className="mt-3 rounded-xl bg-fondo p-3">
               <p>{t("resultado.sinCuenta", { n: resultado.sinCuenta.length })}</p>

@@ -2,10 +2,12 @@
 // estudiantes que ya tienen cuenta de estudiante en MuseLearn con el mismo correo.
 // Los que no tienen cuenta se devuelven para que el docente les comparta el código de la clase.
 import type { SupabaseClient } from "@supabase/supabase-js";
-import { Clase } from "@/types/contratos";
+import { Clase, type Tarea } from "@/types/contratos";
 import { crearClase } from "@/lib/db/clases";
+import { crearTarea } from "@/lib/db/tareas";
+import { NuevaTarea } from "@/lib/db/validacion-tareas";
 import { claseDelDocente } from "@/lib/db/gestion";
-import { claseDesdeCurso, type AlumnoClassroom, type CursoClassroom } from "./classroom";
+import { claseDesdeCurso, tareaDesdeClassroom, type AlumnoClassroom, type CursoClassroom, type TareaClassroom } from "./classroom";
 
 export interface ResultadoImportacion {
   clase: Clase;
@@ -83,4 +85,64 @@ export async function importarCurso(
     yaEstaban: conCorreo.filter((a) => cuentas.has(a.correo) && yaInscritos.has(cuentas.get(a.correo)!)).length,
     sinCuenta: alumnos.filter((a) => !a.correo || !cuentas.has(a.correo)).map(({ nombre, correo }) => ({ nombre, correo })),
   };
+}
+
+export interface ResultadoTareas {
+  nuevas: Tarea[];
+  yaEstaban: number;
+  vencidas: number;
+  /** No se importaron por el tope diario de tareas nuevas. */
+  porLimite: number;
+}
+
+/**
+ * Importa las tareas publicadas del curso que todavía no vencen, como tareas "se entrega en Classroom"
+ * (con su enlace). No duplica: las ya importadas quedan en tareas_vinculadas. Como máximo `maximo` nuevas.
+ */
+export async function importarTareasCurso(
+  db: SupabaseClient,
+  docenteId: string,
+  claseId: string,
+  tareas: TareaClassroom[],
+  op: { ahora?: Date; maximo: number; offsetMin?: number },
+): Promise<ResultadoTareas> {
+  const ahora = op.ahora ?? new Date();
+  const { data: vinculos, error } = await db
+    .from("tareas_vinculadas")
+    .select("externo_id")
+    .eq("clase_id", claseId)
+    .eq("proveedor", "classroom");
+  if (error) throw error;
+  const yaImportadas = new Set((vinculos ?? []).map((v) => v.externo_id as string));
+
+  const resultado: ResultadoTareas = { nuevas: [], yaEstaban: 0, vencidas: 0, porLimite: 0 };
+  // Primero las que vencen antes: son las que más importan para el plan de la semana.
+  const candidatas: { externo: string; datos: NuevaTarea }[] = [];
+  for (const t of tareas) {
+    if (yaImportadas.has(t.id)) {
+      resultado.yaEstaban++;
+      continue;
+    }
+    const datos = tareaDesdeClassroom(t, claseId, ahora, op.offsetMin);
+    if (!datos) {
+      resultado.vencidas++;
+      continue;
+    }
+    candidatas.push({ externo: t.id, datos: NuevaTarea.parse(datos) });
+  }
+  candidatas.sort((a, b) => Date.parse(a.datos.fecha_entrega) - Date.parse(b.datos.fecha_entrega));
+
+  for (const c of candidatas) {
+    if (resultado.nuevas.length >= op.maximo) {
+      resultado.porLimite++;
+      continue;
+    }
+    const tarea = await crearTarea(db, docenteId, c.datos);
+    const { error: errorVinculo } = await db
+      .from("tareas_vinculadas")
+      .insert({ tarea_id: tarea.id, clase_id: claseId, proveedor: "classroom", externo_id: c.externo });
+    if (errorVinculo) throw errorVinculo;
+    resultado.nuevas.push(tarea);
+  }
+  return resultado;
 }

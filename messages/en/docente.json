@@ -10,7 +10,7 @@
   "sinDato": "No data",
   "detalle": "Student details",
   "sinInforme": "No understanding report",
-  "seleccionar": "Select a student in the map",
+  "seleccionar": "Choose a student",
   "vacio": "No concepts have been assessed yet.",
   "resumen": "Teacher summary",
   "integraciones": {
@@ -59,7 +59,7 @@
   },
   "classroom": {
     "titulo": "Import from Google Classroom",
-    "intro": "Bring your Classroom courses with their students. We only read; nothing changes in your Classroom.",
+    "intro": "Bring your Classroom courses with their students and tasks. We only read; we don't change anything in your Classroom.",
     "prueba": "Test mode: Google will show an “unverified app” notice. That's normal until the app is published.",
     "conectar": "Connect Google Classroom",
     "conectado": "Connected to Google",
@@ -67,7 +67,7 @@
     "cargando": "Looking for your courses…",
     "sinCursos": "We found no active courses where you are a teacher.",
     "importar": "Import",
-    "actualizar": "Update students",
+    "actualizar": "Update students and tasks",
     "importando": "Importing…",
     "irClase": "Go to class",
     "yaImportado": "Already imported",
@@ -77,7 +77,13 @@
       "inscritos": "{n, plural, =0 {No new students enrolled} one {I enrolled 1 student} other {I enrolled # students}}.",
       "yaEstaban": "{n, plural, =0 {} one {1 was already there.} other {# were already there.}}",
       "sinCuenta": "{n, plural, one {1 student doesn't have a MuseLearn account yet} other {# students don't have a MuseLearn account yet}}. Share the class code with them:",
-      "codigo": "Code: {codigo}"
+      "codigo": "Code: {codigo}",
+      "tareas": "{n, plural, =0 {There were no new tasks to import.} one {I imported 1 task.} other {I imported # tasks.}}",
+      "tareasYaEstaban": "{n, plural, one {1 was already here.} other {# were already here.}}",
+      "tareasVencidas": "{n, plural, one {1 overdue task was not imported.} other {# overdue tasks were not imported.}}",
+      "tareasLimite": "{n, plural, one {1 task was left for the next import (daily limit).} other {# tasks were left for the next import (daily limit).}}",
+      "tareasPlan": "Muse is fitting them into each student's week. They hand them in on Classroom; on MuseLearn they upload evidence and do the comprehension check.",
+      "tareasSinPermiso": "To bring the tasks too, disconnect and reconnect Google Classroom (a new permission is needed)."
     },
     "errores": {
       "sin_configurar": "Google is not configured on the server yet (GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET in Vercel).",
@@ -112,5 +118,34 @@
       "sinInformes": "There are no comprehension reports in this class yet.",
       "general": "The AI didn't respond. Try again in a moment."
     }
+  },
+  "vistas": {
+    "general": "Overview",
+    "estudiante": "By student",
+    "mapa": "Map"
+  },
+  "general": {
+    "conceptos": "How the class is doing on each concept",
+    "conceptosAyuda": "How many students are at each level, based on their latest report. Weakest concepts first.",
+    "promedio": "Average {n}",
+    "tareas": "By task",
+    "sinTareas": "There are no tasks yet.",
+    "vencida": "past due",
+    "entregaron": "Handed in",
+    "verificaron": "Checked",
+    "comprendieron": "Understood",
+    "apoyo": "Need support",
+    "apoyoAyuda": "Students with concepts at Beginning or Developing, or with overdue tasks not handed in.",
+    "nadie": "Nobody for now: the class is doing well!",
+    "conceptosBajos": "Low on: {lista}",
+    "sinEntregar": "{n, plural, one {1 overdue task not handed in} other {# overdue tasks not handed in}}"
+  },
+  "estudiante": {
+    "elegir": "Student",
+    "entregadas": "Handed in",
+    "promedio": "Average level",
+    "conceptos": "By concept",
+    "tareas": "Their tasks",
+    "verEntrega": "See submission"
   }
 }

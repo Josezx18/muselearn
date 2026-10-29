@@ -9,10 +9,11 @@ import { idiomaValido, origenDesdeCabeceras, rolParaCuentaNueva, urlCallback } f
 import { crearClienteAdmin, crearClienteServidor } from "@/lib/supabase/servidor";
 import { EntradaLogin, EntradaRegistro, inicioPorRol } from "@/lib/db/validacion";
 import { Rol } from "@/types/contratos";
+import { TERMINOS_VERSION } from "@/lib/terminos";
 
 /** Estado que devuelven los formularios: la clave de error se traduce en el cliente (auth.errores.*). */
 export interface EstadoForm {
-  error?: "datos" | "correo_usado" | "credenciales" | "servidor" | "limite" | "enlace_vencido";
+  error?: "datos" | "correo_usado" | "credenciales" | "servidor" | "limite" | "enlace_vencido" | "terminos";
   enviado?: boolean;
 }
 
@@ -26,6 +27,7 @@ export async function registrarse(_previo: EstadoForm, datos: FormData): Promise
     rol: texto(datos, "rol"),
   });
   if (!entrada.success) return { error: "datos" };
+  if (datos.get("acepto") !== "si") return { error: "terminos" };
   const { nombre, correo, contrasena, rol } = entrada.data;
 
   // El usuario se crea con el cliente admin (correo ya confirmado, rol en app_metadata: el usuario no puede editarlo).
@@ -40,7 +42,13 @@ export async function registrarse(_previo: EstadoForm, datos: FormData): Promise
   if (error || !data.user) return { error: /already|registered|exists/i.test(error?.message ?? "") ? "correo_usado" : "servidor" };
 
   const locale = await getLocale();
-  const { error: errorPerfil } = await admin.from("perfiles").insert({ id: data.user.id, rol, nombre, idioma: locale });
+  const perfil = { id: data.user.id, rol, nombre, idioma: locale };
+  const aceptacion = { terminos_version: TERMINOS_VERSION, terminos_aceptados_en: new Date().toISOString() };
+  let { error: errorPerfil } = await admin.from("perfiles").insert({ ...perfil, ...aceptacion });
+  if (errorPerfil && (errorPerfil.code === "42703" || errorPerfil.code === "PGRST204")) {
+    // Antes de la migración 0008 no existen las columnas de términos: se crea el perfil sin ellas.
+    ({ error: errorPerfil } = await admin.from("perfiles").insert(perfil));
+  }
   if (errorPerfil) {
     await admin.auth.admin.deleteUser(data.user.id); // no dejar cuentas sin perfil
     return { error: "servidor" };
@@ -125,4 +133,25 @@ export async function guardarNuevaContrasena(_previo: EstadoForm, datos: FormDat
   const { data: perfil } = await db.from("perfiles").select("rol").eq("id", data.user.id).maybeSingle();
   const rol = Rol.safeParse(perfil?.rol);
   return redirect({ href: rol.success ? inicioPorRol(rol.data) : "/login", locale: await getLocale() });
+}
+
+/** Guarda que el usuario aceptó la versión vigente de los Términos y la Privacidad (lo escribe el servidor). */
+export async function aceptarTerminos(_previo: EstadoForm, datos: FormData): Promise<EstadoForm> {
+  if (datos.get("acepto") !== "si") return { error: "terminos" };
+  const db = await crearClienteServidor();
+  const { data } = await db.auth.getUser();
+  const locale = await getLocale();
+  if (!data.user) return redirect({ href: "/login", locale });
+  const admin = crearClienteAdmin();
+  const { error } = await admin
+    .from("perfiles")
+    .update({ terminos_version: TERMINOS_VERSION, terminos_aceptados_en: new Date().toISOString() })
+    .eq("id", data.user.id);
+  if (error) {
+    console.warn(`[auth] aceptar términos: ${error.message}`);
+    return { error: "servidor" };
+  }
+  const { data: perfil } = await db.from("perfiles").select("rol").eq("id", data.user.id).maybeSingle();
+  const rol = Rol.safeParse(perfil?.rol);
+  return redirect({ href: rol.success ? inicioPorRol(rol.data) : "/login", locale });
 }

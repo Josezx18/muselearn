@@ -20,7 +20,7 @@ import type { NuevaClase } from "./validacion";
 import { enlaceArchivo } from "@/lib/archivos";
 
 const COLUMNAS_CLASE = "id, docente_id, nombre, materia, grado, codigo_inscripcion, creada_en";
-const COLUMNAS_TAREA = "id, clase_id, titulo, instrucciones, adjuntos, fecha_entrega, competencias, nivel_ayuda, creada_en";
+const COLUMNAS_TAREA = "*"; // zod descarta lo que sobra y completa las columnas nuevas
 const CODIGO_DUPLICADO = "23505";
 
 /** Clase del docente, o null si no existe o es de otro docente. */

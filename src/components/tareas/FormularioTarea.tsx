@@ -3,7 +3,7 @@
 import { useCallback, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Button, Input, Textarea, Card, Badge, useToast } from "@/components/ui";
-import { Adjunto, Tarea, NivelAyuda, type PropuestaTarea } from "@/types/contratos";
+import { Adjunto, Tarea, NivelAyuda, EnlaceExterno, type Modalidad, type PropuestaTarea } from "@/types/contratos";
 import { AsistenteTarea } from "./AsistenteTarea";
 
 type NuevaTarea = Omit<Tarea, "id" | "creada_en">;
@@ -28,6 +28,9 @@ export function FormularioTarea({ claseId, tareaExistente, alGuardar, alCancelar
   const [competencias, setCompetencias] = useState<string[]>(tareaExistente?.competencias ?? []);
   const [nuevaCompetencia, setNuevaCompetencia] = useState("");
   const [nivelAyuda, setNivelAyuda] = useState<NivelAyuda>(tareaExistente?.nivel_ayuda ?? "pistas");
+  const [modalidad, setModalidad] = useState<Modalidad>(tareaExistente?.modalidad ?? "muselearn");
+  const [enlace, setEnlace] = useState(tareaExistente?.enlace_externo ?? "");
+  const conEnlace = modalidad === "classroom" || modalidad === "otra";
   const [adjuntos, setAdjuntos] = useState<File[]>([]);
   const [adjuntosExistentes, setAdjuntosExistentes] = useState<Adjunto[]>(tareaExistente?.adjuntos ?? []);
 
@@ -90,13 +93,17 @@ export function FormularioTarea({ claseId, tareaExistente, alGuardar, alCancelar
       avisar(t("errores.fechaRequerida"), "error");
       return false;
     }
+    if (conEnlace && enlace.trim() && !EnlaceExterno.safeParse(enlace.trim()).success) {
+      avisar(t("errores.enlaceInvalido"), "error");
+      return false;
+    }
     const sinCambioDeFecha = tareaExistente && fechaLocal(new Date(tareaExistente.fecha_entrega)) === fechaEntrega;
     if (!sinCambioDeFecha && new Date(fechaEntrega) <= new Date()) {
       avisar(t("errores.fechaPasado"), "error");
       return false;
     }
     return true;
-  }, [titulo, fechaEntrega, avisar, t, tareaExistente]);
+  }, [titulo, fechaEntrega, avisar, t, tareaExistente, conEnlace, enlace]);
 
   async function enviar(e: React.FormEvent) {
     e.preventDefault();
@@ -110,6 +117,8 @@ export function FormularioTarea({ claseId, tareaExistente, alGuardar, alCancelar
         fecha_entrega: new Date(fechaEntrega).toISOString(),
         competencias,
         nivel_ayuda: nivelAyuda,
+        modalidad,
+        enlace_externo: modalidad === "classroom" || modalidad === "otra" ? enlace.trim() || null : null,
         adjuntos: adjuntosExistentes,
       };
       await alGuardar(datos, adjuntos);
@@ -216,6 +225,42 @@ export function FormularioTarea({ claseId, tareaExistente, alGuardar, alCancelar
               </label>
             ))}
           </div>
+        </fieldset>
+
+        <fieldset>
+          <legend className="mb-2 block text-sm font-medium">{t("modalidad.titulo")}</legend>
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+            {(["muselearn", "cuaderno", "classroom", "otra"] as const).map((valor) => (
+              <label key={valor} className="cursor-pointer">
+                <input
+                  type="radio"
+                  name="modalidad"
+                  value={valor}
+                  checked={modalidad === valor}
+                  onChange={() => setModalidad(valor)}
+                  className="peer sr-only"
+                />
+                <span className="flex min-h-11 items-center justify-center rounded-lg border-2 border-borde px-2 text-center text-sm font-bold peer-checked:border-primario peer-checked:bg-primario-claro peer-focus-visible:ring-2 peer-focus-visible:ring-primario hover:border-primario">
+                  {t(`modalidad.${valor}`)}
+                </span>
+              </label>
+            ))}
+          </div>
+          <p className="mt-2 text-xs text-tinta-suave">{t(`modalidad.ayuda.${modalidad}`)}</p>
+          {conEnlace && (
+            <div className="mt-3">
+              <Input
+                id="enlaceExterno"
+                type="url"
+                inputMode="url"
+                etiqueta={t("modalidad.enlace")}
+                value={enlace}
+                onChange={(e) => setEnlace(e.target.value)}
+                placeholder={modalidad === "classroom" ? "https://classroom.google.com/…" : "https://…"}
+                maxLength={500}
+              />
+            </div>
+          )}
         </fieldset>
 
         <div>

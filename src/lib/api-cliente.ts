@@ -30,6 +30,7 @@ import {
   Usuario,
 } from "@/types/contratos";
 import { ESTUDIANTE_ACTUAL } from "./mocks/base";
+import { TERMINOS_VERSION } from "./terminos";
 import type { CambioPerfil, EdicionTarea, PedidoPropuestaTarea } from "@/types/contratos";
 import { clasesMock, usuariosMock } from "./mocks/clases";
 import { entregasMock, tareasMock } from "./mocks/tareas";
@@ -118,13 +119,14 @@ export const subirAdjuntoEntrega = (tareaId: string, archivo: File) => {
   return pedir("/api/entregas/adjuntos", Adjunto, { method: "POST", body: datos });
 };
 
-export const entregar = (datos: { tarea_id: string; contenido_texto: string; adjuntos: Adjunto[] }) =>
+export const entregar = (datos: { tarea_id: string; contenido_texto: string; adjuntos: Adjunto[]; entregada_externamente?: boolean }) =>
   usarMocks()
     ? mock({
         id: crypto.randomUUID(),
         estudiante_id: ESTUDIANTE_ACTUAL,
         estado: "entregada",
         entregada_en: new Date().toISOString(),
+          entregada_externamente: false,
         ...datos,
       } as Entrega)
     : pedir("/api/entregas", Entrega, json(datos));
@@ -294,8 +296,12 @@ export async function cargarComprension(claseId: string, tareaId?: string) {
 function perfilMock(): PerfilUsuario {
   const docente = typeof window !== "undefined" && window.location.pathname.includes("/docente");
   const u = usuariosMock.find((x) => x.rol === (docente ? "docente" : "estudiante")) ?? usuariosMock[0];
-  return { ...u, correo: docente ? "docente@muselearn.demo" : "camila@muselearn.demo", tema: "muse", mascota: "pagi" };
+  return { ...u, correo: docente ? "docente@muselearn.demo" : "camila@muselearn.demo", tema: "muse", mascota: "pagi", terminos_version: TERMINOS_VERSION, terminos_aceptados_en: new Date(Date.now() - 86_400_000).toISOString() };
 }
+
+/** Elimina la cuenta y todos sus datos (escribiendo ELIMINAR para confirmar). No se puede deshacer. */
+export const eliminarMiCuenta = (confirmacion: string) =>
+  usarMocks() ? mock({ ok: true }) : pedir("/api/perfil/eliminar", z.object({ ok: z.literal(true) }), json({ confirmacion }));
 
 export const obtenerPerfil = () => (usarMocks() ? mock(perfilMock()) : pedir("/api/perfil", PerfilUsuario));
 
@@ -438,6 +444,16 @@ export const ResultadoImportacion = z.object({
   inscritos: z.array(z.string()),
   yaEstaban: z.number().int(),
   sinCuenta: z.array(z.object({ nombre: z.string(), correo: z.string().nullable() })),
+  tareas: z
+    .object({
+      nuevas: z.array(z.string()),
+      yaEstaban: z.number().int(),
+      vencidas: z.number().int(),
+      porLimite: z.number().int(),
+      sinPermiso: z.boolean(),
+    })
+    .nullable()
+    .default(null),
 });
 
 export const listarCursosClassroom = () =>
@@ -457,6 +473,7 @@ export const importarCursoClassroom = (curso_id: string) =>
           inscritos: ["Camila Pérez", "Luis Martínez"],
           yaEstaban: 0,
           sinCuenta: [{ nombre: "Ana Torres", correo: "ana.torres@ejemplo.do" }],
+          tareas: { nuevas: ["Proyecto: semáforo con Arduino", "Cuestionario de electrónica"], yaEstaban: 0, vencidas: 3, porLimite: 0, sinPermiso: false },
         },
         900,
       )

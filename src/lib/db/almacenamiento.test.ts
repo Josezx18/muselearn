@@ -46,7 +46,7 @@ describe("esquemas de T02", () => {
   it("EntradaEntrega exige un uuid y limita adjuntos", () => {
     expect(EntradaEntrega.safeParse({ tarea_id: "x" }).success).toBe(false);
     const ok = EntradaEntrega.parse({ tarea_id: TAREA });
-    expect(ok).toEqual({ tarea_id: TAREA, contenido_texto: "", adjuntos: [] });
+    expect(ok).toEqual({ tarea_id: TAREA, contenido_texto: "", adjuntos: [], entregada_externamente: false });
     const muchos = Array.from({ length: 9 }, () => ({ nombre: "a", ruta: "r", tipo_mime: "image/jpeg" }));
     expect(EntradaEntrega.safeParse({ tarea_id: TAREA, adjuntos: muchos }).success).toBe(false);
   });
@@ -55,5 +55,20 @@ describe("esquemas de T02", () => {
     const base = { clase_id: TAREA, titulo: "T", instrucciones: "", fecha_entrega: "2026-11-03T22:00:00.000Z" };
     expect(NuevaTarea.safeParse(base).success).toBe(true);
     expect(NuevaTarea.safeParse({ ...base, fecha_entrega: "mañana" }).success).toBe(false);
+  });
+});
+
+describe("dónde se entrega la tarea", () => {
+  const TAREA_ID = "00000000-0000-4000-8000-000000000201";
+  const base = { clase_id: TAREA_ID, titulo: "T", instrucciones: "", fecha_entrega: "2026-11-03T22:00:00.000Z" };
+  it("por defecto en MuseLearn y sin enlace", () => {
+    const t = NuevaTarea.parse(base);
+    expect(t.modalidad).toBe("muselearn");
+    expect(t.enlace_externo).toBeNull();
+  });
+  it("acepta Classroom con enlace https y rechaza enlaces raros", () => {
+    expect(NuevaTarea.safeParse({ ...base, modalidad: "classroom", enlace_externo: "https://classroom.google.com/c/123" }).success).toBe(true);
+    expect(NuevaTarea.safeParse({ ...base, modalidad: "otra", enlace_externo: "javascript:alert(1)" }).success).toBe(false);
+    expect(NuevaTarea.safeParse({ ...base, modalidad: "moodle" }).success).toBe(false);
   });
 });

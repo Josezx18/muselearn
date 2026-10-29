@@ -13,6 +13,7 @@ export const espacios = [
   "cuenta", // perfil y configuración
   "gestion", // gestión del docente
   "mascota", // lo que dice la mascota
+  "legal", // privacidad y términos de uso
 ] as const;
 
 export type Espacio = (typeof espacios)[number];

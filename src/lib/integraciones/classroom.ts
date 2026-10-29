@@ -6,6 +6,8 @@ export const ALCANCES_CLASSROOM = [
   "https://www.googleapis.com/auth/classroom.courses.readonly",
   "https://www.googleapis.com/auth/classroom.rosters.readonly",
   "https://www.googleapis.com/auth/classroom.profile.emails",
+  // Leer las tareas (coursework) de los cursos donde el usuario es docente.
+  "https://www.googleapis.com/auth/classroom.coursework.students.readonly",
 ];
 
 export const COOKIE_ESTADO = "ml_gc_estado";
@@ -157,5 +159,101 @@ export function claseDesdeCurso(c: CursoClassroom) {
       "·",
     ),
     grado: recortar(c.section || "—", 30) || "—",
+  };
+}
+
+// ---------------- Tareas (coursework) ----------------
+const Fecha = z.object({ year: z.number().int(), month: z.number().int(), day: z.number().int() });
+const Hora = z.object({ hours: z.number().int().optional(), minutes: z.number().int().optional() });
+const TareaGoogle = z.object({
+  id: z.string(),
+  title: z.string().optional(),
+  description: z.string().optional(),
+  state: z.string().optional(),
+  alternateLink: z.string().optional(),
+  dueDate: Fecha.optional(),
+  dueTime: Hora.optional(),
+  workType: z.string().optional(),
+  materials: z
+    .array(
+      z.object({
+        link: z.object({ url: z.string(), title: z.string().optional() }).optional(),
+        driveFile: z.object({ driveFile: z.object({ title: z.string().optional(), alternateLink: z.string().optional() }).optional() }).optional(),
+        youtubeVideo: z.object({ title: z.string().optional(), alternateLink: z.string().optional() }).optional(),
+        form: z.object({ title: z.string().optional(), formUrl: z.string().optional() }).optional(),
+      }),
+    )
+    .optional(),
+});
+export type TareaClassroom = z.infer<typeof TareaGoogle>;
+
+/** Tareas publicadas del curso (las más recientes primero, como las devuelve Google). */
+export async function listarTareasCurso(token: string, cursoId: string, hacerFetch: typeof fetch = fetch): Promise<TareaClassroom[]> {
+  const Pagina = z.object({ courseWork: z.array(TareaGoogle).optional(), nextPageToken: z.string().optional() });
+  const tareas: TareaClassroom[] = [];
+  let pagina: string | undefined;
+  for (let i = 0; i < 5; i++) {
+    const q = new URLSearchParams({ courseWorkStates: "PUBLISHED", pageSize: "50", orderBy: "dueDate desc" });
+    if (pagina) q.set("pageToken", pagina);
+    const p = await pedirGoogle(token, `/courses/${encodeURIComponent(cursoId)}/courseWork?${q}`, Pagina, hacerFetch);
+    tareas.push(...(p.courseWork ?? []));
+    if (!p.nextPageToken) break;
+    pagina = p.nextPageToken;
+  }
+  return tareas;
+}
+
+/**
+ * Fecha de entrega en ISO. Google da fecha y hora en UTC; si no hay hora, se toma las 23:59 de ese día en la
+ * zona del centro (offsetMin, RD = -240). Sin fecha de entrega: dentro de 7 días a las 23:59 locales.
+ */
+export function fechaEntregaClassroom(t: Pick<TareaClassroom, "dueDate" | "dueTime">, ahora: Date, offsetMin = -240): string {
+  if (t.dueDate) {
+    const { year, month, day } = t.dueDate;
+    if (t.dueTime && (t.dueTime.hours !== undefined || t.dueTime.minutes !== undefined)) {
+      return new Date(Date.UTC(year, month - 1, day, t.dueTime.hours ?? 0, t.dueTime.minutes ?? 0)).toISOString();
+    }
+    return new Date(Date.UTC(year, month - 1, day, 23, 59) - offsetMin * 60_000).toISOString();
+  }
+  const local = new Date(ahora.getTime() + offsetMin * 60_000 + 7 * 86_400_000);
+  return new Date(Date.UTC(local.getUTCFullYear(), local.getUTCMonth(), local.getUTCDate(), 23, 59) - offsetMin * 60_000).toISOString();
+}
+
+const enlaceSeguro = (u: string | undefined) => (u && /^https:\/\//i.test(u) && u.length <= 500 ? u : null);
+
+/**
+ * Datos de la tarea de MuseLearn a partir de la de Classroom, o null si ya venció (no se importan tareas pasadas).
+ * Se entrega en Classroom: la tarea guarda el enlace y el estudiante sube aquí su evidencia.
+ */
+export function tareaDesdeClassroom(t: TareaClassroom, claseId: string, ahora: Date, offsetMin = -240) {
+  const fecha_entrega = fechaEntregaClassroom(t, ahora, offsetMin);
+  if (Date.parse(fecha_entrega) <= ahora.getTime()) return null;
+  const materiales = (t.materials ?? [])
+    .map((m) => {
+      if (m.link) return `${m.link.title ?? m.link.url}: ${m.link.url}`;
+      const d = m.driveFile?.driveFile;
+      if (d) return `${d.title ?? "Archivo de Drive"}${d.alternateLink ? `: ${d.alternateLink}` : ""}`;
+      if (m.youtubeVideo) return `${m.youtubeVideo.title ?? "Video"}${m.youtubeVideo.alternateLink ? `: ${m.youtubeVideo.alternateLink}` : ""}`;
+      if (m.form) return `${m.form.title ?? "Formulario"}${m.form.formUrl ? `: ${m.form.formUrl}` : ""}`;
+      return null;
+    })
+    .filter((x): x is string => !!x)
+    .slice(0, 10);
+  const descripcion = (t.description ?? "").trim();
+  const instrucciones = [descripcion || "Ver las instrucciones en Google Classroom.", materiales.length ? `Materiales:\n- ${materiales.join("\n- ")}` : ""]
+    .filter(Boolean)
+    .join("\n\n")
+    .slice(0, 20000);
+  const titulo = (t.title ?? "").trim().slice(0, 160);
+  return {
+    clase_id: claseId,
+    titulo: titulo.length >= 2 ? titulo : "Tarea de Classroom",
+    instrucciones,
+    fecha_entrega,
+    competencias: [] as string[],
+    nivel_ayuda: "pistas" as const,
+    modalidad: "classroom" as const,
+    enlace_externo: enlaceSeguro(t.alternateLink),
+    adjuntos: [],
   };
 }

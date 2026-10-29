@@ -75,5 +75,28 @@
       "5": "Viernes",
       "6": "Sábado"
     }
+  },
+  "privacidad": {
+    "titulo": "Privacidad y datos",
+    "intro": "Tus datos son tuyos. Aquí puedes revisarlos, descargarlos o eliminar tu cuenta.",
+    "aceptaste": "Aceptaste los Términos de uso y la Política de privacidad el {fecha}.",
+    "documentos": "Estos son los documentos que explican cómo usamos tus datos.",
+    "verPrivacidad": "Política de privacidad",
+    "verTerminos": "Términos de uso",
+    "descargar": "Descargar mis datos",
+    "descargarAyuda": "Un archivo con tu perfil, tus clases y todo tu trabajo en MuseLearn.",
+    "descargarBoton": "Descargar",
+    "eliminar": "Eliminar mi cuenta",
+    "eliminarAyudaEstudiante": "Borra tu cuenta, tus entregas, tus conversaciones y tus informes.",
+    "eliminarAyudaDocente": "Borra tu cuenta y tus clases, con sus tareas y las entregas de tus estudiantes en ellas.",
+    "eliminarBoton": "Eliminar cuenta",
+    "confirmarTitulo": "¿Eliminar tu cuenta?",
+    "confirmarEstudiante": "Se borrarán tu cuenta, tus entregas y archivos, tus conversaciones con el tutor, tus verificaciones e informes. Tu docente dejará de ver tu trabajo.",
+    "confirmarDocente": "Se borrarán tu cuenta y TODAS tus clases, con sus tareas, archivos y las entregas e informes de tus estudiantes en esas clases. Si solo quieres dejar una clase, bórrala desde la clase.",
+    "noSeDeshace": "Esto no se puede deshacer. Si quieres guardar una copia, descarga tus datos primero.",
+    "escribe": "Para confirmar, escribe ELIMINAR",
+    "cancelar": "Cancelar",
+    "eliminarDefinitivo": "Eliminar para siempre",
+    "error": "No se pudo eliminar la cuenta. Inténtalo de nuevo."
   }
 }

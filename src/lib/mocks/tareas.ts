@@ -15,6 +15,8 @@ export const tareasMock: Tarea[] = [
     fecha_entrega: enSemana(2, 23, 59),
     competencias: ["Resuelve problemas con ecuaciones lineales"],
     nivel_ayuda: "pistas",
+    modalidad: "muselearn",
+    enlace_externo: null,
     creada_en: enSemana(0, 8),
   },
   {
@@ -26,6 +28,8 @@ export const tareasMock: Tarea[] = [
     fecha_entrega: enSemana(4, 23, 59),
     competencias: ["Opera con números racionales"],
     nivel_ayuda: "ejemplos",
+    modalidad: "cuaderno",
+    enlace_externo: null,
     creada_en: enSemana(0, 8, 30),
   },
   {
@@ -37,6 +41,8 @@ export const tareasMock: Tarea[] = [
     fecha_entrega: enSemana(1, 23, 59),
     competencias: ["Programa microcontroladores para resolver problemas"],
     nivel_ayuda: "explicacion",
+    modalidad: "classroom",
+    enlace_externo: "https://classroom.google.com/",
     creada_en: enSemana(-3, 9),
   },
   {
@@ -48,6 +54,8 @@ export const tareasMock: Tarea[] = [
     fecha_entrega: enSemana(3, 23, 59),
     competencias: ["Analiza circuitos eléctricos básicos"],
     nivel_ayuda: "pistas",
+    modalidad: "muselearn",
+    enlace_externo: null,
     creada_en: enSemana(0, 10),
   },
   {
@@ -59,6 +67,8 @@ export const tareasMock: Tarea[] = [
     fecha_entrega: enSemana(3, 23, 59),
     competencias: ["Aplica modelos físicos del movimiento"],
     nivel_ayuda: "pistas",
+    modalidad: "muselearn",
+    enlace_externo: null,
     creada_en: enSemana(0, 11),
   },
   {
@@ -70,6 +80,8 @@ export const tareasMock: Tarea[] = [
     fecha_entrega: enSemana(7, 23, 59),
     competencias: ["Diseña objetos en 3D"],
     nivel_ayuda: "explicacion",
+    modalidad: "muselearn",
+    enlace_externo: null,
     creada_en: enSemana(1, 9),
   },
   {
@@ -81,6 +93,8 @@ export const tareasMock: Tarea[] = [
     fecha_entrega: enSemana(5, 23, 59),
     competencias: ["Programa algoritmos con estructuras de control"],
     nivel_ayuda: "ejemplos",
+    modalidad: "muselearn",
+    enlace_externo: null,
     creada_en: enSemana(1, 10),
   },
   {
@@ -92,6 +106,8 @@ export const tareasMock: Tarea[] = [
     fecha_entrega: enSemana(9, 23, 59),
     competencias: ["Representa magnitudes vectoriales"],
     nivel_ayuda: "pistas",
+    modalidad: "muselearn",
+    enlace_externo: null,
     creada_en: enSemana(2, 8),
   },
 ];
@@ -105,6 +121,7 @@ export const entregasMock: Entrega[] = [
     adjuntos: [],
     estado: "verificada",
     entregada_en: enSemana(1, 19, 30),
+    entregada_externamente: false,
   },
   {
     id: IDS.entregas.arduino,
@@ -114,5 +131,6 @@ export const entregasMock: Entrega[] = [
     adjuntos: [],
     estado: "pendiente",
     entregada_en: null,
+    entregada_externamente: false,
   },
 ];

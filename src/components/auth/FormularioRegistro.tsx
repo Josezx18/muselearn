@@ -6,6 +6,7 @@ import { Link } from "@/i18n/navigation";
 import { Button, Card, Input } from "@/components/ui";
 import { registrarse, type EstadoForm } from "./acciones";
 import { BotonGoogleEnFormulario, SeparadorO } from "./BotonGoogle";
+import { CasillaTerminos } from "./CasillaTerminos";
 
 const ROLES = ["estudiante", "docente"] as const;
 
@@ -49,6 +50,7 @@ export function FormularioRegistro({ conGoogle = false }: { conGoogle?: boolean 
           required
           minLength={8}
         />
+        <CasillaTerminos />
         {estado.error && (
           <p role="alert" className="text-sm font-medium text-peligro">
             {t(`errores.${estado.error}`)}

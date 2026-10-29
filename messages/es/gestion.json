@@ -58,7 +58,8 @@
     "entregada": "Entregada el {fecha}",
     "cargando": "Cargando la entrega…",
     "error": "No se pudo cargar la entrega.",
-    "cerrar": "Cerrar"
+    "cerrar": "Cerrar",
+    "externa": "El estudiante marcó que la entregó en la otra plataforma (Classroom u otra). Lo de abajo es su evidencia."
   },
   "comentario": {
     "titulo": "Comentario para el estudiante",

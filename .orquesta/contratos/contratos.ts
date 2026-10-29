@@ -39,6 +39,14 @@ export const Adjunto = z.object({
 });
 
 // ---------- Tareas (T02) ----------
+/** Dónde se hace y se entrega la tarea. Si es fuera de MuseLearn, el estudiante sube una evidencia. */
+export const Modalidad = z.enum(["muselearn", "cuaderno", "classroom", "otra"]);
+export const EnlaceExterno = z
+  .string()
+  .trim()
+  .max(500)
+  .regex(/^https?:\/\//i, "enlace_invalido");
+
 export const Tarea = z.object({
   id: z.string().uuid(),
   clase_id: z.string().uuid(),
@@ -48,6 +56,8 @@ export const Tarea = z.object({
   fecha_entrega: FechaHora,
   competencias: z.array(z.string()).default([]),   // p. ej. "Resuelve problemas con ecuaciones lineales"
   nivel_ayuda: NivelAyuda.default("pistas"),
+  modalidad: Modalidad.default("muselearn"),
+  enlace_externo: EnlaceExterno.nullable().default(null), // Classroom, Moodle, Teams…
   creada_en: FechaHora,
 });
 
@@ -61,6 +71,7 @@ export const Entrega = z.object({
   adjuntos: z.array(Adjunto).default([]),
   estado: EstadoEntrega,
   entregada_en: FechaHora.nullable(),
+  entregada_externamente: z.boolean().default(false), // "ya la entregué en Classroom / la otra plataforma"
 });
 
 // ---------- Motor IA: análisis y plan (T03) ----------
@@ -189,6 +200,8 @@ export const PerfilUsuario = Usuario.extend({
   correo: z.string(),
   tema: Tema.default("muse"),
   mascota: Mascota.default("pagi"),
+  terminos_version: z.string().nullable().default(null),       // versión de Términos y Privacidad aceptada
+  terminos_aceptados_en: FechaHora.nullable().default(null),
 });
 
 export const CambioPerfil = z
@@ -208,6 +221,8 @@ export const EdicionTarea = z
     fecha_entrega: FechaHora.optional(),
     competencias: z.array(z.string().trim().min(1).max(200)).max(12).optional(),
     nivel_ayuda: NivelAyuda.optional(),
+    modalidad: Modalidad.optional(),
+    enlace_externo: EnlaceExterno.nullable().optional(),
   })
   .refine((c) => Object.values(c).some((v) => v !== undefined), "sin_cambios");
 
@@ -270,6 +285,7 @@ export const BorradorComentario = z.object({ texto: z.string().trim().min(1).max
 export type Usuario = z.infer<typeof Usuario>;
 export type Clase = z.infer<typeof Clase>;
 export type Tarea = z.infer<typeof Tarea>;
+export type Modalidad = z.infer<typeof Modalidad>;
 export type Entrega = z.infer<typeof Entrega>;
 export type AnalisisTarea = z.infer<typeof AnalisisTarea>;
 export type BloquePlan = z.infer<typeof BloquePlan>;

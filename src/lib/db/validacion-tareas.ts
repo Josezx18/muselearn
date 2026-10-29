@@ -15,6 +15,7 @@ export const EntradaEntrega = z.object({
   tarea_id: z.string().uuid(),
   contenido_texto: z.string().max(20000).default(""),
   adjuntos: z.array(AdjuntoSubida).max(8).default([]),
+  entregada_externamente: z.boolean().default(false),
 });
 export type EntradaEntrega = z.infer<typeof EntradaEntrega>;
 

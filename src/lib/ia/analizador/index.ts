@@ -59,6 +59,7 @@ export async function analizarTarea(
             competencias: tarea.competencias,
             fecha_entrega: tarea.fecha_entrega,
             adjuntos: tarea.adjuntos.map((a) => a.nombre),
+            donde_se_entrega: tarea.modalidad,
           },
         }),
       },

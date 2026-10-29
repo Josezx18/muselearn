@@ -79,6 +79,25 @@ export function DetalleTarea({ id, estudianteId }: { id: string; estudianteId: s
             </div>
           </header>
 
+          {tarea.modalidad !== "muselearn" && (
+            <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-2xl border-2 border-tinta bg-resaltador-claro p-4">
+              <p className="font-bold">
+                {t(`modalidad.${tarea.modalidad}`)}
+                {entrega?.entregada_externamente && <span className="ml-2 font-normal text-tinta-suave">· {t("modalidad.marcada")}</span>}
+              </p>
+              {tarea.enlace_externo && (
+                <a
+                  href={tarea.enlace_externo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex min-h-10 items-center rounded-xl bg-tinta px-4 text-sm font-bold text-superficie"
+                >
+                  {t(tarea.modalidad === "classroom" ? "modalidad.abrirClassroom" : "modalidad.abrir")} ↗
+                </a>
+              )}
+            </div>
+          )}
+
           <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_22rem] lg:items-start">
             <div className="min-w-0 space-y-6">
               <section aria-labelledby="titulo-instrucciones" className="papel papel-margen rounded-2xl border-2 border-borde py-5 pl-14 pr-5">
@@ -137,7 +156,7 @@ export function DetalleTarea({ id, estudianteId }: { id: string; estudianteId: s
               >
                 {t("tutor")}
               </Link>
-              <FormularioEntrega tareaId={id} entregaExistente={entrega} alEntregar={setEntrega} />
+              <FormularioEntrega tareaId={id} modalidad={tarea.modalidad} entregaExistente={entrega} alEntregar={setEntrega} />
               {entrega && entrega.estado !== "pendiente" && (
                 <Link
                   className="flex min-h-13 items-center justify-center rounded-xl bg-primario px-4 text-center font-bold text-white shadow-[0_3px_0_0_var(--color-primario-fuerte)] active:translate-y-[2px] active:shadow-none"

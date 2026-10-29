@@ -10,7 +10,7 @@
   "sinDato": "Sin dato",
   "detalle": "Detalle por estudiante",
   "sinInforme": "Sin informe de comprensión",
-  "seleccionar": "Selecciona un estudiante en el mapa",
+  "seleccionar": "Elige un estudiante",
   "vacio": "Todavía no hay conceptos evaluados.",
   "resumen": "Resumen docente",
   "integraciones": {
@@ -59,7 +59,7 @@
   },
   "classroom": {
     "titulo": "Importar desde Google Classroom",
-    "intro": "Trae tus cursos de Classroom con sus estudiantes. Solo leemos; no cambiamos nada en tu Classroom.",
+    "intro": "Trae tus cursos de Classroom con sus estudiantes y sus tareas. Solo leemos; no cambiamos nada en tu Classroom.",
     "prueba": "Modo de prueba: Google mostrará un aviso de “app no verificada”. Es normal mientras la app no esté publicada.",
     "conectar": "Conectar con Google Classroom",
     "conectado": "Conectado con Google",
@@ -67,7 +67,7 @@
     "cargando": "Buscando tus cursos…",
     "sinCursos": "No encontramos cursos activos donde seas docente.",
     "importar": "Importar",
-    "actualizar": "Actualizar estudiantes",
+    "actualizar": "Actualizar estudiantes y tareas",
     "importando": "Importando…",
     "irClase": "Ir a la clase",
     "yaImportado": "Ya importado",
@@ -77,7 +77,13 @@
       "inscritos": "{n, plural, =0 {Nadie nuevo inscrito} one {Inscribí a 1 estudiante} other {Inscribí a # estudiantes}}.",
       "yaEstaban": "{n, plural, =0 {} one {1 ya estaba.} other {# ya estaban.}}",
       "sinCuenta": "{n, plural, one {1 estudiante aún no tiene cuenta en MuseLearn} other {# estudiantes aún no tienen cuenta en MuseLearn}}. Compárteles el código de la clase:",
-      "codigo": "Código: {codigo}"
+      "codigo": "Código: {codigo}",
+      "tareas": "{n, plural, =0 {No había tareas nuevas por importar.} one {Importé 1 tarea.} other {Importé # tareas.}}",
+      "tareasYaEstaban": "{n, plural, one {1 ya estaba.} other {# ya estaban.}}",
+      "tareasVencidas": "{n, plural, one {1 tarea ya vencida no se importó.} other {# tareas ya vencidas no se importaron.}}",
+      "tareasLimite": "{n, plural, one {1 tarea quedó para la próxima importación (tope diario).} other {# tareas quedaron para la próxima importación (tope diario).}}",
+      "tareasPlan": "Muse las está organizando en la semana de cada estudiante. Se entregan en Classroom; en MuseLearn suben su evidencia y hacen la verificación.",
+      "tareasSinPermiso": "Para traer también las tareas, desconecta y vuelve a conectar Google Classroom (hace falta un permiso nuevo)."
     },
     "errores": {
       "sin_configurar": "Falta configurar Google en el servidor (GOOGLE_CLIENT_ID y GOOGLE_CLIENT_SECRET en Vercel).",
@@ -112,5 +118,34 @@
       "sinInformes": "Todavía no hay informes de comprensión en esta clase.",
       "general": "La IA no respondió. Inténtalo de nuevo en un momento."
     }
+  },
+  "vistas": {
+    "general": "General",
+    "estudiante": "Por estudiante",
+    "mapa": "Mapa"
+  },
+  "general": {
+    "conceptos": "Cómo va la clase en cada concepto",
+    "conceptosAyuda": "Cuántos estudiantes hay en cada nivel, según su informe más reciente. Primero los conceptos más débiles.",
+    "promedio": "Promedio {n}",
+    "tareas": "Por tarea",
+    "sinTareas": "Todavía no hay tareas.",
+    "vencida": "vencida",
+    "entregaron": "Entregaron",
+    "verificaron": "Verificaron",
+    "comprendieron": "Comprendieron",
+    "apoyo": "Necesitan apoyo",
+    "apoyoAyuda": "Estudiantes con conceptos en nivel Inicial o En proceso, o con tareas vencidas sin entregar.",
+    "nadie": "Por ahora nadie: ¡la clase va bien!",
+    "conceptosBajos": "Bajo en: {lista}",
+    "sinEntregar": "{n, plural, one {1 tarea vencida sin entregar} other {# tareas vencidas sin entregar}}"
+  },
+  "estudiante": {
+    "elegir": "Estudiante",
+    "entregadas": "Entregadas",
+    "promedio": "Nivel promedio",
+    "conceptos": "Por concepto",
+    "tareas": "Sus tareas",
+    "verEntrega": "Ver entrega"
   }
 }

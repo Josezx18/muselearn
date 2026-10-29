@@ -17,5 +17,26 @@
     "escuchar": "Escuchar",
     "callar": "Detener",
     "hablale": "Háblale al tutor"
+  },
+  "conversacion": {
+    "abrir": "Conversar por voz",
+    "titulo": "Conversación con tu tutor",
+    "empezar": "Empezar a conversar",
+    "ayuda": "Habla cuando quieras. Cuando hagas una pausa, te respondo. El audio no se guarda.",
+    "escuchando": "Te escucho…",
+    "pensando": "Pensando…",
+    "hablando": "Hablando · toca para interrumpir",
+    "pausa": "En pausa. Toca el micrófono para seguir.",
+    "silencio": "¿Sigues ahí? Toca el micrófono cuando quieras hablar.",
+    "noTeEscuche": "No te escuché bien. Inténtalo otra vez.",
+    "sinMicrofono": "No pude usar el micrófono. Revisa el permiso del navegador o escríbele al tutor.",
+    "error": "Algo falló. Toca el micrófono para intentarlo de nuevo.",
+    "limite": "Llegaste al límite de mensajes al tutor por hoy.",
+    "pausar": "Pausar",
+    "seguir": "Hablar",
+    "terminar": "Terminar",
+    "escribir": "Prefiero escribir",
+    "tu": "Tú",
+    "tutor": "Tutor"
   }
 }

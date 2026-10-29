@@ -17,5 +17,26 @@
     "escuchar": "Listen",
     "callar": "Stop",
     "hablale": "Talk to the tutor"
+  },
+  "conversacion": {
+    "abrir": "Talk by voice",
+    "titulo": "Talk with your tutor",
+    "empezar": "Start talking",
+    "ayuda": "Speak whenever you want. When you pause, I answer. Audio is not stored.",
+    "escuchando": "I'm listening…",
+    "pensando": "Thinking…",
+    "hablando": "Speaking · tap to interrupt",
+    "pausa": "Paused. Tap the microphone to continue.",
+    "silencio": "Still there? Tap the microphone when you want to talk.",
+    "noTeEscuche": "I didn't catch that. Please try again.",
+    "sinMicrofono": "I couldn't use the microphone. Check the browser permission or type to the tutor.",
+    "error": "Something went wrong. Tap the microphone to try again.",
+    "limite": "You reached today's tutor message limit.",
+    "pausar": "Pause",
+    "seguir": "Talk",
+    "terminar": "End",
+    "escribir": "I'd rather type",
+    "tu": "You",
+    "tutor": "Tutor"
   }
 }

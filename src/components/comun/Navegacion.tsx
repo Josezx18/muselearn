@@ -24,7 +24,8 @@ export function Navegacion({ items, accion }: { items: ItemNav[]; accion?: React
     <>
       <header className="sticky top-0 z-30 border-b-2 border-borde bg-fondo/95 backdrop-blur">
         <div className="mx-auto flex h-16 max-w-5xl items-center justify-between gap-3 px-4">
-          <Link href="/" aria-label={t("app.nombre")} className="rounded-lg">
+          {/* Con sesión, el logo lleva al inicio del usuario (no a la portada pública). */}
+          <Link href={items[0]?.href ?? "/"} aria-label={t("app.nombre")} className="rounded-lg">
             <Logo />
           </Link>
           <nav className="hidden gap-1 sm:flex" aria-label={t("nav.menu")}>

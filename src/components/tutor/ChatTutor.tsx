@@ -10,6 +10,7 @@ import { ConMascota } from "@/components/comun/mascotas/ConMascota";
 import { BotonVoz } from "@/components/comun/BotonVoz";
 import { EntradaVoz } from "@/components/verificacion/voz";
 import { useVozSalida } from "@/lib/voz-salida";
+import { Link } from "@/i18n/navigation";
 
 /** Código corto del error para mostrar junto al mensaje (ayuda a diagnosticar). */
 function codigoDe(e: unknown): string {
@@ -80,6 +81,15 @@ export function ChatTutor({ tareaId }: { tareaId: string }) {
       <section className="mx-auto flex w-full min-w-0 max-w-2xl flex-col gap-4">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <h1 className="text-4xl font-extrabold">{t("titulo")}</h1>
+          <Link
+            href={`/estudiante/tarea/${tareaId}/conversar`}
+            className="inline-flex min-h-11 items-center gap-2 rounded-full px-4 font-bold text-white fondo-ia shadow-[0_3px_0_0_var(--sombra-fuerte)] active:translate-y-[2px] active:shadow-none"
+          >
+            <svg viewBox="0 0 24 24" className="size-5" aria-hidden>
+              <path d="M4 10v4M8 7v10M12 4v16M16 7v10M20 10v4" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" />
+            </svg>
+            {t("conversacion.abrir")}
+          </Link>
           {voz.disponible && (
             <BotonVoz
               activa={voz.activa}

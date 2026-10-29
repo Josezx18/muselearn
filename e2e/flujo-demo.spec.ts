@@ -45,8 +45,12 @@ test.describe("estudiante", () => {
     const errores = vigilarErrores(page);
     await page.goto(`/es/estudiante/tarea/${TAREA}/verificar?entrega_id=${ENTREGA}`);
     await expect(page.getByRole("heading", { name: "Explícamelo" })).toBeVisible();
-    await page.getByRole("button", { name: "Empezar", exact: true }).click();
     const caja = page.getByRole("textbox", { name: "Tu explicación" });
+    // Reintenta el clic si llegó antes de que la página se hidratara (el servidor de desarrollo puede tardar).
+    await expect(async () => {
+      if (!(await caja.isVisible())) await page.getByRole("button", { name: "Empezar", exact: true }).click();
+      await expect(caja).toBeVisible({ timeout: 3000 });
+    }).toPass({ timeout: 30000 });
     for (const respuesta of [
       "Resto en ambos lados para mantener la igualdad.",
       "Resto cinco y divido entre tres.",

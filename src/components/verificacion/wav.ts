@@ -32,7 +32,11 @@ export function codificarWav(muestras: Float32Array, frecuencia: number): Blob {
   return new Blob([buffer], { type: "audio/wav" });
 }
 
-export async function grabarWav() {
+/**
+ * Graba el micrófono y devuelve un WAV al detener. `alNivel` recibe el volumen (RMS 0-1) de cada bloque
+ * (~85 ms): el modo conversación lo usa para saber cuándo el estudiante dejó de hablar.
+ */
+export async function grabarWav(opciones: { alNivel?: (rms: number) => void } = {}) {
   const stream = await navigator.mediaDevices.getUserMedia({ audio: { channelCount: 1 } });
   let context: AudioContext | undefined;
   try {
@@ -49,6 +53,11 @@ export async function grabarWav() {
       const bloque = e.inputBuffer.getChannelData(0).slice(0, Math.min(4096, context!.sampleRate * 120 - total));
       bloques.push(bloque);
       total += bloque.length;
+      if (opciones.alNivel) {
+        let suma = 0;
+        for (let i = 0; i < bloque.length; i++) suma += bloque[i] * bloque[i];
+        opciones.alNivel(Math.sqrt(suma / Math.max(1, bloque.length)));
+      }
     };
     fuente.connect(procesador);
     procesador.connect(silencio);

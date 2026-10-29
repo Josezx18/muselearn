@@ -41,8 +41,8 @@ export function rutaDeRedireccion(ruta: string, usuario: { app_metadata?: Record
   }
   // Unirse a una clase exige sesión.
   if (!usuario && /^\/unirse(\/|$)/.test(ruta)) return "/login";
-  // Quien ya tiene sesión no necesita login ni registro.
-  if (usuario && /^\/(login|registro)(\/|$)/.test(ruta)) {
+  // Quien ya tiene sesión no necesita la portada, ni login ni registro: va a su inicio.
+  if (usuario && (ruta === "/" || ruta === "" || /^\/(login|registro)(\/|$)/.test(ruta))) {
     const rol = usuario.app_metadata?.rol;
     return rol === "docente" || rol === "estudiante" ? INICIO[rol] : null;
   }

@@ -89,12 +89,15 @@ export function useVozSalida(locale: string) {
     setHablando(false);
   }, [disponible]);
 
-  /** Lee el texto en voz alta. `forzar` lo lee aunque la voz automática esté apagada (botón "Escuchar"). */
+  /**
+   * Lee el texto en voz alta. `forzar` lo lee aunque la voz automática esté apagada (botón "Escuchar").
+   * `alTerminar` se llama al acabar o si la voz falla. Devuelve false si no se pudo leer.
+   */
   const hablar = useCallback(
-    (texto: string, opciones: { forzar?: boolean; alTerminar?: () => void } = {}) => {
-      if (!disponible || (!opciones.forzar && !leerActiva())) return;
+    (texto: string, opciones: { forzar?: boolean; alTerminar?: () => void } = {}): boolean => {
+      if (!disponible || (!opciones.forzar && !leerActiva())) return false;
       const limpio = textoParaVoz(texto);
-      if (!limpio) return;
+      if (!limpio) return false;
       window.speechSynthesis.cancel();
       const u = new SpeechSynthesisUtterance(limpio);
       u.lang = voz.current?.lang ?? (idioma === "es" ? "es-US" : "en-US");
@@ -106,8 +109,12 @@ export function useVozSalida(locale: string) {
         setHablando(false);
         opciones.alTerminar?.();
       };
-      u.onerror = () => setHablando(false);
+      u.onerror = () => {
+        setHablando(false);
+        opciones.alTerminar?.();
+      };
       window.speechSynthesis.speak(u);
+      return true;
     },
     [disponible, idioma],
   );

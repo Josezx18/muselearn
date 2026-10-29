@@ -21,6 +21,10 @@ describe("rutaDeRedireccion", () => {
     expect(rutaDeRedireccion("/login", docente)).toBe("/docente");
     expect(rutaDeRedireccion("/registro", estudiante)).toBe("/estudiante/hoy");
   });
+  it("con sesión, la portada lleva al inicio del rol (solo Salir vuelve a la portada)", () => {
+    expect(rutaDeRedireccion("/", estudiante)).toBe("/estudiante/hoy");
+    expect(rutaDeRedireccion("/", docente)).toBe("/docente");
+  });
   it("unirse exige sesión", () => {
     expect(rutaDeRedireccion("/unirse", null)).toBe("/login");
     expect(rutaDeRedireccion("/unirse", estudiante)).toBeNull();

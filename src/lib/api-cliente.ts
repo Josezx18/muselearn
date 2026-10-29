@@ -354,3 +354,43 @@ export const obtenerDetalleEntrega = (id: string) => {
     informe: entrega.estado === "verificada" ? informeMock : null,
   });
 };
+
+// ---------------- Integraciones: Google Classroom (modo de prueba) ----------------
+export const CursoClassroom = z.object({
+  id: z.string(),
+  nombre: z.string(),
+  seccion: z.string().nullable(),
+  clase_id: z.string().uuid().nullable(),
+});
+export const ResultadoImportacion = z.object({
+  clase: Clase,
+  nueva: z.boolean(),
+  inscritos: z.array(z.string()),
+  yaEstaban: z.number().int(),
+  sinCuenta: z.array(z.object({ nombre: z.string(), correo: z.string().nullable() })),
+});
+
+export const listarCursosClassroom = () =>
+  usarMocks()
+    ? mock([
+        { id: "c1", nombre: "Tecnología 4to A", seccion: "Atkins", clase_id: null },
+        { id: "c2", nombre: "Tecnología 4to B", seccion: "Martínez", clase_id: clasesMock[0].id },
+      ])
+    : pedir("/api/integraciones/classroom/cursos", z.array(CursoClassroom));
+
+export const importarCursoClassroom = (curso_id: string) =>
+  usarMocks()
+    ? mock(
+        {
+          clase: { ...clasesMock[0], nombre: "Tecnología 4to A" },
+          nueva: true,
+          inscritos: ["Camila Pérez", "Luis Martínez"],
+          yaEstaban: 0,
+          sinCuenta: [{ nombre: "Ana Torres", correo: "ana.torres@ejemplo.do" }],
+        },
+        900,
+      )
+    : pedir("/api/integraciones/classroom/importar", ResultadoImportacion, json({ curso_id }));
+
+export const desconectarClassroom = () =>
+  usarMocks() ? mock(null) : pedir("/api/integraciones/classroom/desconectar", z.null(), { method: "POST" });

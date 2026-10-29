@@ -56,5 +56,40 @@
     },
     "nota": "We use each platform's standards (official APIs and LTI 1.3). Your school decides what gets connected.",
     "volver": "Back to my classes"
+  },
+  "classroom": {
+    "titulo": "Import from Google Classroom",
+    "intro": "Bring your Classroom courses with their students. We only read; nothing changes in your Classroom.",
+    "prueba": "Test mode: Google will show an “unverified app” notice. That's normal until the app is published.",
+    "conectar": "Connect Google Classroom",
+    "conectado": "Connected to Google",
+    "desconectar": "Disconnect",
+    "cargando": "Looking for your courses…",
+    "sinCursos": "We found no active courses where you are a teacher.",
+    "importar": "Import",
+    "actualizar": "Update students",
+    "importando": "Importing…",
+    "irClase": "Go to class",
+    "yaImportado": "Already imported",
+    "resultado": {
+      "nueva": "Done: I created the class {nombre}.",
+      "actualizada": "Done: I updated {nombre}.",
+      "inscritos": "{n, plural, =0 {No new students enrolled} one {I enrolled 1 student} other {I enrolled # students}}.",
+      "yaEstaban": "{n, plural, =0 {} one {1 was already there.} other {# were already there.}}",
+      "sinCuenta": "{n, plural, one {1 student doesn't have a MuseLearn account yet} other {# students don't have a MuseLearn account yet}}. Share the class code with them:",
+      "codigo": "Code: {codigo}"
+    },
+    "errores": {
+      "sin_configurar": "Google is not configured on the server yet (GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET in Vercel).",
+      "denegado": "You didn't give MuseLearn permission in Google. You can try again.",
+      "estado_invalido": "The connection expired or is invalid. Connect again.",
+      "google": "Google Classroom didn't respond. Try again in a moment.",
+      "sin_sesion": "Sign in as a teacher to connect Classroom.",
+      "no_tu_curso": "You can only import courses where you are a teacher.",
+      "error": "It couldn't be completed. Please try again."
+    },
+    "volver": "Back to Integrations",
+    "activa": "Available in test mode",
+    "abrir": "Connect"
   }
 }

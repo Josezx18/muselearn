@@ -22,6 +22,7 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/docente/
 export default async function Pagina({ params }: PageProps<"/[locale]/docente/integraciones">) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "docente.integraciones" });
+  const tc = await getTranslations({ locale, namespace: "docente.classroom" });
   return (
     <div className="mx-auto grid w-full min-w-0 max-w-3xl gap-6">
       <header className="flex items-end justify-between gap-4">
@@ -44,7 +45,11 @@ export default async function Pagina({ params }: PageProps<"/[locale]/docente/in
             <div className="min-w-0">
               <div className="flex flex-wrap items-center gap-2">
                 <h2 className="text-lg font-bold">{t(`plataformas.${clave}.nombre`)}</h2>
-                <span className="rounded-full bg-resaltador-claro px-2 py-0.5 text-xs font-bold">{t("proximamente")}</span>
+                {clave === "classroom" ? (
+                  <span className="rounded-full bg-primario-claro px-2 py-0.5 text-xs font-bold text-primario-fuerte">{tc("activa")}</span>
+                ) : (
+                  <span className="rounded-full bg-resaltador-claro px-2 py-0.5 text-xs font-bold">{t("proximamente")}</span>
+                )}
               </div>
               <dl className="mt-1 grid gap-0.5 text-sm">
                 {clave !== "csv" && (
@@ -58,6 +63,14 @@ export default async function Pagina({ params }: PageProps<"/[locale]/docente/in
                   <dd className="inline text-tinta-suave">{t(`plataformas.${clave}.devolver`)}</dd>
                 </div>
               </dl>
+              {clave === "classroom" && (
+                <Link
+                  href="/docente/integraciones/classroom"
+                  className="mt-2 inline-flex min-h-10 items-center rounded-xl bg-primario px-4 text-sm font-bold text-white shadow-[0_3px_0_0_var(--color-primario-fuerte)]"
+                >
+                  {tc("abrir")} →
+                </Link>
+              )}
             </div>
           </li>
         ))}

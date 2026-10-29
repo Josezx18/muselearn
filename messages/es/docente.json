@@ -56,5 +56,40 @@
     },
     "nota": "Usamos los estándares de cada plataforma (sus API oficiales y LTI 1.3). Tu centro decide qué se conecta.",
     "volver": "Volver a mis clases"
+  },
+  "classroom": {
+    "titulo": "Importar desde Google Classroom",
+    "intro": "Trae tus cursos de Classroom con sus estudiantes. Solo leemos; no cambiamos nada en tu Classroom.",
+    "prueba": "Modo de prueba: Google mostrará un aviso de “app no verificada”. Es normal mientras la app no esté publicada.",
+    "conectar": "Conectar con Google Classroom",
+    "conectado": "Conectado con Google",
+    "desconectar": "Desconectar",
+    "cargando": "Buscando tus cursos…",
+    "sinCursos": "No encontramos cursos activos donde seas docente.",
+    "importar": "Importar",
+    "actualizar": "Actualizar estudiantes",
+    "importando": "Importando…",
+    "irClase": "Ir a la clase",
+    "yaImportado": "Ya importado",
+    "resultado": {
+      "nueva": "Listo: creé la clase {nombre}.",
+      "actualizada": "Listo: actualicé {nombre}.",
+      "inscritos": "{n, plural, =0 {Nadie nuevo inscrito} one {Inscribí a 1 estudiante} other {Inscribí a # estudiantes}}.",
+      "yaEstaban": "{n, plural, =0 {} one {1 ya estaba.} other {# ya estaban.}}",
+      "sinCuenta": "{n, plural, one {1 estudiante aún no tiene cuenta en MuseLearn} other {# estudiantes aún no tienen cuenta en MuseLearn}}. Compárteles el código de la clase:",
+      "codigo": "Código: {codigo}"
+    },
+    "errores": {
+      "sin_configurar": "Falta configurar Google en el servidor (GOOGLE_CLIENT_ID y GOOGLE_CLIENT_SECRET en Vercel).",
+      "denegado": "No diste permiso a MuseLearn en Google. Puedes intentarlo de nuevo.",
+      "estado_invalido": "La conexión venció o no es válida. Vuelve a conectar.",
+      "google": "Google Classroom no respondió. Inténtalo de nuevo en un momento.",
+      "sin_sesion": "Inicia sesión como docente para conectar Classroom.",
+      "no_tu_curso": "Solo puedes importar cursos donde eres docente.",
+      "error": "No se pudo completar. Inténtalo de nuevo."
+    },
+    "volver": "Volver a Integraciones",
+    "activa": "Disponible en prueba",
+    "abrir": "Conectar"
   }
 }

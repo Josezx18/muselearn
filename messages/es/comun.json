@@ -90,5 +90,20 @@
   },
   "tiempo": {
     "minutos": "{minutos} min"
+  },
+  "tema": {
+    "etiqueta": "Apariencia",
+    "cuaderno": {
+      "nombre": "Cuaderno",
+      "detalle": "Verde pizarra"
+    },
+    "meta": {
+      "nombre": "Azul Meta",
+      "detalle": "Azul y limpio"
+    },
+    "muse": {
+      "nombre": "Muse",
+      "detalle": "Azul con degradado de IA"
+    }
   }
 }

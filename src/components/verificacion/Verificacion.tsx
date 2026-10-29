@@ -118,7 +118,7 @@ export function Verificacion({ tareaId, entregaId }: { tareaId: string; entregaI
             </div>
             <p className="text-sm font-bold text-tinta-suave">{t("progreso", { numero })}</p>
           </div>
-          <div className="papel rounded-2xl border-2 border-tinta p-5 shadow-[4px_4px_0_0_var(--color-tinta)]">
+          <div className="papel rounded-2xl border-2 border-tinta p-5 shadow-[4px_4px_0_0_var(--sombra-fuerte)]">
             <h2 className="break-words font-titulo text-2xl font-extrabold leading-snug" aria-live="polite">
               {pregunta.texto}
             </h2>

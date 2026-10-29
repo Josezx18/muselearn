@@ -128,7 +128,7 @@ export function Comprension() {
             const entrego = porcentaje(datos.entregas.filter((e) => e.estado !== "pendiente").map((e) => e.estudiante_id));
             const comprendio = porcentaje(datos.informes.filter((f) => f.informe.nivel_global >= 3).map((f) => f.estudiante));
             return (
-              <section className="rounded-2xl border-2 border-tinta bg-superficie p-5 shadow-[4px_4px_0_0_var(--color-tinta)]">
+              <section className="rounded-2xl border-2 border-tinta bg-superficie p-5 shadow-[4px_4px_0_0_var(--sombra-fuerte)]">
                 <dl className="grid gap-4">
                   <div>
                     <div className="flex items-baseline justify-between gap-3">

@@ -90,5 +90,20 @@
   },
   "tiempo": {
     "minutos": "{minutos} min"
+  },
+  "tema": {
+    "etiqueta": "Appearance",
+    "cuaderno": {
+      "nombre": "Notebook",
+      "detalle": "Chalkboard green"
+    },
+    "meta": {
+      "nombre": "Meta blue",
+      "detalle": "Clean and blue"
+    },
+    "muse": {
+      "nombre": "Muse",
+      "detalle": "Blue with an AI gradient"
+    }
   }
 }

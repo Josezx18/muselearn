@@ -208,7 +208,7 @@ export function Dashboard({ vista, usuario }: { vista: "hoy" | "semana"; usuario
                   {t("proximo")}
                 </h2>
                 {proximo ? (
-                  <div className="mt-3 rounded-2xl border-2 border-tinta bg-superficie p-5 shadow-[4px_4px_0_0_var(--color-tinta)]">
+                  <div className="mt-3 rounded-2xl border-2 border-tinta bg-superficie p-5 shadow-[4px_4px_0_0_var(--sombra-fuerte)]">
                     <p className="text-sm font-bold text-primario-fuerte">{materiaDe(proximo.tarea_id) ?? t("materia")}</p>
                     <p className="mt-1 font-titulo text-2xl font-extrabold leading-tight">
                       <span className="resaltado">{proximo.titulo}</span>

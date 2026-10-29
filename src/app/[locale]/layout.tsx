@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { ProveedorToast } from "@/components/ui";
+import { SCRIPT_TEMA } from "@/lib/tema";
 import "../globals.css";
 
 export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Promise<Metadata> {
@@ -23,7 +24,11 @@ export default async function LayoutRaiz({ children, params }: LayoutProps<"/[lo
   if (!hasLocale(routing.locales, locale)) notFound();
 
   return (
-    <html lang={locale} className="h-full antialiased">
+    // suppressHydrationWarning: el script de <head> pone data-tema antes de que React hidrate.
+    <html lang={locale} className="h-full antialiased" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: SCRIPT_TEMA }} />
+      </head>
       <body className="flex min-h-full flex-col">
         <NextIntlClientProvider>
           <ProveedorToast>{children}</ProveedorToast>

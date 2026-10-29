@@ -45,6 +45,40 @@
   --font-mano: "Caveat Variable", "Comic Sans MS", cursive;
 }
 
+/*
+  Temas de color (selector "Apariencia"). Cambian solo los tokens: los componentes no se tocan.
+  - cuaderno (por defecto): verde pizarra.
+  - meta: azul Meta, papel azulado.
+  - muse: azul Meta + degradado azul → violeta → rosa en los momentos en que actúa la IA.
+  El resaltador amarillo y los colores de nivel 1-3 se mantienen en todos: tienen significado.
+*/
+:root {
+  --ia-1: var(--color-primario);
+  --ia-2: var(--color-primario);
+  --ia-3: var(--color-primario);
+  --degradado-ia: linear-gradient(120deg, var(--ia-1), var(--ia-2) 55%, var(--ia-3));
+  --sombra-fuerte: var(--color-tinta);
+}
+:root[data-tema="meta"],
+:root[data-tema="muse"] {
+  --color-tinta: #1c2b33;
+  --color-tinta-suave: #5b6b75;
+  --color-fondo: #f4f7fb;
+  --color-borde: #dbe3ec;
+  --color-cuadricula: #e6edf6;
+  --color-primario: #0668e1;
+  --color-primario-fuerte: #0050b5;
+  --color-primario-claro: #e6f0fd;
+  --color-nivel-3: #2e9e6b;
+  --color-nivel-4: #0668e1;
+}
+:root[data-tema="muse"] {
+  --ia-1: #0668e1;
+  --ia-2: #6a4cf5;
+  --ia-3: #c44fb6;
+  --sombra-fuerte: #5b3fd6;
+}
+
 @layer base {
   html {
     -webkit-text-size-adjust: 100%;
@@ -80,6 +114,12 @@
 }
 
 @layer components {
+  /* Fondo de los momentos de IA: color de marca en "cuaderno" y "meta", degradado en "muse". */
+  .fondo-ia {
+    background-color: var(--ia-1);
+    background-image: var(--degradado-ia);
+  }
+
   /* Hoja de cuaderno cuadriculado (cuadros de 22 px), opcional con línea roja de margen. */
   .papel {
     background-color: var(--color-superficie);

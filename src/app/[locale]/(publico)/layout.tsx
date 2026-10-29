@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { Link } from "@/i18n/navigation";
 import { SelectorIdioma } from "@/components/comun/SelectorIdioma";
+import { SelectorTema } from "@/components/comun/SelectorTema";
 import { marca } from "@/config/marca";
 import { Logo } from "@/components/comun/Logo";
 
@@ -12,7 +13,10 @@ export default function LayoutPublico({ children }: { children: ReactNode }) {
         <Link href="/" aria-label={marca.nombre} className="rounded-lg">
           <Logo />
         </Link>
-        <SelectorIdioma />
+        <div className="flex items-center gap-1">
+          <SelectorTema />
+          <SelectorIdioma />
+        </div>
       </div>
       <main className="flex-1 [&>*]:rounded-2xl">{children}</main>
     </div>

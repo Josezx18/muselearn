@@ -83,7 +83,7 @@ export function Informe({ id }: { id: string }) {
         {t("volver")}
       </Link>
       <h1 className="text-4xl font-extrabold">{t("titulo")}</h1>
-      <section className="rounded-2xl border-2 border-tinta bg-superficie p-5 shadow-[4px_4px_0_0_var(--color-tinta)]">
+      <section className="rounded-2xl border-2 border-tinta bg-superficie p-5 shadow-[4px_4px_0_0_var(--sombra-fuerte)]">
         <h2 className="text-sm font-bold text-tinta-suave">{t("nivel")}</h2>
         <p className="font-titulo text-3xl font-extrabold">{t(`niveles.${informe.nivel_global}`)}</p>
         <div className="mt-2 grid grid-cols-4 gap-1.5" aria-hidden>

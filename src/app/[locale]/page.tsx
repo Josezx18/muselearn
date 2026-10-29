@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { SelectorIdioma } from "@/components/comun/SelectorIdioma";
+import { SelectorTema } from "@/components/comun/SelectorTema";
 import { Logo } from "@/components/comun/Logo";
 
 // Portada. El elemento memorable es la hoja de cuaderno: así se ve una entrega y la pregunta que la verifica.
@@ -27,7 +28,10 @@ export default async function Portada() {
     <div className="flex flex-1 flex-col">
       <header className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 pt-5">
         <Logo />
-        <SelectorIdioma />
+        <div className="flex items-center gap-1">
+          <SelectorTema />
+          <SelectorIdioma />
+        </div>
       </header>
 
       <main className="flex-1">
@@ -73,7 +77,7 @@ export default async function Portada() {
             </div>
 
             {/* Nota al margen: la pregunta de verificación y la respuesta del estudiante */}
-            <figcaption className="aparece relative z-10 -mt-6 ml-4 mr-1 rounded-2xl border-2 border-tinta bg-superficie p-4 shadow-[4px_4px_0_0_var(--color-tinta)] [--retraso:1500ms] sm:ml-16">
+            <figcaption className="aparece relative z-10 -mt-6 ml-4 mr-1 rounded-2xl border-2 border-tinta bg-superficie p-4 shadow-[4px_4px_0_0_var(--sombra-fuerte)] [--retraso:1500ms] sm:ml-16">
               <p className="text-sm font-bold text-primario-fuerte">{t("inicio.cuaderno.margen")}</p>
               <p className="mt-1 font-titulo text-lg font-bold leading-snug">{t("inicio.cuaderno.pregunta")}</p>
               <div className="mt-3 flex gap-3 rounded-xl bg-fondo p-3">

@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { cn } from "@/components/ui";
 import { SelectorIdioma } from "./SelectorIdioma";
+import { SelectorTema } from "./SelectorTema";
 import { Logo } from "./Logo";
 import { IconoNav } from "./IconoNav";
 
@@ -43,6 +44,7 @@ export function Navegacion({ items, accion }: { items: ItemNav[]; accion?: React
             ))}
           </nav>
           <div className="flex items-center gap-1">
+            <SelectorTema />
             <SelectorIdioma />
             {accion}
           </div>

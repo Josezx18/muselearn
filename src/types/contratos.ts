@@ -217,7 +217,53 @@ export const DetalleEntrega = z.object({
   adjuntos: z.array(Adjunto.extend({ url: z.string().nullable() })), // enlace temporal para ver el archivo
   preguntas: z.array(PreguntaVerificacion),
   informe: InformeComprension.nullable(),
+  comentario: z.lazy(() => ComentarioDocente).nullable().default(null),
 });
+
+// ---------- IA para el docente ----------
+/** Comentario del docente sobre una entrega: lo lee el estudiante. */
+export const ComentarioDocente = z.object({
+  entrega_id: z.string().uuid(),
+  texto: z.string().trim().min(1).max(4000),
+  actualizado_en: FechaHora,
+});
+
+/** Pedido del docente para que la IA proponga una tarea. */
+export const PedidoPropuestaTarea = z.object({
+  clase_id: z.string().uuid(),
+  tema: z.string().trim().min(3).max(500),          // "ecuaciones de primer grado con fracciones"
+  detalles: z.string().trim().max(1500).optional(), // "trabajo en el cuaderno, 5 ejercicios, nivel básico"
+});
+
+/** Tarea propuesta por la IA: el docente la revisa y la edita antes de guardarla. */
+export const PropuestaTarea = z.object({
+  titulo: z.string().trim().min(2).max(160),
+  instrucciones: z.string().trim().min(1).max(6000),
+  competencias: z.array(z.string().trim().min(1).max(200)).min(1).max(6),
+  nivel_ayuda: NivelAyuda,
+  minutos_estimados: z.number().int().min(5).max(600),
+  razon: z.string().max(600),                       // por qué esa propuesta, para el docente
+});
+
+/** Plan de repaso que la IA sugiere a partir del mapa de comprensión de la clase. */
+export const SugerenciaRepaso = z.object({
+  resumen: z.string().max(800),
+  actividades: z
+    .array(
+      z.object({
+        concepto: z.string(),
+        por_que: z.string().max(400),               // qué muestran los informes
+        actividad: z.string().max(1200),            // qué hacer en clase
+        minutos: z.number().int().min(5).max(90),
+        agrupacion: z.enum(["toda_la_clase", "grupos", "individual"]),
+      }),
+    )
+    .min(1)
+    .max(5),
+});
+
+/** Borrador de comentario para una entrega (el docente lo edita antes de guardarlo). */
+export const BorradorComentario = z.object({ texto: z.string().trim().min(1).max(2000) });
 
 // ---------- Tipos TS derivados ----------
 export type Usuario = z.infer<typeof Usuario>;
@@ -251,3 +297,8 @@ export type PerfilUsuario = z.infer<typeof PerfilUsuario>;
 export type CambioPerfil = z.infer<typeof CambioPerfil>;
 export type EdicionTarea = z.infer<typeof EdicionTarea>;
 export type DetalleEntrega = z.infer<typeof DetalleEntrega>;
+export type ComentarioDocente = z.infer<typeof ComentarioDocente>;
+export type PedidoPropuestaTarea = z.infer<typeof PedidoPropuestaTarea>;
+export type PropuestaTarea = z.infer<typeof PropuestaTarea>;
+export type SugerenciaRepaso = z.infer<typeof SugerenciaRepaso>;
+export type BorradorComentario = z.infer<typeof BorradorComentario>;

@@ -3,7 +3,8 @@
 import { useCallback, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Button, Input, Textarea, Card, Badge, useToast } from "@/components/ui";
-import { Adjunto, Tarea, NivelAyuda } from "@/types/contratos";
+import { Adjunto, Tarea, NivelAyuda, type PropuestaTarea } from "@/types/contratos";
+import { AsistenteTarea } from "./AsistenteTarea";
 
 type NuevaTarea = Omit<Tarea, "id" | "creada_en">;
 
@@ -72,6 +73,14 @@ export function FormularioTarea({ claseId, tareaExistente, alGuardar, alCancelar
     setAdjuntosExistentes((a) => a.filter((_, i) => i !== idx));
   }, []);
 
+  /** La propuesta de la IA reemplaza el título, las instrucciones, las competencias y el nivel de ayuda. */
+  const usarPropuesta = useCallback((p: PropuestaTarea) => {
+    setTitulo(p.titulo);
+    setInstrucciones(p.instrucciones);
+    setCompetencias(p.competencias);
+    setNivelAyuda(p.nivel_ayuda);
+  }, []);
+
   const validar = useCallback(() => {
     if (!titulo.trim()) {
       avisar(t("errores.tituloRequerido"), "error");
@@ -115,6 +124,7 @@ export function FormularioTarea({ claseId, tareaExistente, alGuardar, alCancelar
   return (
     <Card className="flex flex-col gap-4 p-4">
       <h2 className="text-xl font-bold">{tareaExistente ? t("formulario.titulo") : t("nueva.titulo")}</h2>
+      {!tareaExistente && <AsistenteTarea claseId={claseId} alProponer={usarPropuesta} />}
 
       <form onSubmit={enviar} className="flex flex-col gap-4">
         <div>
@@ -170,7 +180,7 @@ export function FormularioTarea({ claseId, tareaExistente, alGuardar, alCancelar
               placeholder={t("formulario.competenciasPlaceholder")}
               className="flex-1"
             />
-            <Button variante="secundario" tamano="sm" onClick={agregarCompetencia}>
+            <Button type="button" variante="secundario" tamano="sm" onClick={agregarCompetencia}>
               +
             </Button>
           </div>
@@ -236,16 +246,16 @@ export function FormularioTarea({ claseId, tareaExistente, alGuardar, alCancelar
             className="sr-only"
             id="inputAdjuntos"
           />
-          <Button variante="secundario" tamano="sm" onClick={() => document.getElementById("inputAdjuntos")?.click()}>
+          <Button type="button" variante="secundario" tamano="sm" onClick={() => document.getElementById("inputAdjuntos")?.click()}>
             {t("formulario.adjuntosAgregar")}
           </Button>
         </div>
 
         <div className="flex justify-end gap-2 pt-2">
-          <Button variante="secundario" onClick={alCancelar} disabled={cargando}>
+          <Button type="button" variante="secundario" onClick={alCancelar} disabled={cargando}>
             {t("nueva.cancelar")}
           </Button>
-          <Button disabled={cargando} cargando={cargando}>
+          <Button type="submit" disabled={cargando} cargando={cargando}>
             {cargando ? t("nueva.guardando") : t("nueva.guardar")}
           </Button>
         </div>

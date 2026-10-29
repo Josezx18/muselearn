@@ -15,7 +15,8 @@ export type FuncionIA =
   | "tutor" // tutor socrático
   | "verificar" // preguntas de verificación
   | "evaluar" // informe de comprensión
-  | "ruta"; // ruta de práctica
+  | "ruta" // ruta de práctica
+  | "docente"; // ayudas para el docente: proponer tareas, sugerir repasos, borradores de comentario
 
 export type Esfuerzo = "minimal" | "low" | "medium" | "high";
 export type IdProveedor = "meta" | "abierto" | "nvidia";
@@ -39,6 +40,7 @@ export const RUTAS: Record<FuncionIA, IdProveedor[]> = {
   verificar: ["meta", "abierto"],
   evaluar: ["meta", "abierto"],
   ruta: ["meta", "abierto"],
+  docente: ["meta", "abierto"],
 };
 
 export const ESFUERZO_POR_DEFECTO: Record<FuncionIA, Esfuerzo> = {
@@ -49,6 +51,7 @@ export const ESFUERZO_POR_DEFECTO: Record<FuncionIA, Esfuerzo> = {
   verificar: "high",
   evaluar: "high",
   ruta: "medium",
+  docente: "medium",
 };
 
 /** Lee los proveedores configurados en las variables de entorno. */

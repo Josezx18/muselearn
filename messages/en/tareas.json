@@ -95,5 +95,24 @@
     "adjuntoTipoInvalido": "File type not allowed",
     "sinPermiso": "You don't have permission for this action",
     "noEncontrado": "Task not found"
+  },
+  "ia": {
+    "abrir": "Create the task with AI",
+    "titulo": "Create with AI",
+    "ayuda": "Write what you want them to practice. Muse suggests the title, the instructions with the exercises, the competencies and the help level. You review and edit it before saving.",
+    "tema": "What do you want them to practice?",
+    "temaEjemplo": "Linear equations with fractions",
+    "detalles": "Details (optional)",
+    "detallesEjemplo": "5 exercises in the notebook, basic level, one from daily life",
+    "proponer": "Suggest task",
+    "otra": "Suggest another",
+    "pensando": "Muse is writing…",
+    "cerrar": "Close",
+    "lista": "Done: I filled in the form (≈ {minutos} min).",
+    "errores": {
+      "tema": "Write the topic (at least 3 characters).",
+      "limite": "You reached today's limit of AI help. Try again tomorrow.",
+      "general": "The AI didn't respond. Try again in a moment."
+    }
   }
 }

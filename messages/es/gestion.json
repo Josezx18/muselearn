@@ -59,5 +59,25 @@
     "cargando": "Cargando la entrega…",
     "error": "No se pudo cargar la entrega.",
     "cerrar": "Cerrar"
+  },
+  "comentario": {
+    "titulo": "Comentario para el estudiante",
+    "ayuda": "Lo verá en la página de la tarea. Puedes pedirle a Muse un borrador y editarlo.",
+    "enviado": "Enviado el {fecha}. El estudiante ya lo puede leer.",
+    "placeholder": "Escribe qué hizo bien y qué puede mejorar…",
+    "borrador": "Borrador con IA",
+    "otroBorrador": "Otro borrador",
+    "pensando": "Muse está escribiendo…",
+    "enviar": "Enviar comentario",
+    "actualizar": "Actualizar",
+    "quitar": "Quitar",
+    "guardado": "Comentario enviado.",
+    "quitado": "Comentario quitado.",
+    "aviso": "El borrador de Muse no da respuestas ni pone nota: revísalo antes de enviarlo.",
+    "errores": {
+      "limite": "Llegaste al máximo de ayudas de IA por hoy.",
+      "ia": "La IA no respondió. Inténtalo de nuevo en un momento.",
+      "guardar": "No se pudo guardar el comentario."
+    }
   }
 }

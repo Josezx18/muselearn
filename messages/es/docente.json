@@ -91,5 +91,26 @@
     "volver": "Volver a Integraciones",
     "activa": "Disponible en prueba",
     "abrir": "Conectar"
+  },
+  "repaso": {
+    "titulo": "Sugerir repaso con IA",
+    "ayuda": "Muse lee los resultados de comprensión de la clase (sin nombres de estudiantes) y propone actividades para la próxima clase.",
+    "sinInformes": "Cuando tus estudiantes completen la verificación de una tarea, Muse podrá sugerirte un repaso.",
+    "sugerir": "Sugerir repaso",
+    "otra": "Sugerir otro",
+    "pensando": "Muse está pensando…",
+    "minutos": "{n} min",
+    "porQue": "Por qué:",
+    "agrupacion": {
+      "toda_la_clase": "Toda la clase",
+      "grupos": "En grupos",
+      "individual": "Individual"
+    },
+    "aviso": "Es una sugerencia: adáptala a tu grupo.",
+    "errores": {
+      "limite": "Llegaste al máximo de ayudas de IA por hoy. Vuelve a intentarlo mañana.",
+      "sinInformes": "Todavía no hay informes de comprensión en esta clase.",
+      "general": "La IA no respondió. Inténtalo de nuevo en un momento."
+    }
   }
 }

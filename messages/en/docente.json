@@ -91,5 +91,26 @@
     "volver": "Back to Integrations",
     "activa": "Available in test mode",
     "abrir": "Connect"
+  },
+  "repaso": {
+    "titulo": "Suggest a review with AI",
+    "ayuda": "Muse reads the class comprehension results (without student names) and suggests activities for your next class.",
+    "sinInformes": "Once your students complete a task's comprehension check, Muse can suggest a review.",
+    "sugerir": "Suggest review",
+    "otra": "Suggest another",
+    "pensando": "Muse is thinking…",
+    "minutos": "{n} min",
+    "porQue": "Why:",
+    "agrupacion": {
+      "toda_la_clase": "Whole class",
+      "grupos": "In groups",
+      "individual": "Individual"
+    },
+    "aviso": "It's a suggestion: adapt it to your group.",
+    "errores": {
+      "limite": "You reached today's limit of AI help. Try again tomorrow.",
+      "sinInformes": "There are no comprehension reports in this class yet.",
+      "general": "The AI didn't respond. Try again in a moment."
+    }
   }
 }

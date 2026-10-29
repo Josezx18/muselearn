@@ -7,6 +7,7 @@ import { FormularioEntrega } from "@/components/entregas";
 import { Button, Dificultad, Skeleton } from "@/components/ui";
 import { Link } from "@/i18n/navigation";
 import { enlaceArchivo } from "@/lib/archivos";
+import { ComentarioDocente } from "./ComentarioDocente";
 export function DetalleTarea({ id, estudianteId }: { id: string; estudianteId: string }) {
   const t = useTranslations("estudiante");
   const locale = useLocale();
@@ -145,6 +146,7 @@ export function DetalleTarea({ id, estudianteId }: { id: string; estudianteId: s
                   {t(entrega.estado === "verificada" ? "verInforme" : "irVerificar")}
                 </Link>
               )}
+              {entrega && entrega.estado !== "pendiente" && <ComentarioDocente entregaId={entrega.id} />}
             </aside>
           </div>
         </>

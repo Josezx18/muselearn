@@ -59,5 +59,25 @@
     "cargando": "Loading the submission…",
     "error": "The submission could not be loaded.",
     "cerrar": "Close"
+  },
+  "comentario": {
+    "titulo": "Comment for the student",
+    "ayuda": "They'll see it on the task page. You can ask Muse for a draft and edit it.",
+    "enviado": "Sent on {fecha}. The student can read it now.",
+    "placeholder": "Write what they did well and what they can improve…",
+    "borrador": "AI draft",
+    "otroBorrador": "Another draft",
+    "pensando": "Muse is writing…",
+    "enviar": "Send comment",
+    "actualizar": "Update",
+    "quitar": "Remove",
+    "guardado": "Comment sent.",
+    "quitado": "Comment removed.",
+    "aviso": "Muse's draft doesn't give answers or grades: review it before sending.",
+    "errores": {
+      "limite": "You reached today's limit of AI help.",
+      "ia": "The AI didn't respond. Try again in a moment.",
+      "guardar": "The comment couldn't be saved."
+    }
   }
 }

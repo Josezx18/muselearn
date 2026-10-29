@@ -10,7 +10,36 @@ export const LIMITES = {
   verificaciones: numero(process.env.LIMITE_VERIFICACIONES_DIA, 10),
   /** Tareas creadas por docente y día (cada una dispara un análisis por estudiante). */
   tareas: numero(process.env.LIMITE_TAREAS_DIA, 20),
+  /** Ayudas de IA del docente por día (proponer tarea, sugerir repaso, borradores de comentario). */
+  docenteIA: numero(process.env.LIMITE_IA_DOCENTE_DIA, 40),
 } as const;
+
+export type FuncionIADocente = "proponer_tarea" | "sugerir_repaso" | "borrador_comentario";
+
+/** Tabla aún no creada (migración 0007 sin aplicar): el tope no bloquea, solo se avisa en el registro. */
+const sinTabla = (e: { code?: string } | null) => e?.code === "42P01" || e?.code === "PGRST205";
+
+/** Ayudas de IA que el docente pidió hoy. Necesita el cliente admin (la tabla no es visible para usuarios). */
+export async function usosIADocenteHoy(admin: SupabaseClient, docenteId: string, desde = inicioDelDia()): Promise<number> {
+  const { count, error } = await admin
+    .from("uso_ia_docente")
+    .select("id", { count: "exact", head: true })
+    .eq("docente_id", docenteId)
+    .gte("creado_en", desde);
+  if (error) {
+    if (sinTabla(error)) {
+      console.warn("[limites] falta la tabla uso_ia_docente (migración 0007)");
+      return 0;
+    }
+    throw error;
+  }
+  return count ?? 0;
+}
+
+export async function registrarUsoIADocente(admin: SupabaseClient, docenteId: string, funcion: FuncionIADocente): Promise<void> {
+  const { error } = await admin.from("uso_ia_docente").insert({ docente_id: docenteId, funcion });
+  if (error) console.warn(`[limites] no se pudo registrar el uso de IA del docente: ${error.message}`);
+}
 
 function numero(valor: string | undefined, porDefecto: number): number {
   const n = Number(valor);

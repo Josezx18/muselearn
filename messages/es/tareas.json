@@ -95,5 +95,24 @@
     "adjuntoTipoInvalido": "Tipo de archivo no permitido",
     "sinPermiso": "No tienes permiso para esta acción",
     "noEncontrado": "Tarea no encontrada"
+  },
+  "ia": {
+    "abrir": "Crear la tarea con IA",
+    "titulo": "Crear con IA",
+    "ayuda": "Escribe qué quieres que practiquen. Muse propone el título, las instrucciones con los ejercicios, las competencias y el nivel de ayuda. Tú la revisas y la editas antes de guardarla.",
+    "tema": "¿Qué quieres que practiquen?",
+    "temaEjemplo": "Ecuaciones de primer grado con fracciones",
+    "detalles": "Detalles (opcional)",
+    "detallesEjemplo": "5 ejercicios en el cuaderno, nivel básico, uno de la vida diaria",
+    "proponer": "Proponer tarea",
+    "otra": "Proponer otra",
+    "pensando": "Muse está escribiendo…",
+    "cerrar": "Cerrar",
+    "lista": "Listo: llené el formulario (≈ {minutos} min).",
+    "errores": {
+      "tema": "Escribe el tema (mínimo 3 caracteres).",
+      "limite": "Llegaste al máximo de ayudas de IA por hoy. Vuelve a intentarlo mañana.",
+      "general": "La IA no respondió. Inténtalo de nuevo en un momento."
+    }
   }
 }

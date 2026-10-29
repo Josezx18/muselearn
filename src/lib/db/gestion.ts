@@ -5,6 +5,7 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import { z } from "zod";
 import {
   Clase,
+  ComentarioDocente,
   DetalleEntrega,
   Entrega,
   InformeComprension,
@@ -126,7 +127,7 @@ export async function detalleEntrega(db: SupabaseClient, entregaId: string) {
   const { data: fila } = await db.from("entregas").select("*").eq("id", entregaId).maybeSingle();
   if (!fila) return null;
   const entrega = Entrega.parse(fila);
-  const [{ data: perfil }, { data: sesiones }, { data: informe }] = await Promise.all([
+  const [{ data: perfil }, { data: sesiones }, { data: informe }, comentario] = await Promise.all([
     db.from("perfiles").select("id, rol, nombre, idioma").eq("id", entrega.estudiante_id).maybeSingle(),
     db
       .from("sesiones_verificacion")
@@ -135,6 +136,7 @@ export async function detalleEntrega(db: SupabaseClient, entregaId: string) {
       .order("creada_en", { ascending: false })
       .limit(1),
     db.from("informes").select("informe").eq("entrega_id", entregaId).maybeSingle(),
+    comentarioDeEntrega(db, entregaId),
   ]);
   const estudiante = Usuario.safeParse(perfil);
   return DetalleEntrega.parse({
@@ -146,7 +148,42 @@ export async function detalleEntrega(db: SupabaseClient, entregaId: string) {
       .catch([])
       .parse(sesiones?.[0]?.preguntas ?? []),
     informe: informe ? (InformeComprension.safeParse(informe.informe).data ?? null) : null,
+    comentario,
   });
+}
+
+/** Comentario del docente sobre la entrega (lo decide el RLS: el estudiante dueño y el docente de la tarea). */
+export async function comentarioDeEntrega(db: SupabaseClient, entregaId: string): Promise<ComentarioDocente | null> {
+  const { data, error } = await db
+    .from("comentarios_entrega")
+    .select("entrega_id, texto, actualizado_en")
+    .eq("entrega_id", entregaId)
+    .maybeSingle();
+  if (error) {
+    // Sin la migración 0007 la tabla no existe: la entrega se muestra igual, sin comentario.
+    console.warn(`[gestion] no se pudo leer el comentario: ${error.message}`);
+    return null;
+  }
+  return data ? (ComentarioDocente.safeParse(data).data ?? null) : null;
+}
+
+/** Guarda (o reemplaza) el comentario del docente. El RLS exige que sea el docente de la tarea. */
+export async function guardarComentario(db: SupabaseClient, docenteId: string, entregaId: string, texto: string) {
+  const { data, error } = await db
+    .from("comentarios_entrega")
+    .upsert(
+      { entrega_id: entregaId, docente_id: docenteId, texto, actualizado_en: new Date().toISOString() },
+      { onConflict: "entrega_id" },
+    )
+    .select("entrega_id, texto, actualizado_en")
+    .single();
+  if (error) throw error;
+  return ComentarioDocente.parse(data);
+}
+
+export async function borrarComentario(db: SupabaseClient, entregaId: string) {
+  const { error } = await db.from("comentarios_entrega").delete().eq("entrega_id", entregaId);
+  if (error) throw error;
 }
 
 /**

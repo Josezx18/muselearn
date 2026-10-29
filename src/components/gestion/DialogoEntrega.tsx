@@ -5,6 +5,7 @@ import { useFormatter, useTranslations } from "next-intl";
 import { Dialog, NivelDominio, Skeleton } from "@/components/ui";
 import { obtenerDetalleEntrega } from "@/lib/api-cliente";
 import type { DetalleEntrega } from "@/types/contratos";
+import { ComentarioEntrega } from "./ComentarioEntrega";
 
 /** Lo que entregó el estudiante: texto, fotos y archivos, sus respuestas de la verificación y el informe. */
 export function DialogoEntrega({ entregaId, nombre, alCerrar }: { entregaId: string | null; nombre: string; alCerrar: () => void }) {
@@ -135,6 +136,13 @@ export function DialogoEntrega({ entregaId, nombre, alCerrar }: { entregaId: str
               </ul>
             </section>
           )}
+
+          <ComentarioEntrega
+            key={detalle.entrega.id}
+            entregaId={detalle.entrega.id}
+            inicial={detalle.comentario}
+            entregada={detalle.entrega.estado !== "pendiente"}
+          />
         </div>
       )}
     </Dialog>

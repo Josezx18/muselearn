@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { listarClases, cargarComprension } from "@/lib/api-cliente";
 import type { Clase, Tarea, Usuario, Entrega, InformeComprension, MapaComprension } from "@/types/contratos";
 import { Button, Card } from "@/components/ui";
+import { RepasoIA } from "./RepasoIA";
 const colores = { 1: "bg-nivel-1 text-white", 2: "bg-nivel-2 text-tinta", 3: "bg-nivel-3 text-white", 4: "bg-nivel-4 text-white" };
 type Datos = {
   mapa: MapaComprension;
@@ -215,6 +216,7 @@ export function Comprension() {
               ))}
             </ul>
           </Card>
+          <RepasoIA key={`${clase}-${tarea}`} claseId={clase} tareaId={tarea || undefined} hayInformes={datos.informes.length > 0} />
           <Card>
             <h2 className="text-lg font-semibold">{t("detalle")}</h2>
             {!seleccion ? (

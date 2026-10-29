@@ -8,7 +8,9 @@ import {
   Adjunto,
   AnalisisTarea,
   BloquePlan,
+  BorradorComentario,
   Clase,
+  ComentarioDocente,
   DetalleEntrega,
   Entrega,
   EstadoBloque,
@@ -20,13 +22,15 @@ import {
   PracticaAgregada,
   PreferenciasEstudio,
   PreguntaVerificacion,
+  PropuestaTarea,
   RutaPractica,
+  SugerenciaRepaso,
   SesionVerificacion,
   Tarea,
   Usuario,
 } from "@/types/contratos";
 import { ESTUDIANTE_ACTUAL } from "./mocks/base";
-import type { CambioPerfil, EdicionTarea } from "@/types/contratos";
+import type { CambioPerfil, EdicionTarea, PedidoPropuestaTarea } from "@/types/contratos";
 import { clasesMock, usuariosMock } from "./mocks/clases";
 import { entregasMock, tareasMock } from "./mocks/tareas";
 import { analisisMock, planSemanalMock } from "./mocks/ia";
@@ -352,7 +356,73 @@ export const obtenerDetalleEntrega = (id: string) => {
     adjuntos: entrega.adjuntos.map((a) => ({ ...a, url: null })),
     preguntas: sesionVerificacionMock.preguntas,
     informe: entrega.estado === "verificada" ? informeMock : null,
+    comentario: comentarioMock(entrega.id),
   });
+};
+
+// ---------------- IA para el docente ----------------
+const comentariosMock = new Map<string, ComentarioDocente>();
+const comentarioMock = (entregaId: string) => comentariosMock.get(entregaId) ?? null;
+
+/** La IA propone una tarea (no se guarda: el docente la revisa en el formulario). */
+export const proponerTareaIA = (pedido: PedidoPropuestaTarea) =>
+  usarMocks()
+    ? mock<PropuestaTarea>(
+        {
+          titulo: `Práctica: ${pedido.tema}`.slice(0, 160),
+          instrucciones: `1. Lee con atención cada ejercicio sobre ${pedido.tema}.\n2. Resuelve en tu cuaderno mostrando todos los pasos.\n3. Toma una foto clara de tu cuaderno y súbela.\n4. Escribe en una frase qué paso te costó más y por qué.`,
+          competencias: [`Aplica ${pedido.tema} en situaciones nuevas`, "Explica su razonamiento paso a paso"],
+          nivel_ayuda: "pistas",
+          minutos_estimados: 40,
+          razon: "Ejercicios graduados para practicar lo visto en clase y explicar el razonamiento.",
+        },
+        900,
+      )
+    : pedir("/api/docente/ia/tarea", PropuestaTarea, json(pedido));
+
+/** Plan de repaso para la clase a partir de los informes de comprensión. */
+export const sugerirRepasoIA = (clase_id: string, tarea_id?: string) =>
+  usarMocks()
+    ? mock<SugerenciaRepaso>(
+        {
+          resumen: "La clase entiende el procedimiento, pero varios estudiantes no justifican por qué la igualdad se mantiene. Conviene un repaso corto y en grupos.",
+          actividades: [
+            {
+              concepto: mapaComprensionMock.conceptos_a_reforzar[0] ?? "Despejar x",
+              por_que: "La mitad de la clase quedó en Inicial o En proceso: aplican el paso sin explicarlo.",
+              actividad: "En parejas, uno resuelve 3x + 5 = 20 en voz alta y el otro pregunta \"¿por qué haces eso en los dos lados?\" en cada paso. Luego cambian.",
+              minutos: 15,
+              agrupacion: "grupos",
+            },
+          ],
+        },
+        900,
+      )
+    : pedir("/api/docente/ia/repaso", SugerenciaRepaso, json({ clase_id, tarea_id: tarea_id ?? null }));
+
+/** Borrador del comentario para una entrega (no se guarda hasta que el docente lo envía). */
+export const borradorComentarioIA = (entrega_id: string) =>
+  usarMocks()
+    ? mock<BorradorComentario>(
+        { texto: "Explicaste muy bien por qué restaste 5 en los dos lados. Revisa el último paso: ¿cómo puedes comprobar que tu resultado cumple la ecuación?" },
+        900,
+      )
+    : pedir("/api/docente/ia/comentario", BorradorComentario, json({ entrega_id }));
+
+export const obtenerComentario = (entregaId: string) =>
+  usarMocks() ? mock(comentarioMock(entregaId)) : pedir(`/api/entregas/${entregaId}/comentario`, ComentarioDocente.nullable());
+
+export const guardarComentario = (entregaId: string, texto: string) => {
+  if (!usarMocks()) return pedir(`/api/entregas/${entregaId}/comentario`, ComentarioDocente, { method: "PUT", body: JSON.stringify({ texto }) });
+  const c = { entrega_id: entregaId, texto, actualizado_en: new Date().toISOString() };
+  comentariosMock.set(entregaId, c);
+  return mock(c);
+};
+
+export const borrarComentario = (entregaId: string) => {
+  if (!usarMocks()) return pedir(`/api/entregas/${entregaId}/comentario`, z.null(), { method: "DELETE" });
+  comentariosMock.delete(entregaId);
+  return mock(null);
 };
 
 // ---------------- Integraciones: Google Classroom (modo de prueba) ----------------

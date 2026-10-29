@@ -2,8 +2,12 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { useFormatter, useTranslations } from "next-intl";
-import { Button, Card, Badge, Skeleton } from "@/components/ui";
-import { listarEntregas, listarEstudiantes } from "@/lib/api-cliente";
+import { Button, Card, Badge, Dialog, Skeleton, useToast } from "@/components/ui";
+import { borrarTarea, editarTarea, listarEntregas, listarEstudiantes, subirAdjuntoTarea } from "@/lib/api-cliente";
+import { useRouter } from "@/i18n/navigation";
+import { enlaceArchivo } from "@/lib/archivos";
+import { DialogoEntrega } from "@/components/gestion/DialogoEntrega";
+import { FormularioTarea } from "./FormularioTarea";
 import type { Tarea, Entrega, Usuario } from "@/types/contratos";
 
 interface DetalleTareaDocenteProps {
@@ -12,8 +16,16 @@ interface DetalleTareaDocenteProps {
 
 const ESTADO_ORDEN: Record<string, number> = { pendiente: 0, entregada: 1, verificando: 2, verificada: 3 };
 
-export function DetalleTareaDocente({ tarea }: DetalleTareaDocenteProps) {
+export function DetalleTareaDocente({ tarea: inicial }: DetalleTareaDocenteProps) {
   const t = useTranslations("tareas");
+  const tg = useTranslations("gestion.tarea");
+  const avisar = useToast();
+  const router = useRouter();
+  const [tarea, setTarea] = useState(inicial);
+  const [editando, setEditando] = useState(false);
+  const [borrando, setBorrando] = useState(false);
+  const [ocupado, setOcupado] = useState(false);
+  const [abierta, setAbierta] = useState<{ id: string; nombre: string } | null>(null);
   const formato = useFormatter();
   const [entregas, setEntregas] = useState<Entrega[] | null>(null);
   const [estudiantes, setEstudiantes] = useState<Usuario[] | null>(null);
@@ -22,10 +34,7 @@ export function DetalleTareaDocente({ tarea }: DetalleTareaDocenteProps) {
 
   const cargar = useCallback(async () => {
     try {
-      const [ents, ests] = await Promise.all([
-        listarEntregas(tarea.id),
-        listarEstudiantes(tarea.clase_id),
-      ]);
+      const [ents, ests] = await Promise.all([listarEntregas(tarea.id), listarEstudiantes(tarea.clase_id)]);
       setEntregas(ents);
       setEstudiantes(ests);
       setError(false);
@@ -51,13 +60,19 @@ export function DetalleTareaDocente({ tarea }: DetalleTareaDocenteProps) {
     );
   }
 
-  if (error) return <p role="alert" className="text-sm font-medium text-peligro">{t("lista.error")}</p>;
+  if (error)
+    return (
+      <p role="alert" className="text-sm font-medium text-peligro">
+        {t("lista.error")}
+      </p>
+    );
 
   const entregasPorEstudiante = new Map(entregas?.map((e) => [e.estudiante_id, e]) ?? []);
-  const filas = estudiantes?.map((est) => ({
-    estudiante: est,
-    entrega: entregasPorEstudiante.get(est.id) ?? null,
-  })) ?? [];
+  const filas =
+    estudiantes?.map((est) => ({
+      estudiante: est,
+      entrega: entregasPorEstudiante.get(est.id) ?? null,
+    })) ?? [];
 
   filas.sort((a, b) => {
     const ea = a.entrega ? ESTADO_ORDEN[a.entrega.estado] : -1;
@@ -111,10 +126,70 @@ export function DetalleTareaDocente({ tarea }: DetalleTareaDocenteProps) {
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
         <div>
           <h1 className="text-2xl font-extrabold tracking-tight">{tarea.titulo}</h1>
-          <p className="text-tinta-suave">{t("detalle.fechaEntrega")} {formato.dateTime(new Date(tarea.fecha_entrega), { dateStyle: "medium", timeStyle: "short" })}</p>
+          <p className="text-tinta-suave">
+            {t("detalle.fechaEntrega")} {formato.dateTime(new Date(tarea.fecha_entrega), { dateStyle: "medium", timeStyle: "short" })}
+          </p>
         </div>
-        <Badge tono="primario">{obtenerNivelAyudaTexto(tarea.nivel_ayuda)}</Badge>
+        <div className="flex flex-wrap items-center gap-2">
+          <Badge tono="primario">{obtenerNivelAyudaTexto(tarea.nivel_ayuda)}</Badge>
+          <Button variante="secundario" tamano="sm" onClick={() => setEditando(true)}>
+            {tg("editar")}
+          </Button>
+          <Button variante="fantasma" tamano="sm" className="text-peligro" onClick={() => setBorrando(true)}>
+            {tg("borrar")}
+          </Button>
+        </div>
       </div>
+
+      {editando && (
+        <FormularioTarea
+          claseId={tarea.clase_id}
+          tareaExistente={tarea}
+          alCancelar={() => setEditando(false)}
+          alGuardar={async (datos, archivos) => {
+            const nuevos = await Promise.all(archivos.map((a) => subirAdjuntoTarea(tarea.id, a)));
+            const editada = await editarTarea(tarea.id, {
+              titulo: datos.titulo,
+              instrucciones: datos.instrucciones,
+              fecha_entrega: datos.fecha_entrega,
+              competencias: datos.competencias,
+              nivel_ayuda: datos.nivel_ayuda,
+            });
+            setTarea({
+              ...editada,
+              adjuntos: [...editada.adjuntos, ...nuevos.filter((n) => !editada.adjuntos.some((a) => a.ruta === n.ruta))],
+            });
+            setEditando(false);
+            avisar(tg("guardada"), "exito");
+          }}
+        />
+      )}
+
+      <Dialog abierto={borrando} alCerrar={() => setBorrando(false)} titulo={tg("borrar")}>
+        <p>{tg("confirmarBorrar")}</p>
+        <div className="mt-5 flex justify-end gap-2">
+          <Button variante="secundario" onClick={() => setBorrando(false)}>
+            {tg("cancelar")}
+          </Button>
+          <Button
+            variante="peligro"
+            cargando={ocupado}
+            onClick={async () => {
+              setOcupado(true);
+              try {
+                await borrarTarea(tarea.id);
+                avisar(tg("borrada"), "exito");
+                router.push(`/docente/clases/${tarea.clase_id}`);
+              } catch {
+                avisar(t("lista.error"), "error");
+                setOcupado(false);
+              }
+            }}
+          >
+            {tg("borrar")}
+          </Button>
+        </div>
+      </Dialog>
 
       <Card className="prose prose-sm max-w-none">
         <h3 className="font-semibold mb-2">{t("detalle.instrucciones")}</h3>
@@ -126,7 +201,9 @@ export function DetalleTareaDocente({ tarea }: DetalleTareaDocenteProps) {
           <h3 className="font-semibold mb-2">{t("detalle.competencias")}</h3>
           <div className="flex flex-wrap gap-1">
             {tarea.competencias.map((c, i) => (
-              <Badge key={i} tono="neutro">{c}</Badge>
+              <Badge key={i} tono="neutro">
+                {c}
+              </Badge>
             ))}
           </div>
         </Card>
@@ -138,7 +215,7 @@ export function DetalleTareaDocente({ tarea }: DetalleTareaDocenteProps) {
           <ul className="flex flex-wrap gap-2">
             {tarea.adjuntos.map((a, i) => (
               <li key={i} className="flex items-center gap-2 text-sm">
-                <a href={a.ruta} target="_blank" rel="noopener noreferrer" className="text-primario hover:underline">
+                <a href={enlaceArchivo(a.ruta)} target="_blank" rel="noopener noreferrer" className="text-primario hover:underline">
                   {a.nombre}
                 </a>
                 <span className="text-tinta-suave">({a.tipo_mime})</span>
@@ -149,48 +226,32 @@ export function DetalleTareaDocente({ tarea }: DetalleTareaDocenteProps) {
       )}
 
       <div>
-        <h2 className="text-xl font-bold mb-3">{t("detalle.estudiantes")} ({filas.length})</h2>
+        <h2 className="text-xl font-bold mb-3">
+          {t("detalle.estudiantes")} ({filas.length})
+        </h2>
         {filas.length === 0 ? (
           <Card className="text-center text-tinta-suave">{t("lista.sinEntregas")}</Card>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm" role="table">
-              <thead>
-                <tr className="border-b border-borde">
-                  <th className="text-left p-2 font-medium">{t("detalle.estudiante")}</th>
-                  <th className="text-left p-2 font-medium">{t("detalle.estado")}</th>
-                  <th className="text-left p-2 font-medium">{t("detalle.entrega")}</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filas.map(({ estudiante, entrega }) => (
-                  <tr key={estudiante.id} className="border-b border-borde/50">
-                    <td className="p-2 font-medium">{estudiante.nombre}</td>
-                    <td className="p-2">
-                      {entrega ? (
-                        <Badge tono={obtenerTonoEstado(entrega.estado)}>
-                          {obtenerEstadoTexto(entrega.estado)}
-                        </Badge>
-                      ) : (
-                        <Badge tono="neutro">{obtenerEstadoTexto("pendiente")}</Badge>
-                      )}
-                    </td>
-                    <td className="p-2">
-                      {entrega ? (
-                        <Button variante="secundario" tamano="sm" onClick={() => {}}>
-                          {t("detalle.verEntrega")}
-                        </Button>
-                      ) : (
-                        <span className="text-tinta-suave">{t("detalle.sinEntrega")}</span>
-                      )}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <ul className="grid gap-2">
+            {filas.map(({ estudiante, entrega }) => (
+              <li key={estudiante.id} className="flex flex-wrap items-center justify-between gap-2 rounded-xl border-2 border-borde bg-superficie p-3">
+                <div className="flex min-w-0 flex-wrap items-center gap-2">
+                  <span className="font-bold">{estudiante.nombre}</span>
+                  <Badge tono={entrega ? obtenerTonoEstado(entrega.estado) : "neutro"}>{obtenerEstadoTexto(entrega?.estado ?? "pendiente")}</Badge>
+                </div>
+                {entrega && entrega.estado !== "pendiente" ? (
+                  <Button variante="secundario" tamano="sm" onClick={() => setAbierta({ id: entrega.id, nombre: estudiante.nombre })}>
+                    {t("detalle.verEntrega")}
+                  </Button>
+                ) : (
+                  <span className="text-sm text-tinta-suave">{t("detalle.sinEntrega")}</span>
+                )}
+              </li>
+            ))}
+          </ul>
         )}
       </div>
+      <DialogoEntrega entregaId={abierta?.id ?? null} nombre={abierta?.nombre ?? ""} alCerrar={() => setAbierta(null)} />
     </div>
   );
 }

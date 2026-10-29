@@ -23,9 +23,7 @@ export function FormularioTarea({ claseId, tareaExistente, alGuardar, alCancelar
   const [cargando, setCargando] = useState(false);
   const [titulo, setTitulo] = useState(tareaExistente?.titulo ?? "");
   const [instrucciones, setInstrucciones] = useState(tareaExistente?.instrucciones ?? "");
-  const [fechaEntrega, setFechaEntrega] = useState(
-    tareaExistente?.fecha_entrega ? new Date(tareaExistente.fecha_entrega).toISOString().slice(0, 16) : ""
-  );
+  const [fechaEntrega, setFechaEntrega] = useState(tareaExistente?.fecha_entrega ? fechaLocal(new Date(tareaExistente.fecha_entrega)) : "");
   const [competencias, setCompetencias] = useState<string[]>(tareaExistente?.competencias ?? []);
   const [nuevaCompetencia, setNuevaCompetencia] = useState("");
   const [nivelAyuda, setNivelAyuda] = useState<NivelAyuda>(tareaExistente?.nivel_ayuda ?? "pistas");
@@ -40,25 +38,31 @@ export function FormularioTarea({ claseId, tareaExistente, alGuardar, alCancelar
     }
   }, [competencias, nuevaCompetencia]);
 
-  const quitarCompetencia = useCallback((idx: number) => {
-    setCompetencias(competencias.filter((_, i) => i !== idx));
-  }, [competencias]);
+  const quitarCompetencia = useCallback(
+    (idx: number) => {
+      setCompetencias(competencias.filter((_, i) => i !== idx));
+    },
+    [competencias],
+  );
 
-  const manejarArchivos = useCallback((archivos: FileList | File[]) => {
-    const validos: File[] = [];
-    for (const archivo of Array.from(archivos)) {
-      if (!TIPOS_PERMITIDOS.includes(archivo.type)) {
-        avisar(t("formulario.adjuntosErrorTipo"), "error");
-        continue;
+  const manejarArchivos = useCallback(
+    (archivos: FileList | File[]) => {
+      const validos: File[] = [];
+      for (const archivo of Array.from(archivos)) {
+        if (!TIPOS_PERMITIDOS.includes(archivo.type)) {
+          avisar(t("formulario.adjuntosErrorTipo"), "error");
+          continue;
+        }
+        if (archivo.size > MAX_TAMANO) {
+          avisar(t("formulario.adjuntosErrorTamano"), "error");
+          continue;
+        }
+        validos.push(archivo);
       }
-      if (archivo.size > MAX_TAMANO) {
-        avisar(t("formulario.adjuntosErrorTamano"), "error");
-        continue;
-      }
-      validos.push(archivo);
-    }
-    setAdjuntos((a) => [...a, ...validos]);
-  }, [avisar, t]);
+      setAdjuntos((a) => [...a, ...validos]);
+    },
+    [avisar, t],
+  );
 
   const quitarAdjunto = useCallback((idx: number) => {
     setAdjuntos((a) => a.filter((_, i) => i !== idx));
@@ -77,12 +81,13 @@ export function FormularioTarea({ claseId, tareaExistente, alGuardar, alCancelar
       avisar(t("errores.fechaRequerida"), "error");
       return false;
     }
-    if (new Date(fechaEntrega) <= new Date()) {
+    const sinCambioDeFecha = tareaExistente && fechaLocal(new Date(tareaExistente.fecha_entrega)) === fechaEntrega;
+    if (!sinCambioDeFecha && new Date(fechaEntrega) <= new Date()) {
       avisar(t("errores.fechaPasado"), "error");
       return false;
     }
     return true;
-  }, [titulo, fechaEntrega, avisar, t]);
+  }, [titulo, fechaEntrega, avisar, t, tareaExistente]);
 
   async function enviar(e: React.FormEvent) {
     e.preventDefault();
@@ -99,7 +104,7 @@ export function FormularioTarea({ claseId, tareaExistente, alGuardar, alCancelar
         adjuntos: adjuntosExistentes,
       };
       await alGuardar(datos, adjuntos);
-      avisar(t("nueva.exito"), "exito");
+      if (!tareaExistente) avisar(t("nueva.exito"), "exito");
     } catch {
       avisar(t("nueva.error"), "error");
     } finally {
@@ -142,13 +147,7 @@ export function FormularioTarea({ claseId, tareaExistente, alGuardar, alCancelar
           <label htmlFor="fechaEntrega" className="block text-sm font-medium mb-1">
             {t("formulario.fechaEntrega")}
           </label>
-          <Input
-            id="fechaEntrega"
-            type="datetime-local"
-            value={fechaEntrega}
-            onChange={(e) => setFechaEntrega(e.target.value)}
-            required
-          />
+          <Input id="fechaEntrega" type="datetime-local" value={fechaEntrega} onChange={(e) => setFechaEntrega(e.target.value)} required />
         </div>
 
         <div>
@@ -180,11 +179,13 @@ export function FormularioTarea({ claseId, tareaExistente, alGuardar, alCancelar
         <fieldset>
           <legend className="block text-sm font-medium mb-2">{t("formulario.nivelAyuda")}</legend>
           <div className="grid gap-3 sm:grid-cols-3">
-            {([
-              ["pistas", t("formulario.nivelAyudaPistas"), t("formulario.nivelAyudaPistasDesc")],
-              ["ejemplos", t("formulario.nivelAyudaEjemplos"), t("formulario.nivelAyudaEjemplosDesc")],
-              ["explicacion", t("formulario.nivelAyudaExplicacion"), t("formulario.nivelAyudaExplicacionDesc")],
-            ] as const).map(([valor, label, desc]) => (
+            {(
+              [
+                ["pistas", t("formulario.nivelAyudaPistas"), t("formulario.nivelAyudaPistasDesc")],
+                ["ejemplos", t("formulario.nivelAyudaEjemplos"), t("formulario.nivelAyudaEjemplosDesc")],
+                ["explicacion", t("formulario.nivelAyudaExplicacion"), t("formulario.nivelAyudaExplicacionDesc")],
+              ] as const
+            ).map(([valor, label, desc]) => (
               <label key={valor} className="relative cursor-pointer">
                 <input
                   type="radio"
@@ -196,9 +197,7 @@ export function FormularioTarea({ claseId, tareaExistente, alGuardar, alCancelar
                 />
                 <div
                   className={`p-3 rounded-lg border-2 transition-colors ${
-                    nivelAyuda === valor
-                      ? "border-primario bg-primario-claro"
-                      : "border-borde hover:border-primario"
+                    nivelAyuda === valor ? "border-primario bg-primario-claro" : "border-borde hover:border-primario"
                   }`}
                 >
                   <p className="font-medium">{label}</p>
@@ -223,7 +222,9 @@ export function FormularioTarea({ claseId, tareaExistente, alGuardar, alCancelar
             {adjuntosExistentes.map((a, i) => (
               <Badge key={a.ruta} tono="neutro" className="gap-1" onClick={() => quitarAdjuntoExistente(i)}>
                 {a.nombre}
-                <button type="button" className="ml-1 hover:text-tinta">×</button>
+                <button type="button" className="ml-1 hover:text-tinta">
+                  ×
+                </button>
               </Badge>
             ))}
           </div>
@@ -251,4 +252,10 @@ export function FormularioTarea({ claseId, tareaExistente, alGuardar, alCancelar
       </form>
     </Card>
   );
+}
+
+/** "yyyy-MM-ddTHH:mm" en la hora local del navegador, que es lo que espera <input type="datetime-local">. */
+function fechaLocal(d: Date): string {
+  const dos = (n: number) => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${dos(d.getMonth() + 1)}-${dos(d.getDate())}T${dos(d.getHours())}:${dos(d.getMinutes())}`;
 }

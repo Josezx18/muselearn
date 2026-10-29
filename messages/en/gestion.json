@@ -1,0 +1,63 @@
+{
+  "clase": {
+    "acciones": "Class options",
+    "editar": "Edit class",
+    "borrar": "Delete class",
+    "codigo": "Join code",
+    "copiar": "Copy",
+    "copiado": "Code copied",
+    "cambiarCodigo": "Change code",
+    "confirmarCodigo": "The current code will stop working. Students already in the class are not affected. Change it?",
+    "codigoNuevo": "New code: {codigo}",
+    "guardar": "Save changes",
+    "guardada": "Class updated.",
+    "cancelar": "Cancel",
+    "confirmarBorrar": "This deletes the class, its {tareas, plural, one {# task} other {# tasks}}, submissions, tutor conversations and reports. It cannot be undone.",
+    "escribeNombre": "To confirm, type the class name:",
+    "borrarDefinitivo": "Delete forever",
+    "borrada": "Class deleted.",
+    "error": "It couldn't be completed. Please try again."
+  },
+  "pestanas": {
+    "tareas": "Tasks",
+    "estudiantes": "Students"
+  },
+  "estudiantes": {
+    "titulo": "{n, plural, =0 {No students} one {# student} other {# students}}",
+    "vacio": "Nobody has joined yet. Share the class code with your students.",
+    "quitar": "Remove",
+    "confirmarQuitar": "Remove {nombre} from the class? They will stop seeing its tasks. Their submissions are kept and they can rejoin with the code.",
+    "quitado": "{nombre} is no longer in the class."
+  },
+  "tarea": {
+    "editar": "Edit task",
+    "borrar": "Delete task",
+    "guardar": "Save changes",
+    "guardada": "Task updated. If you changed the date, your students' weeks are re-planned automatically.",
+    "confirmarBorrar": "This deletes the task, its submissions, tutor conversations and reports. It cannot be undone.",
+    "borrada": "Task deleted.",
+    "cancelar": "Cancel"
+  },
+  "entrega": {
+    "titulo": "{nombre}'s submission",
+    "texto": "What they wrote",
+    "sinTexto": "No text.",
+    "archivos": "Files and photos",
+    "sinArchivos": "No files.",
+    "abrir": "Open",
+    "verificacion": "Check",
+    "sinVerificacion": "They haven't done the check yet.",
+    "pregunta": "Question {n}",
+    "respuesta": "Answered",
+    "porVoz": "by voice",
+    "porTexto": "by text",
+    "sinRespuesta": "Not answered.",
+    "informe": "Understanding",
+    "nivel": "Overall level",
+    "resumen": "Summary for the teacher",
+    "entregada": "Submitted on {fecha}",
+    "cargando": "Loading the submission…",
+    "error": "The submission could not be loaded.",
+    "cerrar": "Close"
+  }
+}

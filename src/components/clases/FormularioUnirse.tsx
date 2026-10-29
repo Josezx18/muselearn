@@ -9,8 +9,11 @@ import type { Clase } from "@/types/contratos";
 
 const ERRORES_CONOCIDOS = ["codigo_invalido", "no_existe", "ya_inscrito", "es_docente", "no_autenticado"];
 
-/** Pantalla "Unirme a una clase": el estudiante escribe el código de 6 caracteres. */
-export function FormularioUnirse() {
+/**
+ * Pantalla "Unirme a una clase": el estudiante escribe el código de 6 caracteres.
+ * `compacto` lo muestra dentro de otra pantalla (Mi perfil) y avisa con `alUnirse` en vez de mandar a Hoy.
+ */
+export function FormularioUnirse({ compacto = false, alUnirse }: { compacto?: boolean; alUnirse?: (clase: Clase) => void } = {}) {
   const t = useTranslations("clases.unirse");
   const [cargando, setCargando] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -22,13 +25,23 @@ export function FormularioUnirse() {
     setCargando(true);
     setError(null);
     try {
-      setUnida(await unirseAClase(codigo));
+      const clase = await unirseAClase(codigo);
+      setUnida(clase);
+      alUnirse?.(clase);
     } catch (fallo) {
       const clave = fallo instanceof ErrorApi && ERRORES_CONOCIDOS.includes(fallo.codigo) ? fallo.codigo : "error";
       setError(clave);
     } finally {
       setCargando(false);
     }
+  }
+
+  if (unida && compacto) {
+    return (
+      <p role="status" className="rounded-xl bg-primario-claro p-3 font-bold">
+        {t("exito", { nombre: unida.nombre })}
+      </p>
+    );
   }
 
   if (unida) {
@@ -47,9 +60,10 @@ export function FormularioUnirse() {
     );
   }
 
+  const Contenedor = compacto ? "div" : Card;
   return (
-    <Card>
-      <h1 className="text-2xl font-extrabold tracking-tight">{t("titulo")}</h1>
+    <Contenedor>
+      {!compacto && <h1 className="text-2xl font-extrabold tracking-tight">{t("titulo")}</h1>}
       <p className="mt-1 text-sm text-tinta-suave">{t("ayuda")}</p>
       <form onSubmit={enviar} className="mt-5 flex flex-col gap-4">
         <Input
@@ -67,6 +81,6 @@ export function FormularioUnirse() {
           {t("unirme")}
         </Button>
       </form>
-    </Card>
+    </Contenedor>
   );
 }

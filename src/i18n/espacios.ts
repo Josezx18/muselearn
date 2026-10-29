@@ -10,6 +10,8 @@ export const espacios = [
   "verificacion", // T04
   "informes", // T06
   "docente", // T06
+  "cuenta", // perfil y configuración
+  "gestion", // gestión del docente
 ] as const;
 
 export type Espacio = (typeof espacios)[number];

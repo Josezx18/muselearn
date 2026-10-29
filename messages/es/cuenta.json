@@ -1,0 +1,79 @@
+{
+  "menu": {
+    "abrir": "Menú de la cuenta",
+    "perfil": "Mi perfil",
+    "configuracion": "Configuración",
+    "salir": "Salir",
+    "docente": "Docente",
+    "estudiante": "Estudiante"
+  },
+  "perfil": {
+    "titulo": "Mi perfil",
+    "datos": "Tus datos",
+    "nombre": "Nombre",
+    "correo": "Correo",
+    "correoAyuda": "Con este correo inicias sesión. Para cambiarlo, pídeselo a tu docente o al centro.",
+    "rol": "Tipo de cuenta",
+    "guardar": "Guardar",
+    "guardado": "Listo, guardé tus datos.",
+    "error": "No pudimos guardar. Inténtalo de nuevo.",
+    "contrasena": {
+      "titulo": "Contraseña",
+      "actual": "Contraseña actual",
+      "nueva": "Nueva contraseña",
+      "ayuda": "Al menos 8 caracteres.",
+      "cambiar": "Cambiar contraseña",
+      "cambiada": "Listo, tu contraseña cambió.",
+      "errores": {
+        "contrasena_incorrecta": "La contraseña actual no es correcta.",
+        "contrasena_corta": "La nueva contraseña debe tener al menos 8 caracteres.",
+        "contrasena_igual": "La nueva contraseña debe ser distinta a la actual.",
+        "error": "No se pudo cambiar la contraseña."
+      }
+    },
+    "clases": {
+      "titulo": "Mis clases",
+      "vacio": "Todavía no estás en ninguna clase.",
+      "unirme": "Unirme a otra clase",
+      "salir": "Salir de la clase",
+      "confirmarSalir": "¿Salir de {nombre}? Dejarás de ver sus tareas. Tu docente puede volver a inscribirte con el código.",
+      "salio": "Saliste de la clase.",
+      "de": "{materia} · {grado}"
+    }
+  },
+  "config": {
+    "titulo": "Configuración",
+    "intro": "Se guarda en tu cuenta: la verás igual en cualquier computadora o celular.",
+    "apariencia": "Apariencia",
+    "colores": "Colores",
+    "mascota": "Mascota",
+    "idioma": "Idioma",
+    "guardado": "Guardado en tu cuenta.",
+    "error": "No pudimos guardar en tu cuenta; quedó guardado solo en este navegador.",
+    "horas": {
+      "titulo": "Mis horas de estudio",
+      "intro": "MuseLearn arma tu semana solo en estas horas. Marca los días que puedes estudiar y el horario.",
+      "dia": "Día",
+      "desde": "Desde",
+      "hasta": "Hasta",
+      "agregar": "Agregar horario",
+      "quitar": "Quitar",
+      "bloque": "Duración máxima de cada bloque",
+      "minutos": "{n} min",
+      "guardar": "Guardar y reorganizar mi semana",
+      "guardado": "Listo: tu semana se reorganizó con tus horas.",
+      "error": "Revisa los horarios: la hora final debe ser después de la inicial.",
+      "total": "{horas} h libres por semana",
+      "sinHoras": "Sin horas, no podemos planificar tu semana."
+    },
+    "dias": {
+      "0": "Domingo",
+      "1": "Lunes",
+      "2": "Martes",
+      "3": "Miércoles",
+      "4": "Jueves",
+      "5": "Viernes",
+      "6": "Sábado"
+    }
+  }
+}

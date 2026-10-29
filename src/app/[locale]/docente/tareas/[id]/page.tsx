@@ -1,29 +1,27 @@
-import { Metadata } from "next";
-import { DetalleTareaDocente } from "@/components/tareas/DetalleTareaDocente";
-import { obtenerUsuarioActual } from "@/lib/db/sesion";
 import { notFound } from "next/navigation";
+import { getTranslations } from "next-intl/server";
+import { DetalleTareaDocente } from "@/components/tareas/DetalleTareaDocente";
+import { usarMocks } from "@/lib/api-cliente";
+import { obtenerUsuarioActual } from "@/lib/db/sesion";
+import { tareaDelDocente } from "@/lib/db/gestion";
+import { tareasMock } from "@/lib/mocks/tareas";
 
-interface Props {
-  params: Promise<{ locale: string; id: string }>;
+export async function generateMetadata({ params }: PageProps<"/[locale]/docente/tareas/[id]">) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "tareas" });
+  return { title: t("detalle.titulo") };
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export default async function PaginaTareaDocente({ params }: PageProps<"/[locale]/docente/tareas/[id]">) {
   const { id } = await params;
-  return { title: `Detalle de la tarea ${id}` };
-}
-
-export default async function PaginaTareaDocente({ params }: Props) {
-  const { id } = await params;
-  const actual = await obtenerUsuarioActual();
-  if (!actual || actual.usuario.rol !== "docente") notFound();
-
-  const { data: tarea } = await actual.db
-    .from("tareas")
-    .select("*, clases!inner(docente_id)")
-    .eq("id", id)
-    .eq("clases.docente_id", actual.usuario.id)
-    .maybeSingle();
+  let tarea = null;
+  if (usarMocks()) {
+    tarea = tareasMock.find((t) => t.id === id) ?? tareasMock[0];
+  } else {
+    const actual = await obtenerUsuarioActual();
+    if (!actual || actual.usuario.rol !== "docente") notFound();
+    tarea = await tareaDelDocente(actual.db, actual.usuario.id, id);
+  }
   if (!tarea) notFound();
-
   return <DetalleTareaDocente tarea={tarea} />;
 }

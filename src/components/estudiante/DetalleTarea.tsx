@@ -6,6 +6,7 @@ import type { Tarea, AnalisisTarea, Entrega } from "@/types/contratos";
 import { FormularioEntrega } from "@/components/entregas";
 import { Button, Dificultad, Skeleton } from "@/components/ui";
 import { Link } from "@/i18n/navigation";
+import { enlaceArchivo } from "@/lib/archivos";
 export function DetalleTarea({ id, estudianteId }: { id: string; estudianteId: string }) {
   const t = useTranslations("estudiante");
   const locale = useLocale();
@@ -87,7 +88,11 @@ export function DetalleTarea({ id, estudianteId }: { id: string; estudianteId: s
                 {tarea.adjuntos.length > 0 && (
                   <ul className="mt-4 space-y-1 text-sm text-tinta-suave">
                     {tarea.adjuntos.map((a, i) => (
-                      <li key={i}>📎 {a.nombre}</li>
+                      <li key={i}>
+                        <a href={enlaceArchivo(a.ruta)} target="_blank" rel="noopener noreferrer" className="font-bold text-primario-fuerte underline-offset-4 hover:underline">
+                          📎 {a.nombre}
+                        </a>
+                      </li>
                     ))}
                   </ul>
                 )}

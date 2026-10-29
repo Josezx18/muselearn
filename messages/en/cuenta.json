@@ -1,0 +1,79 @@
+{
+  "menu": {
+    "abrir": "Account menu",
+    "perfil": "My profile",
+    "configuracion": "Settings",
+    "salir": "Sign out",
+    "docente": "Teacher",
+    "estudiante": "Student"
+  },
+  "perfil": {
+    "titulo": "My profile",
+    "datos": "Your details",
+    "nombre": "Name",
+    "correo": "Email",
+    "correoAyuda": "You sign in with this email. To change it, ask your teacher or school.",
+    "rol": "Account type",
+    "guardar": "Save",
+    "guardado": "Done, your details were saved.",
+    "error": "We couldn't save. Please try again.",
+    "contrasena": {
+      "titulo": "Password",
+      "actual": "Current password",
+      "nueva": "New password",
+      "ayuda": "At least 8 characters.",
+      "cambiar": "Change password",
+      "cambiada": "Done, your password changed.",
+      "errores": {
+        "contrasena_incorrecta": "The current password is not correct.",
+        "contrasena_corta": "The new password must have at least 8 characters.",
+        "contrasena_igual": "The new password must be different.",
+        "error": "The password could not be changed."
+      }
+    },
+    "clases": {
+      "titulo": "My classes",
+      "vacio": "You are not in any class yet.",
+      "unirme": "Join another class",
+      "salir": "Leave class",
+      "confirmarSalir": "Leave {nombre}? You will stop seeing its tasks. Your teacher can enroll you again with the code.",
+      "salio": "You left the class.",
+      "de": "{materia} · {grado}"
+    }
+  },
+  "config": {
+    "titulo": "Settings",
+    "intro": "Saved to your account: it looks the same on any computer or phone.",
+    "apariencia": "Appearance",
+    "colores": "Colors",
+    "mascota": "Mascot",
+    "idioma": "Language",
+    "guardado": "Saved to your account.",
+    "error": "We couldn't save to your account; it was saved only in this browser.",
+    "horas": {
+      "titulo": "My study hours",
+      "intro": "MuseLearn plans your week only in these hours. Choose the days you can study and the time.",
+      "dia": "Day",
+      "desde": "From",
+      "hasta": "To",
+      "agregar": "Add time slot",
+      "quitar": "Remove",
+      "bloque": "Longest study block",
+      "minutos": "{n} min",
+      "guardar": "Save and re-plan my week",
+      "guardado": "Done: your week was re-planned with your hours.",
+      "error": "Check the times: the end must be after the start.",
+      "total": "{horas} free hours per week",
+      "sinHoras": "Without hours, we can't plan your week."
+    },
+    "dias": {
+      "0": "Sunday",
+      "1": "Monday",
+      "2": "Tuesday",
+      "3": "Wednesday",
+      "4": "Thursday",
+      "5": "Friday",
+      "6": "Saturday"
+    }
+  }
+}

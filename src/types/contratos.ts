@@ -180,6 +180,45 @@ export const MapaComprension = z.object({
   conceptos_a_reforzar: z.array(z.string()),        // los de nivel promedio más bajo
 });
 
+// ---------- Perfil y configuración del usuario ----------
+export const Tema = z.enum(["cuaderno", "meta", "muse"]);
+export const Mascota = z.enum(["pagi", "chispa", "orbi"]);
+
+export const PerfilUsuario = Usuario.extend({
+  correo: z.string(),
+  tema: Tema.default("muse"),
+  mascota: Mascota.default("pagi"),
+});
+
+export const CambioPerfil = z
+  .object({
+    nombre: z.string().trim().min(2).max(80).optional(),
+    idioma: Idioma.optional(),
+    tema: Tema.optional(),
+    mascota: Mascota.optional(),
+  })
+  .refine((c) => Object.values(c).some((v) => v !== undefined), "sin_cambios");
+
+// ---------- Gestión del docente ----------
+export const EdicionTarea = z
+  .object({
+    titulo: z.string().trim().min(2).max(160).optional(),
+    instrucciones: z.string().trim().min(1).max(20000).optional(),
+    fecha_entrega: FechaHora.optional(),
+    competencias: z.array(z.string().trim().min(1).max(200)).max(12).optional(),
+    nivel_ayuda: NivelAyuda.optional(),
+  })
+  .refine((c) => Object.values(c).some((v) => v !== undefined), "sin_cambios");
+
+/** Lo que el docente ve al abrir una entrega: el trabajo, la verificación y el informe. */
+export const DetalleEntrega = z.object({
+  entrega: Entrega,
+  estudiante: Usuario,
+  adjuntos: z.array(Adjunto.extend({ url: z.string().nullable() })), // enlace temporal para ver el archivo
+  preguntas: z.array(PreguntaVerificacion),
+  informe: InformeComprension.nullable(),
+});
+
 // ---------- Tipos TS derivados ----------
 export type Usuario = z.infer<typeof Usuario>;
 export type Clase = z.infer<typeof Clase>;
@@ -206,3 +245,9 @@ export type PreguntaVerificacion = z.infer<typeof PreguntaVerificacion>;
 export type EvaluacionConcepto = z.infer<typeof EvaluacionConcepto>;
 export type PasoRuta = z.infer<typeof PasoRuta>;
 export type CeldaMapaCalor = z.infer<typeof CeldaMapaCalor>;
+export type Tema = z.infer<typeof Tema>;
+export type Mascota = z.infer<typeof Mascota>;
+export type PerfilUsuario = z.infer<typeof PerfilUsuario>;
+export type CambioPerfil = z.infer<typeof CambioPerfil>;
+export type EdicionTarea = z.infer<typeof EdicionTarea>;
+export type DetalleEntrega = z.infer<typeof DetalleEntrega>;

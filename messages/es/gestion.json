@@ -1,0 +1,63 @@
+{
+  "clase": {
+    "acciones": "Opciones de la clase",
+    "editar": "Editar clase",
+    "borrar": "Borrar clase",
+    "codigo": "Código para unirse",
+    "copiar": "Copiar",
+    "copiado": "Código copiado",
+    "cambiarCodigo": "Cambiar código",
+    "confirmarCodigo": "El código actual dejará de funcionar. Los estudiantes que ya están en la clase no se afectan. ¿Cambiarlo?",
+    "codigoNuevo": "Nuevo código: {codigo}",
+    "guardar": "Guardar cambios",
+    "guardada": "Clase actualizada.",
+    "cancelar": "Cancelar",
+    "confirmarBorrar": "Se borrarán la clase, sus {tareas, plural, one {# tarea} other {# tareas}}, las entregas, las conversaciones con el tutor y los informes. No se puede deshacer.",
+    "escribeNombre": "Para confirmar, escribe el nombre de la clase:",
+    "borrarDefinitivo": "Borrar para siempre",
+    "borrada": "Clase borrada.",
+    "error": "No se pudo completar. Inténtalo de nuevo."
+  },
+  "pestanas": {
+    "tareas": "Tareas",
+    "estudiantes": "Estudiantes"
+  },
+  "estudiantes": {
+    "titulo": "{n, plural, =0 {Sin estudiantes} one {# estudiante} other {# estudiantes}}",
+    "vacio": "Todavía nadie se unió. Comparte el código de la clase con tus estudiantes.",
+    "quitar": "Quitar",
+    "confirmarQuitar": "¿Quitar a {nombre} de la clase? Dejará de ver las tareas. Sus entregas se conservan y puede volver a unirse con el código.",
+    "quitado": "{nombre} ya no está en la clase."
+  },
+  "tarea": {
+    "editar": "Editar tarea",
+    "borrar": "Borrar tarea",
+    "guardar": "Guardar cambios",
+    "guardada": "Tarea actualizada. Si cambiaste la fecha, la semana de tus estudiantes se reorganiza sola.",
+    "confirmarBorrar": "Se borrarán la tarea, sus entregas, las conversaciones con el tutor y los informes. No se puede deshacer.",
+    "borrada": "Tarea borrada.",
+    "cancelar": "Cancelar"
+  },
+  "entrega": {
+    "titulo": "Entrega de {nombre}",
+    "texto": "Lo que escribió",
+    "sinTexto": "No escribió texto.",
+    "archivos": "Archivos y fotos",
+    "sinArchivos": "Sin archivos.",
+    "abrir": "Abrir",
+    "verificacion": "Verificación",
+    "sinVerificacion": "Todavía no hizo la verificación.",
+    "pregunta": "Pregunta {n}",
+    "respuesta": "Respondió",
+    "porVoz": "por voz",
+    "porTexto": "por texto",
+    "sinRespuesta": "Sin responder.",
+    "informe": "Comprensión",
+    "nivel": "Nivel global",
+    "resumen": "Resumen para el docente",
+    "entregada": "Entregada el {fecha}",
+    "cargando": "Cargando la entrega…",
+    "error": "No se pudo cargar la entrega.",
+    "cerrar": "Cerrar"
+  }
+}

@@ -13,7 +13,7 @@
   "grabando": "Recording · up to two minutes.",
   "transcribiendo": "Processing your voice…",
   "vozOpcional": "Voice is optional. You can always type your answer.",
-  "errorVoz": "We could not transcribe. Type your explanation or try browser dictation.",
+  "errorVoz": "Transcription failed. Your audio is kept on this screen for retrying. You can switch to typing; leaving discards the audio.",
   "dictar": "Try browser dictation",
   "limite": "You reached today's limit of checks. Come back tomorrow to explain this assignment.",
   "voz": {
@@ -22,5 +22,13 @@
     "escuchar": "Listen",
     "callar": "Stop",
     "hablale": "Talk to the tutor"
-  }
+  },
+  "volumen": "Volume: {n} %",
+  "nivelMicrofono": "Microphone level",
+  "permisoChrome": "Chrome Android: tap the icon beside the address → Permissions → Microphone → Allow. Also check Android Settings → Apps → Chrome → Permissions.",
+  "permisoSafari": "Safari iOS: page menu → Website Settings → Microphone → Allow. Also check Settings → Apps → Safari → Microphone.",
+  "reintentarAudio": "Retry this audio",
+  "audioConservado": "Transcription failed. Your audio is kept on this screen for retrying. You can switch to typing; leaving discards the audio.",
+  "escucharAudio": "Listen to my audio",
+  "escribirRespuesta": "I prefer typing (discard audio)"
 }

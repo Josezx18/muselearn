@@ -14,6 +14,7 @@ Estados: ⬜ sin empezar · 🟦 trabajando · 🟨 bloqueado · 🟩 lista para
 | T06 | Informes y panel docente | Codex | `T06-informes-codex` | t06-informes | ✅ | 28 oct: integrada con ruta de respaldo; "Agregar a mi semana" queda como mejora |
 | T07 | Integrador | Claude (chat) | `T07-integrador` | main | 🟦 | 27 oct: integró T01 y T03 |
 | T10 | Exportación CSV | Codex | `T10-csv` | t10-csv | 🟩 | 29 oct: completa; lint/typecheck, 199 pruebas y 4 e2e OK; sin push |
+| T13 | Voz | Codex | `T13-voz` | t13-voz | 🟩 | 29 oct: completa; lint/typecheck, 216 pruebas y seis e2e OK; falta ensayo con micrófono real |
 | T08 | Demo y entrega | José | — | — | ⬜ | |
 | T09 | Calificar y devolver | Codex | `T09-calificar` | t09-calificar | 🟨 | 29 oct: 8/9 criterios, 191 unitarias y 4 e2e OK; conectar limpieza en POST /api/entregas; 0009 sin aplicar |
 

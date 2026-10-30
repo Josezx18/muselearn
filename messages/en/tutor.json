@@ -37,6 +37,12 @@
     "terminar": "End",
     "escribir": "I'd rather type",
     "tu": "You",
-    "tutor": "Tutor"
+    "tutor": "Tutor",
+    "volumen": "Volume: {n} %",
+    "nivelMicrofono": "Microphone level",
+    "permisoChrome": "Chrome Android: tap the icon beside the address → Permissions → Microphone → Allow. Also check Android Settings → Apps → Chrome → Permissions.",
+    "permisoSafari": "Safari iOS: page menu → Website Settings → Microphone → Allow. Also check Settings → Apps → Safari → Microphone.",
+    "reintentarAudio": "Retry this audio",
+    "audioConservado": "Transcription failed. Your audio is kept on this screen for retrying. You can switch to typing; leaving discards the audio."
   }
 }

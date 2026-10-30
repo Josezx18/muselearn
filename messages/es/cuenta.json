@@ -98,5 +98,21 @@
     "cancelar": "Cancelar",
     "eliminarDefinitivo": "Eliminar para siempre",
     "error": "No se pudo eliminar la cuenta. Inténtalo de nuevo."
+  },
+  "voz": {
+    "titulo": "Voz",
+    "voz": "Voz del navegador",
+    "recomendada": "Recomendada: {nombre}",
+    "sistema": "Voz del sistema",
+    "velocidad": "Velocidad: {n}×",
+    "ritmo": "Velocidad de lectura",
+    "pausa": "Hablo despacio: pausa de {n} s",
+    "despacio": "Hablo despacio",
+    "muestra": "Hola, vamos a aprender a tu ritmo.",
+    "probar": "Probar",
+    "noDisponible": "Este navegador no permite leer en voz alta.",
+    "guardado": "Preferencias de voz guardadas en este dispositivo.",
+    "error": "No se pudieron guardar las preferencias. Permite el almacenamiento del sitio.",
+    "local": "Estos ajustes se guardan solo en este dispositivo y se usan en el tutor, la verificación y la conversación."
   }
 }

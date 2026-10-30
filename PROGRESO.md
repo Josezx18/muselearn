@@ -14,6 +14,7 @@ Formato: `- AAAA-MM-DD HH:MM [Txx] qué se hizo / qué falta / decisión tomada`
 5. T08 demo y entregables
 
 ## Mejoras propuestas (por los agentes; el integrador decide)
+- [T13] Validar y ajustar la detección de turnos con micrófonos reales y ruido de aula en Android/iOS.
 - [T10] Centralizar descargas binarias en api-cliente para comunicar errores del servidor dentro de la página.
 - [T10] Para clases grandes, paginar consultas y transmitir CSV para superar el límite de filas de Supabase.
 - [T09] Versionar los intentos de entrega/verificación para conservar evidencia histórica al corregir sin reutilizar preguntas o informes anteriores.
@@ -62,3 +63,5 @@ Formato: `- AAAA-MM-DD HH:MM [Txx] qué se hizo / qué falta / decisión tomada`
 - 2026-10-28 [T07] Datos de demo: `supabase/seed-demo.sql` (generado por `supabase/demo/generar-seed-demo.py`, validado con los contratos): 5 estudiantes ficticios, 4 tareas, entregas, informes y rutas; la historia muestra "entregó 100 % / comprendió 60 %" y el caso de copia (Sofía). seed-auth crea ahora 5 estudiantes. **Pendiente: ejecutar el SQL** (el servidor de Supabase pidió confirmación y no hubo respuesta). Prueba e2e `e2e/flujo-demo.spec.ts`: 14/14 OK en escritorio y celular.
 - 2026-10-28 [T07] Arreglo en producción: los contratos rechazaban las fechas de Supabase ("+00:00"); `FechaHora = z.iso.datetime({ offset: true })` en `contratos.ts`. Síntoma: las tareas no cargaban y crear clase daba error aunque se guardaba. Prueba de regresión en `src/types/contratos.test.ts`.
 - 2026-10-28 [T07] Rediseño visual "el cuaderno": papel cuadriculado, tinta azul, verde pizarra, resaltador solo para "lo próximo" y la evidencia; tipografías Bricolage Grotesque (títulos), Lexend (lectura) y Caveat (lo que el estudiante "escribe"). Portada nueva con la hoja de cuaderno; Hoy como horario; tarea con instrucciones en papel; tutor tipo chat; verificación con botón de voz grande; panel docente con la comparación entregó/comprendió; informe con la evidencia resaltada. Arreglados los textos de nivel de ayuda que faltaban. 380 px y escritorio revisados; 123 pruebas y 14 e2e OK.
+
+- 2026-10-29 [T13] Voz configurable por idioma, velocidad y pausa persistidas localmente; fondo adaptable, medidor accesible, ayuda de permisos Android/iOS, limpieza de markdown/emojis/enlaces y reintento único con audio recuperable. lint/typecheck y 216 pruebas OK (10 omitidas); seis e2e con mocks y revisión visual a 380/1280 px, es/en. Falta ensayo con micrófono físico (documentado en ficha). Sin push ni merge.

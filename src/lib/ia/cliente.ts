@@ -320,8 +320,7 @@ export function crearTranscriptor(env: NodeJS.ProcessEnv = process.env, hacerFet
     if (claves.length) ajustes.keywords = claves;
 
     let ultimoError = "";
-    // 2 intentos: el segundo si el servicio respondió 429 o 5xx (según la documentación de Meta),
-    // o si rechazó la petición por las palabras clave: se reintenta sin ellas (la voz es más importante).
+    // El navegador reintenta red/5xx una vez. Aquí se corrigen keywords rechazadas y se respeta el reintento 429.
     for (let intento = 0; intento < 2; intento++) {
       const cuerpo = new FormData();
       cuerpo.append("request", new Blob([JSON.stringify(ajustes)], { type: "application/json" }));
@@ -330,7 +329,11 @@ export function crearTranscriptor(env: NodeJS.ProcessEnv = process.env, hacerFet
         method: "POST",
         headers: { Authorization: `Bearer ${env.MODEL_API_KEY}` },
         body: cuerpo,
+      }).catch((e: unknown) => {
+        ultimoError = e instanceof Error ? e.message : "error_red";
+        return null;
       });
+      if (!r) break;
       if (r.ok) {
         const datos = (await r.json()) as { transcript?: unknown; audioDurationMs?: unknown };
         console.info(`[ia] voz ${modelo} audio=${String(datos.audioDurationMs ?? "?")}ms`);
@@ -341,8 +344,8 @@ export function crearTranscriptor(env: NodeJS.ProcessEnv = process.env, hacerFet
         delete ajustes.keywords;
         continue;
       }
-      if (r.status !== 429 && r.status < 500) break;
-      await new Promise((listo) => setTimeout(listo, 800 * (intento + 1)));
+      if (r.status === 429 && intento === 0) { await new Promise(listo => setTimeout(listo, 800)); continue; }
+      break;
     }
     throw new ErrorIA(`No se pudo transcribir el audio: ${ultimoError}`, [{ proveedor: "meta", error: ultimoError }]);
   };

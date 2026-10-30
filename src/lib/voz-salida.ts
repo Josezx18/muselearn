@@ -6,7 +6,25 @@ import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "
 const CLAVE = "muselearn-voz";
 const oyentes = new Set<() => void>();
 
-/** ¿La voz del tutor está activada en este dispositivo? (por defecto, sí) */
+/** Preferencias locales compartidas por todas las salidas de voz. */
+export interface PreferenciasVoz { voces: Record<string, string>; velocidad: number; pausaMs: number }
+export function leerPreferenciasVoz(): PreferenciasVoz {
+  const defecto = { voces: {}, velocidad: 1, pausaMs: 1300 };
+  try {
+    const p = JSON.parse(localStorage.getItem("muselearn-voz-ajustes") ?? "null") as {voces?: unknown; velocidad?: unknown; pausaMs?: unknown} | null;
+    return { voces: typeof p?.voces === "object" && p.voces !== null ? Object.fromEntries(Object.entries(p.voces).filter((entrada): entrada is [string, string] => typeof entrada[1] === "string")) : {},
+      velocidad: typeof p?.velocidad === "number" && p.velocidad >= 0.8 && p.velocidad <= 1.3 ? p.velocidad : 1,
+      pausaMs: typeof p?.pausaMs === "number" && p.pausaMs >= 1000 && p.pausaMs <= 2000 ? p.pausaMs : 1300 };
+  } catch { return defecto; }
+}
+export function guardarPreferenciasVoz(p: PreferenciasVoz): boolean {
+  try { localStorage.setItem("muselearn-voz-ajustes", JSON.stringify(p)); oyentes.forEach(o => o()); return true; }
+  catch { return false; }
+}
+export function vocesPorIdioma(voces: SpeechSynthesisVoice[], idioma: "es" | "en") {
+  return voces.filter(v => puntuarVoz(v, idioma) >= 0).sort((a,b) => puntuarVoz(b, idioma) - puntuarVoz(a, idioma));
+}
+
 function leerActiva(): boolean {
   try {
     return localStorage.getItem(CLAVE) !== "no";
@@ -47,9 +65,19 @@ export function puntuarVoz(v: { name: string; lang: string; localService?: boole
 /** Quita lo que no se debe leer en voz alta (markdown, emojis, URLs). */
 export function textoParaVoz(texto: string): string {
   return texto
-    .replace(/https?:\/\/\S+/g, "")
+    .replace(/```[\s\S]*?```|~~~[\s\S]*?~~~/g, " ")
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, " ")
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
+    .replace(/\[([^\]]+)\]\[[^\]]*\]/g, "$1")
+    .replace(/^\s*\[[^\]]+\]:.*$/gm, " ")
+    .replace(/(?:https?:\/\/|www\.)\S+/gi, " ")
+    .replace(/<[^>]*>/g, " ")
+    .replace(/^\s*(?:[-+*]|\d+[.)])\s+/gm, "")
+    .replace(/^\s*[-=]{3,}\s*$/gm, " ")
     .replace(/[*_#`>~|]/g, "")
-    .replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/gu, "")
+    .replace(/[#*0-9]\uFE0F?\u20E3/gu, "")
+    .replace(/[\p{Extended_Pictographic}\p{Regional_Indicator}\p{Emoji_Modifier}\u200D\uFE0F\u20E3]/gu, "")
+    .replace(/[\[\]]/g, "")
     .replace(/\s+/g, " ")
     .trim();
 }
@@ -102,7 +130,10 @@ export function useVozSalida(locale: string) {
       const u = new SpeechSynthesisUtterance(limpio);
       u.lang = voz.current?.lang ?? (idioma === "es" ? "es-US" : "en-US");
       if (voz.current) u.voice = voz.current;
-      u.rate = 1;
+      const preferencias = leerPreferenciasVoz();
+      const elegida = vocesPorIdioma(window.speechSynthesis.getVoices(), idioma).find(v => v.voiceURI === preferencias.voces[idioma]) ?? voz.current;
+      if (elegida) { u.voice = elegida; u.lang = elegida.lang; }
+      u.rate = preferencias.velocidad;
       u.pitch = 1.05;
       u.onstart = () => setHablando(true);
       u.onend = () => {

@@ -17,6 +17,7 @@ Estados: ⬜ sin empezar · 🟦 trabajando · 🟨 bloqueado · 🟩 lista para
 | T13 | Voz | Codex | `T13-voz` | t13-voz | 🟩 | 29 oct: completa; lint/typecheck, 216 pruebas y seis e2e OK; falta ensayo con micrófono real |
 | T15 | Datos demo | Codex | `T15-demo` | t15-demo-datos | 🟨 | 29 oct: 6/7; SQL idempotente probado localmente; falta conectar detalles/comentarios/semana en api-cliente |
 | T08 | Demo y entrega | José | — | — | ⬜ | |
+| T18 | Pruebas RLS | Codex | `T18-rls` | t18-rls | 🟩 | 29 oct: batería completa; 211/214 casos RLS, 3 reproducen H01; lint/typecheck y 228 unitarias OK; requiere corrección del integrador |
 | T09 | Calificar y devolver | Codex | `T09-calificar` | t09-calificar | 🟨 | 29 oct: 8/9 criterios, 191 unitarias y 4 e2e OK; conectar limpieza en POST /api/entregas; 0009 sin aplicar |
 
 ## Orden de integración previsto

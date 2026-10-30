@@ -1,12 +1,23 @@
+import { execSync, spawn, type ChildProcess } from "node:child_process";
+import { mkdirSync, writeFileSync } from "node:fs";
+import { join } from "node:path";
 import { test, expect } from "@playwright/test";
 import lighthouse from "lighthouse";
 import { launch } from "chrome-launcher";
 import type { Flags } from "lighthouse";
 
 // Lighthouse móvil ≥ 85 en Hoy, Tarea y Comprensión (T20).
-// Ejecuta con: npx playwright test e2e/rendimiento.spec.ts
+//
+// Mide SIEMPRE un build de producción con mocks, nunca el servidor `next dev`:
+//   npx playwright test --config=playwright.lighthouse.config.ts
+//
+// El spec levanta `npm run build` y `npm run start -p 3100` con NEXT_PUBLIC_USAR_MOCKS=true.
+// Si defines LH_URL (p. ej. una instancia de producción ya desplegada), mide esa URL y no levanta nada.
+// Respeta el Chrome instalado vía chrome-launcher (o CHROME_PATH). Sin dependencias nuevas.
 
-const URL_BASE = process.env.LH_URL ?? "http://localhost:3000";
+const PUERTO = 3100;
+const URL_BASE = process.env.LH_URL ?? `http://localhost:${PUERTO}`;
+const AUTOGESTION = !process.env.LH_URL && process.env.LH_SELF_HOST === "1";
 const RUTAS = [
   { nombre: "Hoy", ruta: "/es/estudiante/hoy", umbral: 85 },
   { nombre: "Tarea", ruta: "/es/estudiante/tarea/00000000-0000-4000-8000-000000000201", umbral: 85 },
@@ -28,11 +39,24 @@ const lighthouseFlags: Flags = {
   },
 };
 
+const entornoMocks = { ...process.env, NEXT_PUBLIC_USAR_MOCKS: "true" };
+
+async function esperarServidor(url: string, timeoutMs = 90_000) {
+  const fin = Date.now() + timeoutMs;
+  while (Date.now() < fin) {
+    try {
+      const res = await fetch(url);
+      if (res.ok) return;
+    } catch {
+      // aún arrancando
+    }
+    await new Promise((r) => setTimeout(r, 500));
+  }
+  throw new Error(`El servidor de producción no respondió en ${url}`);
+}
+
 async function medirLighthouse(url: string, puerto: number) {
-  const resultado = await lighthouse(url, {
-    ...lighthouseFlags,
-    port: puerto,
-  });
+  const resultado = await lighthouse(url, { ...lighthouseFlags, port: puerto });
   if (!resultado?.lhr) {
     throw new Error("Lighthouse no devolvió resultados");
   }
@@ -42,14 +66,39 @@ async function medirLighthouse(url: string, puerto: number) {
 }
 
 test.describe("Lighthouse móvil (T20)", () => {
+  test.skip(
+    !AUTOGESTION && !process.env.LH_URL,
+    "Ejecuta con --config=playwright.lighthouse.config.ts (build+start con mocks) o define LH_URL.",
+  );
+
   let chrome: Awaited<ReturnType<typeof launch>>;
+  let servidor: ChildProcess | null = null;
 
   test.beforeAll(async () => {
+    if (AUTOGESTION) {
+      // Build de producción con mocks (explícito, no `next dev`).
+      execSync("npm run build", { stdio: "inherit", env: entornoMocks });
+      const nextBin = join(process.cwd(), "node_modules", "next", "dist", "bin", "next");
+      servidor = spawn(process.execPath, [nextBin, "start", "-p", String(PUERTO)], {
+        stdio: "ignore",
+        env: entornoMocks,
+      });
+      await esperarServidor(`${URL_BASE}/es`);
+    }
+
     chrome = await launch({ chromeFlags: ["--headless", "--no-sandbox", "--disable-gpu"] });
   });
 
   test.afterAll(async () => {
-    await chrome.kill();
+    await chrome?.kill();
+    if (servidor?.pid) {
+      try {
+        if (process.platform === "win32") execSync(`taskkill /PID ${servidor.pid} /T /F`);
+        else process.kill(servidor.pid, "SIGTERM");
+      } catch {
+        // el proceso ya terminó
+      }
+    }
   });
 
   for (const { nombre, ruta, umbral } of RUTAS) {
@@ -57,6 +106,15 @@ test.describe("Lighthouse móvil (T20)", () => {
       const url = `${URL_BASE}${ruta}`;
       const { performance, accessibility } = await medirLighthouse(url, chrome.port!);
       console.log(`[${nombre}] Performance: ${performance}, Accessibility: ${accessibility}`);
+
+      // Evidencia: guarda las puntuaciones medidas.
+      const carpeta = join(process.cwd(), "test-results", "lighthouse");
+      mkdirSync(carpeta, { recursive: true });
+      writeFileSync(
+        join(carpeta, `${nombre}.json`),
+        JSON.stringify({ nombre, url, performance, accessibility, fecha: new Date().toISOString() }, null, 2),
+      );
+
       expect(performance).toBeGreaterThanOrEqual(umbral);
       expect(accessibility).toBe(100);
     });

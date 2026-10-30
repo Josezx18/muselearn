@@ -26,7 +26,7 @@ Estados: ⬜ sin empezar · 🟦 trabajando · 🟨 bloqueado · ✅ integrada
 | T17 | Mocks y deudas | Codex | t17-deuda | ✅ | Mocks por entrega y nueva verificación tras corregir. |
 | T18 | Pruebas RLS | Codex | t18-rls | ✅ | H01 corregido con 0011; 214/214 RLS según relevo. |
 | T19 | Arreglos del ensayo | Codex | t19-ensayo | 🟨 | Sin fallos funcionales confirmados en el ensayo automatizado; falta ensayo físico y persistencia autenticada. |
-| T20 | Rendimiento móvil | OpenCode | t20-rendimiento | ⬜ | Objetivos definidos; sesión aún no creada. |
+| T20 | Rendimiento móvil | OpenCode | t20-rendimiento | 🟦 | Criterios [x]: Lighthouse móvil Hoy 92 / Tarea 93 / Comprensión 88 (A11y 100), a11y 64/64, semana 6/6. Pendiente de integrar por T07. |
 
 ## Cierre del hackathon
 

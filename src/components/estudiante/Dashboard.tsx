@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { addDays, format, isSameDay } from "date-fns";
+import { addDays, isSameDay } from "date-fns";
 import { Link } from "@/i18n/navigation";
 import { actualizarBloque, recalcularPlan } from "@/lib/api-cliente";
 import { Button, Card, Skeleton } from "@/components/ui";
@@ -10,8 +10,11 @@ import { TarjetaTarea } from "./TarjetaTarea";
 import { enlaceDeBloque } from "@/lib/practica";
 import dynamic from "next/dynamic";
 
-const ConMascota = dynamic(() => import("@/components/comun/mascotas/ConMascota").then((m) => m.ConMascota), { ssr: false });
+const MascotaSidebar = dynamic(() => import("@/components/comun/mascotas/MascotaSidebar").then((m) => m.MascotaSidebar), { ssr: false });
 const MascotaBoton = dynamic(() => import("@/components/comun/mascotas/ConMascota").then((m) => m.MascotaBoton), { ssr: false });
+
+const isoFecha = (d: Date) =>
+  `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
 
 interface DashboardProps {
   vista: "hoy" | "semana";
@@ -28,6 +31,7 @@ export function Dashboard({ vista, usuario, plan: planInicial, tareas: tareasIni
   const locale = useLocale();
   const tm = useTranslations("mascota.hoy");
   const [semana, setSemana] = useState(semanaInicial);
+  const [semanaPendiente, setSemanaPendiente] = useState(semanaInicial);
   const [plan, setPlan] = useState<PlanSemanal | null>(planInicial);
   const [tareas] = useState<Tarea[]>(tareasIniciales);
   const [analisis] = useState<AnalisisTarea[]>(analisisInicial);
@@ -42,6 +46,23 @@ export function Dashboard({ vista, usuario, plan: planInicial, tareas: tareasIni
     if (vista === "semana" && !cargando) refHoy.current?.scrollIntoView({ block: "nearest", inline: "start" });
   }, [vista, cargando]);
 
+  async function cargarSemana(nuevaSemana: string) {
+    setSemanaPendiente(nuevaSemana);
+    setCargando(true);
+    setError(false);
+    try {
+      const { obtenerPlan } = await import("@/lib/api-cliente");
+      const nuevoPlan = await obtenerPlan(nuevaSemana);
+      setPlan(nuevoPlan);
+      setSemana(nuevaSemana);
+      setCerrados([]);
+    } catch {
+      setError(true);
+    } finally {
+      setCargando(false);
+    }
+  }
+
   async function reorganizar() {
     setOcupado(true);
     setError(false);
@@ -55,6 +76,14 @@ export function Dashboard({ vista, usuario, plan: planInicial, tareas: tareasIni
     }
   }
 
+  function mover(n: number) {
+    const base = new Date(`${semana}T12:00:00`);
+    base.setDate(base.getDate() + n * 7);
+    const lunes = new Date(base);
+    lunes.setDate(lunes.getDate() - ((lunes.getDay() + 6) % 7));
+    void cargarSemana(isoFecha(lunes));
+  }
+
   async function cambiar(b: BloquePlan, estado: EstadoBloque) {
     setOcupado(true);
     setError(false);
@@ -66,11 +95,6 @@ export function Dashboard({ vista, usuario, plan: planInicial, tareas: tareasIni
     } finally {
       setOcupado(false);
     }
-  }
-
-  function mover(n: number) {
-    setCargando(true);
-    setSemana(format(addDays(new Date(`${semana}T12:00:00`), n * 7), "yyyy-MM-dd"));
   }
 
   const hoy = new Date();
@@ -148,7 +172,7 @@ export function Dashboard({ vista, usuario, plan: planInicial, tareas: tareasIni
   const mensajeMascota = proximo ? tm("conProximo", { titulo: proximo.titulo }) : tm("sinPendientes");
 
   return (
-    <ConMascota expresion={proximo ? "hola" : "lograste"} mensaje={mensajeMascota} hrefConversar={conversar}>
+    <div className="min-w-0 lg:grid lg:grid-cols-[minmax(0,1fr)_16rem] lg:gap-8">
       <div className="min-w-0 space-y-8">
         <header className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div className="flex items-end gap-3">
@@ -170,9 +194,7 @@ export function Dashboard({ vista, usuario, plan: planInicial, tareas: tareasIni
             <Button
               variante="secundario"
               tamano="sm"
-              onClick={() => {
-                setCargando(true);
-              }}
+              onClick={() => void cargarSemana(semanaPendiente)}
             >
               {t("reintentar")}
             </Button>
@@ -297,7 +319,7 @@ export function Dashboard({ vista, usuario, plan: planInicial, tareas: tareasIni
                         <h2
                           className={`rounded-xl px-3 py-2 text-base font-extrabold capitalize ${esHoy ? "bg-tinta text-white" : "bg-superficie border-2 border-borde"}`}
                         >
-                          {d.toLocaleDateString(locale, { weekday: "long", day: "numeric" })}
+                          <time dateTime={isoFecha(d)}>{d.toLocaleDateString(locale, { weekday: "long", day: "numeric" })}</time>
                         </h2>
                         {entregasDia.map((ta) => (
                           <Link
@@ -328,6 +350,9 @@ export function Dashboard({ vista, usuario, plan: planInicial, tareas: tareasIni
           </>
         )}
       </div>
-    </ConMascota>
+      <aside className="hidden lg:block">
+        <MascotaSidebar expresion={proximo ? "hola" : "lograste"} mensaje={mensajeMascota} hrefConversar={conversar} />
+      </aside>
+    </div>
   );
 }

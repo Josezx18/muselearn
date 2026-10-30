@@ -169,14 +169,14 @@
     animation-delay: var(--retraso, 0ms);
   }
 }
+/* Revelado sin tocar la opacidad: el texto siempre es plenamente opaco, así el contraste
+   medido por axe es siempre el real (una animación de opacidad lo falseaba a mitad de fundido). */
 @keyframes aparece {
   from {
-    opacity: 0;
     transform: translateY(6px);
     clip-path: inset(0 100% 0 0);
   }
   to {
-    opacity: 1;
     transform: none;
     clip-path: inset(0 0 0 0);
   }

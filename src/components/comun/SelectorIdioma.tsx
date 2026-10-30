@@ -14,7 +14,7 @@ export function SelectorIdioma({ className }: { className?: string }) {
   const [pendiente, iniciar] = useTransition();
 
   return (
-    <div role="group" aria-label={t("etiqueta")} className={cn("inline-flex rounded-lg border border-borde bg-superficie p-0.5", className)}>
+    <div role="group" aria-label={t("etiqueta")} className={cn("inline-flex rounded-lg border border-borde bg-superficie p-1", className)}>
       {routing.locales.map((l: Locale) => (
         <button
           key={l}
@@ -24,7 +24,7 @@ export function SelectorIdioma({ className }: { className?: string }) {
           disabled={pendiente}
           onClick={() => iniciar(() => router.replace(ruta, { locale: l }))}
           className={cn(
-            "rounded-md px-2 py-1 text-xs font-bold uppercase",
+            "rounded-md px-3 py-2 text-sm font-bold uppercase min-h-[44px] min-w-[44px]",
             actual === l ? "bg-primario text-white" : "text-tinta-suave hover:text-tinta",
           )}
           title={t(l)}

@@ -92,14 +92,14 @@ export function MascotaBoton({
       key={toque}
       type="button"
       aria-label={t("hablar")}
-      className="shrink-0 rounded-full"
+      className={cn("shrink-0 rounded-full min-h-[44px] min-w-[44px] flex items-center justify-center", className)}
       onClick={() => {
         setToque((n) => n + 1);
         if (hrefConversar) router.push(hrefConversar);
         else alTocar?.();
       }}
     >
-      <Mascota {...mascota} className={cn(className, toque > 0 && "mascota-toque")} />
+      <Mascota {...mascota} className={cn("size-10", toque > 0 && "mascota-toque")} />
     </button>
   );
 }

@@ -82,5 +82,20 @@
     }
   },
   "exportarError": "No se pudo descargar el CSV.",
-  "exportarEntregas": "Descargar entregas (CSV)"
+  "exportarEntregas": "Descargar entregas (CSV)",
+  "calificacion": {
+    "titulo": "Calificación y corrección",
+    "nota": "Nota (0–100, opcional)",
+    "guardar": "Guardar nota",
+    "motivo": "Motivo de la devolución",
+    "devolver": "Devolver para corregir",
+    "devuelta": "Devuelta",
+    "sinNota": "Sin nota",
+    "valor": "Nota: {nota}/100",
+    "aviso": "Tu docente te pidió corregir: {motivo}",
+    "cargando": "Cargando calificación…",
+    "error": "No se pudo cargar o guardar la calificación.",
+    "guardado": "Cambios guardados.",
+    "reintentar": "Reintentar"
+  }
 }

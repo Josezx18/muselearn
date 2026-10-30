@@ -15,6 +15,7 @@ Estados: ⬜ sin empezar · 🟦 trabajando · 🟨 bloqueado · 🟩 lista para
 | T07 | Integrador | Claude (chat) | `T07-integrador` | main | 🟦 | 27 oct: integró T01 y T03 |
 | T10 | Exportación CSV | Codex | `T10-csv` | t10-csv | 🟩 | 29 oct: completa; lint/typecheck, 199 pruebas y 4 e2e OK; sin push |
 | T08 | Demo y entrega | José | — | — | ⬜ | |
+| T09 | Calificar y devolver | Codex | `T09-calificar` | t09-calificar | 🟨 | 29 oct: 8/9 criterios, 191 unitarias y 4 e2e OK; conectar limpieza en POST /api/entregas; 0009 sin aplicar |
 
 ## Orden de integración previsto
 T00 → T01 → T03 → T02 → T05 → T04 → T06 → seed demo → e2e → despliegue

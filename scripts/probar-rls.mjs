@@ -50,8 +50,8 @@ try {
   iniciado = true;
   exigir(comando('pg_ctl', ['-D', carpeta, '-l', join(carpeta, 'servidor.log'), '-o', `-p ${puerto} -h 127.0.0.1`, '-w', 'start']));
   exigir(sql(readFileSync(resolve(raiz, 'supabase/pruebas-rls/preparar.sql'), 'utf8')));
-  const migraciones = readdirSync(resolve(raiz, 'supabase/migrations')).filter((f) => /^00(0[1-9]|10)_.*\.sql$/.test(f)).sort();
-  if (migraciones.length !== 10) throw new Error('Se esperan exactamente las migraciones 0001–0010');
+  const migraciones = readdirSync(resolve(raiz, 'supabase/migrations')).filter((f) => /^\d{4}_.*\.sql$/.test(f)).sort();
+  if (migraciones.length < 11) throw new Error('Faltan migraciones: se esperan 0001 en adelante');
   for (const archivo of migraciones) exigir(sql(readFileSync(resolve(raiz, 'supabase/migrations', archivo), 'utf8')));
   exigir(sql(datos));
   console.log(`PostgreSQL local: 10 migraciones completas; ${casos.length} casos aislados con ROLLBACK.`);

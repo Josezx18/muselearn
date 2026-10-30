@@ -36,16 +36,16 @@ programación entre **Codex** y **OpenCode**. Léelo completo antes de actuar. F
 - Comandos: `npm run lint`, `npm run typecheck`, `npm test`, `npm run build`,
   `npm run e2e` (con `NEXT_PUBLIC_USAR_MOCKS=true` en el entorno para que corra `e2e/demo-guion.spec.ts`).
 
-## 3. Estado al 29 oct, 10 p. m.
-- `main` = `5bf03fb`, publicado en Vercel. Migraciones **0001–0010 aplicadas** en Supabase.
+## 3. Estado al 30 oct, 6 a. m.
+- `main` integra hasta T18. Publicado en Vercel: `5bf03fb` (falta subir T14, T16, T17, T18 y la 0011). Migraciones 0001–0010 aplicadas; **0011 (protege la identidad de las entregas, hallazgo H01 de T18) pendiente de aplicar** antes de publicar.
 - Integradas: T01–T06 (base), T09 calificar/devolver, T10 CSV, T11 guion de demo, T12 avisos, T13 voz,
   T15 datos de demo, más IA del docente, Google Classroom (modo prueba), entrar con Google, recuperar
   contraseña, privacidad y términos, panel de comprensión (General / Por estudiante / Mapa).
 - 228 pruebas unitarias y 84 e2e pasan.
 - **En curso / pendiente:**
-  - T14 accesibilidad (OpenCode, rama `t14-a11y`): terminar e integrar.
-  - T16 cómo funciona + README + post X, T17 mocks por entrega y deudas, T18 pruebas RLS (Codex):
-    fichas listas, se lanzan con `scripts\windows\oleada-C-T16-T18.bat`.
+  - T14, T16, T17 y T18 integradas. `npm run rls` (T18) pasa 214/214 con la 0011.
+  - Pendiente de T14: Lighthouse móvil de Hoy (76) y Comprensión (84) bajo la meta de 85; se mejora con
+    `next/font` y más Server Components (ficha nueva si hace falta).
   - Configuración que hace José (no código): proveedor Google en Supabase, Redirect URLs
     (`https://muselearn-five.vercel.app/api/auth/callback**`), `NEXT_PUBLIC_ENTRAR_CON_GOOGLE=true` en Vercel,
     usuarios de prueba en Google Cloud, revisar textos legales con el liceo.
@@ -94,5 +94,7 @@ todos los criterios de tu ficha, sin preguntarme si continuar."
 - Las fichas en modo automático no hacen merge ni push; si una sesión pide permiso, José elige la opción 2.
 
 ## 7. Bitácora del integrador (agrega una línea por cambio, la más nueva arriba)
+- 2026-10-30 06:10 — Claude: integradas T14, T16, T17, T18; migración 0011 contra traslado de entregas (H01);
+  `probar-rls.mjs` aplica todas las migraciones (214/214). En Linux corre como usuario sin root con RLS_PG_BIN.
 - 2026-10-29 22:10 — Claude: integradas T12, T13, T15; avisos de nota/comentario/devolución; 0010 aplicada;
   publicado `5bf03fb`. Fichas T16–T18 listas. T14 en curso.

@@ -27,3 +27,12 @@ T14 midió Lighthouse móvil con mocks (`npm run build && npm start`): Hoy 76, T
 ## Solicitudes al integrador
 ## Decisiones
 ## Bloqueos
+- 2026-10-30 [T07, revisión de 33e1e1c]: no aceptada para integración. La rama informa 34 fallos de accesibilidad y Accessibility 96–97 frente al requisito de 100. No se acepta intercambiar accesibilidad por rendimiento.
+
+## Correcciones solicitadas por T07
+- [ ] **Carga real rota:** las páginas Hoy, Semana y Comprensión importan `api-cliente` desde el servidor. Sus funciones hacen `fetch("/api/...")`: en Node falta una URL absoluta y no se propaga la sesión autenticada. Los mocks ocultan el problema. Conservar la carga autenticada en cliente o solicitar un servicio de servidor específico; no solucionar con una URL pública fija ni con service_role. Probar sin mocks sin imprimir credenciales.
+- [ ] **Semana bloqueada:** `Dashboard.mover()` activa `cargando` y cambia `semana`, pero se eliminó el efecto que pedía el plan y terminaba la carga. Restaurar la navegación entre semanas, el lunes como inicio (se reemplazó por la fecha UTC actual) y el reintento que ahora solo activa `cargando`. Añadir cobertura e2e de avanzar/retroceder y contenido de la semana elegida.
+- [ ] **Accesibilidad:** reproducir y corregir los 34 casos indicados en la ficha. Mantener axe sin serious/critical y Lighthouse Accessibility 100. No relajar las pruebas ni aceptar la regresión. T07 autoriza para esta corrección mínima editar SelectorIdioma, Navegacion y MascotaBoton/ConMascota, además del alcance original.
+- [ ] **Alcance ampliado de forma explícita:** se autorizan `src/lib/fontes.ts`, `src/components/docente/VistaMapa.tsx`, la página de Semana y el e2e de navegación semanal como auxiliares necesarios de T20. Documentar las rutas exactas modificadas. No editar API, DB ni `api-cliente.ts`.
+- [ ] **SSR y carga diferida:** `ConMascota` envuelve todo Dashboard; usarlo con `ssr:false` oculta todo el contenido inicial y anula la ventaja del renderizado servidor. Mantener el contenido inicial visible y diferir solo elementos que lo permitan. Preservar la ubicación y comportamiento de RepasoIA.
+- [ ] **Validación reproducible:** los tests Lighthouse deben medir build+start con mocks de forma explícita, no el servidor dev que levanta por defecto Playwright; respetar Chrome instalado, guardar puntuaciones/evidencia y no añadir dependencias nuevas. Ejecutar lint, typecheck, unitarias, accesibilidad, demo y navegación semanal. Marcar criterios solo cuando pasen; detallar cualquier limitación real.

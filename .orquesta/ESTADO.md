@@ -26,7 +26,7 @@ Estados: ⬜ sin empezar · 🟦 trabajando · 🟨 bloqueado · ✅ integrada
 | T17 | Mocks y deudas | Codex | t17-deuda | ✅ | Mocks por entrega y nueva verificación tras corregir. |
 | T18 | Pruebas RLS | Codex | t18-rls | ✅ | H01 corregido con 0011; 214/214 RLS según relevo. |
 | T19 | Arreglos del ensayo | Codex | t19-ensayo | 🟨 | Sin fallos funcionales confirmados en el ensayo automatizado; falta ensayo físico y persistencia autenticada. |
-| T20 | Rendimiento móvil | OpenCode | t20-rendimiento | ⬜ | Objetivos definidos; sesión aún no creada. |
+| T20 | Rendimiento móvil | OpenCode | t20-rendimiento | 🟦 | Revisión de 33e1e1c: devuelta para corregir carga real en servidor, navegación semanal y regresiones de accesibilidad; no integrada. |
 
 ## Cierre del hackathon
 

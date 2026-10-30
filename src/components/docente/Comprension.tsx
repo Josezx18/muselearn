@@ -1,4 +1,5 @@
 "use client";
+import { BotonExportar } from "@/lib/exportar/BotonExportar";
 import { useEffect, useMemo, useState } from "react";
 import { useFormatter, useTranslations } from "next-intl";
 import { listarClases, cargarComprension } from "@/lib/api-cliente";
@@ -79,6 +80,7 @@ export function Comprension() {
   return (
     <div className="mx-auto grid w-full min-w-0 max-w-6xl gap-5">
       <h1 className="text-4xl font-extrabold">{t("titulo")}</h1>
+      <BotonExportar claseId={clase} tipo="comprension" etiqueta={t("exportarComprension")} error={t("exportarError")} />
       <div className="grid gap-3 sm:grid-cols-2">
         <label htmlFor="comprension-clase" className="grid gap-1">
           {t("clase")}

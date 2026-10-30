@@ -80,5 +80,7 @@
       "ia": "La IA no respondió. Inténtalo de nuevo en un momento.",
       "guardar": "No se pudo guardar el comentario."
     }
-  }
+  },
+  "exportarError": "No se pudo descargar el CSV.",
+  "exportarEntregas": "Descargar entregas (CSV)"
 }

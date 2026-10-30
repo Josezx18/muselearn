@@ -14,6 +14,8 @@ Formato: `- AAAA-MM-DD HH:MM [Txx] qué se hizo / qué falta / decisión tomada`
 5. T08 demo y entregables
 
 ## Mejoras propuestas (por los agentes; el integrador decide)
+- [T10] Centralizar descargas binarias en api-cliente para comunicar errores del servidor dentro de la página.
+- [T10] Para clases grandes, paginar consultas y transmitir CSV para superar el límite de filas de Supabase.
 - [T06] Guardar pasos completados por estudiante en DB para sincronizar dispositivos.
 - [T06] Paginar el mapa de calor y agrupar métricas/resúmenes en una sola consulta para clases grandes.
 - [T06] Hacer transaccional e idempotente la incorporación de rutas al plan, conservándolas al reorganizar.
@@ -39,6 +41,7 @@ Formato: `- AAAA-MM-DD HH:MM [Txx] qué se hizo / qué falta / decisión tomada`
 - 2026-10-26 Discord: se permite cualquier herramienta de programación sin declararla; Muse Code es opcional.
 
 ## Bitácora
+- 2026-10-29 [T10] CSV Excel de entregas y comprensión: sesión y dueño/RLS, BOM UTF-8, punto y coma, fechas en zona del centro, fórmulas neutralizadas, notas opcionales y botones es/en con mocks. lint/typecheck OK; 199 pruebas pasan (10 omitidas), 4 e2e de descarga OK a 380/1280 px y revisión visual. Ficha completa; sin push ni merge.
 - 2026-10-27 [T06] Por instrucción explícita del usuario, se prepara commit de todo el trabajo tras repetir lint y typecheck (OK) y npm test (116 OK, 2 fallos del mock T04, 10 omitidas). La ficha mantiene documentados ambos bloqueos de integración.
 - 2026-10-27 [T06] Ruta real con Muse y validación del prompt 05, endpoints de informe/ruta con permisos, panel docente calculado sin IA, mapa de calor, indicadores y detalle, informe y práctica marcable, es/en. lint/typecheck OK y 14 pruebas T06 OK; UI verificada en Chrome a 380/1280 px. Bloqueos: contrato de pasos en plan T03 y actualización de mock test T04 (suite global: 116 OK, 2 fallos, 10 omitidas). Sin commit por regla de suite completa; detalles y solicitudes en ficha.
 - 2026-10-27 [T04] Cierre de controles: lint y typecheck OK; suite local 94 pruebas OK (10 omitidas: 7 reales opt-in ya ejecutadas aparte y 3 preexistentes). Siete pruebas Muse reales OK. Permisos, WAV y recuperación probados; estado 🟨 por dependencias externas, sin marcar los cuatro criterios pendientes.

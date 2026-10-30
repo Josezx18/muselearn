@@ -20,7 +20,7 @@ test("docente califica y devuelve; estudiante corrige y vuelve a entregar", asyn
     }]));
   });
   await page.goto(`/es/docente/tareas/${tarea}`);
-  await page.getByRole("button", { name: "Ver entrega", exact: true }).first().click();
+  await page.getByRole("listitem").filter({ hasText: "Camila" }).getByRole("button", { name: "Ver entrega", exact: true }).click();
   const dialogo = page.getByRole("dialog");
   const nota = dialogo.getByRole("spinbutton", { name: "Nota (0–100, opcional)" });
   await expect(nota).toBeEnabled();
@@ -57,7 +57,7 @@ test("docente califica y devuelve; estudiante corrige y vuelve a entregar", asyn
   await expect(page.getByText(/Tu docente te pidió corregir:/)).toHaveCount(0);
   await page.goto(`/es/docente/tareas/${tarea}`);
   await expect(page.getByText("Nota: 87,25/100", { exact: true })).toBeVisible();
-  await page.getByRole("button", { name: "Ver entrega", exact: true }).first().click();
+  await page.getByRole("listitem").filter({ hasText: "Camila" }).getByRole("button", { name: "Ver entrega", exact: true }).click();
   await expect(page.getByRole("dialog").getByText("Divido ambos lados entre tres para mantener la igualdad.", { exact: true })).toBeVisible();
   await sinDesborde(page);
   expect(errores).toEqual([]);

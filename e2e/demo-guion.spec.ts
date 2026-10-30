@@ -113,8 +113,8 @@ test("guion: crear con IA → organizar → voz → evidencia Classroom → expl
   await test.step("Docente: General → Por estudiante → borrador editable", async () => {
     await page.goto("/es/docente/comprension");
     await expect(page.getByRole("heading", { name: "Cómo va la clase en cada concepto" })).toBeVisible();
-    await expect(page.getByText("80%", { exact: true })).toBeVisible();
-    await expect(page.getByText("40%", { exact: true })).toBeVisible();
+    await expect(page.getByText("100%", { exact: true })).toBeVisible();
+    await expect(page.getByText("42%", { exact: true })).toBeVisible();
     await pantalla(page, info, "08-general");
     await page.getByRole("tab", { name: "Por estudiante", exact: true }).click();
     await page.getByRole("combobox", { name: "Estudiante", exact: true }).selectOption(id(11));

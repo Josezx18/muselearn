@@ -7,7 +7,7 @@ Frase central: **entregó vs. demostró comprensión**.
 ## Datos y continuidad
 
 Ensayar con `NEXT_PUBLIC_USAR_MOCKS=true`: datos ficticios, sin llamadas a proveedores ni a Classroom.
-Matemática 4to A (`MAT4KQ`) tiene cinco estudiantes: cuatro entregaron (80 %) y dos demostraron comprensión (40 %).
+Matemática 4to A (`MAT4KQ`) tiene doce estudiantes: todos entregaron (100 %) y cinco demostraron comprensión (42 %).
 No narrar el antiguo 100 % / 60 % con los mocks. Sofía necesita apoyo; estos datos no demuestran que copiara.
 
 Los mocks no conservan la tarea nueva al navegar. Después de crearla, hacer un corte explícito a las tareas preparadas.
@@ -25,7 +25,7 @@ Rotular el corte «Otro ejemplo: ecuaciones». Los informes mock son fijos, no u
 | 1:15–1:35 | **Semáforo con Arduino** → mostrar **Abrir Classroom**. En **Tu evidencia**, escribir cómo programó los LED o agregar foto; marcar **Ya la entregué en Google Classroom.** → **Entregar**. | La tarea se entrega en Classroom. Aquí aporta evidencia y confirma que ya la entregó, para después explicar su trabajo. | She submits in Classroom. Here she provides evidence and confirms submission, ready to explain her work. |
 | 1:35–2:00 | Corte rotulado «Otro ejemplo: ecuaciones». **Explícamelo** → **Empezar** → tres respuestas con cortes. Mocks: texto. Real: ensayar voz y foto previamente. | Entregar y comprender son cosas distintas. En esta práctica de ecuaciones, explica por qué hace cada operación y cómo comprueba el resultado. | Submission and understanding are different. In this equations example, she explains each operation and how she checks the result. |
 | 2:00–2:15 | **Tu comprensión** → conceptos, evidencia y **Tu ruta de práctica**. | Recibe un nivel por concepto, evidencia de su explicación y una ruta corta para practicar lo que le falta. | She gets a level per concept, evidence from her explanation, and a short practice path. |
-| 2:15–2:35 | Docente → **Comprensión** → **General**: 80 % / 40 %. **Por estudiante** → elegir Camila; opcional Sofía para mostrar apoyo. | Yo comparo entregó vs. demostró comprensión: aquí, ochenta frente a cuarenta por ciento. Paso de la clase a cada estudiante para saber quién necesita apoyo. | I compare submission with demonstrated understanding: here, eighty versus forty percent. I move from the class overview to each student's needs. |
+| 2:15–2:35 | Docente → **Comprensión** → **General**: 100 % / 42 %. **Por estudiante** → elegir Camila; opcional Sofía para mostrar apoyo. | Yo comparo entregó vs. demostró comprensión: aquí, cien frente a cuarenta y dos por ciento. Paso de la clase a cada estudiante para saber quién necesita apoyo. | I compare submission with demonstrated understanding: here, one hundred versus forty-two percent. I move from the class overview to each student's needs. |
 | 2:35–2:48 | Camila → **Ver entrega** → **Borrador con IA** (u **Otro borrador**). Editar → **Enviar comentario** o **Actualizar**. | Muse sugiere un comentario basado en la entrega y su explicación. Yo lo reviso y lo envío. | Muse drafts feedback from the submission and explanation. I review and send it. |
 | 2:48–2:55 | Portada. | Muse Spark, Muse Voice Transcribe y Muse Spark Open. Entregar no es aprender. Demuéstralo. | Muse Spark, Muse Voice Transcribe and Muse Spark Open. Show what you learned. |
 

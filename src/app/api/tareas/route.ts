@@ -6,6 +6,7 @@ import { NuevaTarea } from "@/lib/db/validacion-tareas";
 import { LIMITES, tareasCreadasHoy } from "@/lib/db/limites";
 import { analizarYGuardar, cargarContextoTarea, estaInscrito } from "@/lib/ia/analizador/servicio";
 import { crearClienteAdmin } from "@/lib/supabase/servidor";
+import { crearAviso, TipoAviso } from "@/lib/db/avisos";
 
 /** Margen para analizar a todos los estudiantes después de responder (segundos). */
 export const maxDuration = 300;
@@ -59,6 +60,15 @@ export async function POST(peticion: Request) {
           .select("estudiante_id")
           .eq("clase_id", clase_id);
         if (!inscripciones?.length) return;
+
+        // Aviso de tarea nueva para cada estudiante inscrito
+        const idsEstudiantes = inscripciones.map((i) => i.estudiante_id);
+        await crearAviso(admin, {
+          usuarioIds: idsEstudiantes,
+          tipo: "tarea_nueva" as TipoAviso,
+          titulo: `Nueva tarea: ${entrada.data.titulo}`,
+          enlace: `/estudiante/tarea/${tarea.id}`,
+        });
 
         const ctx = await cargarContextoTarea(tarea.id);
         if (!ctx) return;

@@ -1,0 +1,17 @@
+{
+  "campana": {
+    "etiqueta": "Notifications, {count} unread",
+    "titulo": "Notifications",
+    "lista": "Notification list",
+    "cargando": "Loading notifications…",
+    "sin_avisos": "No notifications at the moment",
+    "marcar_todos_leidos": "Mark all as read"
+  },
+  "tipos": {
+    "tarea_nueva": "New task",
+    "entrega_devuelta": "Returned submission",
+    "comentario": "Teacher comment",
+    "nota": "Grade published",
+    "tareas_importadas": "Tasks imported"
+  }
+}

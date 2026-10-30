@@ -7,6 +7,7 @@ import { LIMITES, tareasCreadasHoy } from "@/lib/db/limites";
 import { analizarPendientes } from "@/lib/ia/analizador/pendientes";
 import { crearClienteAdmin } from "@/lib/supabase/servidor";
 import { docenteConToken } from "../_comun";
+import { crearAviso, TipoAviso } from "@/lib/db/avisos";
 
 const Entrada = z.object({ curso_id: z.string().min(1).max(64) });
 
@@ -49,6 +50,15 @@ export async function POST(peticion: Request) {
     after(async () => {
       try {
         const { data } = await admin.from("inscripciones").select("estudiante_id").eq("clase_id", claseId);
+        if (data?.length) {
+          const idsEstudiantes = data.map((f) => f.estudiante_id as string);
+          await crearAviso(admin, {
+            usuarioIds: idsEstudiantes,
+            tipo: "tareas_importadas" as TipoAviso,
+            titulo: `Se importaron ${tareas?.nuevas.length ?? 0} tareas nuevas de Classroom`,
+            enlace: `/estudiante/hoy`,
+          });
+        }
         await analizarPendientes(claseId, (data ?? []).map((f) => f.estudiante_id as string));
       } catch (e) {
         console.warn(`[classroom] análisis en segundo plano: ${(e as Error).message}`);

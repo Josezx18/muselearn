@@ -12,17 +12,21 @@
 Que el estudiante y el docente se enteren de lo importante sin buscarlo. Sin correo ni notificaciones push (después del hackathon).
 
 ## Criterios de aceptación
-- [ ] Migración `0010_avisos.sql`: tabla `avisos (id, usuario_id → perfiles, tipo text check in ('tarea_nueva','entrega_devuelta','comentario','nota','tareas_importadas'), titulo text, enlace text (ruta interna que empieza con "/"), leido boolean default false, creado_en)`. RLS: cada usuario lee y marca como leídos solo los suyos (`update` solo de la columna `leido`); crear solo el servidor (service_role). **No la apliques**: la aplica el integrador.
-- [ ] `crearAviso(admin, { usuarioIds, tipo, titulo, enlace })` en `src/lib/db/avisos.ts`. Nunca rompe la acción que lo llama: si falla, solo registra con `console.warn` (y funciona aunque la tabla aún no exista).
-- [ ] Avisos que se crean: tarea nueva → estudiantes de la clase; comentario del docente, nota y entrega devuelta → el estudiante; tareas importadas de Classroom → estudiantes de la clase (un solo aviso por importación).
-- [ ] `GET /api/avisos` (últimos 30 del usuario y cuántos sin leer) y `POST /api/avisos/leidos` (`{ ids }` o todos).
-- [ ] Campana en la barra superior con el número de sin leer; al tocarla se abre una lista accesible (teclado, `aria-expanded`, Escape cierra). Tocar un aviso lo marca leído y lleva a su enlace. Se actualiza al abrir y cada 60 s solo si la pestaña está visible.
-- [ ] Textos en es y en; 380 px sin scroll horizontal; mocks para `NEXT_PUBLIC_USAR_MOCKS=true`.
-- [ ] Pruebas unitarias (`crearAviso` con tabla ausente, enlaces solo internos) y `e2e/avisos.spec.ts`.
+- [x] Migración `0010_avisos.sql`: tabla `avisos (id, usuario_id → perfiles, tipo text check in ('tarea_nueva','entrega_devuelta','comentario','nota','tareas_importadas'), titulo text, enlace text (ruta interna que empieza con "/"), leido boolean default false, creado_en)`. RLS: cada usuario lee y marca como leídos solo los suyos (`update` solo de la columna `leido`); crear solo el servidor (service_role). **No la apliques**: la aplica el integrador.
+- [x] `crearAviso(admin, { usuarioIds, tipo, titulo, enlace })` en `src/lib/db/avisos.ts`. Nunca rompe la acción que lo llama: si falla, solo registra con `console.warn` (y funciona aunque la tabla aún no exista).
+- [x] Avisos que se crean: tarea nueva → estudiantes de la clase; comentario del docente, nota y entrega devuelta → el estudiante; tareas importadas de Classroom → estudiantes de la clase (un solo aviso por importación).
+- [x] `GET /api/avisos` (últimos 30 del usuario y cuántos sin leer) y `POST /api/avisos/leidos` (`{ ids }` o todos).
+- [x] Campana en la barra superior con el número de sin leer; al tocarla se abre una lista accesible (teclado, `aria-expanded`, Escape cierra). Tocar un aviso lo marca leído y lleva a su enlace. Se actualiza al abrir y cada 60 s solo si la pestaña está visible.
+- [x] Textos en es y en; 380 px sin scroll horizontal; mocks para `NEXT_PUBLIC_USAR_MOCKS=true`.
+- [x] Pruebas unitarias (`crearAviso` con tabla ausente, enlaces solo internos) y `e2e/avisos.spec.ts`.
 
 ## Reglas
 - Lee `AGENTS.md`. Antes de cada commit: `npm run lint && npm run typecheck && npm test`. Prefijo `T12:`. Sin atribución de IA; no cambies `user.name`/`user.email`. Sin merge ni push.
 
 ## Solicitudes al integrador
+- Aplicar migración `0010_avisos.sql` en Supabase cuando esté listo.
+
 ## Decisiones
+- Los endpoints `/api/entregas/[id]/comentario/`, `/api/entregas/[id]/calificacion/` y `/api/entregas/[id]/devolver/` son parte de T09 (aún no implementado). Cuando T09 se integre, se debe agregar la llamada a `crearAviso` en esas rutas según lo especificado en la ficha.
+
 ## Bloqueos

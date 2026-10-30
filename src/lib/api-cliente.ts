@@ -37,6 +37,7 @@ import { entregasMock, tareasMock } from "./mocks/tareas";
 import { analisisMock, planSemanalMock } from "./mocks/ia";
 import { mensajesTutorMock, sesionVerificacionMock } from "./mocks/conversacion";
 import { informeMock, mapaComprensionMock, rutaMock } from "./mocks/informes";
+import { avisosMockRespuesta } from "./mocks/avisos";
 
 export const usarMocks = () => process.env.NEXT_PUBLIC_USAR_MOCKS === "true";
 
@@ -481,3 +482,30 @@ export const importarCursoClassroom = (curso_id: string) =>
 
 export const desconectarClassroom = () =>
   usarMocks() ? mock(null) : pedir("/api/integraciones/classroom/desconectar", z.null(), { method: "POST" });
+
+// ---------------- T12 — avisos ----------------
+export const Aviso = z.object({
+  id: z.string().uuid(),
+  usuario_id: z.string().uuid(),
+  tipo: z.string(),
+  titulo: z.string(),
+  enlace: z.string(),
+  leido: z.boolean(),
+  creado_en: z.string(),
+});
+
+export const RespuestaAvisos = z.object({
+  avisos: z.array(Aviso),
+  noLeidos: z.number().int().min(0),
+});
+export type RespuestaAvisos = z.infer<typeof RespuestaAvisos>;
+
+export const listarAvisos = () =>
+  usarMocks()
+    ? mock(avisosMockRespuesta, 300)
+    : pedir("/api/avisos", RespuestaAvisos);
+
+export const marcarAvisosLeidos = (ids?: string[]) =>
+  usarMocks()
+    ? mock({ ok: true }, 200)
+    : pedir("/api/avisos/leidos", z.object({ ok: z.literal(true) }), { method: "POST", body: JSON.stringify({ ids }) });

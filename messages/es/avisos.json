@@ -1,0 +1,17 @@
+{
+  "campana": {
+    "etiqueta": "Notificaciones, {count} sin leer",
+    "titulo": "Avisos",
+    "lista": "Lista de avisos",
+    "cargando": "Cargando avisos…",
+    "sin_avisos": "No hay avisos por ahora",
+    "marcar_todos_leidos": "Marcar todos como leídos"
+  },
+  "tipos": {
+    "tarea_nueva": "Nueva tarea",
+    "entrega_devuelta": "Entrega devuelta",
+    "comentario": "Comentario del docente",
+    "nota": "Nota publicada",
+    "tareas_importadas": "Tareas importadas"
+  }
+}

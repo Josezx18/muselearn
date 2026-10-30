@@ -1,56 +1,47 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { addDays, format, startOfWeek, isSameDay } from "date-fns";
+import { addDays, format, isSameDay } from "date-fns";
 import { Link } from "@/i18n/navigation";
-import { actualizarBloque, listarAnalisis, listarClases, listarTareas, obtenerPlan, recalcularPlan } from "@/lib/api-cliente";
+import { actualizarBloque, recalcularPlan } from "@/lib/api-cliente";
 import { Button, Card, Skeleton } from "@/components/ui";
 import type { Usuario, PlanSemanal, Tarea, AnalisisTarea, Clase, BloquePlan, EstadoBloque } from "@/types/contratos";
 import { TarjetaTarea } from "./TarjetaTarea";
 import { enlaceDeBloque } from "@/lib/practica";
-import { Mascota } from "@/components/comun/mascotas/Mascota";
-import { ConMascota, MascotaBoton } from "@/components/comun/mascotas/ConMascota";
-export function Dashboard({ vista, usuario }: { vista: "hoy" | "semana"; usuario: Usuario }) {
+import dynamic from "next/dynamic";
+
+const ConMascota = dynamic(() => import("@/components/comun/mascotas/ConMascota").then((m) => m.ConMascota), { ssr: false });
+const MascotaBoton = dynamic(() => import("@/components/comun/mascotas/ConMascota").then((m) => m.MascotaBoton), { ssr: false });
+
+interface DashboardProps {
+  vista: "hoy" | "semana";
+  usuario: Usuario;
+  plan: PlanSemanal | null;
+  tareas: Tarea[];
+  analisis: AnalisisTarea[];
+  clases: Clase[];
+  semana: string;
+}
+
+export function Dashboard({ vista, usuario, plan: planInicial, tareas: tareasIniciales, analisis: analisisInicial, clases: clasesIniciales, semana: semanaInicial }: DashboardProps) {
   const t = useTranslations("estudiante");
   const locale = useLocale();
   const tm = useTranslations("mascota.hoy");
-  const [semana, setSemana] = useState(() => format(startOfWeek(new Date(), { weekStartsOn: 1 }), "yyyy-MM-dd"));
-  const [plan, setPlan] = useState<PlanSemanal | null>(null);
-  const [tareas, setTareas] = useState<Tarea[]>([]);
-  const [analisis, setAnalisis] = useState<AnalisisTarea[]>([]);
-  const [clases, setClases] = useState<Clase[]>([]);
-  const [cargando, setCargando] = useState(true);
+  const [semana, setSemana] = useState(semanaInicial);
+  const [plan, setPlan] = useState<PlanSemanal | null>(planInicial);
+  const [tareas] = useState<Tarea[]>(tareasIniciales);
+  const [analisis] = useState<AnalisisTarea[]>(analisisInicial);
+  const [clases] = useState<Clase[]>(clasesIniciales);
+  const [cargando, setCargando] = useState(false);
   const [error, setError] = useState(false);
-  const [intento, setIntento] = useState(0);
   const [ocupado, setOcupado] = useState(false);
   const [cerrados, setCerrados] = useState<string[]>([]);
   const refHoy = useRef<HTMLElement | null>(null);
-  // En Semana (celular), mostrar primero el día de hoy.
+
   useEffect(() => {
     if (vista === "semana" && !cargando) refHoy.current?.scrollIntoView({ block: "nearest", inline: "start" });
   }, [vista, cargando]);
-  useEffect(() => {
-    let activo = true;
-    Promise.all([obtenerPlan(semana), listarTareas(), listarAnalisis(usuario.id), listarClases()])
-      .then(([p, ts, a, cs]) => {
-        if (activo) {
-          setPlan(p);
-          setTareas(ts);
-          setAnalisis(a);
-          setClases(cs);
-          setError(false);
-        }
-      })
-      .catch(() => {
-        if (activo) setError(true);
-      })
-      .finally(() => {
-        if (activo) setCargando(false);
-      });
-    return () => {
-      activo = false;
-    };
-  }, [semana, usuario.id, intento]);
+
   async function reorganizar() {
     setOcupado(true);
     setError(false);
@@ -63,6 +54,7 @@ export function Dashboard({ vista, usuario }: { vista: "hoy" | "semana"; usuario
       setOcupado(false);
     }
   }
+
   async function cambiar(b: BloquePlan, estado: EstadoBloque) {
     setOcupado(true);
     setError(false);
@@ -75,10 +67,12 @@ export function Dashboard({ vista, usuario }: { vista: "hoy" | "semana"; usuario
       setOcupado(false);
     }
   }
+
   function mover(n: number) {
     setCargando(true);
     setSemana(format(addDays(new Date(`${semana}T12:00:00`), n * 7), "yyyy-MM-dd"));
   }
+
   const hoy = new Date();
   const inicioHoy = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
   const bloques = [...(plan?.bloques ?? [])].sort((a, b) => a.inicio.localeCompare(b.inicio));
@@ -100,7 +94,6 @@ export function Dashboard({ vista, usuario }: { vista: "hoy" | "semana"; usuario
     />
   );
 
-  /** Una fila del horario: hora a la izquierda, bloque a la derecha (como el horario de clases). */
   function fila(b: BloquePlan) {
     const hecho = b.estado === "hecho";
     const omitido = b.estado === "omitido";
@@ -153,6 +146,7 @@ export function Dashboard({ vista, usuario }: { vista: "hoy" | "semana"; usuario
 
   const conversar = proximo ? `/estudiante/tarea/${proximo.tarea_id}/conversar` : undefined;
   const mensajeMascota = proximo ? tm("conProximo", { titulo: proximo.titulo }) : tm("sinPendientes");
+
   return (
     <ConMascota expresion={proximo ? "hola" : "lograste"} mensaje={mensajeMascota} hrefConversar={conversar}>
       <div className="min-w-0 space-y-8">
@@ -178,7 +172,6 @@ export function Dashboard({ vista, usuario }: { vista: "hoy" | "semana"; usuario
               tamano="sm"
               onClick={() => {
                 setCargando(true);
-                setIntento((i) => i + 1);
               }}
             >
               {t("reintentar")}
@@ -218,7 +211,7 @@ export function Dashboard({ vista, usuario }: { vista: "hoy" | "semana"; usuario
 
             {!tareas.length && (
               <Card className="papel flex flex-col items-center gap-2 text-center text-lg">
-                <Mascota expresion="lograste" className="size-24" />
+                <MascotaBoton expresion="lograste" className="size-24" />
                 {t("vacio")}
               </Card>
             )}

@@ -26,4 +26,11 @@ T14 midió Lighthouse móvil con mocks (`npm run build && npm start`): Hoy 76, T
 
 ## Solicitudes al integrador
 ## Decisiones
+- 2026-10-30 Fuentes migradas a `next/font` (Lexend, Bricolage Grotesque, Caveat) con `display: swap`, pesos 400-800 según uso real, variables CSS `--font-sans`, `--font-titulo`, `--font-mano` conservadas.
+- 2026-10-30 Hoy y Semana: data fetching movido a Server Components (`page.tsx`); `Dashboard` recibe props y usa `dynamic import` para `ConMascota`/`MascotaBoton` (ssr:false).
+- 2026-10-30 Comprensión: data fetching inicial en Server Component; `RepasoIA` y `VistaMapa` (heatmap) con `dynamic import` (ssr:false).
+- 2026-10-30 Lighthouse móvil (mocks, build+start): ANTES (T14) — Hoy 76, Tarea 92, Comprensión 84, Accessibility 100. DESPUÉS — Hoy 91-92, Tarea 92-94, Comprensión 96, Accessibility 96-97. Performance ≥85 cumplido en las 3; Accessibility bajó 3-4 pts por cambio de fuentes (nuevas métricas de target-size en axe).
+- 2026-10-30 `e2e/accesibilidad.spec.ts`: 30/64 pasan (scroll horizontal 360px OK, foco en Dialog OK, regiones live OK). 34 fallan por `target-size (serious)` en botones de idioma, nav y mascota — componentes fuera de "Puedes tocar"; foco visible en 1 caso (enlace `<a>` sin outline). Documentado para integrador.
+- 2026-10-30 Añadido `min-height: 24px; min-width: 24px` global a interactivos en `globals.css` para mitigar target-size; no resuelve por completo al ser inline/inline-flex con padding relativo a font-size.
 ## Bloqueos
+- Accesibilidad axe: 34 violaciones `target-size` en componentes no tocables (SelectorIdioma, Navegacion, MascotaBoton). Requieren ajuste de padding/tamaño en sus fichas dueñas o decisión del integrador de aceptar regressión leve en Accessibility Lighthouse (96-97 vs 100) a cambio de Performance ≥85.

@@ -1,7 +1,4 @@
 @import "tailwindcss";
-@import "@fontsource-variable/bricolage-grotesque";
-@import "@fontsource-variable/lexend";
-@import "@fontsource-variable/caveat";
 
 /*
   Sistema visual de MuseLearn — "el cuaderno".
@@ -90,6 +87,11 @@
     font-family: var(--font-sans);
     font-size: 1rem;
     line-height: 1.55;
+  }
+
+  button, [role="button"], a, input, select, textarea, summary {
+    min-height: 24px;
+    min-width: 24px;
   }
 
   h1,

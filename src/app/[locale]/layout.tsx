@@ -6,6 +6,7 @@ import { routing } from "@/i18n/routing";
 import { ProveedorToast } from "@/components/ui";
 import { COLOR_BARRA, MASCOTA_POR_DEFECTO, SCRIPT_TEMA, TEMA_POR_DEFECTO } from "@/lib/tema";
 import { DefsMascotas } from "@/components/comun/mascotas/Mascota";
+import { Lexend, Bricolage_Grotesque, Caveat } from "@/lib/fontes";
 import "../globals.css";
 
 export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Promise<Metadata> {
@@ -30,7 +31,7 @@ export default async function LayoutRaiz({ children, params }: LayoutProps<"/[lo
       lang={locale}
       data-tema={TEMA_POR_DEFECTO}
       data-mascota={MASCOTA_POR_DEFECTO}
-      className="h-full antialiased"
+      className={`${Lexend.variable} ${Bricolage_Grotesque.variable} ${Caveat.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <head>

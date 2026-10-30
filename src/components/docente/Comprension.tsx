@@ -2,15 +2,19 @@
 import { BotonExportar } from "@/lib/exportar/BotonExportar";
 import { useEffect, useMemo, useState } from "react";
 import { useFormatter, useTranslations } from "next-intl";
-import { listarClases, cargarComprension } from "@/lib/api-cliente";
+import { cargarComprension } from "@/lib/api-cliente";
 import type { Clase, Tarea, Usuario, Entrega, MapaComprension, NivelDominio } from "@/types/contratos";
 import { Button, Card, NivelDominio as Nivel, Tabs } from "@/components/ui";
 import { fichaEstudiante, necesitanApoyo, resumenPorConcepto, resumenPorTarea, type InformeDeEstudiante } from "@/lib/comprension-resumen";
 import { DialogoEntrega } from "@/components/gestion/DialogoEntrega";
-import { RepasoIA } from "./RepasoIA";
+import dynamic from "next/dynamic";
+
+const RepasoIA = dynamic(() => import("./RepasoIA").then((m) => m.RepasoIA), { ssr: false });
+const VistaMapaDynamic = dynamic(() => import("./VistaMapa").then((m) => m.VistaMapa), { ssr: false });
 
 const colores = { 1: "bg-nivel-1 text-white", 2: "bg-nivel-2 text-tinta", 3: "bg-nivel-3 text-white", 4: "bg-nivel-4 text-white" };
 const NIVELES = [1, 2, 3, 4] as const;
+
 type Datos = {
   mapa: MapaComprension;
   estudiantes: Usuario[];
@@ -18,40 +22,27 @@ type Datos = {
   tareas: Tarea[];
   informes: InformeDeEstudiante[];
 };
+
 type Vista = "general" | "estudiante" | "mapa";
 
-/**
- * Panel de comprensión del docente. Tres vistas: General (cómo va la clase por concepto y por tarea, y quién
- * necesita apoyo), Por estudiante (su ficha en todas las tareas) y Mapa (estudiante × concepto).
- */
-export function Comprension() {
+interface ComprensionProps {
+  clases: Clase[];
+  datosIniciales: Datos | null;
+  claseIdInicial: string;
+}
+
+export function Comprension({ clases, datosIniciales, claseIdInicial }: ComprensionProps) {
   const t = useTranslations("docente"),
     comun = useTranslations("informes");
-  const [clases, setClases] = useState<Clase[]>([]),
-    [clase, setClase] = useState("");
-  const [tareas, setTareas] = useState<Tarea[]>([]),
-    [tarea, setTarea] = useState("");
-  const [datos, setDatos] = useState<Datos | null>(null),
-    [seleccion, setSeleccion] = useState("");
+  const [clase, setClase] = useState(claseIdInicial);
+  const [tareas, setTareas] = useState<Tarea[]>(datosIniciales?.tareas ?? []);
+  const [tarea, setTarea] = useState("");
+  const [datos, setDatos] = useState<Datos | null>(datosIniciales);
+  const [seleccion, setSeleccion] = useState("");
   const [vista, setVista] = useState<Vista>("general");
   const [error, setError] = useState(false),
     [intento, setIntento] = useState(0);
-  useEffect(() => {
-    let activo = true;
-    listarClases()
-      .then((cs) => {
-        if (activo) {
-          setClases(cs);
-          setClase(cs[0]?.id ?? "");
-        }
-      })
-      .catch(() => {
-        if (activo) setError(true);
-      });
-    return () => {
-      activo = false;
-    };
-  }, [intento]);
+
   useEffect(() => {
     if (!clase) return;
     let activo = true;
@@ -77,6 +68,7 @@ export function Comprension() {
 
   const porcentaje = (ids: string[]) =>
     datos?.estudiantes.length ? Math.round((100 * datos.estudiantes.filter((e) => ids.includes(e.id)).length) / datos.estudiantes.length) : 0;
+
   return (
     <div className="mx-auto grid w-full min-w-0 max-w-6xl gap-5">
       <h1 className="text-4xl font-extrabold">{t("titulo")}</h1>
@@ -162,16 +154,17 @@ export function Comprension() {
               {
                 id: "general",
                 etiqueta: t("vistas.general"),
-                contenido: <VistaGeneral datos={datos} tareaFiltro={tarea} claseId={clase} alVerEstudiante={verEstudiante} />,
+                contenido: <VistaGeneral datos={datos} tareaFiltro={tarea} alVerEstudiante={verEstudiante} />,
               },
               {
                 id: "estudiante",
                 etiqueta: t("vistas.estudiante"),
                 contenido: <VistaEstudiante datos={datos} seleccion={seleccion} alElegir={setSeleccion} />,
               },
-              { id: "mapa", etiqueta: t("vistas.mapa"), contenido: <VistaMapa datos={datos} alVerEstudiante={verEstudiante} /> },
+              { id: "mapa", etiqueta: t("vistas.mapa"), contenido: <VistaMapaDynamic datos={datos} alVerEstudiante={verEstudiante} /> },
             ]}
           />
+          <RepasoIA key={`${clase}-${tarea}`} claseId={clase} tareaId={tarea || undefined} hayInformes={datos.informes.length > 0} />
         </>
       )}
     </div>
@@ -205,16 +198,13 @@ function Leyenda() {
   );
 }
 
-// ---------------- General ----------------
 function VistaGeneral({
   datos,
   tareaFiltro,
-  claseId,
   alVerEstudiante,
 }: {
   datos: Datos;
   tareaFiltro: string;
-  claseId: string;
   alVerEstudiante: (id: string) => void;
 }) {
   const t = useTranslations("docente"),
@@ -337,7 +327,6 @@ function VistaGeneral({
           </ul>
         </Card>
       )}
-      <RepasoIA key={`${claseId}-${tareaFiltro}`} claseId={claseId} tareaId={tareaFiltro || undefined} hayInformes={datos.informes.length > 0} />
     </div>
   );
 }
@@ -351,7 +340,6 @@ function Dato({ etiqueta, valor }: { etiqueta: string; valor: string }) {
   );
 }
 
-// ---------------- Por estudiante ----------------
 function VistaEstudiante({ datos, seleccion, alElegir }: { datos: Datos; seleccion: string; alElegir: (id: string) => void }) {
   const t = useTranslations("docente"),
     tt = useTranslations("tareas");
@@ -435,58 +423,6 @@ function VistaEstudiante({ datos, seleccion, alElegir }: { datos: Datos; selecci
         </Card>
       )}
       <DialogoEntrega entregaId={abierta} nombre={estudiante?.nombre ?? ""} alCerrar={() => setAbierta(null)} />
-    </div>
-  );
-}
-
-// ---------------- Mapa ----------------
-function VistaMapa({ datos, alVerEstudiante }: { datos: Datos; alVerEstudiante: (id: string) => void }) {
-  const t = useTranslations("docente"),
-    comun = useTranslations("informes");
-  return (
-    <div className="grid gap-4">
-      <Leyenda />
-      {!datos.mapa.conceptos.length && <p>{t("vacio")}</p>}
-      <div role="region" aria-label={t("titulo")} tabIndex={0} className="min-w-0 max-w-full overflow-x-auto rounded border border-borde">
-        <table className="w-full border-collapse text-sm">
-          <caption className="sr-only">{t("titulo")}</caption>
-          <thead>
-            <tr>
-              <th className="p-3 text-left">{t("detalle")}</th>
-              {datos.mapa.conceptos.map((c) => (
-                <th className="min-w-36 p-3" key={c}>
-                  {c}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {datos.estudiantes.map((u) => (
-              <tr key={u.id}>
-                <th className="p-3 text-left">
-                  <button className="text-primario underline" onClick={() => alVerEstudiante(u.id)}>
-                    {u.nombre}
-                  </button>
-                </th>
-                {datos.mapa.conceptos.map((c) => {
-                  const nivel = datos.mapa.celdas.find((x) => x.estudiante_id === u.id && x.concepto === c)?.nivel;
-                  return (
-                    <td className="border border-borde p-1" key={c}>
-                      <button
-                        onClick={() => alVerEstudiante(u.id)}
-                        aria-label={`${u.nombre}, ${c}: ${nivel ? `${nivel} · ${comun(`niveles.${nivel}`)}` : t("sinDato")}`}
-                        className={`w-full rounded-lg p-3 font-titulo font-extrabold ${nivel ? colores[nivel] : "bg-nivel-vacio text-tinta-suave"}`}
-                      >
-                        {nivel ?? t("sinDato")}
-                      </button>
-                    </td>
-                  );
-                })}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
     </div>
   );
 }

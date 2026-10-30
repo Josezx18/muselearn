@@ -180,7 +180,7 @@ export function FormularioEntrega({ tareaId, modalidad = "muselearn", entregaExi
                   <li key={e.clave} className="relative">
                     {/* Vista previa local (blob:) — next/image no aplica aquí. */}
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={e.vista} alt={t("entrega.fotoAlt", { numero: i + 1 })} className="h-20 w-20 rounded-lg border border-borde object-cover" />
+                    <img src={e.vista} alt={t("entrega.fotoAlt", { numero: i + 1 })} width="80" height="80" className="h-20 w-20 rounded-lg border border-borde object-cover" />
                     <button
                       type="button"
                       onClick={() => quitar(e.clave)}
@@ -209,6 +209,7 @@ export function FormularioEntrega({ tareaId, modalidad = "muselearn", entregaExi
             type="file"
             accept="image/*"
             capture="environment"
+            aria-label={t("entrega.tomarFoto")}
             className="sr-only"
             tabIndex={-1}
             onChange={(e) => {
@@ -221,6 +222,7 @@ export function FormularioEntrega({ tareaId, modalidad = "muselearn", entregaExi
             type="file"
             accept="application/pdf,image/*"
             multiple
+            aria-label={t("entrega.adjuntosAgregar")}
             className="sr-only"
             tabIndex={-1}
             onChange={(e) => {

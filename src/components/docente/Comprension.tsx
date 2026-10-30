@@ -180,12 +180,10 @@ export function Comprension() {
 
 function Barra({ etiqueta, valor, clase }: { etiqueta: string; valor: number; clase: string }) {
   return (
-    <div>
-      <div className="flex items-baseline justify-between gap-3">
-        <dt className="font-bold">{etiqueta}</dt>
-        <dd className="font-titulo text-3xl font-extrabold tabular-nums">{valor}%</dd>
-      </div>
-      <div className="mt-1.5 h-4 overflow-hidden rounded-full bg-nivel-vacio" aria-hidden>
+    <div className="grid grid-cols-2 items-baseline gap-3">
+      <dt className="font-bold">{etiqueta}</dt>
+      <dd className="text-right font-titulo text-3xl font-extrabold tabular-nums">{valor}%</dd>
+      <div className="col-span-2 h-4 overflow-hidden rounded-full bg-nivel-vacio" aria-hidden>
         <div className={`h-full rounded-full ${clase}`} style={{ width: `${valor}%` }} />
       </div>
     </div>
@@ -476,7 +474,7 @@ function VistaMapa({ datos, alVerEstudiante }: { datos: Datos; alVerEstudiante: 
                     <td className="border border-borde p-1" key={c}>
                       <button
                         onClick={() => alVerEstudiante(u.id)}
-                        aria-label={`${u.nombre}, ${c}: ${nivel ? comun(`niveles.${nivel}`) : t("sinDato")}`}
+                        aria-label={`${u.nombre}, ${c}: ${nivel ? `${nivel} · ${comun(`niveles.${nivel}`)}` : t("sinDato")}`}
                         className={`w-full rounded-lg p-3 font-titulo font-extrabold ${nivel ? colores[nivel] : "bg-nivel-vacio text-tinta-suave"}`}
                       >
                         {nivel ?? t("sinDato")}

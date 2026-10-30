@@ -34,9 +34,9 @@
   --color-peligro-claro: #fcebe7;
 
   /* Niveles de dominio MINERD: 1 Inicial · 2 En proceso · 3 Logrado · 4 Destacado */
-  --color-nivel-1: #d94f3d;
+  --color-nivel-1: #b23a2b;
   --color-nivel-2: #f0a43a;
-  --color-nivel-3: #3a9d7b;
+  --color-nivel-3: #2f7d63;
   --color-nivel-4: #1f6f5c;
   --color-nivel-vacio: #e6eaec;
 
@@ -69,7 +69,7 @@
   --color-primario: #0668e1;
   --color-primario-fuerte: #0050b5;
   --color-primario-claro: #e6f0fd;
-  --color-nivel-3: #2e9e6b;
+  --color-nivel-3: #2b7a5c;
   --color-nivel-4: #0668e1;
 }
 :root[data-tema="muse"] {

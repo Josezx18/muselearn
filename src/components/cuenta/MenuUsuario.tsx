@@ -33,13 +33,15 @@ export function MenuUsuario({ nombre, rol }: { nombre: string; rol: "docente" | 
         type="button"
         aria-haspopup="menu"
         aria-expanded={abierto}
-        aria-label={t("abrir")}
+        aria-label={`${t("abrir")}: ${primerNombre}`}
         onClick={() => setAbierto((a) => !a)}
         className="flex items-center gap-2 rounded-full border border-borde bg-superficie py-1 pl-1 pr-3 hover:border-tinta-suave"
       >
-        <span aria-hidden className="grid size-8 place-items-center rounded-full fondo-ia font-titulo text-sm font-extrabold text-white">
-          {primerNombre.charAt(0).toUpperCase()}
-        </span>
+        <span
+          aria-hidden
+          data-inicial={primerNombre.charAt(0).toUpperCase()}
+          className="grid size-8 place-items-center rounded-full fondo-ia font-titulo text-sm font-extrabold text-white before:content-[attr(data-inicial)]"
+        />
         <span className="hidden max-w-28 truncate text-sm font-bold sm:block">{primerNombre}</span>
         <svg viewBox="0 0 24 24" className="size-4 text-tinta-suave" aria-hidden>
           <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />

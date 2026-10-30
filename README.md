@@ -107,6 +107,8 @@ Work in progress during the hackathon (Oct 27 – Nov 4, 2026).
 
 ## Run it locally
 
+- `npm run rls` — tests RLS against an isolated local PostgreSQL cluster (requires PostgreSQL binaries in PATH or `RLS_PG_BIN`); see [instructions](supabase/pruebas-rls/README.md).
+
 Requirements: Node.js 22+, a Supabase project and a Meta Model API key.
 
 ```bash

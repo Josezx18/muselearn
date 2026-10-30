@@ -11,6 +11,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "e2e": "playwright test",
+    "rls": "node scripts/probar-rls.mjs",
     "prueba:ia": "node --env-file=.env.local scripts/prueba-ia.mjs",
     "seed:auth": "node --env-file=.env.local --experimental-strip-types supabase/seed-auth.ts"
   },

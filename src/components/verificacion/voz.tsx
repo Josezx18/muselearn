@@ -2,8 +2,8 @@
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Button } from "@/components/ui";
-import { transcribirVoz } from "@/lib/api-cliente";
-import { grabarWav } from "./wav";
+
+import { grabarWav, transcribirConReintento } from "./wav";
 
 interface Reconocimiento {
   lang: string;
@@ -33,6 +33,9 @@ export function EntradaVoz({
   const locale = useLocale();
   const [grabando, setGrabando] = useState(false);
   const [procesando, setProcesando] = useState(false);
+  const [volumen, setVolumen] = useState(0);
+  const [permiso, setPermiso] = useState(false);
+  const [audioPendiente, setAudioPendiente] = useState<Blob | null>(null);
   const [fallo, setFallo] = useState(false);
   const disponible = useSyncExternalStore(
     suscribir,
@@ -60,11 +63,14 @@ export function EntradaVoz({
     setGrabando(false);
     setProcesando(true);
     try {
-      const audio = await grabacion.current?.detener();
+      const audio = audioPendiente ?? await grabacion.current?.detener();
       grabacion.current = null;
       if (!audio || audio.size <= 44) throw new Error("audio_vacio");
-      const { texto } = await transcribirVoz(audio, tareaId);
-      if (vigente.current) onTexto(texto);
+      setAudioPendiente(audio);
+      const { texto } = await transcribirConReintento(audio, tareaId);
+      if (!texto.trim()) throw new Error("audio_vacio");
+      setAudioPendiente(null);
+      if (vigente.current) { setFallo(false); onTexto(texto); }
     } catch {
       if (vigente.current) setFallo(true);
     } finally {
@@ -74,8 +80,9 @@ export function EntradaVoz({
   async function empezar() {
     setProcesando(true);
     setFallo(false);
+    setPermiso(false);
     try {
-      const nueva = await grabarWav();
+      const nueva = await grabarWav({ alNivel: setVolumen });
       if (!vigente.current) {
         await nueva.detener();
         return;
@@ -83,7 +90,8 @@ export function EntradaVoz({
       grabacion.current = nueva;
       setGrabando(true);
       timer.current = setTimeout(() => void detener(), 120000);
-    } catch {
+    } catch (e) {
+      setPermiso(e instanceof DOMException && (e.name === "NotAllowedError" || e.name === "SecurityError"));
       setFallo(true);
     } finally {
       if (vigente.current) setProcesando(false);
@@ -114,10 +122,11 @@ export function EntradaVoz({
   }
   return (
     <div className="flex flex-col gap-2">
+      {grabando && <label>{t("volumen", {n: Math.min(100, Math.round(volumen * 500))})}<meter className="block w-full" min={0} max={100} value={Math.min(100, Math.round(volumen * 500))} aria-label={t("nivelMicrofono")} /></label>}
       {disponible && (
         <button
           type="button"
-          disabled={disabled || procesando}
+          disabled={disabled || procesando || Boolean(audioPendiente)}
           onClick={() => void (grabando ? detener() : empezar())}
           aria-pressed={grabando}
           className={`flex min-h-16 items-center gap-3 rounded-2xl border-2 px-3 py-2 text-left font-titulo text-lg font-extrabold transition-colors disabled:opacity-50 ${
@@ -152,6 +161,16 @@ export function EntradaVoz({
           <p role="alert" className="text-peligro">
             {t("errorVoz")}
           </p>
+          {permiso && <div className="text-sm"><p>{t("permisoChrome")}</p><p>{t("permisoSafari")}</p></div>}
+          {audioPendiente && <>
+            <Button type="button" disabled={disabled || procesando} onClick={() => void detener()}>{t("reintentarAudio")}</Button>
+            <audio controls src={undefined} ref={elemento => {
+              if (!elemento || !audioPendiente) return;
+              const url = URL.createObjectURL(audioPendiente); elemento.src = url;
+              return () => URL.revokeObjectURL(url);
+            }} aria-label={t("escucharAudio")} className="w-full" />
+          </>}
+          <Button type="button" variante="fantasma" disabled={disabled || procesando} onClick={() => { setAudioPendiente(null); setFallo(false); }}>{t("escribirRespuesta")}</Button>
           <Button type="button" variante="fantasma" disabled={disabled || procesando} onClick={dictar}>
             {t("dictar")}
           </Button>

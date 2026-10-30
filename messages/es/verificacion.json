@@ -13,7 +13,7 @@
   "grabando": "Grabando · máximo dos minutos.",
   "transcribiendo": "Procesando tu voz…",
   "vozOpcional": "La voz es opcional. Siempre puedes responder por texto.",
-  "errorVoz": "No pudimos transcribir. Escribe tu explicación o prueba el dictado del navegador.",
+  "errorVoz": "No se pudo transcribir. Conservamos el audio en esta pantalla para reintentar. También puedes pasar a escribir; al salir se descarta el audio.",
   "dictar": "Probar dictado del navegador",
   "limite": "Llegaste al límite de verificaciones por hoy. Vuelve mañana para explicar esta tarea.",
   "voz": {
@@ -22,5 +22,13 @@
     "escuchar": "Escuchar",
     "callar": "Detener",
     "hablale": "Háblale al tutor"
-  }
+  },
+  "volumen": "Volumen: {n} %",
+  "nivelMicrofono": "Nivel del micrófono",
+  "permisoChrome": "Chrome Android: toca el icono junto a la dirección → Permisos → Micrófono → Permitir. Revisa también Ajustes de Android → Aplicaciones → Chrome → Permisos.",
+  "permisoSafari": "Safari iOS: menú de la página → Configuración del sitio web → Micrófono → Permitir. Revisa también Ajustes → Apps → Safari → Micrófono.",
+  "reintentarAudio": "Reintentar este audio",
+  "audioConservado": "No se pudo transcribir. Conservamos el audio en esta pantalla para reintentar. También puedes pasar a escribir; al salir se descarta el audio.",
+  "escucharAudio": "Escuchar mi audio",
+  "escribirRespuesta": "Prefiero escribir (descartar audio)"
 }

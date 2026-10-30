@@ -98,5 +98,21 @@
     "cancelar": "Cancel",
     "eliminarDefinitivo": "Delete forever",
     "error": "The account couldn't be deleted. Try again."
+  },
+  "voz": {
+    "titulo": "Voice",
+    "voz": "Browser voice",
+    "recomendada": "Recommended: {nombre}",
+    "sistema": "System voice",
+    "velocidad": "Speed: {n}×",
+    "ritmo": "Reading speed",
+    "pausa": "I speak slowly: {n} s pause",
+    "despacio": "I speak slowly",
+    "muestra": "Hello, let’s learn at your own pace.",
+    "probar": "Try voice",
+    "noDisponible": "This browser cannot read aloud.",
+    "guardado": "Voice preferences saved on this device.",
+    "error": "Could not save preferences. Allow site storage.",
+    "local": "These settings are saved only on this device and used by the tutor, verification and conversation."
   }
 }

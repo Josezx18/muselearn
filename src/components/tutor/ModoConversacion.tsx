@@ -3,11 +3,11 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { ErrorApi, enviarAlTutor, transcribirVoz } from "@/lib/api-cliente";
+import { ErrorApi, enviarAlTutor } from "@/lib/api-cliente";
 import { Mascota } from "@/components/comun/mascotas/Mascota";
-import { grabarWav } from "@/components/verificacion/wav";
-import { useVozSalida } from "@/lib/voz-salida";
-import { nuevoTurno, procesarNivel } from "@/lib/turno-voz";
+import { grabarWav, transcribirConReintento } from "@/components/verificacion/wav";
+import { useVozSalida, leerPreferenciasVoz } from "@/lib/voz-salida";
+import { AJUSTES_TURNO, nuevoTurno, procesarNivel } from "@/lib/turno-voz";
 
 type Estado = "inicio" | "escuchando" | "pensando" | "hablando" | "pausa";
 type Aviso = null | "silencio" | "noTeEscuche" | "sinMicrofono" | "error" | "limite";
@@ -28,6 +28,7 @@ export function ModoConversacion({ tareaId }: { tareaId: string }) {
   const [respuesta, setRespuesta] = useState("");
   const [volumen, setVolumen] = useState(0);
 
+  const [audioPendiente, setAudioPendiente] = useState<Blob | null>(null);
   const vigente = useRef(true);
   const turno = useRef(0); // invalida callbacks de turnos anteriores (al interrumpir o pausar)
   const grabacion = useRef<Awaited<ReturnType<typeof grabarWav>> | null>(null);
@@ -55,13 +56,15 @@ export function ModoConversacion({ tareaId }: { tareaId: string }) {
       setEstado("pensando");
       setVolumen(0);
       try {
-        const { texto } = await transcribirVoz(wav, tareaId);
+        setAudioPendiente(wav);
+        const { texto } = await transcribirConReintento(wav, tareaId);
         if (!vigente.current || miTurno !== turno.current) return;
         if (!texto.trim()) {
           setAviso("noTeEscuche");
-          escucharRef.current();
+          setEstado("pausa");
           return;
         }
+        setAudioPendiente(null);
         setDicho(texto);
         setRespuesta("");
         let completa = "";
@@ -93,13 +96,14 @@ export function ModoConversacion({ tareaId }: { tareaId: string }) {
     voz.callar();
     setEstado("escuchando");
     const vad = nuevoTurno(performance.now());
+    const ajustes = {...AJUSTES_TURNO, pausaMs: leerPreferenciasVoz().pausaMs};
     let cerrado = false;
     try {
       grabacion.current = await grabarWav({
         alNivel: (rms) => {
           if (cerrado || miTurno !== turno.current) return;
           setVolumen(rms);
-          const d = procesarNivel(vad, rms, performance.now());
+          const d = procesarNivel(vad, rms, performance.now(), ajustes);
           if (d === "seguir") return;
           cerrado = true;
           void (async () => {
@@ -116,6 +120,9 @@ export function ModoConversacion({ tareaId }: { tareaId: string }) {
           })();
         },
       });
+      if (!vigente.current || miTurno !== turno.current) { await detenerGrabacion(); return; }
+      // La calibración comienza cuando el micrófono está listo, no mientras pide permiso.
+      vad.inicio = performance.now();
       setAviso(null);
     } catch {
       setAviso("sinMicrofono");
@@ -137,6 +144,7 @@ export function ModoConversacion({ tareaId }: { tareaId: string }) {
 
   /** Tocar a la mascota: si habla, la interrumpe y te escucha; si está en pausa, empieza a escuchar. */
   function tocarMascota() {
+    if (audioPendiente) return;
     if (estado === "hablando" || estado === "pausa" || estado === "inicio") void escuchar();
   }
 
@@ -152,7 +160,7 @@ export function ModoConversacion({ tareaId }: { tareaId: string }) {
   const escala = 1 + Math.min(0.25, volumen * 4);
 
   return (
-    <div className="fixed inset-0 z-50 flex flex-col bg-[#0b1026] text-white">
+    <div className="fixed inset-0 z-50 flex flex-col overflow-y-auto overflow-x-hidden bg-[#0b1026] text-white">
       {/* Fondo: el degradado del tema, suave */}
       <div
         aria-hidden
@@ -170,7 +178,7 @@ export function ModoConversacion({ tareaId }: { tareaId: string }) {
         </Link>
       </header>
 
-      <main className="relative flex flex-1 flex-col items-center justify-center gap-6 px-6">
+      <main className="relative flex shrink-0 flex-1 flex-col items-center justify-center gap-6 px-6">
         <button
           type="button"
           onClick={tocarMascota}
@@ -201,6 +209,12 @@ export function ModoConversacion({ tareaId }: { tareaId: string }) {
           {textoEstado}
         </p>
 
+        {estado === "escuchando" && <label className="w-full max-w-xs">{t("volumen", {n: Math.min(100, Math.round(volumen * 500))})}<meter className="block w-full" min={0} max={100} value={Math.min(100, Math.round(volumen * 500))} aria-label={t("nivelMicrofono")} /></label>}
+        {aviso === "sinMicrofono" && <div className="max-w-md text-sm"><p>{t("permisoChrome")}</p><p>{t("permisoSafari")}</p></div>}
+        {estado === "pausa" && audioPendiente && <div className="grid gap-3">
+          <p role="alert">{t("audioConservado")}</p>
+          <button className="min-h-11 rounded-xl bg-white/15 px-4" onClick={() => { const audio = audioPendiente; if (audio) void responder(audio, ++turno.current); }}>{t("reintentarAudio")}</button>
+        </div>}
         {/* Subtítulos: lo último que dijiste y lo que responde el tutor */}
         <div className="grid w-full max-w-xl gap-3">
           {dicho && (
@@ -231,6 +245,7 @@ export function ModoConversacion({ tareaId }: { tareaId: string }) {
           <>
             <button
               type="button"
+              disabled={estado === "pensando" || Boolean(audioPendiente)}
               onClick={() => (estado === "escuchando" || estado === "hablando" ? pausar() : void escuchar())}
               aria-pressed={estado === "escuchando"}
               aria-label={estado === "escuchando" || estado === "hablando" ? t("pausar") : t("seguir")}

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { nuevoTurno, procesarNivel } from "./turno-voz";
+import { AJUSTES_TURNO, nuevoTurno, procesarNivel } from "./turno-voz";
 
 /** Simula bloques de 85 ms con el volumen dado por la función. */
 function simular(nivel: (ms: number) => number, hastaMs = 60000) {
@@ -37,4 +37,17 @@ describe("turno de habla", () => {
   it("corta los turnos muy largos", () => {
     expect(simular((ms) => (ms < 400 ? 0.004 : 0.1)).d).toBe("maximo");
   });
+});
+
+it("recalibra cuando aumenta el ruido estable", () => {
+  const e = nuevoTurno(0);
+  for (let ms = 0; ms < 8000; ms += 85) expect(procesarNivel(e, ms < 1000 ? 0.01 : 0.04, ms)).toBe("seguir");
+  expect(e.ruido).toBeGreaterThan(0.035);
+});
+it("respeta la pausa de quien habla despacio", () => {
+  const e = nuevoTurno(0);
+  const ajustes = {...AJUSTES_TURNO, pausaMs: 2000};
+  for (let ms = 0; ms < 2000; ms += 85) procesarNivel(e, ms > 500 ? 0.1 : 0.004, ms, ajustes);
+  expect(procesarNivel(e, 0.004, 3500, ajustes)).toBe("seguir");
+  expect(procesarNivel(e, 0.004, 4100, ajustes)).toBe("termino");
 });

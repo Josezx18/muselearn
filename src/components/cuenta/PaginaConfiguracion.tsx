@@ -25,6 +25,8 @@ import type { PreferenciasEstudio } from "@/types/contratos";
 import { franjasValidas, minutosSemana } from "@/lib/horas";
 import { PrivacidadDatos } from "./PrivacidadDatos";
 
+import { leerPreferenciasVoz, guardarPreferenciasVoz, vocesPorIdioma, useVozSalida, type PreferenciasVoz } from "@/lib/voz-salida";
+
 const MUESTRA: Record<Tema, string> = {
   cuaderno: "linear-gradient(135deg, #1f6f5c 0 60%, #ffd84d 60%)",
   meta: "linear-gradient(135deg, #0668e1 0 60%, #ffd84d 60%)",
@@ -49,6 +51,7 @@ export function PaginaConfiguracion({ rol }: { rol: "docente" | "estudiante" }) 
       </header>
       <Apariencia />
       <Idioma />
+      <ConfiguracionVoz />
       {rol === "estudiante" && <HorasDeEstudio />}
       <PrivacidadDatos rol={rol} />
     </div>
@@ -281,4 +284,44 @@ function HorasDeEstudio() {
       </Button>
     </Card>
   );
+}
+
+function ConfiguracionVoz() {
+  const t = useTranslations("cuenta.voz");
+  const locale = useLocale();
+  const idioma = locale === "en" ? "en" : "es";
+  const voz = useVozSalida(locale);
+  const [prefs, setPrefs] = useState<PreferenciasVoz | null>(null);
+  const [voces, setVoces] = useState<SpeechSynthesisVoice[]>([]);
+  const [guardado, setGuardado] = useState<boolean | null>(null);
+  useEffect(() => {
+    const actualizar = () => { setPrefs(leerPreferenciasVoz()); setVoces(window.speechSynthesis?.getVoices() ?? []); };
+    actualizar();
+    window.speechSynthesis?.addEventListener("voiceschanged", actualizar);
+    return () => window.speechSynthesis?.removeEventListener("voiceschanged", actualizar);
+  }, []);
+  if (!prefs) return null;
+  const opciones = vocesPorIdioma(voces, idioma);
+  function cambiar(p: PreferenciasVoz) { setPrefs(p); setGuardado(guardarPreferenciasVoz(p)); }
+  return <Card>
+    <h2 className="text-xl font-bold">{t("titulo")}</h2>
+    <p className="mt-1 text-sm text-tinta-suave">{t("local")}</p>
+    <div className="mt-3 grid min-w-0 gap-4">
+      <label className="grid min-w-0 gap-1">{t("voz")}
+        <select className="min-h-11 w-full min-w-0 rounded-lg border-2 border-borde bg-superficie p-2" value={prefs.voces[idioma] ?? ""} onChange={e => cambiar({...prefs, voces: {...prefs.voces, [idioma]: e.target.value}})}>
+          <option value="">{t("recomendada", {nombre: opciones[0]?.name ?? t("sistema")})}</option>
+          {opciones.map(v => <option key={v.voiceURI} value={v.voiceURI}>{v.name} ({v.lang})</option>)}
+        </select>
+      </label>
+      <label className="grid gap-1">{t("velocidad", {n: prefs.velocidad})}
+        <input aria-label={t("ritmo")} type="range" min="0.8" max="1.3" step="0.1" value={prefs.velocidad} onChange={e => cambiar({...prefs, velocidad: Number(e.target.value)})} />
+      </label>
+      <label className="grid gap-1">{t("pausa", {n: prefs.pausaMs / 1000})}
+        <input aria-label={t("despacio")} type="range" min="1000" max="2000" step="100" value={prefs.pausaMs} onChange={e => cambiar({...prefs, pausaMs: Number(e.target.value)})} />
+      </label>
+      <Button disabled={!voz.disponible} onClick={() => voz.hablar(t("muestra"), {forzar: true})}>{t("probar")}</Button>
+      {!voz.disponible && <p>{t("noDisponible")}</p>}
+      {guardado !== null && <p role="status">{t(guardado ? "guardado" : "error")}</p>}
+    </div>
+  </Card>;
 }

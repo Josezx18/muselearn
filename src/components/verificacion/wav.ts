@@ -1,3 +1,14 @@
+import { ErrorApi, transcribirVoz } from "@/lib/api-cliente";
+
+/** Reenvía el mismo audio una sola vez ante fallos transitorios. */
+export async function transcribirConReintento(audio: Blob, tareaId?: string) {
+  try { return await transcribirVoz(audio, tareaId); }
+  catch (e) {
+    if (!(e instanceof TypeError) && !(e instanceof ErrorApi && e.estado >= 500)) throw e;
+    return transcribirVoz(audio, tareaId);
+  }
+}
+
 /** PCM mono firmado de 16 bits, RIFF/WAVE a 24 kHz. */
 export function codificarWav(muestras: Float32Array, frecuencia: number): Blob {
   if (!Number.isFinite(frecuencia) || frecuencia < 8000) throw new Error("frecuencia_invalida");

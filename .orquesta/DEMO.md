@@ -1,8 +1,10 @@
 ﻿# Guion del video — 2:55 (máximo 3:00)
 
-Ensayo T11, 29 de octubre de 2026. Narración ES, subtítulos EN, interfaz ES.
+Guion T11, revisado por T07 el 30 de octubre de 2026. Narración ES, subtítulos EN, interfaz ES.
 Estudiante en celular (390 px), docente en escritorio (1440 px). Entrega: 4 de noviembre.
 Frase central: **entregó vs. demostró comprensión**.
+
+Materiales listos para edición: [narración y pautas de montaje](../docs/video/GRABACION.md), [subtítulos EN](../docs/video/subtitulos-en.srt) y [paquete de entrega](../docs/ENTREGA.md). Los subtítulos corresponden al montaje previsto; ajustar sus tiempos a la grabación final de José.
 
 ## Datos y continuidad
 

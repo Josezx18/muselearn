@@ -10,7 +10,8 @@ async function pantalla(page: Page, info: TestInfo, nombre: string) {
   await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(0);
   if (process.env.DEMO_CAPTURAS === "true") {
     await mkdir("docs/capturas", { recursive: true });
-    await page.screenshot({ path: `docs/capturas/demo-${nombre}-${info.project.name === "celular" ? 390 : 1440}.png`, fullPage: nombre !== "10-comentario", animations: "disabled", scale: "css" });
+    // En celular, conservar la vista real: una captura larga coloca la barra fija sobre el contenido.
+    await page.screenshot({ path: `docs/capturas/demo-${nombre}-${info.project.name === "celular" ? 390 : 1440}.png`, fullPage: info.project.name !== "celular" && nombre !== "10-comentario", animations: "disabled", scale: "css" });
   }
 }
 

@@ -2,6 +2,18 @@
 
 Tres versiones, cada una en español e inglés. Cada bloque es un post independiente de menos de 280 caracteres. Hashtags descriptivos del hackathon; confirmar las etiquetas oficiales antes de publicar. Sin datos personales de estudiantes.
 
+## Versión con enlace a la app
+
+ES:
+
+¿Quién entregó y quién comprendió? MuseLearn organiza tareas, guía sin resolver y pide explicar el trabajo. El docente ve evidencia y decide. Demo con datos ficticios: https://muselearn-five.vercel.app
+
+EN:
+
+Who submitted, and who understood? MuseLearn plans study, tutors without solving and asks students to explain their work. Teachers review the evidence. Fictional demo: https://muselearn-five.vercel.app
+
+Al publicar el video, adjuntarlo o incluir su enlace y comprobar de nuevo el límite de X; un enlace cuenta según las reglas de la plataforma. Etiquetas y menciones oficiales pendientes de verificar. Estos textos son borradores; no se ha publicado nada desde esta preparación.
+
 ## 1. Aprender / Learning
 
 ES (197 caracteres):

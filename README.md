@@ -43,7 +43,7 @@ Read [How it works (English)](https://muselearn-five.vercel.app/en/como-funciona
 
 **Teacher (1440 px):** create a task with AI, compare submission with demonstrated understanding, move from General to each student, and review AI-drafted feedback.
 
-![Current General view: 80 percent submitted and 40 percent demonstrated understanding](docs/capturas/demo-08-general-1440.png)
+![General view: 100 percent submitted and 42 percent demonstrated understanding](docs/capturas/demo-08-general-1440.png)
 
 | Scene | Desktop | Phone |
 |---|---|---|
@@ -56,7 +56,7 @@ Read [How it works (English)](https://muselearn-five.vercel.app/en/como-funciona
 | Per student | [1440 px](docs/capturas/demo-09-estudiante-1440.png) | [390 px](docs/capturas/demo-09-estudiante-390.png) |
 | Reviewed feedback draft | [1440 px](docs/capturas/demo-10-comentario-1440.png) | [390 px](docs/capturas/demo-10-comentario-390.png) |
 
-*Captured October 29, 2026 with fictional data (`NEXT_PUBLIC_USAR_MOCKS=true`). Reports and AI replies are fixed mocks; voice input in the automated rehearsal is synthetic. Classroom submission is the student's confirmation, not a submission sent to Google. See the [2:55 script](.orquesta/DEMO.md) and [desktop/phone rehearsal](e2e/demo-guion.spec.ts).*
+*Captured October 30, 2026 with fictional data (`NEXT_PUBLIC_USAR_MOCKS=true`). Reports and AI replies are fixed mocks; voice input in the automated rehearsal is synthetic. Classroom submission is the student's confirmation, not a submission sent to Google. See the [2:55 script](.orquesta/DEMO.md), [English subtitles](docs/video/subtitulos-en.srt) and [desktop/phone rehearsal](e2e/demo-guion.spec.ts).*
 
 ### Why it is not "another chatbot"
 - The agent acts on its own when something happens (new task, submission, missed study block) instead of waiting for a prompt.
@@ -74,10 +74,14 @@ Read [How it works (English)](https://muselearn-five.vercel.app/en/como-funciona
 
 Every call goes through one client (`src/lib/ia/cliente.ts`) that picks the provider per job, validates the JSON output against Zod schemas, retries once and falls back to the next provider.
 
+### Meta open-weight models
+
+Task analysis and planning prefer the configured Muse Spark Open endpoint, with Baseten as the project's primary open-weight provider. `MODELO_ABIERTO_URL`, `MODELO_ABIERTO_ID` and the server-only `MODELO_ABIERTO_KEY` select that endpoint. If it is unavailable, the client tries its configured Meta API and NVIDIA fallbacks. The provider actually used is recorded in server logs; mock demonstrations do not call any provider.
+
 ## Stack
 
 - **Next.js 16** (App Router, React 19) · TypeScript · Tailwind CSS 4 · `next-intl` (es/en)
-- **Supabase**: Postgres with Row Level Security, Auth, Storage (private buckets for attachments and audio)
+- **Supabase**: Postgres with Row Level Security, Auth and private attachment storage; voice transcription processes audio in memory without storing it
 - Vitest and Playwright for tests
 - Mobile-first: everything works at 380 px wide, so students can use their phones
 
@@ -120,7 +124,7 @@ npm run dev                     # http://localhost:3000
 - **No keys yet?** Keep `NEXT_PUBLIC_USAR_MOCKS=true` in `.env.local` and the UI runs on sample data.
 - `npm run prueba:ia` — checks that each AI provider in `.env.local` answers.
 - `npm run seed:auth` — creates fictional demo users and a demo class; then run `supabase/seed-demo.sql` in the Supabase SQL Editor for demo tasks, submissions and reports.
-- `npm run e2e` — end-to-end tests of the demo flow (desktop and phone) with sample data.
+- `npm run e2e` — end-to-end tests of the demo flow (desktop and phone); set `NEXT_PUBLIC_USAR_MOCKS=true` in the test process and local server environment.
 - Database schema and RLS policies: `supabase/migrations/`.
 - `npm run lint`, `npm run typecheck`, `npm test`, `npm run build`.
 
@@ -138,7 +142,7 @@ all at `@muselearn.demo`. The full roster is in
 
 To load a **dedicated demo Supabase project** (the integrator runs these steps):
 
-1. Apply the existing migrations through `0009_calificaciones.sql`.
+1. Apply all existing migrations in order, currently through `0011_proteger_identidad_entrega.sql`.
 2. Set that project's `NEXT_PUBLIC_SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY`
    in `.env.local`. Set `DEMO_CONTRASENA` there to a private password of at least
    12 characters. There is no default password and the seed never prints it.
@@ -156,10 +160,15 @@ Mathematics includes levels 1–4, four students needing support, teacher commen
 optional grades and Elian's returned submission for correction.
 
 Without keys, set `NEXT_PUBLIC_USAR_MOCKS=true`. The roster, tasks, overview,
-Camila's plan and initial grades use the same dataset. **Current integration
-limitation:** the shared API mock still returns Camila's report/questions for
-other submissions and starts teacher comments empty. T15 records the required
-client update in its integration requests; database demo data is complete.
+Camila's plan and initial grades use the same dataset. Reports and verification
+questions are selected per submission, teacher comments start from demo fixtures,
+and the planner selects the requested week. Generated AI replies remain fixed
+mocks, and newly created tasks do not persist across navigation in this mode.
+
+For the currently hosted demo, José manages its fictional accounts separately;
+see [the closing plan](.orquesta/CIERRE-HACKATHON.md). The dedicated-project setup
+above is the recommended local/test setup and does not authorize reseeding a
+shared production project.
 
 After editing mock data, run `node supabase/demo/generar.mjs` to regenerate the
 SQL and validation fixtures, then `npm run lint`, `npm run typecheck`, `npm test`.
@@ -170,13 +179,13 @@ For the isolated PostgreSQL repeatability check, see
 
 - Only fictional data in this repository and in the seeds.
 - Each student sees only their own work; teachers see only their own classes (enforced by RLS in the database, not just in the UI).
-- Verification audio is deleted after transcription.
+- Verification audio is transcribed in memory and is not stored by MuseLearn.
 - Users can download all their data and delete their account from Settings → Privacy and data.
 - Student data is never sent to Meta's *Contributor* tier.
 
 ## How it was built
 
-All product code was written during the hackathon build period, starting **October 27, 2026**.
+All product code was written during the hackathon build period, starting **October 27, 2026**. Architecture notes, task sheets and draft prompts were prepared before the build started; product code and subsequent changes can be checked in the Git history.
 
 I designed the architecture and the contracts (types, API and database schema) first, then built the pieces in parallel with AI coding agents (Claude Code, Codex, OpenCode), each working on its own branch with strict file ownership, and integrated and reviewed every piece myself. The design documents, task sheets and the prompts used by the app's own agents are in [`.orquesta/`](.orquesta/).
 

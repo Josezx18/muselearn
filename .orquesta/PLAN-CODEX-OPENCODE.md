@@ -38,6 +38,7 @@ Nada nuevo. José graba el video con `.orquesta/DEMO.md`. Solo errores graves, c
 ## 4 nov — entrega del hackathon
 
 ## Después del hackathon (no empezar antes)
+- Conector MCP para asistentes externos, solicitado por José: diseño en `.orquesta/MCP.md`. Prioridad y alcance inicial pendientes de confirmar; no se ha implementado ni publicado.
 - Classroom completo: devolver notas a Classroom (permiso de escritura, verificación de Google).
 - Rol coordinador del centro y consentimiento de familias.
 - Moodle y Microsoft Teams.

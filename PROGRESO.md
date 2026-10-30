@@ -51,6 +51,7 @@ Formato: `- AAAA-MM-DD HH:MM [Txx] qué se hizo / qué falta / decisión tomada`
 - 2026-10-26 Discord: se permite cualquier herramienta de programación sin declararla; Muse Code es opcional.
 
 ## Bitácora
+- 2026-10-30 [T07] José solicita conexión de asistentes externos mediante MCP. Preparado diseño en .orquesta/MCP.md con herramientas de consulta por rol, OAuth, scopes, RLS, consentimiento, revocación y pruebas entre cuentas; sin endpoint implementado. Prioridad frente al cierre y escritura pendientes de respuesta; T20 sigue independiente. Sin push.
 - 2026-10-30 [T07] Revisada T20 33e1e1c, sin integrar: páginas servidor llaman cliente API con fetch relativo y sin sesión; Dashboard pierde recarga por semana/reintento e inicio en lunes; ficha declara 34 fallos axe y Accessibility 96–97. Correcciones concretas y ampliación mínima de alcance anotadas en T20; se devuelve a OpenCode. main conserva su versión funcional, sin push.
 - 2026-10-30 [T07] Ensayo automatizado solicitado por José: 150 e2e correctas y 2 omitidas (Chrome, escritorio/celular, mocks; 7,1 min); 7/7 casos de tutor/evaluación con IA real y 12/12 del analizador, incluidos tres casos en vivo. Cinco páginas públicas de Vercel responden 200. Resultados y límites en ENSAYO.md; fotos, audio físico, Classroom real y persistencia autenticada pendientes. Sin cambios de aplicación ni push.
 - 2026-10-30 [T07] Build de producción también correcto. Revisión documental sin cambios de aplicación: no se repitieron e2e ni RLS; los resultados históricos del tablero proceden del relevo.

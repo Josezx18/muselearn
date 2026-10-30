@@ -114,7 +114,7 @@ if errorlevel 1 (
 )
 echo Abriendo %F% con %PLAT% ...
 if /i "%PLAT%"=="claude" start "%TITULO%" /d "%DIR%" cmd /k claude --permission-mode acceptEdits "%PROMPT_FICHA%"
-if /i "%PLAT%"=="codex" start "%TITULO%" /d "%DIR%" cmd /k %EXE% "%PROMPT_FICHA%"
+if /i "%PLAT%"=="codex" start "%TITULO%" /d "%DIR%" cmd /k %EXE% %CODEX_FLAGS% "%PROMPT_FICHA%"
 if /i "%PLAT%"=="opencode" start "%TITULO%" /d "%DIR%" cmd /k opencode --prompt "%PROMPT_FICHA%"
 exit /b 0
 

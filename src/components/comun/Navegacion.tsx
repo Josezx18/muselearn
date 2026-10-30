@@ -7,6 +7,7 @@ import { cn } from "@/components/ui";
 import { SelectorIdioma } from "./SelectorIdioma";
 import { Logo } from "./Logo";
 import { IconoNav } from "./IconoNav";
+import { Campana } from "@/components/avisos/Campana";
 
 export interface ItemNav {
   href: string;
@@ -45,6 +46,7 @@ export function Navegacion({ items, accion }: { items: ItemNav[]; accion?: React
           </nav>
           <div className="flex items-center gap-1">
             <SelectorIdioma />
+            <Campana />
             {accion}
           </div>
         </div>

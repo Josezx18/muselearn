@@ -147,5 +147,7 @@
     "conceptos": "By concept",
     "tareas": "Their tasks",
     "verEntrega": "See submission"
-  }
+  },
+  "exportarError": "Could not download the CSV.",
+  "exportarComprension": "Download understanding (CSV)"
 }

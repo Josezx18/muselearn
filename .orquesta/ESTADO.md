@@ -13,6 +13,7 @@ Estados: ⬜ sin empezar · 🟦 trabajando · 🟨 bloqueado · 🟩 lista para
 | T05 | Dashboard estudiante | Codex | `T05-dashboard-codex` | t05-dashboard | ✅ | 27 oct: integrada; entrega real de T02 conectada; 380 px verificado |
 | T06 | Informes y panel docente | Codex | `T06-informes-codex` | t06-informes | ✅ | 28 oct: integrada con ruta de respaldo; "Agregar a mi semana" queda como mejora |
 | T07 | Integrador | Claude (chat) | `T07-integrador` | main | 🟦 | 27 oct: integró T01 y T03 |
+| T10 | Exportación CSV | Codex | `T10-csv` | t10-csv | 🟩 | 29 oct: completa; lint/typecheck, 199 pruebas y 4 e2e OK; sin push |
 | T08 | Demo y entrega | José | — | — | ⬜ | |
 
 ## Orden de integración previsto

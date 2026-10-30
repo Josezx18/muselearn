@@ -147,5 +147,7 @@
     "conceptos": "Por concepto",
     "tareas": "Sus tareas",
     "verEntrega": "Ver entrega"
-  }
+  },
+  "exportarError": "No se pudo descargar el CSV.",
+  "exportarComprension": "Descargar comprensión (CSV)"
 }

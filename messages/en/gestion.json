@@ -80,5 +80,7 @@
       "ia": "The AI didn't respond. Try again in a moment.",
       "guardar": "The comment couldn't be saved."
     }
-  }
+  },
+  "exportarError": "Could not download the CSV.",
+  "exportarEntregas": "Download submissions (CSV)"
 }

@@ -1,4 +1,5 @@
 "use client";
+import { BotonExportar } from "@/lib/exportar/BotonExportar";
 
 import { useEffect, useState, type FormEvent } from "react";
 import { useTranslations } from "next-intl";
@@ -78,6 +79,7 @@ export function GestionClase({ claseInicial }: { claseInicial: Clase }) {
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
+          <BotonExportar claseId={clase.id} tipo="entregas" etiqueta={t("exportarEntregas")} error={t("exportarError")} />
           <Button variante="secundario" tamano="sm" onClick={() => setDialogo("editar")}>
             {t("clase.editar")}
           </Button>

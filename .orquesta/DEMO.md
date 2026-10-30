@@ -1,44 +1,76 @@
-# Guion del video (3:00 exactos, requisito oficial)
+﻿# Guion del video — 2:55 (máximo 3:00)
 
-**Formato recomendado:** narración en español (es auténtico y es el tema *Build for Your World*) con **subtítulos en inglés**.
-Interfaz en español. Grabar la pantalla del celular para el estudiante y la PC para el docente.
-Que se vea como un **sistema de agentes que actúa solo**, no como un chat.
+Ensayo T11, 29 de octubre de 2026. Narración ES, subtítulos EN, interfaz ES.
+Estudiante en celular (390 px), docente en escritorio (1440 px). Entrega: 4 de noviembre.
+Frase central: **entregó vs. demostró comprensión**.
 
-App: https://muselearn-five.vercel.app · Cuentas de demo en `supabase/seed-auth.ts` (contraseña `Demo-Muse-2026`).
+## Datos y continuidad
 
-## La historia
-Clase **Matemática 4to A** (código MAT4KQ), 5 estudiantes ficticios. Los datos de demo (`supabase/seed-demo.sql`) ya traen
-dos tareas verificadas. En la de ecuaciones **todos entregaron (100 %), pero solo 3 de 5 demostraron comprensión (60 %)**,
-y **Sofía** entregó un trabajo perfecto que no supo explicar. En el video, **Camila** hace en vivo la tarea nueva.
+Ensayar con `NEXT_PUBLIC_USAR_MOCKS=true`: datos ficticios, sin llamadas a proveedores ni a Classroom.
+Matemática 4to A (`MAT4KQ`) tiene cinco estudiantes: cuatro entregaron (80 %) y dos demostraron comprensión (40 %).
+No narrar el antiguo 100 % / 60 % con los mocks. Sofía necesita apoyo; estos datos no demuestran que copiara.
+
+Los mocks no conservan la tarea nueva al navegar. Después de crearla, hacer un corte explícito a las tareas preparadas.
+Classroom se muestra con **Semáforo con Arduino**. La verificación y el informe, con **Práctica: ecuaciones de primer grado**.
+Rotular el corte «Otro ejemplo: ecuaciones». Los informes mock son fijos, no una evaluación real de las respuestas del ensayo.
 
 ## Escenas
 
-| Tiempo | Pantalla | Qué hacer | Narración (ES) | Subtítulo (EN) |
-|---|---|---|---|---|
-| 0:00–0:15 | Tú en cámara, o la portada | — | Soy docente de Tecnología en República Dominicana. Hoy una tarea entregada ya no prueba que alguien aprendió: la IA la puede hacer por ellos. | I teach technology in the Dominican Republic. Today a submitted assignment no longer proves anyone learned: AI can do it for them. |
-| 0:15–0:30 | PC · docente · Tareas → **Nueva tarea** | Crear "Sistemas de ecuaciones 2x2", nivel de ayuda **Solo pistas**. | Asigno una práctica y decido cuánta ayuda puede dar el tutor: solo pistas. | I assign practice and choose how much help the tutor may give: hints only. |
-| 0:30–0:55 | Celular · Camila · **Hoy** | Mostrar el aviso amarillo y "Lo próximo que te toca". Tocar "¿Por qué esta prioridad?". | Sin que nadie pregunte, MuseLearn analiza la tarea para cada estudiante —dificultad, minutos, prioridad— y reorganiza su semana. Y le explica por qué. | Without anyone asking, MuseLearn analyzes the task for each student — difficulty, minutes, priority — and re-plans their week, explaining why. |
-| 0:55–1:20 | Celular · **Tutor** | Escribir: *"Dame la respuesta del ejercicio 2"*. Luego tocar **Necesito una pista**. | Camila pide la respuesta. El tutor no se la da: le hace la pregunta que la lleva a descubrir el paso. | Camila asks for the answer. The tutor won't give it: it asks the question that leads her to the step. |
-| 1:20–1:35 | Celular · tarea → **Tomar foto del cuaderno** | Fotografiar la hoja escrita a mano y **Entregar**. | Entrega como siempre: una foto de su cuaderno. | She submits like always: a photo of her notebook. |
-| 1:35–2:15 | Celular · **Explícamelo** | Empezar. Escuchar la pregunta (debe citar un paso de la foto). Tocar el **micrófono** y responder hablando. | Muse Spark lee su letra y le pregunta por un paso concreto que escribió. Ella responde hablando; Muse Voice Transcribe lo pasa a texto. Tres preguntas, sobre su propio trabajo. | Muse Spark reads her handwriting and asks about a specific step she wrote. She answers out loud; Muse Voice Transcribe turns it into text. Three questions, about her own work. |
-| 2:15–2:30 | Celular · **Tu comprensión** | Bajar despacio: nivel por concepto, evidencia resaltada, ruta de práctica. | Recibe su nivel por concepto, con la evidencia de lo que dijo, y una ruta de práctica corta para lo que le falta. | She gets her level per concept, backed by her own words, and a short practice route for what's missing. |
-| 2:30–2:50 | PC · docente · **Comprensión** | Elegir la tarea "Ecuaciones de primer grado". Mostrar las dos barras y tocar a **Sofía**. | Y yo veo lo que ningún aula virtual muestra: el 100 % entregó, pero solo el 60 % demostró que entendió. Sofía entregó un trabajo perfecto… y no pudo explicar ningún paso. | And I see what no LMS shows: 100% submitted, but only 60% showed they understood. Sofía turned in perfect work… and couldn't explain a single step. |
-| 2:50–3:00 | Portada | — | Hecho durante el hackathon con Muse Spark, Muse Voice Transcribe y Muse Spark Open. Entregar no es aprender. Demuéstralo. | Built during the hackathon with Muse Spark, Muse Voice Transcribe and Muse Spark Open. Proof of learning, not just proof of delivery. |
+| Tiempo | Pantalla y acciones | Narración ES | Subtítulo EN |
+|---|---|---|---|
+| 0:00–0:12 | Portada o cámara. | Soy docente de Tecnología en República Dominicana. Una tarea entregada ya no prueba que alguien aprendió. | I teach technology in the Dominican Republic. A submitted assignment no longer proves learning. |
+| 0:12–0:35 | Docente → Matemática 4to A → **Nueva tarea** → **Crear la tarea con IA**. Tema «Ecuaciones de primer grado» → **Proponer tarea**. Revisar título, instrucciones y ayuda; fecha futura, **En Classroom**, enlace → **Guardar**. | Muse propone la tarea y sus competencias. Yo reviso, decido cuánta ayuda recibe el estudiante y dónde entrega: también en Classroom. | Muse drafts assignments and competencies. I review them and choose tutor support and where students submit, including Classroom. |
+| 0:35–0:53 | Corte a Camila → **Hoy**: «Lo próximo que te toca», aviso y prioridad. | El agente analiza dificultad, tiempo y prioridad, y organiza la semana. Camila ve qué le toca y por qué. | The agent analyzes difficulty, time and priority, and organizes the week. Camila sees what comes next and why. |
+| 0:53–1:15 | Tocar la mascota → **Conversación con tu tutor** → **Empezar a conversar**. Decir «Necesito una pista». Esperar respuesta; **Prefiero escribir** muestra el chat y **Necesito una pista**. | Con un toque habla con su mascota. Al hacer una pausa, el tutor responde con una pregunta que la ayuda a pensar. | One tap starts a voice conversation with her companion. When she pauses, the tutor responds with a guiding question. |
+| 1:15–1:35 | **Semáforo con Arduino** → mostrar **Abrir Classroom**. En **Tu evidencia**, escribir cómo programó los LED o agregar foto; marcar **Ya la entregué en Google Classroom.** → **Entregar**. | La tarea se entrega en Classroom. Aquí aporta evidencia y confirma que ya la entregó, para después explicar su trabajo. | She submits in Classroom. Here she provides evidence and confirms submission, ready to explain her work. |
+| 1:35–2:00 | Corte rotulado «Otro ejemplo: ecuaciones». **Explícamelo** → **Empezar** → tres respuestas con cortes. Mocks: texto. Real: ensayar voz y foto previamente. | Entregar y comprender son cosas distintas. En esta práctica de ecuaciones, explica por qué hace cada operación y cómo comprueba el resultado. | Submission and understanding are different. In this equations example, she explains each operation and how she checks the result. |
+| 2:00–2:15 | **Tu comprensión** → conceptos, evidencia y **Tu ruta de práctica**. | Recibe un nivel por concepto, evidencia de su explicación y una ruta corta para practicar lo que le falta. | She gets a level per concept, evidence from her explanation, and a short practice path. |
+| 2:15–2:35 | Docente → **Comprensión** → **General**: 80 % / 40 %. **Por estudiante** → elegir Camila; opcional Sofía para mostrar apoyo. | Yo comparo entregó vs. demostró comprensión: aquí, ochenta frente a cuarenta por ciento. Paso de la clase a cada estudiante para saber quién necesita apoyo. | I compare submission with demonstrated understanding: here, eighty versus forty percent. I move from the class overview to each student's needs. |
+| 2:35–2:48 | Camila → **Ver entrega** → **Borrador con IA** (u **Otro borrador**). Editar → **Enviar comentario** o **Actualizar**. | Muse sugiere un comentario basado en la entrega y su explicación. Yo lo reviso y lo envío. | Muse drafts feedback from the submission and explanation. I review and send it. |
+| 2:48–2:55 | Portada. | Muse Spark, Muse Voice Transcribe y Muse Spark Open. Entregar no es aprender. Demuéstralo. | Muse Spark, Muse Voice Transcribe and Muse Spark Open. Show what you learned. |
 
-**Qué suma cada escena a la rúbrica:** 0:15–0:55 *agente autónomo* (Best Agentic Use-Case) y modelo abierto (Muse Spark Open en Baseten);
-0:55–2:30 *uso creativo de Meta* (visión + voz + tutor con reglas); 2:30–2:50 *impacto*.
+Los tiempos corresponden al montaje final: cortar esperas, preparar tomas, mantener voz comprensible.
+Tutor: menos de 30 segundos. Mostrar el ciclo organizar → aprender → entregar → demostrar → mejorar.
+La mención de modelos describe la implementación real; los mocks no validan proveedores, costos, ASR ni visión.
 
-## Preparar antes de grabar
-- [ ] Volver a cargar los datos de demo (`supabase/seed-demo.sql`) para que las fechas queden alrededor del día de la grabación.
-- [ ] Una hoja real de cuaderno con **Sistemas 2x2** resuelto a mano (letra clara, foto derecha, buena luz).
-- [ ] Ensayar el flujo completo una vez en la app publicada: tutor, foto, verificación por voz, informe.
-- [ ] Celular: modo No molestar, brillo alto, sin notificaciones. PC: zoom del navegador al 110 %.
-- [ ] Dos sesiones abiertas: docente (PC) y Camila (celular).
-- [ ] Grabar varias tomas del tutor y de la verificación (las respuestas de la IA varían; elegir la mejor).
-- [ ] Narración grabada aparte, con micrófono cerca; subtítulos en inglés quemados en el video.
-- [ ] Duración final: 3:00 o menos.
+## Reproducir
 
-## Plan B si algo falla en vivo
-- El tutor tarda: dejar el corte en la respuesta ya escrita (es streaming; se puede acelerar 1,5× en edición).
-- La lectura del cuaderno no cita un paso: repetir con una foto más clara; si sigue, usar la toma por texto.
-- La voz falla: el botón "Probar dictado del navegador" o escribir la respuesta (mostrar que siempre hay alternativa).
+En PowerShell, servidor:
+
+```powershell
+$env:NEXT_PUBLIC_USAR_MOCKS='true'
+npm.cmd run dev
+```
+
+Otra terminal:
+
+```powershell
+$env:NEXT_PUBLIC_USAR_MOCKS='true'
+$env:DEMO_CAPTURAS='true'
+# Opcional, si falta el Chromium de Playwright:
+$env:CHROMIUM_PATH='C:/Program Files/Google/Chrome/Application/chrome.exe'
+npx.cmd playwright test e2e/demo-guion.spec.ts --workers=1
+```
+
+El ensayo comprueba consola, excepciones y desbordamiento en escritorio y celular.
+Las capturas se guardan en `docs/capturas/demo-XX-*-1440.png` y `demo-XX-*-390.png`.
+El audio automatizado es un tono seguido de silencio: ejercita captura WAV, detección de pausa y transcripción mock.
+La voz audible y el reconocimiento de habla humana se ensayan manualmente en el dispositivo real.
+
+## Antes de grabar
+
+- [ ] Elegir mocks rotulados como demostración o cuentas ficticias reales. No mezclar cifras del seed con las de mocks.
+- [ ] App publicada: https://muselearn-five.vercel.app. Cuentas en `supabase/seed-auth.ts`; no mostrar credenciales.
+- [ ] En modo real, refrescar fechas del seed y confirmar los porcentajes antes de narrarlos.
+- [ ] Confirmar con dos sesiones reales que la tarea creada llega a Camila y reorganiza el plan; los mocks no prueban esa persistencia.
+- [ ] Entregar de verdad en Classroom antes de marcar la casilla. MuseLearn registra la confirmación del estudiante; no envía ni comprueba la entrega en Google.
+- [ ] Ensayar micrófono, altavoz y foto clara del cuaderno. No afirmar lectura de un paso si la pregunta no lo cita.
+- [ ] Revisar el comentario y comprobar que llega al estudiante con cuentas reales.
+- [ ] Celular sin notificaciones; PC a 100 % para reproducir capturas. Narración aparte, subtítulos EN; exportación ≤ 3:00.
+
+## Alternativas
+
+- IA lenta: usar toma de la propuesta lista conservando la revisión docente.
+- Sin micrófono: **Prefiero escribir**; en verificación, **Tu explicación**.
+- Foto ilegible: evidencia escrita, sin afirmar lectura de la foto.
+- Classroom sin acceso: mostrar enlace y evidencia ficticia sin fingir una entrega externa real.

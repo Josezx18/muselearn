@@ -30,15 +30,25 @@ MuseLearn keeps the classroom flow teachers already know (classes, tasks, submis
 
 ### Screens
 
-**Student (phone):** *Today* with the next block, the Socratic tutor, the "Explain it to me" verification, and the comprehension report with evidence in the student's own words.
+**Student (390 px):** tap the companion to talk, provide evidence for a Classroom assignment, explain the work, and receive a practice path.
 
-![Four phone screens: Today, Tutor, Explain it to me, Comprehension by concept](docs/capturas/estudiante.png)
+![Voice conversation with the study companion](docs/capturas/demo-03-voz-390.png)
 
-**Teacher (desktop):** submitted vs. showed understanding, and the student × concept heatmap.
+**Teacher (1440 px):** create a task with AI, compare submission with demonstrated understanding, move from General to each student, and review AI-drafted feedback.
 
-![Teacher comprehension panel with the submitted vs. understood bars and the heatmap](docs/capturas/pc-docente.png)
+![Current General view: 80 percent submitted and 40 percent demonstrated understanding](docs/capturas/demo-08-general-1440.png)
 
-*Screenshots use the fictional demo data (`NEXT_PUBLIC_USAR_MOCKS=true`).*
+| Scene | Desktop | Phone |
+|---|---|---|
+| Create with AI | [1440 px](docs/capturas/demo-01-crear-ia-1440.png) | [390 px](docs/capturas/demo-01-crear-ia-390.png) |
+| Today | [1440 px](docs/capturas/demo-02-hoy-1440.png) | [390 px](docs/capturas/demo-02-hoy-390.png) |
+| Classroom evidence | [1440 px](docs/capturas/demo-05-classroom-evidencia-1440.png) | [390 px](docs/capturas/demo-05-classroom-evidencia-390.png) |
+| Explanation | [1440 px](docs/capturas/demo-06-verificacion-1440.png) | [390 px](docs/capturas/demo-06-verificacion-390.png) |
+| Report and practice | [1440 px](docs/capturas/demo-07-informe-1440.png) | [390 px](docs/capturas/demo-07-informe-390.png) |
+| Per student | [1440 px](docs/capturas/demo-09-estudiante-1440.png) | [390 px](docs/capturas/demo-09-estudiante-390.png) |
+| Reviewed feedback draft | [1440 px](docs/capturas/demo-10-comentario-1440.png) | [390 px](docs/capturas/demo-10-comentario-390.png) |
+
+*Captured October 29, 2026 with fictional data (`NEXT_PUBLIC_USAR_MOCKS=true`). Reports and AI replies are fixed mocks; voice input in the automated rehearsal is synthetic. Classroom submission is the student's confirmation, not a submission sent to Google. See the [2:55 script](.orquesta/DEMO.md) and [desktop/phone rehearsal](e2e/demo-guion.spec.ts).*
 
 ### Why it is not "another chatbot"
 - The agent acts on its own when something happens (new task, submission, missed study block) instead of waiting for a prompt.

@@ -1,9 +1,9 @@
-import { Calificacion, type Calificacion as Registro } from "@/lib/db/calificaciones";
+import { Calificacion, type Calificacion as Registro } from "@/types/contratos";
 import { Entrega } from "@/types/contratos";
-import datosDemo from "../../../supabase/demo/objetos.json";
+import { calificacionesDemoMock } from "./devoluciones";
 
 const clave = "muselearn-t09-calificaciones";
-const iniciales = Calificacion.array().parse(datosDemo.calificaciones);
+const iniciales = Calificacion.array().parse(calificacionesDemoMock);
 const memoria = new Map<string, Registro>(iniciales.map((c) => [c.entrega_id, c]));
 export function leerCalificacionMock(id: string) {
   if (typeof window !== "undefined") {

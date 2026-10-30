@@ -28,10 +28,10 @@ test("la IA sugiere un repaso desde el panel de comprensión", async ({ page }) 
 test("el docente pide un borrador de comentario, lo edita y lo envía", async ({ page }) => {
   await page.goto(TAREA);
   await page.getByRole("button", { name: "Ver entrega" }).first().click();
-  await page.getByRole("button", { name: "Borrador con IA" }).click();
+  await page.getByRole("button", { name: "Otro borrador", exact: true }).click();
   const campo = page.getByRole("textbox", { name: "Comentario para el estudiante" });
   await expect(campo).toHaveValue(/Explicaste/);
   await campo.fill("¡Buen trabajo! Revisa el paso 3.");
-  await page.getByRole("button", { name: "Enviar comentario" }).click();
-  await expect(page.getByText(/El estudiante ya lo puede leer/)).toBeVisible();
+  await page.getByRole("button", { name: "Actualizar", exact: true }).click();
+  await expect(page.getByText("Comentario enviado.", { exact: true })).toBeVisible();
 });

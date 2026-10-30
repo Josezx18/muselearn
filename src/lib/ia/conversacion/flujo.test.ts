@@ -61,6 +61,7 @@ const ok = (data: unknown = null) => ({ data, error: null });
 const sesion = {
   ...sesionVerificacionMock,
   estado: "en_curso",
+  creada_en: new Date(Date.parse(informeMock.generado_en) - 60000).toISOString(),
   preguntas: sesionVerificacionMock.preguntas.map((p, i) => (i === 2 ? { ...p, respuesta: null, via: null } : p)),
 };
 const entrada = { sesion_id: sesion.id, pregunta_id: "p3", respuesta: "Sustituyo en la ecuación.", via: "texto" };
@@ -81,9 +82,24 @@ describe("cierre y recuperación de verificación", () => {
     const db = dbSimulada(lecturas);
     const admin = dbSimulada(escrituras);
     m.estudiante.mockResolvedValue({ db });
-    m.contexto.mockResolvedValue({ db, admin, entrega: entregasMock[0], tarea: tareasMock[0], usuario: { idioma: "es" } });
+    m.contexto.mockResolvedValue({ db, admin, entrega: { ...entregasMock[0], estado: "verificando", entregada_en: sesion.creada_en }, tarea: tareasMock[0], usuario: { idioma: "es" } });
     return { db, admin };
   }
+  it("rechaza una sesión anterior a la nueva entrega aunque exista un informe", async () => {
+    const { admin } = preparar([ok({ ...sesion, creada_en: "2020-01-01T00:00:00Z" }), ok({ informe: informeMock })]);
+    expect((await POST(request())).status).toBe(409);
+    expect(admin.operaciones).toEqual([]);
+    expect(m.evaluar).not.toHaveBeenCalled();
+  });
+  it("reemplaza el informe anterior al completar la nueva sesión", async () => {
+    const anterior = { ...informeMock, generado_en: "2020-01-01T00:00:00Z" };
+    const { admin } = preparar([ok(sesion), ok({ informe: anterior })], [ok({ id: sesion.id }), ok(), ok(), ok()]);
+    expect((await POST(request())).status).toBe(200);
+    expect(m.evaluar).toHaveBeenCalledOnce();
+    expect(admin.operaciones).toContainEqual({ tabla: "informes", metodo: "upsert", valor: {
+      entrega_id: entregasMock[0].id, informe: informeMock, ruta: { pasos: [] },
+    } });
+  });
   it("rechaza respuestas fuera de turno sin llamar al modelo ni escribir", async () => {
     const { admin } = preparar([ok(sesion), ok()]);
     expect((await POST(request({ ...entrada, pregunta_id: "p1" }))).status).toBe(409);

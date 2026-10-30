@@ -1,3 +1,4 @@
+import { sesionVigente, informeDeSesion } from "@/lib/ia/conversacion/intentos";
 import { InformeComprension, SesionVerificacion } from "@/types/contratos";
 import { comprobarEscritura, contextoEntrega, estudianteActual } from "@/lib/ia/conversacion/servidor";
 import { contenidoEntrega, evaluar, generarRuta, siguientePregunta } from "@/lib/ia/conversacion/verificador";
@@ -17,9 +18,10 @@ export async function POST(request: Request) {
     if (!data) throw new ErrorConversacion(404, "sesion_no_encontrada");
     const sesion = SesionVerificacion.parse(data);
     const ctx = await contextoEntrega(sesion.entrega_id);
+    if (!sesionVigente(data, ctx.entrega)) throw new ErrorConversacion(409, "sesion_obsoleta");
     const guardado = await ctx.db.from("informes").select("informe").eq("entrega_id", ctx.entrega.id).maybeSingle();
     if (guardado.error) throw guardado.error;
-    if (guardado.data) {
+    if (guardado.data && informeDeSesion(InformeComprension.parse(guardado.data.informe), data)) {
       // Recupera un cierre interrumpido después de guardar el informe.
       comprobarEscritura(await ctx.admin.from("entregas").update({ estado: "verificada" }).eq("id", ctx.entrega.id));
       comprobarEscritura(await ctx.admin.from("sesiones_verificacion").update({ estado: "completada" }).eq("id", sesion.id));

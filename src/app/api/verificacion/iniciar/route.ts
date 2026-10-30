@@ -1,3 +1,4 @@
+import { sesionVigente } from "@/lib/ia/conversacion/intentos";
 import { SesionVerificacion } from "@/types/contratos";
 import { LIMITES, verificacionesHoy } from "@/lib/db/limites";
 import { comprobarEscritura, contextoEntrega } from "@/lib/ia/conversacion/servidor";
@@ -21,7 +22,7 @@ export async function POST(request: Request) {
       .limit(1)
       .maybeSingle();
     if (error) throw error;
-    if (previa) return Response.json(SesionVerificacion.parse(previa));
+    if (previa && sesionVigente(previa, ctx.entrega)) return Response.json(SesionVerificacion.parse(previa));
     if ((await verificacionesHoy(ctx.admin, ctx.usuario.id)) >= LIMITES.verificaciones) {
       throw new ErrorConversacion(429, "limite_diario_verificaciones");
     }

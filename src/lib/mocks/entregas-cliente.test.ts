@@ -18,7 +18,7 @@ describe("datos mock por entrega y semana", () => {
       if (i) expect(detalle.preguntas.map((p) => p.respuesta)).toEqual(respuestasDemo(i));
     }
   }, 20000);
-  it("no inventa informes o preguntas para entregas sin verificaci?n", async () => {
+  it("no inventa informes o preguntas para entregas sin verificación", async () => {
     vi.stubEnv("NEXT_PUBLIC_USAR_MOCKS", "true");
     const detalle = await obtenerDetalleEntrega(id(330));
     expect(detalle.informe).toBeNull();

@@ -7,7 +7,7 @@ export const comentariosDemoMock = entregasMock.filter((e) => e.entregada_en).ma
   entrega_id: e.id,
   texto: e.id === id(330)
     ? "En y = 2x + 1 primero multiplica 2 por x. Revisa la tabla, comprueba los puntos y vuelve a entregar."
-    : "Gracias por mostrar tu procedimiento. Explica cada operaci?n y comprueba sustituyendo tu resultado.",
+    : "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
   actualizado_en: planSemanalMock.generado_en,
 }));
 export const calificacionesDemoMock = comentariosDemoMock.map((c, i) => Calificacion.parse({

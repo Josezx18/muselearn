@@ -14,6 +14,8 @@ Formato: `- AAAA-MM-DD HH:MM [Txx] qué se hizo / qué falta / decisión tomada`
 5. T08 demo y entregables
 
 ## Mejoras propuestas (por los agentes; el integrador decide)
+- [T17] Incorporar un identificador de intento y cierre transaccional para resolver carreras entre devolver, volver a entregar y evaluar en peticiones simultaneas.
+- [T17] Hacer que el generador del seed consuma los fixtures compartidos de comentarios y calificaciones para evitar duplicar sus reglas.
 - [T13] Validar y ajustar la detección de turnos con micrófonos reales y ruido de aula en Android/iOS.
 - [T15] Resolver por entrega y semana los datos del cliente mock compartido para que detalle, comentarios y navegación entre semanas coincidan con la demo de Supabase (solicitud concreta en T15).
 - [T15] Ampliar después la demo con evidencias ficticias de cuaderno y más verificaciones en Tecnología; hoy los niveles se concentran en la práctica de ecuaciones del guion.
@@ -71,3 +73,5 @@ Formato: `- AAAA-MM-DD HH:MM [Txx] qué se hizo / qué falta / decisión tomada`
 - 2026-10-29 [T13] Voz configurable por idioma, velocidad y pausa persistidas localmente; fondo adaptable, medidor accesible, ayuda de permisos Android/iOS, limpieza de markdown/emojis/enlaces y reintento único con audio recuperable. lint/typecheck y 216 pruebas OK (10 omitidas); seis e2e con mocks y revisión visual a 380/1280 px, es/en. Falta ensayo con micrófono físico (documentado en ficha). Sin push ni merge.
 
 - 2026-10-29 [T17] Mocks por entrega (informes, preguntas, comentarios y notas), plan por semana y sin importar objetos.json al cliente. Esquemas T09 en contratos compartidos con reexportacion compatible. Lint/typecheck y 235 pruebas correctas (10 omitidas).
+
+- 2026-10-29 [T17] Ficha completa: nueva sesion tras corregir, rechazo 409 de sesiones anteriores y reemplazo del informe conservando recuperacion de cierres interrumpidos. Pruebas unitarias de inicio/cierre y selectores e2e de comentarios precargados. Lint/typecheck OK, 235 unitarias correctas (10 omitidas) y suite e2e completa: 82 correctas, 2 omitidas por Google desactivado. Capturas revisadas a 380/1280 px. Puerto 3001 aislado de T16; sin push ni merge.

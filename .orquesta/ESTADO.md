@@ -16,6 +16,7 @@ Estados: ⬜ sin empezar · 🟦 trabajando · 🟨 bloqueado · 🟩 lista para
 | T10 | Exportación CSV | Codex | `T10-csv` | t10-csv | 🟩 | 29 oct: completa; lint/typecheck, 199 pruebas y 4 e2e OK; sin push |
 | T13 | Voz | Codex | `T13-voz` | t13-voz | 🟩 | 29 oct: completa; lint/typecheck, 216 pruebas y seis e2e OK; falta ensayo con micrófono real |
 | T15 | Datos demo | Codex | `T15-demo` | t15-demo-datos | 🟨 | 29 oct: 6/7; SQL idempotente probado localmente; falta conectar detalles/comentarios/semana en api-cliente |
+| T16 | Como funciona y publicaciones | Codex | `T16-como-funciona` | t16-como-funciona | 🟩 | 29 oct: 6/6; pagina es/en, README y posts; cuatro e2e OK; sin push |
 | T08 | Demo y entrega | José | — | — | ⬜ | |
 | T09 | Calificar y devolver | Codex | `T09-calificar` | t09-calificar | 🟨 | 29 oct: 8/9 criterios, 191 unitarias y 4 e2e OK; conectar limpieza en POST /api/entregas; 0009 sin aplicar |
 

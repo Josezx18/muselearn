@@ -166,5 +166,53 @@
     "salir": "Ahora no (cerrar sesión)",
     "falta": "Marca la casilla para aceptar.",
     "error": "No se pudo guardar. Inténtalo de nuevo."
+  },
+  "comoFunciona": {
+    "titulo": "Cómo funciona",
+    "intro": "Entregar una tarea no basta para demostrar que aprendiste. MuseLearn conecta el plan de estudio, la ayuda y la explicación del estudiante con lo que ve su docente.",
+    "capturas": "Capturas de la demo con datos ficticios. Las pantallas ilustradas están en español; las respuestas de IA de esta demo son simuladas.",
+    "secciones": [
+      [
+        "Planifica",
+        "Cada tarea se analiza por dificultad, tiempo y conceptos. Hoy y Semana distribuyen el trabajo según tu horario; los avisos te cuentan los cambios del plan.",
+        "Plan de estudio en Hoy con bloques y prioridades"
+      ],
+      [
+        "Tutor que no hace la tarea",
+        "El tutor guía con preguntas y pistas. El docente decide el nivel de ayuda: pistas, ejemplos parecidos o explicación del concepto.",
+        "Tutor socrático con una pregunta guía"
+      ],
+      [
+        "Verifica que entendiste",
+        "Después de entregar texto, archivos o una foto del cuaderno, explicas tu propio trabajo por voz o texto. Recibes un informe por concepto y una ruta de práctica. También puedes aportar evidencia de una tarea de Classroom.",
+        "Verificación con preguntas sobre el trabajo entregado"
+      ],
+      [
+        "El docente ve la comprensión",
+        "El panel compara quién entregó y quién demostró comprender, con evidencia por concepto. El docente puede comentar, calificar de forma opcional, devolver para corregir y exportar CSV. La IA puede equivocarse; la evaluación final es del docente.",
+        "Panel docente de comprensión con datos ficticios"
+      ],
+      [
+        "IA del docente",
+        "A partir de un tema, la IA propone una tarea. También sugiere repasos con datos agregados sin nombres y redacta borradores de comentarios. El docente revisa y edita antes de guardar.",
+        "Creación de una tarea con una propuesta de IA"
+      ]
+    ],
+    "modelos": "Modelos de Meta que usamos",
+    "columnas": [
+      "Función",
+      "Modelo",
+      "Proveedor"
+    ],
+    "trabajos": [
+      "Tutor, preguntas de comprensión, lectura del cuaderno, informe y ruta",
+      "Respuestas por voz (transcripción, español e inglés)",
+      "Análisis de tareas en lote y planificación semanal",
+      "Respaldo"
+    ],
+    "privacidad": "Privacidad",
+    "privacidadTexto": "Cada estudiante accede a su propio trabajo y cada docente a sus clases. El audio se transcribe y no se guarda. Puedes descargar tus datos y eliminar tu cuenta. No usamos el tier Contributor con datos de estudiantes.",
+    "privacidadEnlace": "Leer la política de privacidad",
+    "volver": "Volver a la portada"
   }
 }

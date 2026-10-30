@@ -17,6 +17,7 @@ const COLOR_NIVEL = { 1: "bg-nivel-1", 2: "bg-nivel-2", 3: "bg-nivel-3", 4: "bg-
 
 export default async function Portada() {
   const t = await getTranslations("comun");
+  const legal = await getTranslations("legal.comoFunciona");
   const pasos = [
     { titulo: t("inicio.pasos.organiza"), detalle: t("inicio.pasos.organizaDetalle") },
     { titulo: t("inicio.pasos.aprende"), detalle: t("inicio.pasos.aprendeDetalle") },
@@ -116,6 +117,7 @@ export default async function Portada() {
                 </li>
               ))}
             </ol>
+            <Link href="/como-funciona" className="mt-6 inline-block underline underline-offset-4">{legal("titulo")}</Link>
           </div>
         </section>
 
@@ -164,6 +166,7 @@ export default async function Portada() {
 
       <footer className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-3 px-4 pb-8 text-sm text-tinta-suave">
         <span>{t("inicio.pie")}</span>
+        <Link href="/como-funciona" className="underline underline-offset-4">{legal("titulo")}</Link>
         <EnlacesLegales />
       </footer>
     </div>

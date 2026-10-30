@@ -44,9 +44,9 @@ describe("mocks cumplen los contratos", () => {
     expect(r.success, r.success ? "" : r.error.message).toBe(true);
   });
 
-  it("hay 8 tareas de 3 clases y un análisis por tarea", () => {
+  it("hay 8 tareas de 2 clases y un análisis por tarea", () => {
     expect(tareasMock).toHaveLength(8);
-    expect(new Set(tareasMock.map((t) => t.clase_id)).size).toBe(3);
+    expect(new Set(tareasMock.map((t) => t.clase_id)).size).toBe(2);
     expect(new Set(analisisMock.map((a) => a.tarea_id))).toEqual(new Set(tareasMock.map((t) => t.id)));
   });
 

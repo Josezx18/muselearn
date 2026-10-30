@@ -114,6 +114,48 @@ npm run dev                     # http://localhost:3000
 - Database schema and RLS policies: `supabase/migrations/`.
 - `npm run lint`, `npm run typecheck`, `npm test`, `npm run build`.
 
+## Demo accounts and data
+
+All names and work are invented. The shared dataset contains one teacher,
+twelve students and two classes: **Matemática 4to A** (`MAT4KQ`) and
+**Tecnología 4to B** (`TEC4ZR`). Every student is enrolled in both classes.
+
+Use `docente@muselearn.demo` for the teacher and `camila@muselearn.demo` for
+the student in the script. Other student accounts are `luis`, `sofia`, `diego`,
+`valeria`, `yandel`, `alondra`, `dariel`, `nayeli`, `elian`, `kiara` and `jadiel`,
+all at `@muselearn.demo`. The full roster is in
+[`supabase/demo/cuentas.json`](supabase/demo/cuentas.json).
+
+To load a **dedicated demo Supabase project** (the integrator runs these steps):
+
+1. Apply the existing migrations through `0009_calificaciones.sql`.
+2. Set that project's `NEXT_PUBLIC_SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY`
+   in `.env.local`. Set `DEMO_CONTRASENA` there to a private password of at least
+   12 characters. There is no default password and the seed never prints it.
+3. Run `npm run seed:auth`, then execute `supabase/seed-demo.sql` in the same
+   project's SQL Editor. Never run either seed against production.
+4. Sign in with the accounts above and the password from `.env.local`.
+   Accept the terms on first sign-in. Use `NEXT_PUBLIC_USAR_MOCKS=false` for this mode.
+
+Both seeds can be repeated. IDs are fixed; occupied IDs/emails belonging to other
+accounts cause an error. The SQL transaction resets only the specified fictional
+submissions and their evidence; other accounts and classes remain untouched.
+Dates follow the current week in `America/Santo_Domingo`: overdue work, current
+week and next week. Camila has two study blocks each day and plans for both weeks.
+Mathematics includes levels 1–4, four students needing support, teacher comments,
+optional grades and Elian's returned submission for correction.
+
+Without keys, set `NEXT_PUBLIC_USAR_MOCKS=true`. The roster, tasks, overview,
+Camila's plan and initial grades use the same dataset. **Current integration
+limitation:** the shared API mock still returns Camila's report/questions for
+other submissions and starts teacher comments empty. T15 records the required
+client update in its integration requests; database demo data is complete.
+
+After editing mock data, run `node supabase/demo/generar.mjs` to regenerate the
+SQL and validation fixtures, then `npm run lint`, `npm run typecheck`, `npm test`.
+For the isolated PostgreSQL repeatability check, see
+[`supabase/demo/PRUEBAS.md`](supabase/demo/PRUEBAS.md).
+
 ## Privacy
 
 - Only fictional data in this repository and in the seeds.

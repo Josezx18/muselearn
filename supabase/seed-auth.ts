@@ -1,69 +1,46 @@
-// Usuarios de demo (datos 100% ficticios). Idempotente: se puede ejecutar varias veces.
-// Uso:  node --env-file=.env.local --experimental-strip-types supabase/seed-auth.ts
-// Necesita NEXT_PUBLIC_SUPABASE_URL y SUPABASE_SERVICE_ROLE_KEY en .env.local.
+﻿// Solo cuentas ficticias @muselearn.demo. Ejecutar únicamente en el proyecto de demo.
+// node --env-file=.env.local --experimental-strip-types supabase/seed-auth.ts
 import { createClient } from "@supabase/supabase-js";
+import { readFileSync } from "node:fs";
+import { z } from "zod";
 
-const CONTRASENA_DEMO = process.env.DEMO_CONTRASENA ?? "Demo-Muse-2026";
-
-const docente = { correo: "docente@demo.muselearn", nombre: "Prof. Ana Rodríguez", rol: "docente" } as const;
-const estudiantes = [
-  { correo: "camila@demo.muselearn", nombre: "Camila Pérez", rol: "estudiante" },
-  { correo: "luis@demo.muselearn", nombre: "Luis Martínez", rol: "estudiante" },
-  { correo: "sofia@demo.muselearn", nombre: "Sofía Gómez", rol: "estudiante" },
-  { correo: "diego@demo.muselearn", nombre: "Diego Fernández", rol: "estudiante" },
-  { correo: "valeria@demo.muselearn", nombre: "Valeria Santos", rol: "estudiante" },
-] as const;
-
+const cuentas = z.array(z.object({
+  id: z.string().uuid(), correo: z.email().endsWith("@muselearn.demo"),
+  nombre: z.string().min(2), rol: z.enum(["docente", "estudiante"]), idioma: z.literal("es"),
+})).parse(JSON.parse(readFileSync(new URL("./demo/cuentas.json", import.meta.url), "utf8")));
+const contrasena = process.env.DEMO_CONTRASENA;
+if (!contrasena || contrasena.length < 12) throw new Error("Define DEMO_CONTRASENA (mínimo 12 caracteres) solo en .env.local");
 const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const claveServicio = process.env.SUPABASE_SERVICE_ROLE_KEY;
-if (!url || !claveServicio) throw new Error("Falta NEXT_PUBLIC_SUPABASE_URL o SUPABASE_SERVICE_ROLE_KEY en .env.local");
+const clave = process.env.SUPABASE_SERVICE_ROLE_KEY;
+if (!url || !clave) throw new Error("Falta NEXT_PUBLIC_SUPABASE_URL o SUPABASE_SERVICE_ROLE_KEY en .env.local");
+const admin = createClient(url, clave, { auth: { persistSession: false, autoRefreshToken: false } });
 
-const admin = createClient(url, claveServicio, { auth: { persistSession: false } });
-
-async function asegurarUsuario(u: { correo: string; nombre: string; rol: "docente" | "estudiante" }): Promise<string> {
-  const { data, error } = await admin.auth.admin.createUser({
-    email: u.correo,
-    password: CONTRASENA_DEMO,
-    email_confirm: true,
-    app_metadata: { rol: u.rol },
-    user_metadata: { nombre: u.nombre },
-  });
-  let id = data.user?.id;
-  if (error) {
-    // Ya existe: lo buscamos y dejamos la contraseña y el rol como en el seed.
-    const { data: lista, error: errorLista } = await admin.auth.admin.listUsers({ perPage: 1000 });
-    if (errorLista) throw errorLista;
-    const existente = lista.users.find((x) => x.email === u.correo);
-    if (!existente) throw error;
-    id = existente.id;
-    await admin.auth.admin.updateUserById(id, { password: CONTRASENA_DEMO, app_metadata: { rol: u.rol } });
-  }
-  if (!id) throw new Error(`No se obtuvo el id de ${u.correo}`);
-  const { error: errorPerfil } = await admin.from("perfiles").upsert({ id, rol: u.rol, nombre: u.nombre, idioma: "es" });
-  if (errorPerfil) throw errorPerfil;
-  return id;
+// Preflight completo: un ID o correo ajeno detiene el seed antes de modificar cuentas.
+const existentes = [];
+for (let page = 1; ; page++) {
+  const { data, error } = await admin.auth.admin.listUsers({ page, perPage: 1000 });
+  if (error) throw error;
+  existentes.push(...data.users);
+  if (data.users.length < 1000) break;
 }
-
-const docenteId = await asegurarUsuario(docente);
-const estudianteIds = await Promise.all(estudiantes.map(asegurarUsuario));
-
-// Clase de demo con un código fijo y fácil de recordar para la presentación.
-const { data: clase, error: errorClase } = await admin
-  .from("clases")
-  .upsert(
-    { docente_id: docenteId, nombre: "Matemática 4to A", materia: "Matemática", grado: "4to", codigo_inscripcion: "MAT4KQ" },
-    { onConflict: "codigo_inscripcion" },
-  )
-  .select("id")
-  .single();
-if (errorClase) throw errorClase;
-
-const { error: errorInscripciones } = await admin
-  .from("inscripciones")
-  .upsert(estudianteIds.map((id) => ({ clase_id: clase.id, estudiante_id: id })));
-if (errorInscripciones) throw errorInscripciones;
-
-console.log(`Listo. Docente: ${docente.correo}`);
-for (const e of estudiantes) console.log(`       Estudiante: ${e.correo}`);
-console.log(`Contraseña de todos: ${CONTRASENA_DEMO}`);
-console.log("Clase de demo: Matemática 4to A (código MAT4KQ)");
+for (const cuenta of cuentas) {
+  const porId = existentes.find((u) => u.id === cuenta.id);
+  const porCorreo = existentes.find((u) => u.email === cuenta.correo);
+  if ((porId && porId.email !== cuenta.correo) || (porCorreo && porCorreo.id !== cuenta.id)) {
+    throw new Error(`ID/correo ocupado: ${cuenta.correo}. No se modifica ni elimina esa cuenta.`);
+  }
+}
+for (const cuenta of cuentas) {
+  const atributos = { password: contrasena, email_confirm: true,
+    app_metadata: { rol: cuenta.rol }, user_metadata: { nombre: cuenta.nombre } };
+  const { error } = existentes.some((u) => u.id === cuenta.id)
+    ? await admin.auth.admin.updateUserById(cuenta.id, atributos)
+    : await admin.auth.admin.createUser({ ...atributos, id: cuenta.id, email: cuenta.correo });
+  if (error) throw error;
+  const { correo: _correo, ...perfil } = cuenta;
+  void _correo;
+  const { error: errorPerfil } = await admin.from("perfiles").upsert(perfil, { onConflict: "id" });
+  if (errorPerfil) throw errorPerfil;
+  console.log(`Lista: ${cuenta.correo} (${cuenta.rol})`);
+}
+console.log("13 cuentas listas. Ejecuta supabase/seed-demo.sql en este mismo proyecto de demo.");

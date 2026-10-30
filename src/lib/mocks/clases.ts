@@ -9,6 +9,14 @@ export const usuariosMock: Usuario[] = [
   { id: IDS.estudiantes[2], rol: "estudiante", nombre: "Sofía Gómez", idioma: "es" },
   { id: IDS.estudiantes[3], rol: "estudiante", nombre: "Diego Fernández", idioma: "es" },
   { id: IDS.estudiantes[4], rol: "estudiante", nombre: "Valeria Santos", idioma: "es" },
+
+  { id: IDS.estudiantes[5], rol: "estudiante", nombre: "Yandel Rosario", idioma: "es" },
+  { id: IDS.estudiantes[6], rol: "estudiante", nombre: "Alondra de la Cruz", idioma: "es" },
+  { id: IDS.estudiantes[7], rol: "estudiante", nombre: "Dariel Jiménez", idioma: "es" },
+  { id: IDS.estudiantes[8], rol: "estudiante", nombre: "Nayeli Tejada", idioma: "es" },
+  { id: IDS.estudiantes[9], rol: "estudiante", nombre: "Elian Alcántara", idioma: "es" },
+  { id: IDS.estudiantes[10], rol: "estudiante", nombre: "Kiara Peralta", idioma: "es" },
+  { id: IDS.estudiantes[11], rol: "estudiante", nombre: "Jadiel Encarnación", idioma: "es" },
 ];
 
 export const clasesMock: Clase[] = [
@@ -24,19 +32,10 @@ export const clasesMock: Clase[] = [
   {
     id: IDS.clases.tecnologia,
     docente_id: IDS.docente,
-    nombre: "Tecnología 4to A",
+    nombre: "Tecnología 4to B",
     materia: "Tecnología",
     grado: "4to",
     codigo_inscripcion: "TEC4ZR",
     creada_en: enSemana(-14, 9),
-  },
-  {
-    id: IDS.clases.fisica,
-    docente_id: IDS.docente,
-    nombre: "Física 4to A",
-    materia: "Física",
-    grado: "4to",
-    codigo_inscripcion: "FIS4WM",
-    creada_en: enSemana(-14, 10),
   },
 ];

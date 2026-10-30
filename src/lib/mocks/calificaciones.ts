@@ -1,12 +1,14 @@
 import { Calificacion, type Calificacion as Registro } from "@/lib/db/calificaciones";
 import { Entrega } from "@/types/contratos";
+import datosDemo from "../../../supabase/demo/objetos.json";
 
 const clave = "muselearn-t09-calificaciones";
-const memoria = new Map<string, Registro>();
+const iniciales = Calificacion.array().parse(datosDemo.calificaciones);
+const memoria = new Map<string, Registro>(iniciales.map((c) => [c.entrega_id, c]));
 export function leerCalificacionMock(id: string) {
   if (typeof window !== "undefined") {
     const registros = zRegistros(window.localStorage.getItem(clave));
-    return registros.find((c) => c.entrega_id === id) ?? null;
+    return registros.find((c) => c.entrega_id === id) ?? iniciales.find((c) => c.entrega_id === id) ?? null;
   }
   return memoria.get(id) ?? null;
 }

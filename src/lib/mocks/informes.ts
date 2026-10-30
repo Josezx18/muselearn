@@ -143,3 +143,10 @@ export function panelComprensionMock(claseId: string, tareaId?: string) {
   });
   return { tareas, estudiantes, entregas, informes, mapa };
 }
+
+export function informeParaEntregaMock(id: string) {
+  return informesClaseMock.find((i) => i.entrega_id === id) ?? null;
+}
+export function rutaParaEntregaMock(id: string) {
+  return informeParaEntregaMock(id) ? RutaPractica.parse({ ...rutaMock, entrega_id: id }) : null;
+}

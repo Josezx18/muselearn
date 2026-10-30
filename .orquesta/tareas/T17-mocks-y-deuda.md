@@ -12,8 +12,8 @@
 - T09 dejó `Nota`, `EntradaCalificacion`, `EntradaDevolucion` y `Calificacion` en `src/lib/db/calificaciones.ts` (provisionales).
 
 ## Criterios de aceptación
-- [ ] Modo mocks: `obtenerDetalleEntrega(id)` y `obtenerInforme(id)` devuelven el informe, las preguntas, el comentario y la calificación **de esa entrega** (de `src/lib/mocks/`, no de `supabase/demo/objetos.json`, para no meter ese JSON en el bundle). `comentariosMock` arranca con los comentarios de demo. El plan mock se elige por semana.
-- [ ] Los esquemas de T09 pasan a `src/types/contratos.ts` (y su copia en `.orquesta/contratos/`), con las importaciones actualizadas. Sin cambios de comportamiento.
+- [x] Modo mocks: `obtenerDetalleEntrega(id)` y `obtenerInforme(id)` devuelven el informe, las preguntas, el comentario y la calificación **de esa entrega** (de `src/lib/mocks/`, no de `supabase/demo/objetos.json`, para no meter ese JSON en el bundle). `comentariosMock` arranca con los comentarios de demo. El plan mock se elige por semana.
+- [x] Los esquemas de T09 pasan a `src/types/contratos.ts` (y su copia en `.orquesta/contratos/`), con las importaciones actualizadas. Sin cambios de comportamiento.
 - [ ] Verificación tras una devolución: si el docente devolvió la entrega y el estudiante vuelve a entregar, `POST /api/verificacion/iniciar` crea una sesión nueva (no reutiliza una `en_curso` de antes de la devolución) y el informe nuevo reemplaza al anterior al terminar. Respuestas de una sesión vieja se rechazan con 409. Pruebas unitarias.
 - [ ] `npm test` y toda la suite e2e con `NEXT_PUBLIC_USAR_MOCKS=true` pasan.
 
@@ -21,4 +21,8 @@
 - Lee `AGENTS.md`. Antes de cada commit: `npm run lint && npm run typecheck && npm test`. Prefijo `T17:`. Sin atribución de IA. Sin merge ni push.
 
 ## Decisiones
+- Se conserva la reexportacion de los esquemas desde db/calificaciones para no modificar consumidores fuera de T17. El cliente y los mocks importan el contrato compartido.
+- El mock devuelve 404 si la entrega no tiene informe; no inventa evidencia de otra entrega. Las semanas se desplazan conservando las horas locales.
+- La regla especifica de T17 prevalece: sin push ni merge.
+
 ## Bloqueos

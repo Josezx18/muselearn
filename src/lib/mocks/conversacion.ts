@@ -1,6 +1,6 @@
 // Mocks de T04 (tutor y verificación). Datos ficticios.
 import type { MensajeChat, SesionVerificacion } from "@/types/contratos";
-import { IDS, enSemana } from "./base";
+import { IDS, enSemana, id } from "./base";
 
 export const mensajesTutorMock: MensajeChat[] = [
   { rol: "estudiante", contenido: "No entiendo el ejercicio 3: 4x + 6 = 2x + 14", creado_en: enSemana(1, 18, 0) },
@@ -37,3 +37,10 @@ export const sesionVerificacionMock: SesionVerificacion = {
     },
   ],
 };
+
+export const sesionesDemoMock: SesionVerificacion[] = informesClaseMock.map((informe, i) => ({
+  id: i === 0 ? IDS.verificacion : id(410 + i), entrega_id: informe.entrega_id, estado: "completada",
+  preguntas: sesionVerificacionMock.preguntas.map((p, j) => ({ ...p, respuesta: i === 0 ? p.respuesta : respuestasDemo(i)[j] })),
+}));
+
+import { informesClaseMock, respuestasDemo } from "./informes";

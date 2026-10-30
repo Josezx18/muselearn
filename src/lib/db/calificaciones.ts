@@ -1,21 +1,9 @@
 import { z } from "zod";
 import type { SupabaseClient } from "@supabase/supabase-js";
-import { Entrega, FechaHora, type Usuario } from "@/types/contratos";
+import { Entrega, Nota, EntradaDevolucion, Calificacion, type Usuario } from "@/types/contratos";
 import { tareaDelDocente } from "./gestion";
 
-// Contratos provisionales T09: trasladar al contrato compartido al integrar.
-export const Nota = z.number().min(0).max(100).multipleOf(0.01).nullable();
-export const EntradaCalificacion = z.object({ nota: Nota }).strict();
-export const EntradaDevolucion = z.object({ motivo: z.string().trim().min(1).max(1000) }).strict();
-export const Calificacion = z.object({
-  entrega_id: z.string().uuid(),
-  docente_id: z.string().uuid(),
-  nota: Nota,
-  devuelta: z.boolean(),
-  motivo_devolucion: z.string().max(1000).nullable(),
-  actualizado_en: FechaHora,
-});
-export type Calificacion = z.infer<typeof Calificacion>;
+export { Nota, EntradaCalificacion, EntradaDevolucion, Calificacion } from "@/types/contratos";
 
 /** Comprueba pertenencia explícita además de RLS, antes de cualquier uso de admin. */
 export async function entregaPermitida(db: SupabaseClient, usuario: Usuario, id: string, escritura = false) {

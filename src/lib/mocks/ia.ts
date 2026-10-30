@@ -1,5 +1,5 @@
 // Mocks de T03 (análisis de tareas y plan semanal). Datos ficticios.
-import { format } from "date-fns";
+import { addDays, format } from "date-fns";
 import type { AnalisisTarea, PlanSemanal } from "@/types/contratos";
 import { ESTUDIANTE_ACTUAL, IDS, enSemana, lunesActual } from "./base";
 
@@ -45,3 +45,17 @@ export const planSemanalMock: PlanSemanal = {
   avisos: ["Llegó una tarea de Tecnología; reservé tiempo para practicar y comprobar las ecuaciones."],
   generado_en: enSemana(0, 11, 5),
 };
+
+/** Mantiene las horas locales y separa los identificadores de cada semana. */
+export function planParaSemanaMock(semana = planSemanalMock.semana_inicio): PlanSemanal {
+  const desde = new Date(`${planSemanalMock.semana_inicio}T12:00:00`);
+  const hasta = new Date(`${semana}T12:00:00`);
+  const dias = Math.round((hasta.getTime() - desde.getTime()) / 86400000);
+  return { ...planSemanalMock, semana_inicio: semana,
+    bloques: planSemanalMock.bloques.map((b) => ({ ...b,
+      id: dias === 0 ? b.id : `${b.id}-${semana}`,
+      inicio: addDays(new Date(b.inicio), dias).toISOString(),
+      fin: addDays(new Date(b.fin), dias).toISOString(),
+    })),
+  };
+}

@@ -34,9 +34,9 @@ import { TERMINOS_VERSION } from "./terminos";
 import type { CambioPerfil, EdicionTarea, PedidoPropuestaTarea } from "@/types/contratos";
 import { clasesMock, usuariosMock } from "./mocks/clases";
 import { entregasMock, tareasMock } from "./mocks/tareas";
-import { analisisMock, planSemanalMock } from "./mocks/ia";
-import { mensajesTutorMock, sesionVerificacionMock } from "./mocks/conversacion";
-import { informeMock, mapaComprensionMock, rutaMock } from "./mocks/informes";
+import { analisisMock, planSemanalMock, planParaSemanaMock } from "./mocks/ia";
+import { mensajesTutorMock, sesionVerificacionMock, sesionesDemoMock } from "./mocks/conversacion";
+import { informeMock, mapaComprensionMock, rutaMock, informeParaEntregaMock, rutaParaEntregaMock } from "./mocks/informes";
 import { avisosMockRespuesta } from "./mocks/avisos";
 
 export const usarMocks = () => process.env.NEXT_PUBLIC_USAR_MOCKS === "true";
@@ -147,10 +147,10 @@ export const listarAnalisis = (estudianteId: string) =>
   usarMocks() ? mock(analisisMock) : pedir(`/api/ia/analisis?estudiante_id=${encodeURIComponent(estudianteId)}`, z.array(AnalisisTarea));
 
 export const obtenerPlan = (semana_inicio?: string) =>
-  usarMocks() ? mock(planSemanalMock) : pedir(`/api/ia/plan${semana_inicio ? `?semana_inicio=${semana_inicio}` : ""}`, PlanSemanal);
+  usarMocks() ? mock(planParaSemanaMock(semana_inicio)) : pedir(`/api/ia/plan${semana_inicio ? `?semana_inicio=${semana_inicio}` : ""}`, PlanSemanal);
 
 export const recalcularPlan = (semana_inicio?: string) =>
-  usarMocks() ? mock(planSemanalMock, 1200) : pedir("/api/ia/plan", PlanSemanal, json({ semana_inicio }));
+  usarMocks() ? mock(planParaSemanaMock(semana_inicio), 1200) : pedir("/api/ia/plan", PlanSemanal, json({ semana_inicio }));
 
 export const actualizarBloque = (id: string, estado: EstadoBloque) =>
   usarMocks()
@@ -237,8 +237,14 @@ export const InformeConRuta = z.object({
 
 export const obtenerInforme = (entrega_id: string) =>
   usarMocks()
-    ? mock({ informe: informeMock, ruta: rutaMock, tarea_id: tareasMock[0].id })
+    ? informeEntregaMock(entrega_id)
     : pedir(`/api/informes/${entrega_id}`, InformeConRuta);
+
+function informeEntregaMock(id: string) {
+  const informe = informeParaEntregaMock(id);
+  if (!informe) return Promise.reject(new ErrorApi(404, "informe_no_encontrado", "informe_no_encontrado"));
+  return mock(InformeConRuta.parse({ informe, ruta: rutaParaEntregaMock(id), tarea_id: entregasMock.find((e) => e.id === id)?.tarea_id }));
+}
 
 /** "Agregar a mi semana": coloca los pasos de la ruta de práctica en el plan del estudiante. */
 export const agregarRutaASemana = (entrega_id: string) =>
@@ -361,14 +367,14 @@ export const obtenerDetalleEntrega = (id: string) => {
     entrega,
     estudiante,
     adjuntos: entrega.adjuntos.map((a) => ({ ...a, url: null })),
-    preguntas: sesionVerificacionMock.preguntas,
-    informe: entrega.estado === "verificada" ? informeMock : null,
+    preguntas: sesionesDemoMock.find((s) => s.entrega_id === entrega.id)?.preguntas ?? [],
+    informe: informeParaEntregaMock(entrega.id),
     comentario: comentarioMock(entrega.id),
   });
 };
 
 // ---------------- IA para el docente ----------------
-const comentariosMock = new Map<string, ComentarioDocente>();
+const comentariosMock = new Map<string, ComentarioDocente>(comentariosDemoMock.map((c) => [c.entrega_id, c]));
 const comentarioMock = (entregaId: string) => comentariosMock.get(entregaId) ?? null;
 
 /** La IA propone una tarea (no se guarda: el docente la revisa en el formulario). */
@@ -484,7 +490,7 @@ export const desconectarClassroom = () =>
   usarMocks() ? mock(null) : pedir("/api/integraciones/classroom/desconectar", z.null(), { method: "POST" });
 
 // ---------------- T09: calificar y devolver ----------------
-import { Calificacion, EntradaCalificacion, EntradaDevolucion } from "./db/calificaciones";
+import { Calificacion, EntradaCalificacion, EntradaDevolucion } from "@/types/contratos";
 import { leerCalificacionMock, escribirCalificacionMock, estadoCalificadoMock, escribirEntregaMock, leerEntregaMock } from "./mocks/calificaciones";
 
 export const obtenerCalificacion = (id: string) => usarMocks()
@@ -551,3 +557,5 @@ export const marcarAvisosLeidos = (ids?: string[]) =>
   usarMocks()
     ? mock({ ok: true }, 200)
     : pedir("/api/avisos/leidos", z.object({ ok: z.literal(true) }), { method: "POST", body: JSON.stringify({ ids }) });
+
+import { comentariosDemoMock } from "./mocks/devoluciones";

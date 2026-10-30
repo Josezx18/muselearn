@@ -1,26 +1,37 @@
 # ESTADO — Tablero de sesiones
 
-Cada sesión actualiza SU fila al empezar y al terminar un bloque de trabajo.
-Estados: ⬜ sin empezar · 🟦 trabajando · 🟨 bloqueado · 🟩 lista para integrar · ✅ integrada
+Actualizado por T07 el 30 oct de 2026. Las ramas T01–T18 figuran integradas en `main`, comprobado con `git branch --merged main`. Publicación y migraciones según el relevo; no se ha consultado producción.
 
-| Ficha | Pieza | Plataforma | Nombre de sesión | Rama | Estado | Último avance |
-|---|---|---|---|---|---|---|
-| T00 | Esqueleto y contratos | Claude Code | `T00-esqueleto` | main | ✅ | 27 oct: listo; falta prueba con claves reales y push |
-| T01 | Auth y clases | Claude Code | `T01-auth-claude` | t01-auth-clases | ✅ | 27 oct: integrada; falta seed con claves reales |
-| T02 | Tareas y entregas | OpenCode | `T02-tareas-opencode` | t02-tareas | ✅ | 27 oct: integrada con correcciones de T07 (subida real a Storage, crear tarea, FormularioEntrega) |
-| T03 | Motor IA | Claude Code | `T03-motor-claude` | t03-motor-ia | ✅ | 27 oct: integrada; falta medir costo con claves reales |
-| T04 | Tutor y verificación | Codex | `T04-tutor-codex` | t04-tutor-verificacion | ✅ | 27 oct: integrada; voz conectada por T07; faltan 3 fotos reales de cuaderno para la prueba |
-| T05 | Dashboard estudiante | Codex | `T05-dashboard-codex` | t05-dashboard | ✅ | 27 oct: integrada; entrega real de T02 conectada; 380 px verificado |
-| T06 | Informes y panel docente | Codex | `T06-informes-codex` | t06-informes | ✅ | 28 oct: integrada con ruta de respaldo; "Agregar a mi semana" queda como mejora |
-| T07 | Integrador | Claude (chat) | `T07-integrador` | main | 🟦 | 27 oct: integró T01 y T03 |
-| T10 | Exportación CSV | Codex | `T10-csv` | t10-csv | 🟩 | 29 oct: completa; lint/typecheck, 199 pruebas y 4 e2e OK; sin push |
-| T13 | Voz | Codex | `T13-voz` | t13-voz | 🟩 | 29 oct: completa; lint/typecheck, 216 pruebas y seis e2e OK; falta ensayo con micrófono real |
-| T15 | Datos demo | Codex | `T15-demo` | t15-demo-datos | 🟨 | 29 oct: 6/7; SQL idempotente probado localmente; falta conectar detalles/comentarios/semana en api-cliente |
-| T16 | Como funciona y publicaciones | Codex | `T16-como-funciona` | t16-como-funciona | 🟩 | 29 oct: 6/6; pagina es/en, README y posts; cuatro e2e OK; sin push |
-| T17 | Mocks y deudas | Codex | `T17-deuda` | t17-deuda | 🟩 | 29 oct: completa; lint/typecheck, 235 unitarias y 82 e2e OK; sin push ni merge |
-| T08 | Demo y entrega | José | — | — | ⬜ | |
-| T18 | Pruebas RLS | Codex | `T18-rls` | t18-rls | 🟩 | 29 oct: batería completa; 211/214 casos RLS, 3 reproducen H01; lint/typecheck y 228 unitarias OK; requiere corrección del integrador |
-| T09 | Calificar y devolver | Codex | `T09-calificar` | t09-calificar | 🟨 | 29 oct: 8/9 criterios, 191 unitarias y 4 e2e OK; conectar limpieza en POST /api/entregas; 0009 sin aplicar |
+Estados: ⬜ sin empezar · 🟦 trabajando · 🟨 bloqueado · ✅ integrada
 
-## Orden de integración previsto
-T00 → T01 → T03 → T02 → T05 → T04 → T06 → seed demo → e2e → despliegue
+| Ficha | Pieza | Plataforma | Rama | Estado | Último avance / siguiente paso |
+|---|---|---|---|---|---|
+| T00 | Esqueleto y contratos | Claude Code | main | ✅ | Base integrada. |
+| T01 | Auth y clases | Claude Code | t01-auth-clases | ✅ | Google y revisión legal pendientes de configuración por José. |
+| T02 | Tareas y entregas | OpenCode | t02-tareas | ✅ | Subida real y formulario de entrega conectados por T07. |
+| T03 | Motor IA | Claude Code | t03-motor-ia | ✅ | Comprobar IA y tiempos en ensayo real. |
+| T04 | Tutor y verificación | Codex | t04-tutor-verificacion | ✅ | Fotos y micrófono reales pendientes del ensayo. |
+| T05 | Dashboard estudiante | Codex | t05-dashboard | ✅ | Hoy, Semana y entrega conectadas. |
+| T06 | Informes y panel docente | Codex | t06-informes | ✅ | Agregar práctica a la semana sigue como mejora. |
+| T07 | Integrador | Codex (relevo) | main | 🟦 | Relevo leído; tablero contrastado con ramas integradas. |
+| T08 | Demo y entrega | José | — | ⬜ | Ensayo real, video y entrega del hackathon. |
+| T09 | Calificar y devolver | Codex | t09-calificar | ✅ | Reentrega conectada, 0009 aplicada según relevo y ciclo renovado por T17. |
+| T10 | Exportación CSV | Codex | t10-csv | ✅ | CSV integrado. |
+| T11 | Guion de demo | Codex | t11-demo | ✅ | Ensayar con IA real y cuentas ficticias. |
+| T12 | Avisos | OpenCode | t12-avisos | ✅ | 0010 aplicada según relevo; comprobar en ensayo real. |
+| T13 | Voz | Codex | t13-voz | ✅ | Pendiente ensayo con micrófono físico. |
+| T14 | Accesibilidad | OpenCode | t14-a11y | ✅ | Rendimiento pendiente en T20. |
+| T15 | Datos demo | Codex | t15-demo-datos | ✅ | Mocks completados por T17; carga remota de demo a cargo de José. |
+| T16 | Cómo funciona y publicaciones | Codex | t16-como-funciona | ✅ | Página pública, README y publicaciones integrados. |
+| T17 | Mocks y deudas | Codex | t17-deuda | ✅ | Mocks por entrega y nueva verificación tras corregir. |
+| T18 | Pruebas RLS | Codex | t18-rls | ✅ | H01 corregido con 0011; 214/214 RLS según relevo. |
+| T19 | Arreglos del ensayo | Codex | t19-ensayo | 🟨 | Faltan observaciones reales de José en ENSAYO.md. |
+| T20 | Rendimiento móvil | OpenCode | t20-rendimiento | ⬜ | Objetivos definidos; sesión aún no creada. |
+
+## Cierre del hackathon
+
+Sigue `.orquesta/CIERRE-HACKATHON.md`: ensayo real → criterios concretos en T19/T20 → revisión e integración → segundo ensayo → congelar el 3 nov → entregar el 4 nov.
+
+La plantilla `.orquesta/ENSAYO.md` no acredita que José haya realizado el recorrido ni desbloquea T19 por sí sola. El integrador copia únicamente observaciones reales a las fichas y evita solapar archivos entre T19 y T20.
+
+No hacer push desde esta sesión. Mantener la autoría de los commits del dueño del repositorio.

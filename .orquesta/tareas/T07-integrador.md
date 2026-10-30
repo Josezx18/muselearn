@@ -20,10 +20,18 @@ Que `main` siempre compile y funcione, y que al final exista una demo desplegada
 - [ ] Prueba e2e Playwright del flujo de demo completo (docente crea tarea → estudiante ve plan → tutor → entrega → verificación por texto → informe → panel docente).
 - [ ] Despliegue en Vercel con variables de entorno; URL pública funcionando.
 - [ ] Revisión final de seguridad: RLS, secretos, tier de modelo, borrado de audios.
-- [ ] Mantener `.orquesta/ESTADO.md` al día.
+- [x] Mantener `.orquesta/ESTADO.md` al día.
 
 ## Registro de integraciones
 | Fecha | Rama | Resultado | Notas |
 |---|---|---|---|
 | 27 oct | t01-auth-clases | ✅ | sin conflictos; RLS → migración 0003 aplicada; script `seed:auth` agregado |
 | 27 oct | t03-motor-ia | ✅ | conflicto solo en PROGRESO.md; `ZONA_OFFSET_MIN` en .env.example; 0004 quita EXECUTE de anon a funciones RLS |
+
+## Relevo del 30 oct — Codex
+- Ficha T07 asignada expresamente por José; no existe `.ficha-actual` en la carpeta principal. No se altera la asignación de los worktrees.
+- Todas las ramas T01–T18 aparecen en `git branch --merged main`; no queda ninguna de ellas por integrar. Se actualizó el tablero, que conservaba estados previos a esas integraciones.
+- T19 requiere observaciones reales de José: se creó una plantilla en `.orquesta/ENSAYO.md` y se aclaró que su mera existencia no habilita la ficha. T20 conserva su alcance para OpenCode; no se abrió una sesión ni se modificó su código.
+- Las solicitudes antiguas se contrastaron con el relevo y el plan: contratos T09, reentrega, mocks T15 y H01 ya figuran resueltos; mejoras transaccionales, CSV y práctica en Semana no se amplían durante esta preparación del cierre.
+- Orden vigente de José: nunca hacer push ni cambiar el autor de los commits.
+- Verificación del relevo: lint, typecheck, 235 pruebas (10 omitidas) y build correctos. Se restauraron dependencias ya declaradas; manifiesto y lockfile sin cambios. No se repitieron e2e ni RLS en esta revisión documental; sus resultados históricos siguen identificados como datos del relevo.

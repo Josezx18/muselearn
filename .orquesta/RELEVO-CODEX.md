@@ -96,6 +96,8 @@ todos los criterios de tu ficha, sin preguntarme si continuar."
 - Las fichas en modo automático no hacen merge ni push; si una sesión pide permiso, José elige la opción 2.
 
 ## 7. Bitácora del integrador (agrega una línea por cambio, la más nueva arriba)
+- 2026-10-30 — Codex: build de producción correcto tras restaurar dependencias locales. Revisión solo documental; e2e y RLS no repetidos en esta sesión.
+- 2026-10-30 — Codex: relevo leído y ramas T01–T18 confirmadas integradas; tablero corregido, plantilla ENSAYO.md creada y T19 bloqueada hasta observaciones reales. T20 pendiente de OpenCode. Dependencias locales restauradas sin cambios de manifiesto/lockfile; lint/typecheck y 235 pruebas OK (10 omitidas). Orden vigente: nunca push ni cambiar autoría.
 - 2026-10-30 07:30 — Claude: publicado `b4e5214` con 0011 aplicada. Plan de cierre, fichas T19/T20, `cargar-demo.bat` y `oleada-D-T19-T20.bat`.
 - 2026-10-30 06:10 — Claude: integradas T14, T16, T17, T18; migración 0011 contra traslado de entregas (H01);
   `probar-rls.mjs` aplica todas las migraciones (214/214). En Linux corre como usuario sin root con RLS_PG_BIN.

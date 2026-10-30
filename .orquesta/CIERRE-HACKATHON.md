@@ -50,7 +50,7 @@ Formulario del hackathon: enlace a la app, repo público https://github.com/Jose
 publicación en X (`docs/PUBLICACION-X.md`), modelos de Meta usados (tabla del README).
 
 ## Para Codex integrador (si Claude no está)
-1. Cuando exista `.orquesta/ENSAYO.md`, copia cada fallo como criterio `- [ ]` en
+1. Cuando `.orquesta/ENSAYO.md` contenga observaciones del ensayo real (no solo la plantilla), copia cada fallo como criterio `- [ ]` en
    `.orquesta/tareas/T19-arreglos-ensayo.md` (sección "Fallos del ensayo"), separando los de UI (anótalos para
    OpenCode en T20 si son visuales) de los de datos/API/IA (T19). Commit, y dile a José que lance
    `scripts\windows\oleada-D-T19-T20.bat`.

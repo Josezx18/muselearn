@@ -26,3 +26,4 @@ Que el recorrido de `.orquesta/DEMO.md` funcione sin tropiezos con IA real, en c
 ## Solicitudes al integrador
 ## Decisiones
 ## Bloqueos
+- 2026-10-30 [T07]: pendiente el ensayo real de José. `.orquesta/ENSAYO.md` contiene solo una plantilla; no hay fallos observados que convertir en criterios. Su mera existencia no habilita el inicio de T19.

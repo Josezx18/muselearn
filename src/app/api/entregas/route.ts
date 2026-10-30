@@ -4,6 +4,8 @@ import { errorHttp } from "@/lib/db/http";
 import { obtenerUsuarioActual } from "@/lib/db/sesion";
 import { EntradaEntrega, QueryEntregas } from "@/lib/db/validacion-tareas";
 import { rutasDeEntregaValidas } from "@/lib/db/almacenamiento";
+import { limpiarDevolucionPropia } from "@/lib/db/calificaciones";
+import { crearClienteAdmin } from "@/lib/supabase/servidor";
 
 export async function GET(peticion: Request) {
   const actual = await obtenerUsuarioActual();
@@ -59,6 +61,12 @@ export async function POST(peticion: Request) {
 
   try {
     const entrega = await crearEntrega(actual.db, actual.usuario.id, entrada.data);
+    // Si el docente la había devuelto para corregir, la nueva entrega quita el aviso (conserva la nota).
+    if (previa) {
+      await limpiarDevolucionPropia(crearClienteAdmin(), entrega.id, actual.usuario.id).catch((e) =>
+        console.warn(`[entregas] no se pudo limpiar la devolución: ${(e as Error).message}`),
+      );
+    }
     return NextResponse.json(entrega, { status: 201 });
   } catch (e) {
     if (e instanceof Error && e.message === "tarea_no_encontrada") return errorHttp(404, "tarea_no_encontrada", "Tarea no encontrada.");

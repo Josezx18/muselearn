@@ -1,7 +1,7 @@
 // Mocks de T06 (informe, ruta y panel docente). Datos ficticios.
-import { Entrega, InformeComprension, MapaComprension, RutaPractica } from "@/types/contratos";
+import { InformeComprension, MapaComprension, RutaPractica } from "@/types/contratos";
 import { usuariosMock } from "./clases";
-import { tareasMock } from "./tareas";
+import { tareasMock, entregasClaseMock, entregasMock } from "./tareas";
 import { IDS, enSemana } from "./base";
 
 export const informeMock: InformeComprension = {
@@ -32,7 +32,7 @@ export const informeMock: InformeComprension = {
   resumen_estudiante:
     "Explicaste muy bien por qué restas para despejar, y resolviste un caso nuevo sin ayuda. Te falta aprender a comprobar tu respuesta sustituyendo x en la ecuación. Con 15 minutos de práctica lo vas a dominar.",
   resumen_docente: "Domina el despeje y la operación inversa (niveles 3-4). No sabe verificar soluciones por sustitución (nivel 1).",
-  generado_en: enSemana(1, 19, 45),
+  generado_en: enSemana(-4, 19, 45),
 };
 
 export const rutaMock: RutaPractica = {
@@ -64,12 +64,36 @@ export const rutaMock: RutaPractica = {
 
 const conceptos = ["Operaciones inversas", "Despejar x", "Comprobar la solución"];
 const niveles: (1 | 2 | 3 | 4 | null)[][] = [
-  [4, 3, 1],
-  [3, 3, 2],
-  [2, 1, 1],
-  [4, 4, 3],
-  [null, null, null],
+  [4, 3, 1], [3, 3, 3], [1, 1, 1], [4, 4, 4], [2, 2, 1], [3, 4, 3],
+  [2, 1, 2], [4, 3, 4], [null, null, null], [null, null, null],
+  [null, null, null], [null, null, null],
 ];
+
+export const informesClaseMock: InformeComprension[] = entregasClaseMock
+  .filter((e) => e.estado === "verificada")
+  .map((e, i) => InformeComprension.parse({
+    ...informeMock, entrega_id: e.id,
+    nivel_global: [3, 3, 1, 4, 2, 3, 2, 4][i],
+    por_concepto: informeMock.por_concepto.map((c, j) => ({
+      ...c, nivel: niveles[i][j],
+      evidencia: i === 0 ? c.evidencia : respuestasDemo(i)[j],
+    })),
+    resumen_docente: [2, 4, 6].includes(i)
+      ? "Necesita acompañamiento para justificar operaciones y comprobar resultados."
+      : "Explica el equilibrio de la ecuación y valida sus resultados.",
+    resumen_estudiante: [2, 4, 6].includes(i)
+      ? "Ya diste el primer paso. Practica las operaciones inversas y comprueba cada solución."
+      : i === 0 ? informeMock.resumen_estudiante : "Explicaste las operaciones y comprobaste tu resultado. Sigue practicando con un problema nuevo.",
+    fortalezas: i === 2 ? ["Reconoce que necesita explicar el procedimiento"] : ["Identifica la incógnita"],
+    debilidades: [2, 4, 6].includes(i) ? ["Justificar las operaciones inversas", "Comprobar la solución"] : [],
+  }));
+
+export function respuestasDemo(i: number): string[] {
+  if ([2, 4, 6].includes(i)) return [
+    "Sumé 5, pero no sé si debía restarlo.", "Dividí entre 3 porque lo vi en el ejemplo.", "No comprobé: no sé dónde poner el resultado.",
+  ];
+  return ["Resto 5 en ambos lados para conservar la igualdad.", "Divido ambos lados entre 3: x vale 5.", "Sustituyo: 3 por 5 más 5 da 20; ambos lados coinciden."];
+}
 
 export const mapaComprensionMock: MapaComprension = {
   clase_id: IDS.clases.matematica,
@@ -94,34 +118,12 @@ export function panelComprensionMock(claseId: string, tareaId?: string) {
   const estudiantes = usuariosMock.filter((u) => u.rol === "estudiante");
   const seleccion = tareas.filter((t) => !tareaId || t.id === tareaId);
   const tieneDatos = seleccion.some((t) => t.id === IDS.tareas.ecuaciones);
-  const entregas = tieneDatos
-    ? estudiantes.slice(0, 4).map((u, i) =>
-        Entrega.parse({
-          id: `00000000-0000-4000-8000-${String(301 + i).padStart(12, "0")}`,
-          tarea_id: IDS.tareas.ecuaciones,
-          estudiante_id: u.id,
-          contenido_texto: "",
-          estado: i < 3 ? "verificada" : "entregada",
-          adjuntos: [],
-          entregada_en: enSemana(1, 18),
-          entregada_externamente: false,
-        }),
-      )
-    : [];
-  const informes = entregas
-    .filter((e) => e.estado === "verificada")
-    .map((e, i) => ({
-      estudiante: e.estudiante_id,
-      titulo: tareas.find((t) => t.id === e.tarea_id)!.titulo,
-      informe: InformeComprension.parse({
-        ...informeMock,
-        entrega_id: e.id,
-        nivel_global: i === 2 ? 1 : 3,
-        por_concepto: informeMock.por_concepto.map((c, j) => ({ ...c, nivel: niveles[i][j] })),
-        resumen_docente:
-          i === 2 ? "Requiere acompañamiento para explicar las operaciones y comprobar el resultado." : informeMock.resumen_docente,
-      }),
-    }));
+  const entregas = entregasMock.filter((e) => seleccion.some((t) => t.id === e.tarea_id));
+  const informes = tieneDatos ? informesClaseMock.map((informe) => ({
+    estudiante: entregas.find((e) => e.id === informe.entrega_id)!.estudiante_id,
+    titulo: tareas.find((t) => t.id === IDS.tareas.ecuaciones)!.titulo,
+    informe,
+  })) : [];
   const mapa = MapaComprension.parse({
     ...mapaComprensionMock,
     clase_id: claseId,

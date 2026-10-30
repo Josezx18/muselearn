@@ -1,6 +1,6 @@
 // Mocks de T02 (tareas y entregas). Datos ficticios.
 import type { Entrega, Tarea } from "@/types/contratos";
-import { ESTUDIANTE_ACTUAL, IDS, enSemana } from "./base";
+import { ESTUDIANTE_ACTUAL, IDS, enSemana, id } from "./base";
 
 const t = IDS.tareas;
 const c = IDS.clases;
@@ -12,12 +12,12 @@ export const tareasMock: Tarea[] = [
     titulo: "Práctica: ecuaciones de primer grado",
     instrucciones: "Resuelve los ejercicios 1 al 8 de la página 54. Muestra cada paso del despeje.",
     adjuntos: [],
-    fecha_entrega: enSemana(2, 23, 59),
+    fecha_entrega: enSemana(-3, 23, 59),
     competencias: ["Resuelve problemas con ecuaciones lineales"],
     nivel_ayuda: "pistas",
     modalidad: "muselearn",
     enlace_externo: null,
-    creada_en: enSemana(0, 8),
+    creada_en: enSemana(-10, 8),
   },
   {
     id: t.fracciones,
@@ -38,12 +38,12 @@ export const tareasMock: Tarea[] = [
     titulo: "Semáforo con Arduino",
     instrucciones: "Programa un semáforo con 3 LED y explica en comentarios qué hace cada bloque del código.",
     adjuntos: [],
-    fecha_entrega: enSemana(1, 23, 59),
+    fecha_entrega: enSemana(-1, 23, 59),
     competencias: ["Programa microcontroladores para resolver problemas"],
     nivel_ayuda: "explicacion",
     modalidad: "classroom",
     enlace_externo: "https://classroom.google.com/",
-    creada_en: enSemana(-3, 9),
+    creada_en: enSemana(-10, 9),
   },
   {
     id: t.circuitos,
@@ -60,12 +60,12 @@ export const tareasMock: Tarea[] = [
   },
   {
     id: t.movimiento,
-    clase_id: c.fisica,
-    titulo: "Problemas de movimiento rectilíneo uniforme",
-    instrucciones: "Resuelve los 6 problemas de MRU. Incluye datos, fórmula, sustitución y resultado con unidades.",
+    clase_id: c.matematica,
+    titulo: "Proporciones y regla de tres",
+    instrucciones: "Resuelve seis problemas de recetas y mapas a escala. Justifica si la relación es directa y comprueba las unidades.",
     adjuntos: [],
     fecha_entrega: enSemana(3, 23, 59),
-    competencias: ["Aplica modelos físicos del movimiento"],
+    competencias: ["Aplica razones y proporciones"],
     nivel_ayuda: "pistas",
     modalidad: "muselearn",
     enlace_externo: null,
@@ -80,8 +80,8 @@ export const tareasMock: Tarea[] = [
     fecha_entrega: enSemana(7, 23, 59),
     competencias: ["Diseña objetos en 3D"],
     nivel_ayuda: "explicacion",
-    modalidad: "muselearn",
-    enlace_externo: null,
+    modalidad: "otra",
+    enlace_externo: "https://www.tinkercad.com/",
     creada_en: enSemana(1, 9),
   },
   {
@@ -99,12 +99,12 @@ export const tareasMock: Tarea[] = [
   },
   {
     id: t.vectores,
-    clase_id: c.fisica,
-    titulo: "Suma de vectores",
-    instrucciones: "Resuelve gráfica y analíticamente los 4 ejercicios de suma de vectores.",
+    clase_id: c.matematica,
+    titulo: "Funciones lineales: tabla y gráfica",
+    instrucciones: "Completa tablas para y = 2x + 1 y y = -x + 4. Grafica las rectas y comprueba el punto de corte.",
     adjuntos: [],
     fecha_entrega: enSemana(9, 23, 59),
-    competencias: ["Representa magnitudes vectoriales"],
+    competencias: ["Representa relaciones lineales"],
     nivel_ayuda: "pistas",
     modalidad: "muselearn",
     enlace_externo: null,
@@ -134,3 +134,37 @@ export const entregasMock: Entrega[] = [
     entregada_externamente: false,
   },
 ];
+
+/** Ocho verificadas y cuatro por revisar; los conceptos bajos muestran cuatro casos de apoyo. */
+export const entregasClaseMock: Entrega[] = IDS.estudiantes.map((estudiante_id, i) => ({
+  ...entregasMock[0],
+  id: i === 0 ? IDS.entregas.ecuaciones : id(310 + i),
+  estudiante_id,
+  estado: i < 8 ? "verificada" : "entregada",
+  entregada_en: enSemana(-4, 19, 30),
+  contenido_texto: i === 2
+    ? "3x + 5 = 20; x = 5. Seguí el ejemplo, pero todavía no sé justificarlo."
+    : i === 9 ? "3x + 5 = 20; 3x = 25; x = 8,33. Necesito revisar el signo."
+    : entregasMock[0].contenido_texto,
+}));
+// La misma colección alimenta listados y el seed; Camila conserva su tarea pendiente de Classroom.
+entregasMock.splice(0, 1, ...entregasClaseMock);
+
+// Trabajo ya presentado en las tareas de esta semana; las próximas siguen pendientes.
+for (const tarea of tareasMock.filter((tarea) => [t.fracciones, t.movimiento, t.circuitos, t.csharp].includes(tarea.id))) {
+  for (const [i, estudiante_id] of IDS.estudiantes.entries()) {
+    entregasMock.push({
+      id: id(500 + tareasMock.indexOf(tarea) * 20 + i), tarea_id: tarea.id, estudiante_id,
+      contenido_texto: tarea.id === t.fracciones ? "1/2 + 1/3 = 3/6 + 2/6 = 5/6. Usé el mínimo común múltiplo de 2 y 3."
+        : tarea.id === t.movimiento ? "Si 4 personas usan 300 g de harina, para 10 necesito 750 g. Mantengo la razón 75 g por persona."
+        : tarea.id === t.circuitos ? "R total = 100 + 200 = 300 ohmios. Con 9 V, I = 9/300 = 0,03 A."
+        : "Sumé las cinco notas con un ciclo y dividí el total entre cinco; comparé el promedio con 70.",
+      adjuntos: [], estado: "entregada", entregada_en: enSemana(0, 19), entregada_externamente: false,
+    });
+  }
+}
+entregasMock.push({
+  id: id(330), tarea_id: t.vectores, estudiante_id: IDS.estudiantes[9],
+  contenido_texto: "Para x = 2 escribí y = 2 + 1 = 3. Debo revisar la multiplicación en y = 2x + 1.",
+  adjuntos: [], estado: "pendiente", entregada_en: enSemana(2, 19), entregada_externamente: false,
+});

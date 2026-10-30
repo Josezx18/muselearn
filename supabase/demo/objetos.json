@@ -1,875 +1,4395 @@
 {
- "analisis": [
-  {
-   "tarea_id": "de000000-0000-4000-8000-000000000101",
-   "estudiante_id": "11111111-1111-4111-8111-111111111111",
-   "dificultad": 3,
-   "minutos_estimados": 30,
-   "prioridad": 65,
-   "conceptos": [
-    "Operaciones inversas",
-    "Despejar x",
-    "Comprobar la solución"
-   ],
-   "pasos_sugeridos": [
-    "Resuelve del 1 al 4",
-    "Descansa 5 minutos",
-    "Resuelve del 5 al 8 y comprueba cada uno"
-   ],
-   "razon": "Ya pasó la fecha de entrega; si te falta algo, entrégalo hoy."
-  },
-  {
-   "tarea_id": "de000000-0000-4000-8000-000000000101",
-   "estudiante_id": "11111111-1111-4111-8111-111111111111",
-   "dificultad": 3,
-   "minutos_estimados": 40,
-   "prioridad": 70,
-   "conceptos": [
-    "Operaciones inversas",
-    "Despejar x",
-    "Comprobar la solución"
-   ],
-   "pasos_sugeridos": [
-    "Resuelve del 1 al 4",
-    "Descansa 5 minutos",
-    "Resuelve del 5 al 8 y comprueba cada uno"
-   ],
-   "razon": "Ya pasó la fecha de entrega; si te falta algo, entrégalo hoy."
-  },
-  {
-   "tarea_id": "de000000-0000-4000-8000-000000000101",
-   "estudiante_id": "11111111-1111-4111-8111-111111111111",
-   "dificultad": 4,
-   "minutos_estimados": 55,
-   "prioridad": 80,
-   "conceptos": [
-    "Operaciones inversas",
-    "Despejar x",
-    "Comprobar la solución"
-   ],
-   "pasos_sugeridos": [
-    "Resuelve del 1 al 4",
-    "Descansa 5 minutos",
-    "Resuelve del 5 al 8 y comprueba cada uno"
-   ],
-   "razon": "Ya pasó la fecha de entrega; si te falta algo, entrégalo hoy."
-  },
-  {
-   "tarea_id": "de000000-0000-4000-8000-000000000101",
-   "estudiante_id": "11111111-1111-4111-8111-111111111111",
-   "dificultad": 3,
-   "minutos_estimados": 45,
-   "prioridad": 70,
-   "conceptos": [
-    "Operaciones inversas",
-    "Despejar x",
-    "Comprobar la solución"
-   ],
-   "pasos_sugeridos": [
-    "Resuelve del 1 al 4",
-    "Descansa 5 minutos",
-    "Resuelve del 5 al 8 y comprueba cada uno"
-   ],
-   "razon": "Ya pasó la fecha de entrega; si te falta algo, entrégalo hoy."
-  },
-  {
-   "tarea_id": "de000000-0000-4000-8000-000000000101",
-   "estudiante_id": "11111111-1111-4111-8111-111111111111",
-   "dificultad": 4,
-   "minutos_estimados": 50,
-   "prioridad": 75,
-   "conceptos": [
-    "Operaciones inversas",
-    "Despejar x",
-    "Comprobar la solución"
-   ],
-   "pasos_sugeridos": [
-    "Resuelve del 1 al 4",
-    "Descansa 5 minutos",
-    "Resuelve del 5 al 8 y comprueba cada uno"
-   ],
-   "razon": "Ya pasó la fecha de entrega; si te falta algo, entrégalo hoy."
-  },
-  {
-   "tarea_id": "de000000-0000-4000-8000-000000000102",
-   "estudiante_id": "11111111-1111-4111-8111-111111111111",
-   "dificultad": 3,
-   "minutos_estimados": 35,
-   "prioridad": 75,
-   "conceptos": [
-    "Razón y proporción",
-    "Regla de tres directa",
-    "Interpretar el resultado"
-   ],
-   "pasos_sugeridos": [
-    "Lee los 6 problemas y marca qué se compara",
-    "Resuelve recetas y precios",
-    "Resuelve los de mapas a escala"
-   ],
-   "razon": "Ya pasó la fecha de entrega; si te falta algo, entrégalo hoy."
-  },
-  {
-   "tarea_id": "de000000-0000-4000-8000-000000000102",
-   "estudiante_id": "11111111-1111-4111-8111-111111111111",
-   "dificultad": 3,
-   "minutos_estimados": 45,
-   "prioridad": 80,
-   "conceptos": [
-    "Razón y proporción",
-    "Regla de tres directa",
-    "Interpretar el resultado"
-   ],
-   "pasos_sugeridos": [
-    "Lee los 6 problemas y marca qué se compara",
-    "Resuelve recetas y precios",
-    "Resuelve los de mapas a escala"
-   ],
-   "razon": "Ya pasó la fecha de entrega; si te falta algo, entrégalo hoy."
-  },
-  {
-   "tarea_id": "de000000-0000-4000-8000-000000000102",
-   "estudiante_id": "11111111-1111-4111-8111-111111111111",
-   "dificultad": 4,
-   "minutos_estimados": 60,
-   "prioridad": 90,
-   "conceptos": [
-    "Razón y proporción",
-    "Regla de tres directa",
-    "Interpretar el resultado"
-   ],
-   "pasos_sugeridos": [
-    "Lee los 6 problemas y marca qué se compara",
-    "Resuelve recetas y precios",
-    "Resuelve los de mapas a escala"
-   ],
-   "razon": "Ya pasó la fecha de entrega; si te falta algo, entrégalo hoy."
-  },
-  {
-   "tarea_id": "de000000-0000-4000-8000-000000000102",
-   "estudiante_id": "11111111-1111-4111-8111-111111111111",
-   "dificultad": 3,
-   "minutos_estimados": 50,
-   "prioridad": 80,
-   "conceptos": [
-    "Razón y proporción",
-    "Regla de tres directa",
-    "Interpretar el resultado"
-   ],
-   "pasos_sugeridos": [
-    "Lee los 6 problemas y marca qué se compara",
-    "Resuelve recetas y precios",
-    "Resuelve los de mapas a escala"
-   ],
-   "razon": "Ya pasó la fecha de entrega; si te falta algo, entrégalo hoy."
-  },
-  {
-   "tarea_id": "de000000-0000-4000-8000-000000000102",
-   "estudiante_id": "11111111-1111-4111-8111-111111111111",
-   "dificultad": 4,
-   "minutos_estimados": 55,
-   "prioridad": 85,
-   "conceptos": [
-    "Razón y proporción",
-    "Regla de tres directa",
-    "Interpretar el resultado"
-   ],
-   "pasos_sugeridos": [
-    "Lee los 6 problemas y marca qué se compara",
-    "Resuelve recetas y precios",
-    "Resuelve los de mapas a escala"
-   ],
-   "razon": "Ya pasó la fecha de entrega; si te falta algo, entrégalo hoy."
-  },
-  {
-   "tarea_id": "de000000-0000-4000-8000-000000000103",
-   "estudiante_id": "11111111-1111-4111-8111-111111111111",
-   "dificultad": 4,
-   "minutos_estimados": 45,
-   "prioridad": 80,
-   "conceptos": [
-    "Sustitución",
-    "Igualación",
-    "Comprobar en ambas ecuaciones"
-   ],
-   "pasos_sugeridos": [
-    "Repasa cómo despejar una variable",
-    "Resuelve del 1 al 3 por sustitución",
-    "Resuelve 4 y 5",
-    "Haz el 6 por igualación y comprueba"
-   ],
-   "razon": "Vence en 3 días y usa el despeje que practicaste: conviene empezar mañana con los primeros sistemas."
-  },
-  {
-   "tarea_id": "de000000-0000-4000-8000-000000000103",
-   "estudiante_id": "11111111-1111-4111-8111-111111111111",
-   "dificultad": 4,
-   "minutos_estimados": 55,
-   "prioridad": 85,
-   "conceptos": [
-    "Sustitución",
-    "Igualación",
-    "Comprobar en ambas ecuaciones"
-   ],
-   "pasos_sugeridos": [
-    "Repasa cómo despejar una variable",
-    "Resuelve del 1 al 3 por sustitución",
-    "Resuelve 4 y 5",
-    "Haz el 6 por igualación y comprueba"
-   ],
-   "razon": "Vence en 3 días y usa el despeje que practicaste: conviene empezar mañana con los primeros sistemas."
-  },
-  {
-   "tarea_id": "de000000-0000-4000-8000-000000000103",
-   "estudiante_id": "11111111-1111-4111-8111-111111111111",
-   "dificultad": 5,
-   "minutos_estimados": 70,
-   "prioridad": 95,
-   "conceptos": [
-    "Sustitución",
-    "Igualación",
-    "Comprobar en ambas ecuaciones"
-   ],
-   "pasos_sugeridos": [
-    "Repasa cómo despejar una variable",
-    "Resuelve del 1 al 3 por sustitución",
-    "Resuelve 4 y 5",
-    "Haz el 6 por igualación y comprueba"
-   ],
-   "razon": "Vence en 3 días y usa el despeje que practicaste: conviene empezar mañana con los primeros sistemas."
-  },
-  {
-   "tarea_id": "de000000-0000-4000-8000-000000000103",
-   "estudiante_id": "11111111-1111-4111-8111-111111111111",
-   "dificultad": 4,
-   "minutos_estimados": 60,
-   "prioridad": 85,
-   "conceptos": [
-    "Sustitución",
-    "Igualación",
-    "Comprobar en ambas ecuaciones"
-   ],
-   "pasos_sugeridos": [
-    "Repasa cómo despejar una variable",
-    "Resuelve del 1 al 3 por sustitución",
-    "Resuelve 4 y 5",
-    "Haz el 6 por igualación y comprueba"
-   ],
-   "razon": "Vence en 3 días y usa el despeje que practicaste: conviene empezar mañana con los primeros sistemas."
-  },
-  {
-   "tarea_id": "de000000-0000-4000-8000-000000000103",
-   "estudiante_id": "11111111-1111-4111-8111-111111111111",
-   "dificultad": 5,
-   "minutos_estimados": 65,
-   "prioridad": 90,
-   "conceptos": [
-    "Sustitución",
-    "Igualación",
-    "Comprobar en ambas ecuaciones"
-   ],
-   "pasos_sugeridos": [
-    "Repasa cómo despejar una variable",
-    "Resuelve del 1 al 3 por sustitución",
-    "Resuelve 4 y 5",
-    "Haz el 6 por igualación y comprueba"
-   ],
-   "razon": "Vence en 3 días y usa el despeje que practicaste: conviene empezar mañana con los primeros sistemas."
-  },
-  {
-   "tarea_id": "de000000-0000-4000-8000-000000000104",
-   "estudiante_id": "11111111-1111-4111-8111-111111111111",
-   "dificultad": 3,
-   "minutos_estimados": 35,
-   "prioridad": 35,
-   "conceptos": [
-    "Tabla de valores",
-    "Pendiente",
-    "Punto de corte"
-   ],
-   "pasos_sugeridos": [
-    "Completa las dos tablas",
-    "Grafica la primera recta",
-    "Grafica la segunda y busca el corte"
-   ],
-   "razon": "Vence en 6 días y es más corta: puedes hacerla el fin de semana sin apuro."
-  },
-  {
-   "tarea_id": "de000000-0000-4000-8000-000000000104",
-   "estudiante_id": "11111111-1111-4111-8111-111111111111",
-   "dificultad": 3,
-   "minutos_estimados": 45,
-   "prioridad": 40,
-   "conceptos": [
-    "Tabla de valores",
-    "Pendiente",
-    "Punto de corte"
-   ],
-   "pasos_sugeridos": [
-    "Completa las dos tablas",
-    "Grafica la primera recta",
-    "Grafica la segunda y busca el corte"
-   ],
-   "razon": "Vence en 6 días y es más corta: puedes hacerla el fin de semana sin apuro."
-  },
-  {
-   "tarea_id": "de000000-0000-4000-8000-000000000104",
-   "estudiante_id": "11111111-1111-4111-8111-111111111111",
-   "dificultad": 4,
-   "minutos_estimados": 60,
-   "prioridad": 50,
-   "conceptos": [
-    "Tabla de valores",
-    "Pendiente",
-    "Punto de corte"
-   ],
-   "pasos_sugeridos": [
-    "Completa las dos tablas",
-    "Grafica la primera recta",
-    "Grafica la segunda y busca el corte"
-   ],
-   "razon": "Vence en 6 días y es más corta: puedes hacerla el fin de semana sin apuro."
-  },
-  {
-   "tarea_id": "de000000-0000-4000-8000-000000000104",
-   "estudiante_id": "11111111-1111-4111-8111-111111111111",
-   "dificultad": 3,
-   "minutos_estimados": 50,
-   "prioridad": 40,
-   "conceptos": [
-    "Tabla de valores",
-    "Pendiente",
-    "Punto de corte"
-   ],
-   "pasos_sugeridos": [
-    "Completa las dos tablas",
-    "Grafica la primera recta",
-    "Grafica la segunda y busca el corte"
-   ],
-   "razon": "Vence en 6 días y es más corta: puedes hacerla el fin de semana sin apuro."
-  },
-  {
-   "tarea_id": "de000000-0000-4000-8000-000000000104",
-   "estudiante_id": "11111111-1111-4111-8111-111111111111",
-   "dificultad": 4,
-   "minutos_estimados": 55,
-   "prioridad": 45,
-   "conceptos": [
-    "Tabla de valores",
-    "Pendiente",
-    "Punto de corte"
-   ],
-   "pasos_sugeridos": [
-    "Completa las dos tablas",
-    "Grafica la primera recta",
-    "Grafica la segunda y busca el corte"
-   ],
-   "razon": "Vence en 6 días y es más corta: puedes hacerla el fin de semana sin apuro."
-  }
- ],
- "informes": [
-  {
-   "entrega_id": "de000000-0000-4000-8000-000000000200",
-   "nivel_global": 3,
-   "por_concepto": [
+  "cuentas": [
     {
-     "concepto": "Operaciones inversas",
-     "competencia": "Resuelve problemas con ecuaciones lineales",
-     "nivel": 4,
-     "evidencia": "para quitar el 5 hago lo contrario, resto 5 en los dos lados"
+      "id": "00000000-0000-4000-8000-000000000001",
+      "rol": "docente",
+      "nombre": "Prof. Ana Rodríguez",
+      "idioma": "es",
+      "correo": "docente@muselearn.demo"
     },
     {
-     "concepto": "Despejar x",
-     "competencia": "Resuelve problemas con ecuaciones lineales",
-     "nivel": 3,
-     "evidencia": "divido entre 3 porque el 3 está multiplicando a la x"
+      "id": "00000000-0000-4000-8000-000000000011",
+      "rol": "estudiante",
+      "nombre": "Camila Pérez",
+      "idioma": "es",
+      "correo": "camila@muselearn.demo"
     },
     {
-     "concepto": "Comprobar la solución",
-     "competencia": "Resuelve problemas con ecuaciones lineales",
-     "nivel": 2,
-     "evidencia": "comprobar no lo hice en todos, solo en el primero"
+      "id": "00000000-0000-4000-8000-000000000012",
+      "rol": "estudiante",
+      "nombre": "Luis Martínez",
+      "idioma": "es",
+      "correo": "luis@muselearn.demo"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000013",
+      "rol": "estudiante",
+      "nombre": "Sofía Gómez",
+      "idioma": "es",
+      "correo": "sofia@muselearn.demo"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000014",
+      "rol": "estudiante",
+      "nombre": "Diego Fernández",
+      "idioma": "es",
+      "correo": "diego@muselearn.demo"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000015",
+      "rol": "estudiante",
+      "nombre": "Valeria Santos",
+      "idioma": "es",
+      "correo": "valeria@muselearn.demo"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000016",
+      "rol": "estudiante",
+      "nombre": "Yandel Rosario",
+      "idioma": "es",
+      "correo": "yandel@muselearn.demo"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000017",
+      "rol": "estudiante",
+      "nombre": "Alondra de la Cruz",
+      "idioma": "es",
+      "correo": "alondra@muselearn.demo"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000018",
+      "rol": "estudiante",
+      "nombre": "Dariel Jiménez",
+      "idioma": "es",
+      "correo": "dariel@muselearn.demo"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000019",
+      "rol": "estudiante",
+      "nombre": "Nayeli Tejada",
+      "idioma": "es",
+      "correo": "nayeli@muselearn.demo"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000020",
+      "rol": "estudiante",
+      "nombre": "Elian Alcántara",
+      "idioma": "es",
+      "correo": "elian@muselearn.demo"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000021",
+      "rol": "estudiante",
+      "nombre": "Kiara Peralta",
+      "idioma": "es",
+      "correo": "kiara@muselearn.demo"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000022",
+      "rol": "estudiante",
+      "nombre": "Jadiel Encarnación",
+      "idioma": "es",
+      "correo": "jadiel@muselearn.demo"
     }
-   ],
-   "fortalezas": [
-    "Entiende por qué se usa la operación inversa",
-    "Despeja con orden y explica cada paso"
-   ],
-   "debilidades": [
-    "Comprobar el resultado en todos los ejercicios"
-   ],
-   "resumen_estudiante": "¡Buen trabajo! Explicaste bien la mayoría de los pasos. Te falta un detalle que puedes reforzar con unos minutos de práctica.",
-   "resumen_docente": "Comprende y explica la mayoría de los pasos; un concepto aún débil.",
-   "generado_en": "2026-10-25T21:00:00Z"
-  },
-  {
-   "entrega_id": "de000000-0000-4000-8000-000000000201",
-   "nivel_global": 3,
-   "por_concepto": [
+  ],
+  "clases": [
     {
-     "concepto": "Operaciones inversas",
-     "competencia": "Resuelve problemas con ecuaciones lineales",
-     "nivel": 3,
-     "evidencia": "resto el 5 para que la x quede sola"
+      "id": "00000000-0000-4000-8000-000000000101",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nombre": "Matemática 4to A",
+      "materia": "Matemática",
+      "grado": "4to",
+      "codigo_inscripcion": "MAT4KQ",
+      "creada_en": "2026-10-12T12:00:00.000Z"
     },
     {
-     "concepto": "Despejar x",
-     "competencia": "Resuelve problemas con ecuaciones lineales",
-     "nivel": 3,
-     "evidencia": "paso el 3 dividiendo al otro lado"
-    },
-    {
-     "concepto": "Comprobar la solución",
-     "competencia": "Resuelve problemas con ecuaciones lineales",
-     "nivel": 3,
-     "evidencia": "cambio la x por 5 y me da 20, entonces está bien"
+      "id": "00000000-0000-4000-8000-000000000102",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nombre": "Tecnología 4to B",
+      "materia": "Tecnología",
+      "grado": "4to",
+      "codigo_inscripcion": "TEC4ZR",
+      "creada_en": "2026-10-12T13:00:00.000Z"
     }
-   ],
-   "fortalezas": [
-    "Resuelve y comprueba correctamente"
-   ],
-   "debilidades": [
-    "Explica el despeje como regla ('pasa dividiendo') más que por qué funciona"
-   ],
-   "resumen_estudiante": "¡Buen trabajo! Explicaste bien la mayoría de los pasos. Te falta un detalle que puedes reforzar con unos minutos de práctica.",
-   "resumen_docente": "Comprende y explica la mayoría de los pasos; un concepto aún débil.",
-   "generado_en": "2026-10-25T21:00:00Z"
-  },
-  {
-   "entrega_id": "de000000-0000-4000-8000-000000000202",
-   "nivel_global": 1,
-   "por_concepto": [
+  ],
+  "tareas": [
     {
-     "concepto": "Operaciones inversas",
-     "competencia": "Resuelve problemas con ecuaciones lineales",
-     "nivel": 1,
-     "evidencia": "no sé, así lo hice"
+      "id": "00000000-0000-4000-8000-000000000201",
+      "clase_id": "00000000-0000-4000-8000-000000000101",
+      "titulo": "Práctica: ecuaciones de primer grado",
+      "instrucciones": "Resuelve los ejercicios 1 al 8 de la página 54. Muestra cada paso del despeje.",
+      "adjuntos": [],
+      "fecha_entrega": "2026-10-24T03:59:00.000Z",
+      "competencias": [
+        "Resuelve problemas con ecuaciones lineales"
+      ],
+      "nivel_ayuda": "pistas",
+      "modalidad": "muselearn",
+      "enlace_externo": null,
+      "creada_en": "2026-10-16T12:00:00.000Z"
     },
     {
-     "concepto": "Despejar x",
-     "competencia": "Resuelve problemas con ecuaciones lineales",
-     "nivel": 1,
-     "evidencia": "creo que se divide pero no me acuerdo por qué"
+      "id": "00000000-0000-4000-8000-000000000202",
+      "clase_id": "00000000-0000-4000-8000-000000000101",
+      "titulo": "Repaso de fracciones",
+      "instrucciones": "Completa la guía de 10 ejercicios de suma y resta de fracciones heterogéneas.",
+      "adjuntos": [],
+      "fecha_entrega": "2026-10-31T03:59:00.000Z",
+      "competencias": [
+        "Opera con números racionales"
+      ],
+      "nivel_ayuda": "ejemplos",
+      "modalidad": "cuaderno",
+      "enlace_externo": null,
+      "creada_en": "2026-10-26T12:30:00.000Z"
     },
     {
-     "concepto": "Comprobar la solución",
-     "competencia": "Resuelve problemas con ecuaciones lineales",
-     "nivel": 1,
-     "evidencia": "puse verificado porque así venía"
+      "id": "00000000-0000-4000-8000-000000000203",
+      "clase_id": "00000000-0000-4000-8000-000000000102",
+      "titulo": "Semáforo con Arduino",
+      "instrucciones": "Programa un semáforo con 3 LED y explica en comentarios qué hace cada bloque del código.",
+      "adjuntos": [],
+      "fecha_entrega": "2026-10-26T03:59:00.000Z",
+      "competencias": [
+        "Programa microcontroladores para resolver problemas"
+      ],
+      "nivel_ayuda": "explicacion",
+      "modalidad": "classroom",
+      "enlace_externo": "https://classroom.google.com/",
+      "creada_en": "2026-10-16T13:00:00.000Z"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000204",
+      "clase_id": "00000000-0000-4000-8000-000000000102",
+      "titulo": "Ley de Ohm en circuitos en serie",
+      "instrucciones": "Calcula la corriente y el voltaje en cada resistencia de los 4 circuitos de la guía.",
+      "adjuntos": [],
+      "fecha_entrega": "2026-10-30T03:59:00.000Z",
+      "competencias": [
+        "Analiza circuitos eléctricos básicos"
+      ],
+      "nivel_ayuda": "pistas",
+      "modalidad": "muselearn",
+      "enlace_externo": null,
+      "creada_en": "2026-10-26T14:00:00.000Z"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000205",
+      "clase_id": "00000000-0000-4000-8000-000000000101",
+      "titulo": "Proporciones y regla de tres",
+      "instrucciones": "Resuelve seis problemas de recetas y mapas a escala. Justifica si la relación es directa y comprueba las unidades.",
+      "adjuntos": [],
+      "fecha_entrega": "2026-10-30T03:59:00.000Z",
+      "competencias": [
+        "Aplica razones y proporciones"
+      ],
+      "nivel_ayuda": "pistas",
+      "modalidad": "muselearn",
+      "enlace_externo": null,
+      "creada_en": "2026-10-26T15:00:00.000Z"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000206",
+      "clase_id": "00000000-0000-4000-8000-000000000102",
+      "titulo": "Diseño 3D de un llavero",
+      "instrucciones": "Diseña un llavero en Tinkercad con tu inicial y exporta el archivo STL.",
+      "adjuntos": [],
+      "fecha_entrega": "2026-11-03T03:59:00.000Z",
+      "competencias": [
+        "Diseña objetos en 3D"
+      ],
+      "nivel_ayuda": "explicacion",
+      "modalidad": "otra",
+      "enlace_externo": "https://www.tinkercad.com/",
+      "creada_en": "2026-10-27T13:00:00.000Z"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000207",
+      "clase_id": "00000000-0000-4000-8000-000000000102",
+      "titulo": "C#: calculadora de promedios",
+      "instrucciones": "Escribe un programa en C# que pida 5 notas y muestre el promedio y si aprobó.",
+      "adjuntos": [],
+      "fecha_entrega": "2026-11-01T03:59:00.000Z",
+      "competencias": [
+        "Programa algoritmos con estructuras de control"
+      ],
+      "nivel_ayuda": "ejemplos",
+      "modalidad": "muselearn",
+      "enlace_externo": null,
+      "creada_en": "2026-10-27T14:00:00.000Z"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000208",
+      "clase_id": "00000000-0000-4000-8000-000000000101",
+      "titulo": "Funciones lineales: tabla y gráfica",
+      "instrucciones": "Completa tablas para y = 2x + 1 y y = -x + 4. Grafica las rectas y comprueba el punto de corte.",
+      "adjuntos": [],
+      "fecha_entrega": "2026-11-05T03:59:00.000Z",
+      "competencias": [
+        "Representa relaciones lineales"
+      ],
+      "nivel_ayuda": "pistas",
+      "modalidad": "muselearn",
+      "enlace_externo": null,
+      "creada_en": "2026-10-28T12:00:00.000Z"
     }
-   ],
-   "fortalezas": [
-    "Entregó a tiempo y con buena presentación"
-   ],
-   "debilidades": [
-    "No puede explicar los pasos que escribió",
-    "No sabe qué significa comprobar"
-   ],
-   "resumen_estudiante": "Entregaste a tiempo, pero cuando te preguntamos cómo lo hiciste no pudiste explicarlo todavía. No pasa nada: la ruta de abajo te ayuda a entender cada paso con tus propias palabras.",
-   "resumen_docente": "Entregó la tarea completa, pero no pudo explicar ninguno de los pasos escritos. Posible copia o ayuda externa; conviene una conversación breve y repaso guiado.",
-   "generado_en": "2026-10-25T21:00:00Z"
-  },
-  {
-   "entrega_id": "de000000-0000-4000-8000-000000000203",
-   "nivel_global": 3,
-   "por_concepto": [
+  ],
+  "entregas": [
     {
-     "concepto": "Operaciones inversas",
-     "competencia": "Resuelve problemas con ecuaciones lineales",
-     "nivel": 3,
-     "evidencia": "resto 5 a los dos lados para que se mantenga igual"
+      "id": "00000000-0000-4000-8000-000000000301",
+      "tarea_id": "00000000-0000-4000-8000-000000000201",
+      "estudiante_id": "00000000-0000-4000-8000-000000000011",
+      "contenido_texto": "1) 3x + 5 = 20 → 3x = 15 → x = 5\n2) 2x − 7 = 9 → 2x = 16 → x = 8",
+      "adjuntos": [],
+      "estado": "verificada",
+      "entregada_en": "2026-10-22T23:30:00.000Z",
+      "entregada_externamente": false
     },
     {
-     "concepto": "Despejar x",
-     "competencia": "Resuelve problemas con ecuaciones lineales",
-     "nivel": 2,
-     "evidencia": "el 2x − 3x no sé si es 2x o x"
+      "id": "00000000-0000-4000-8000-000000000311",
+      "tarea_id": "00000000-0000-4000-8000-000000000201",
+      "estudiante_id": "00000000-0000-4000-8000-000000000012",
+      "contenido_texto": "1) 3x + 5 = 20 → 3x = 15 → x = 5\n2) 2x − 7 = 9 → 2x = 16 → x = 8",
+      "adjuntos": [],
+      "estado": "verificada",
+      "entregada_en": "2026-10-22T23:30:00.000Z",
+      "entregada_externamente": false
     },
     {
-     "concepto": "Comprobar la solución",
-     "competencia": "Resuelve problemas con ecuaciones lineales",
-     "nivel": 3,
-     "evidencia": "sustituyo y veo si da lo mismo"
+      "id": "00000000-0000-4000-8000-000000000312",
+      "tarea_id": "00000000-0000-4000-8000-000000000201",
+      "estudiante_id": "00000000-0000-4000-8000-000000000013",
+      "contenido_texto": "3x + 5 = 20; x = 5. Seguí el ejemplo, pero todavía no sé justificarlo.",
+      "adjuntos": [],
+      "estado": "verificada",
+      "entregada_en": "2026-10-22T23:30:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000313",
+      "tarea_id": "00000000-0000-4000-8000-000000000201",
+      "estudiante_id": "00000000-0000-4000-8000-000000000014",
+      "contenido_texto": "1) 3x + 5 = 20 → 3x = 15 → x = 5\n2) 2x − 7 = 9 → 2x = 16 → x = 8",
+      "adjuntos": [],
+      "estado": "verificada",
+      "entregada_en": "2026-10-22T23:30:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000314",
+      "tarea_id": "00000000-0000-4000-8000-000000000201",
+      "estudiante_id": "00000000-0000-4000-8000-000000000015",
+      "contenido_texto": "1) 3x + 5 = 20 → 3x = 15 → x = 5\n2) 2x − 7 = 9 → 2x = 16 → x = 8",
+      "adjuntos": [],
+      "estado": "verificada",
+      "entregada_en": "2026-10-22T23:30:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000315",
+      "tarea_id": "00000000-0000-4000-8000-000000000201",
+      "estudiante_id": "00000000-0000-4000-8000-000000000016",
+      "contenido_texto": "1) 3x + 5 = 20 → 3x = 15 → x = 5\n2) 2x − 7 = 9 → 2x = 16 → x = 8",
+      "adjuntos": [],
+      "estado": "verificada",
+      "entregada_en": "2026-10-22T23:30:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000316",
+      "tarea_id": "00000000-0000-4000-8000-000000000201",
+      "estudiante_id": "00000000-0000-4000-8000-000000000017",
+      "contenido_texto": "1) 3x + 5 = 20 → 3x = 15 → x = 5\n2) 2x − 7 = 9 → 2x = 16 → x = 8",
+      "adjuntos": [],
+      "estado": "verificada",
+      "entregada_en": "2026-10-22T23:30:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000317",
+      "tarea_id": "00000000-0000-4000-8000-000000000201",
+      "estudiante_id": "00000000-0000-4000-8000-000000000018",
+      "contenido_texto": "1) 3x + 5 = 20 → 3x = 15 → x = 5\n2) 2x − 7 = 9 → 2x = 16 → x = 8",
+      "adjuntos": [],
+      "estado": "verificada",
+      "entregada_en": "2026-10-22T23:30:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000318",
+      "tarea_id": "00000000-0000-4000-8000-000000000201",
+      "estudiante_id": "00000000-0000-4000-8000-000000000019",
+      "contenido_texto": "1) 3x + 5 = 20 → 3x = 15 → x = 5\n2) 2x − 7 = 9 → 2x = 16 → x = 8",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-22T23:30:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000319",
+      "tarea_id": "00000000-0000-4000-8000-000000000201",
+      "estudiante_id": "00000000-0000-4000-8000-000000000020",
+      "contenido_texto": "3x + 5 = 20; 3x = 25; x = 8,33. Necesito revisar el signo.",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-22T23:30:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000320",
+      "tarea_id": "00000000-0000-4000-8000-000000000201",
+      "estudiante_id": "00000000-0000-4000-8000-000000000021",
+      "contenido_texto": "1) 3x + 5 = 20 → 3x = 15 → x = 5\n2) 2x − 7 = 9 → 2x = 16 → x = 8",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-22T23:30:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000321",
+      "tarea_id": "00000000-0000-4000-8000-000000000201",
+      "estudiante_id": "00000000-0000-4000-8000-000000000022",
+      "contenido_texto": "1) 3x + 5 = 20 → 3x = 15 → x = 5\n2) 2x − 7 = 9 → 2x = 16 → x = 8",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-22T23:30:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000302",
+      "tarea_id": "00000000-0000-4000-8000-000000000203",
+      "estudiante_id": "00000000-0000-4000-8000-000000000011",
+      "contenido_texto": "",
+      "adjuntos": [],
+      "estado": "pendiente",
+      "entregada_en": null,
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000520",
+      "tarea_id": "00000000-0000-4000-8000-000000000202",
+      "estudiante_id": "00000000-0000-4000-8000-000000000011",
+      "contenido_texto": "1/2 + 1/3 = 3/6 + 2/6 = 5/6. Usé el mínimo común múltiplo de 2 y 3.",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-26T23:00:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000521",
+      "tarea_id": "00000000-0000-4000-8000-000000000202",
+      "estudiante_id": "00000000-0000-4000-8000-000000000012",
+      "contenido_texto": "1/2 + 1/3 = 3/6 + 2/6 = 5/6. Usé el mínimo común múltiplo de 2 y 3.",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-26T23:00:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000522",
+      "tarea_id": "00000000-0000-4000-8000-000000000202",
+      "estudiante_id": "00000000-0000-4000-8000-000000000013",
+      "contenido_texto": "1/2 + 1/3 = 3/6 + 2/6 = 5/6. Usé el mínimo común múltiplo de 2 y 3.",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-26T23:00:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000523",
+      "tarea_id": "00000000-0000-4000-8000-000000000202",
+      "estudiante_id": "00000000-0000-4000-8000-000000000014",
+      "contenido_texto": "1/2 + 1/3 = 3/6 + 2/6 = 5/6. Usé el mínimo común múltiplo de 2 y 3.",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-26T23:00:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000524",
+      "tarea_id": "00000000-0000-4000-8000-000000000202",
+      "estudiante_id": "00000000-0000-4000-8000-000000000015",
+      "contenido_texto": "1/2 + 1/3 = 3/6 + 2/6 = 5/6. Usé el mínimo común múltiplo de 2 y 3.",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-26T23:00:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000525",
+      "tarea_id": "00000000-0000-4000-8000-000000000202",
+      "estudiante_id": "00000000-0000-4000-8000-000000000016",
+      "contenido_texto": "1/2 + 1/3 = 3/6 + 2/6 = 5/6. Usé el mínimo común múltiplo de 2 y 3.",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-26T23:00:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000526",
+      "tarea_id": "00000000-0000-4000-8000-000000000202",
+      "estudiante_id": "00000000-0000-4000-8000-000000000017",
+      "contenido_texto": "1/2 + 1/3 = 3/6 + 2/6 = 5/6. Usé el mínimo común múltiplo de 2 y 3.",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-26T23:00:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000527",
+      "tarea_id": "00000000-0000-4000-8000-000000000202",
+      "estudiante_id": "00000000-0000-4000-8000-000000000018",
+      "contenido_texto": "1/2 + 1/3 = 3/6 + 2/6 = 5/6. Usé el mínimo común múltiplo de 2 y 3.",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-26T23:00:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000528",
+      "tarea_id": "00000000-0000-4000-8000-000000000202",
+      "estudiante_id": "00000000-0000-4000-8000-000000000019",
+      "contenido_texto": "1/2 + 1/3 = 3/6 + 2/6 = 5/6. Usé el mínimo común múltiplo de 2 y 3.",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-26T23:00:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000529",
+      "tarea_id": "00000000-0000-4000-8000-000000000202",
+      "estudiante_id": "00000000-0000-4000-8000-000000000020",
+      "contenido_texto": "1/2 + 1/3 = 3/6 + 2/6 = 5/6. Usé el mínimo común múltiplo de 2 y 3.",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-26T23:00:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000530",
+      "tarea_id": "00000000-0000-4000-8000-000000000202",
+      "estudiante_id": "00000000-0000-4000-8000-000000000021",
+      "contenido_texto": "1/2 + 1/3 = 3/6 + 2/6 = 5/6. Usé el mínimo común múltiplo de 2 y 3.",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-26T23:00:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000531",
+      "tarea_id": "00000000-0000-4000-8000-000000000202",
+      "estudiante_id": "00000000-0000-4000-8000-000000000022",
+      "contenido_texto": "1/2 + 1/3 = 3/6 + 2/6 = 5/6. Usé el mínimo común múltiplo de 2 y 3.",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-26T23:00:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000560",
+      "tarea_id": "00000000-0000-4000-8000-000000000204",
+      "estudiante_id": "00000000-0000-4000-8000-000000000011",
+      "contenido_texto": "R total = 100 + 200 = 300 ohmios. Con 9 V, I = 9/300 = 0,03 A.",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-26T23:00:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000561",
+      "tarea_id": "00000000-0000-4000-8000-000000000204",
+      "estudiante_id": "00000000-0000-4000-8000-000000000012",
+      "contenido_texto": "R total = 100 + 200 = 300 ohmios. Con 9 V, I = 9/300 = 0,03 A.",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-26T23:00:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000562",
+      "tarea_id": "00000000-0000-4000-8000-000000000204",
+      "estudiante_id": "00000000-0000-4000-8000-000000000013",
+      "contenido_texto": "R total = 100 + 200 = 300 ohmios. Con 9 V, I = 9/300 = 0,03 A.",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-26T23:00:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000563",
+      "tarea_id": "00000000-0000-4000-8000-000000000204",
+      "estudiante_id": "00000000-0000-4000-8000-000000000014",
+      "contenido_texto": "R total = 100 + 200 = 300 ohmios. Con 9 V, I = 9/300 = 0,03 A.",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-26T23:00:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000564",
+      "tarea_id": "00000000-0000-4000-8000-000000000204",
+      "estudiante_id": "00000000-0000-4000-8000-000000000015",
+      "contenido_texto": "R total = 100 + 200 = 300 ohmios. Con 9 V, I = 9/300 = 0,03 A.",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-26T23:00:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000565",
+      "tarea_id": "00000000-0000-4000-8000-000000000204",
+      "estudiante_id": "00000000-0000-4000-8000-000000000016",
+      "contenido_texto": "R total = 100 + 200 = 300 ohmios. Con 9 V, I = 9/300 = 0,03 A.",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-26T23:00:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000566",
+      "tarea_id": "00000000-0000-4000-8000-000000000204",
+      "estudiante_id": "00000000-0000-4000-8000-000000000017",
+      "contenido_texto": "R total = 100 + 200 = 300 ohmios. Con 9 V, I = 9/300 = 0,03 A.",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-26T23:00:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000567",
+      "tarea_id": "00000000-0000-4000-8000-000000000204",
+      "estudiante_id": "00000000-0000-4000-8000-000000000018",
+      "contenido_texto": "R total = 100 + 200 = 300 ohmios. Con 9 V, I = 9/300 = 0,03 A.",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-26T23:00:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000568",
+      "tarea_id": "00000000-0000-4000-8000-000000000204",
+      "estudiante_id": "00000000-0000-4000-8000-000000000019",
+      "contenido_texto": "R total = 100 + 200 = 300 ohmios. Con 9 V, I = 9/300 = 0,03 A.",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-26T23:00:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000569",
+      "tarea_id": "00000000-0000-4000-8000-000000000204",
+      "estudiante_id": "00000000-0000-4000-8000-000000000020",
+      "contenido_texto": "R total = 100 + 200 = 300 ohmios. Con 9 V, I = 9/300 = 0,03 A.",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-26T23:00:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000570",
+      "tarea_id": "00000000-0000-4000-8000-000000000204",
+      "estudiante_id": "00000000-0000-4000-8000-000000000021",
+      "contenido_texto": "R total = 100 + 200 = 300 ohmios. Con 9 V, I = 9/300 = 0,03 A.",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-26T23:00:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000571",
+      "tarea_id": "00000000-0000-4000-8000-000000000204",
+      "estudiante_id": "00000000-0000-4000-8000-000000000022",
+      "contenido_texto": "R total = 100 + 200 = 300 ohmios. Con 9 V, I = 9/300 = 0,03 A.",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-26T23:00:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000580",
+      "tarea_id": "00000000-0000-4000-8000-000000000205",
+      "estudiante_id": "00000000-0000-4000-8000-000000000011",
+      "contenido_texto": "Si 4 personas usan 300 g de harina, para 10 necesito 750 g. Mantengo la razón 75 g por persona.",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-26T23:00:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000581",
+      "tarea_id": "00000000-0000-4000-8000-000000000205",
+      "estudiante_id": "00000000-0000-4000-8000-000000000012",
+      "contenido_texto": "Si 4 personas usan 300 g de harina, para 10 necesito 750 g. Mantengo la razón 75 g por persona.",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-26T23:00:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000582",
+      "tarea_id": "00000000-0000-4000-8000-000000000205",
+      "estudiante_id": "00000000-0000-4000-8000-000000000013",
+      "contenido_texto": "Si 4 personas usan 300 g de harina, para 10 necesito 750 g. Mantengo la razón 75 g por persona.",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-26T23:00:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000583",
+      "tarea_id": "00000000-0000-4000-8000-000000000205",
+      "estudiante_id": "00000000-0000-4000-8000-000000000014",
+      "contenido_texto": "Si 4 personas usan 300 g de harina, para 10 necesito 750 g. Mantengo la razón 75 g por persona.",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-26T23:00:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000584",
+      "tarea_id": "00000000-0000-4000-8000-000000000205",
+      "estudiante_id": "00000000-0000-4000-8000-000000000015",
+      "contenido_texto": "Si 4 personas usan 300 g de harina, para 10 necesito 750 g. Mantengo la razón 75 g por persona.",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-26T23:00:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000585",
+      "tarea_id": "00000000-0000-4000-8000-000000000205",
+      "estudiante_id": "00000000-0000-4000-8000-000000000016",
+      "contenido_texto": "Si 4 personas usan 300 g de harina, para 10 necesito 750 g. Mantengo la razón 75 g por persona.",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-26T23:00:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000586",
+      "tarea_id": "00000000-0000-4000-8000-000000000205",
+      "estudiante_id": "00000000-0000-4000-8000-000000000017",
+      "contenido_texto": "Si 4 personas usan 300 g de harina, para 10 necesito 750 g. Mantengo la razón 75 g por persona.",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-26T23:00:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000587",
+      "tarea_id": "00000000-0000-4000-8000-000000000205",
+      "estudiante_id": "00000000-0000-4000-8000-000000000018",
+      "contenido_texto": "Si 4 personas usan 300 g de harina, para 10 necesito 750 g. Mantengo la razón 75 g por persona.",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-26T23:00:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000588",
+      "tarea_id": "00000000-0000-4000-8000-000000000205",
+      "estudiante_id": "00000000-0000-4000-8000-000000000019",
+      "contenido_texto": "Si 4 personas usan 300 g de harina, para 10 necesito 750 g. Mantengo la razón 75 g por persona.",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-26T23:00:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000589",
+      "tarea_id": "00000000-0000-4000-8000-000000000205",
+      "estudiante_id": "00000000-0000-4000-8000-000000000020",
+      "contenido_texto": "Si 4 personas usan 300 g de harina, para 10 necesito 750 g. Mantengo la razón 75 g por persona.",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-26T23:00:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000590",
+      "tarea_id": "00000000-0000-4000-8000-000000000205",
+      "estudiante_id": "00000000-0000-4000-8000-000000000021",
+      "contenido_texto": "Si 4 personas usan 300 g de harina, para 10 necesito 750 g. Mantengo la razón 75 g por persona.",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-26T23:00:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000591",
+      "tarea_id": "00000000-0000-4000-8000-000000000205",
+      "estudiante_id": "00000000-0000-4000-8000-000000000022",
+      "contenido_texto": "Si 4 personas usan 300 g de harina, para 10 necesito 750 g. Mantengo la razón 75 g por persona.",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-26T23:00:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000620",
+      "tarea_id": "00000000-0000-4000-8000-000000000207",
+      "estudiante_id": "00000000-0000-4000-8000-000000000011",
+      "contenido_texto": "Sumé las cinco notas con un ciclo y dividí el total entre cinco; comparé el promedio con 70.",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-26T23:00:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000621",
+      "tarea_id": "00000000-0000-4000-8000-000000000207",
+      "estudiante_id": "00000000-0000-4000-8000-000000000012",
+      "contenido_texto": "Sumé las cinco notas con un ciclo y dividí el total entre cinco; comparé el promedio con 70.",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-26T23:00:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000622",
+      "tarea_id": "00000000-0000-4000-8000-000000000207",
+      "estudiante_id": "00000000-0000-4000-8000-000000000013",
+      "contenido_texto": "Sumé las cinco notas con un ciclo y dividí el total entre cinco; comparé el promedio con 70.",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-26T23:00:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000623",
+      "tarea_id": "00000000-0000-4000-8000-000000000207",
+      "estudiante_id": "00000000-0000-4000-8000-000000000014",
+      "contenido_texto": "Sumé las cinco notas con un ciclo y dividí el total entre cinco; comparé el promedio con 70.",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-26T23:00:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000624",
+      "tarea_id": "00000000-0000-4000-8000-000000000207",
+      "estudiante_id": "00000000-0000-4000-8000-000000000015",
+      "contenido_texto": "Sumé las cinco notas con un ciclo y dividí el total entre cinco; comparé el promedio con 70.",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-26T23:00:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000625",
+      "tarea_id": "00000000-0000-4000-8000-000000000207",
+      "estudiante_id": "00000000-0000-4000-8000-000000000016",
+      "contenido_texto": "Sumé las cinco notas con un ciclo y dividí el total entre cinco; comparé el promedio con 70.",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-26T23:00:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000626",
+      "tarea_id": "00000000-0000-4000-8000-000000000207",
+      "estudiante_id": "00000000-0000-4000-8000-000000000017",
+      "contenido_texto": "Sumé las cinco notas con un ciclo y dividí el total entre cinco; comparé el promedio con 70.",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-26T23:00:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000627",
+      "tarea_id": "00000000-0000-4000-8000-000000000207",
+      "estudiante_id": "00000000-0000-4000-8000-000000000018",
+      "contenido_texto": "Sumé las cinco notas con un ciclo y dividí el total entre cinco; comparé el promedio con 70.",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-26T23:00:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000628",
+      "tarea_id": "00000000-0000-4000-8000-000000000207",
+      "estudiante_id": "00000000-0000-4000-8000-000000000019",
+      "contenido_texto": "Sumé las cinco notas con un ciclo y dividí el total entre cinco; comparé el promedio con 70.",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-26T23:00:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000629",
+      "tarea_id": "00000000-0000-4000-8000-000000000207",
+      "estudiante_id": "00000000-0000-4000-8000-000000000020",
+      "contenido_texto": "Sumé las cinco notas con un ciclo y dividí el total entre cinco; comparé el promedio con 70.",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-26T23:00:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000630",
+      "tarea_id": "00000000-0000-4000-8000-000000000207",
+      "estudiante_id": "00000000-0000-4000-8000-000000000021",
+      "contenido_texto": "Sumé las cinco notas con un ciclo y dividí el total entre cinco; comparé el promedio con 70.",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-26T23:00:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000631",
+      "tarea_id": "00000000-0000-4000-8000-000000000207",
+      "estudiante_id": "00000000-0000-4000-8000-000000000022",
+      "contenido_texto": "Sumé las cinco notas con un ciclo y dividí el total entre cinco; comparé el promedio con 70.",
+      "adjuntos": [],
+      "estado": "entregada",
+      "entregada_en": "2026-10-26T23:00:00.000Z",
+      "entregada_externamente": false
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000330",
+      "tarea_id": "00000000-0000-4000-8000-000000000208",
+      "estudiante_id": "00000000-0000-4000-8000-000000000020",
+      "contenido_texto": "Para x = 2 escribí y = 2 + 1 = 3. Debo revisar la multiplicación en y = 2x + 1.",
+      "adjuntos": [],
+      "estado": "pendiente",
+      "entregada_en": "2026-10-28T23:00:00.000Z",
+      "entregada_externamente": false
     }
-   ],
-   "fortalezas": [
-    "Comprende la idea de equilibrio de la ecuación"
-   ],
-   "debilidades": [
-    "Se confunde al agrupar términos con x en ambos lados"
-   ],
-   "resumen_estudiante": "¡Buen trabajo! Explicaste bien la mayoría de los pasos. Te falta un detalle que puedes reforzar con unos minutos de práctica.",
-   "resumen_docente": "Comprende y explica la mayoría de los pasos; un concepto aún débil.",
-   "generado_en": "2026-10-25T21:00:00Z"
-  },
-  {
-   "entrega_id": "de000000-0000-4000-8000-000000000204",
-   "nivel_global": 2,
-   "por_concepto": [
+  ],
+  "analisis": [
     {
-     "concepto": "Operaciones inversas",
-     "competencia": "Resuelve problemas con ecuaciones lineales",
-     "nivel": 2,
-     "evidencia": "le sumé 5 en vez de restarlo y luego lo arreglé"
+      "tarea_id": "00000000-0000-4000-8000-000000000203",
+      "estudiante_id": "00000000-0000-4000-8000-000000000011",
+      "dificultad": 3,
+      "minutos_estimados": 60,
+      "prioridad": 95,
+      "conceptos": [
+        "Salidas digitales",
+        "Función delay()",
+        "Estructura setup/loop"
+      ],
+      "pasos_sugeridos": [
+        "Arma el circuito con los 3 LED",
+        "Escribe el código del rojo primero",
+        "Agrega comentarios al final"
+      ],
+      "razon": "La fecha ya pasó: sube tu evidencia y explica el código que entregaste en Classroom."
     },
     {
-     "concepto": "Despejar x",
-     "competencia": "Resuelve problemas con ecuaciones lineales",
-     "nivel": 2,
-     "evidencia": "divido entre 3 pero no estoy segura cuándo"
+      "tarea_id": "00000000-0000-4000-8000-000000000201",
+      "estudiante_id": "00000000-0000-4000-8000-000000000011",
+      "dificultad": 3,
+      "minutos_estimados": 40,
+      "prioridad": 80,
+      "conceptos": [
+        "Despejar x",
+        "Operaciones inversas",
+        "Comprobar la solución"
+      ],
+      "pasos_sugeridos": [
+        "Resuelve 1 a 4",
+        "Descansa 5 minutos",
+        "Resuelve 5 a 8 y comprueba"
+      ],
+      "razon": "Ya verificaste esta tarea: practica la comprobación de tus resultados."
     },
     {
-     "concepto": "Comprobar la solución",
-     "competencia": "Resuelve problemas con ecuaciones lineales",
-     "nivel": 1,
-     "evidencia": "no comprobé ninguno"
+      "tarea_id": "00000000-0000-4000-8000-000000000204",
+      "estudiante_id": "00000000-0000-4000-8000-000000000011",
+      "dificultad": 4,
+      "minutos_estimados": 55,
+      "prioridad": 70,
+      "conceptos": [
+        "Ley de Ohm",
+        "Resistencia equivalente en serie",
+        "Unidades eléctricas"
+      ],
+      "pasos_sugeridos": [
+        "Calcula la resistencia total de cada circuito",
+        "Aplica V = I · R",
+        "Revisa las unidades"
+      ],
+      "razon": "Es de las más difíciles de la semana; conviene empezar temprano."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000205",
+      "estudiante_id": "00000000-0000-4000-8000-000000000011",
+      "dificultad": 3,
+      "minutos_estimados": 45,
+      "prioridad": 65,
+      "conceptos": [
+        "Razón y proporción",
+        "Regla de tres directa",
+        "Interpretar el resultado"
+      ],
+      "pasos_sugeridos": [
+        "Anota los datos de cada problema",
+        "Justifica la relación directa",
+        "Comprueba las unidades"
+      ],
+      "razon": "Practica recetas y mapas justificando la relación entre las cantidades."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000202",
+      "estudiante_id": "00000000-0000-4000-8000-000000000011",
+      "dificultad": 2,
+      "minutos_estimados": 30,
+      "prioridad": 45,
+      "conceptos": [
+        "Mínimo común múltiplo",
+        "Fracciones equivalentes"
+      ],
+      "pasos_sugeridos": [
+        "Calcula el MCM de cada par",
+        "Resuelve 5 por sesión"
+      ],
+      "razon": "Es un repaso; tienes hasta el viernes."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000207",
+      "estudiante_id": "00000000-0000-4000-8000-000000000011",
+      "dificultad": 3,
+      "minutos_estimados": 50,
+      "prioridad": 40,
+      "conceptos": [
+        "Variables numéricas",
+        "Ciclo for",
+        "Condicional if"
+      ],
+      "pasos_sugeridos": [
+        "Pide las 5 notas con un ciclo",
+        "Calcula el promedio",
+        "Muestra el resultado con if"
+      ],
+      "razon": "Entrega el sábado; programa en dos sesiones cortas."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000206",
+      "estudiante_id": "00000000-0000-4000-8000-000000000011",
+      "dificultad": 2,
+      "minutos_estimados": 45,
+      "prioridad": 20,
+      "conceptos": [
+        "Primitivas 3D",
+        "Agrupar y restar formas",
+        "Exportar STL"
+      ],
+      "pasos_sugeridos": [
+        "Haz el contorno del llavero",
+        "Agrega tu inicial en relieve",
+        "Exporta y revisa el archivo"
+      ],
+      "razon": "Entrega la próxima semana; puedes dejarla para el fin de semana."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000208",
+      "estudiante_id": "00000000-0000-4000-8000-000000000011",
+      "dificultad": 4,
+      "minutos_estimados": 60,
+      "prioridad": 15,
+      "conceptos": [
+        "Tabla de valores",
+        "Pendiente",
+        "Punto de corte"
+      ],
+      "pasos_sugeridos": [
+        "Completa las tablas de valores",
+        "Grafica las rectas y comprueba su corte"
+      ],
+      "razon": "Es para la próxima semana; divide las tablas y las gráficas en dos sesiones."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000203",
+      "estudiante_id": "00000000-0000-4000-8000-000000000012",
+      "dificultad": 3,
+      "minutos_estimados": 60,
+      "prioridad": 95,
+      "conceptos": [
+        "Salidas digitales",
+        "Función delay()",
+        "Estructura setup/loop"
+      ],
+      "pasos_sugeridos": [
+        "Arma el circuito con los 3 LED",
+        "Escribe el código del rojo primero",
+        "Agrega comentarios al final"
+      ],
+      "razon": "La fecha ya pasó: sube tu evidencia y explica el código que entregaste en Classroom."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000201",
+      "estudiante_id": "00000000-0000-4000-8000-000000000012",
+      "dificultad": 3,
+      "minutos_estimados": 40,
+      "prioridad": 80,
+      "conceptos": [
+        "Despejar x",
+        "Operaciones inversas",
+        "Comprobar la solución"
+      ],
+      "pasos_sugeridos": [
+        "Resuelve 1 a 4",
+        "Descansa 5 minutos",
+        "Resuelve 5 a 8 y comprueba"
+      ],
+      "razon": "Ya verificaste esta tarea: practica la comprobación de tus resultados."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000204",
+      "estudiante_id": "00000000-0000-4000-8000-000000000012",
+      "dificultad": 4,
+      "minutos_estimados": 55,
+      "prioridad": 70,
+      "conceptos": [
+        "Ley de Ohm",
+        "Resistencia equivalente en serie",
+        "Unidades eléctricas"
+      ],
+      "pasos_sugeridos": [
+        "Calcula la resistencia total de cada circuito",
+        "Aplica V = I · R",
+        "Revisa las unidades"
+      ],
+      "razon": "Es de las más difíciles de la semana; conviene empezar temprano."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000205",
+      "estudiante_id": "00000000-0000-4000-8000-000000000012",
+      "dificultad": 3,
+      "minutos_estimados": 45,
+      "prioridad": 65,
+      "conceptos": [
+        "Razón y proporción",
+        "Regla de tres directa",
+        "Interpretar el resultado"
+      ],
+      "pasos_sugeridos": [
+        "Anota los datos de cada problema",
+        "Justifica la relación directa",
+        "Comprueba las unidades"
+      ],
+      "razon": "Practica recetas y mapas justificando la relación entre las cantidades."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000202",
+      "estudiante_id": "00000000-0000-4000-8000-000000000012",
+      "dificultad": 2,
+      "minutos_estimados": 30,
+      "prioridad": 45,
+      "conceptos": [
+        "Mínimo común múltiplo",
+        "Fracciones equivalentes"
+      ],
+      "pasos_sugeridos": [
+        "Calcula el MCM de cada par",
+        "Resuelve 5 por sesión"
+      ],
+      "razon": "Es un repaso; tienes hasta el viernes."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000207",
+      "estudiante_id": "00000000-0000-4000-8000-000000000012",
+      "dificultad": 3,
+      "minutos_estimados": 50,
+      "prioridad": 40,
+      "conceptos": [
+        "Variables numéricas",
+        "Ciclo for",
+        "Condicional if"
+      ],
+      "pasos_sugeridos": [
+        "Pide las 5 notas con un ciclo",
+        "Calcula el promedio",
+        "Muestra el resultado con if"
+      ],
+      "razon": "Entrega el sábado; programa en dos sesiones cortas."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000206",
+      "estudiante_id": "00000000-0000-4000-8000-000000000012",
+      "dificultad": 2,
+      "minutos_estimados": 45,
+      "prioridad": 20,
+      "conceptos": [
+        "Primitivas 3D",
+        "Agrupar y restar formas",
+        "Exportar STL"
+      ],
+      "pasos_sugeridos": [
+        "Haz el contorno del llavero",
+        "Agrega tu inicial en relieve",
+        "Exporta y revisa el archivo"
+      ],
+      "razon": "Entrega la próxima semana; puedes dejarla para el fin de semana."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000208",
+      "estudiante_id": "00000000-0000-4000-8000-000000000012",
+      "dificultad": 4,
+      "minutos_estimados": 60,
+      "prioridad": 15,
+      "conceptos": [
+        "Tabla de valores",
+        "Pendiente",
+        "Punto de corte"
+      ],
+      "pasos_sugeridos": [
+        "Completa las tablas de valores",
+        "Grafica las rectas y comprueba su corte"
+      ],
+      "razon": "Es para la próxima semana; divide las tablas y las gráficas en dos sesiones."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000203",
+      "estudiante_id": "00000000-0000-4000-8000-000000000013",
+      "dificultad": 3,
+      "minutos_estimados": 60,
+      "prioridad": 95,
+      "conceptos": [
+        "Salidas digitales",
+        "Función delay()",
+        "Estructura setup/loop"
+      ],
+      "pasos_sugeridos": [
+        "Arma el circuito con los 3 LED",
+        "Escribe el código del rojo primero",
+        "Agrega comentarios al final"
+      ],
+      "razon": "La fecha ya pasó: sube tu evidencia y explica el código que entregaste en Classroom."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000201",
+      "estudiante_id": "00000000-0000-4000-8000-000000000013",
+      "dificultad": 3,
+      "minutos_estimados": 40,
+      "prioridad": 80,
+      "conceptos": [
+        "Despejar x",
+        "Operaciones inversas",
+        "Comprobar la solución"
+      ],
+      "pasos_sugeridos": [
+        "Resuelve 1 a 4",
+        "Descansa 5 minutos",
+        "Resuelve 5 a 8 y comprueba"
+      ],
+      "razon": "Ya verificaste esta tarea: practica la comprobación de tus resultados."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000204",
+      "estudiante_id": "00000000-0000-4000-8000-000000000013",
+      "dificultad": 4,
+      "minutos_estimados": 55,
+      "prioridad": 70,
+      "conceptos": [
+        "Ley de Ohm",
+        "Resistencia equivalente en serie",
+        "Unidades eléctricas"
+      ],
+      "pasos_sugeridos": [
+        "Calcula la resistencia total de cada circuito",
+        "Aplica V = I · R",
+        "Revisa las unidades"
+      ],
+      "razon": "Es de las más difíciles de la semana; conviene empezar temprano."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000205",
+      "estudiante_id": "00000000-0000-4000-8000-000000000013",
+      "dificultad": 3,
+      "minutos_estimados": 45,
+      "prioridad": 65,
+      "conceptos": [
+        "Razón y proporción",
+        "Regla de tres directa",
+        "Interpretar el resultado"
+      ],
+      "pasos_sugeridos": [
+        "Anota los datos de cada problema",
+        "Justifica la relación directa",
+        "Comprueba las unidades"
+      ],
+      "razon": "Practica recetas y mapas justificando la relación entre las cantidades."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000202",
+      "estudiante_id": "00000000-0000-4000-8000-000000000013",
+      "dificultad": 2,
+      "minutos_estimados": 30,
+      "prioridad": 45,
+      "conceptos": [
+        "Mínimo común múltiplo",
+        "Fracciones equivalentes"
+      ],
+      "pasos_sugeridos": [
+        "Calcula el MCM de cada par",
+        "Resuelve 5 por sesión"
+      ],
+      "razon": "Es un repaso; tienes hasta el viernes."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000207",
+      "estudiante_id": "00000000-0000-4000-8000-000000000013",
+      "dificultad": 3,
+      "minutos_estimados": 50,
+      "prioridad": 40,
+      "conceptos": [
+        "Variables numéricas",
+        "Ciclo for",
+        "Condicional if"
+      ],
+      "pasos_sugeridos": [
+        "Pide las 5 notas con un ciclo",
+        "Calcula el promedio",
+        "Muestra el resultado con if"
+      ],
+      "razon": "Entrega el sábado; programa en dos sesiones cortas."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000206",
+      "estudiante_id": "00000000-0000-4000-8000-000000000013",
+      "dificultad": 2,
+      "minutos_estimados": 45,
+      "prioridad": 20,
+      "conceptos": [
+        "Primitivas 3D",
+        "Agrupar y restar formas",
+        "Exportar STL"
+      ],
+      "pasos_sugeridos": [
+        "Haz el contorno del llavero",
+        "Agrega tu inicial en relieve",
+        "Exporta y revisa el archivo"
+      ],
+      "razon": "Entrega la próxima semana; puedes dejarla para el fin de semana."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000208",
+      "estudiante_id": "00000000-0000-4000-8000-000000000013",
+      "dificultad": 4,
+      "minutos_estimados": 60,
+      "prioridad": 15,
+      "conceptos": [
+        "Tabla de valores",
+        "Pendiente",
+        "Punto de corte"
+      ],
+      "pasos_sugeridos": [
+        "Completa las tablas de valores",
+        "Grafica las rectas y comprueba su corte"
+      ],
+      "razon": "Es para la próxima semana; divide las tablas y las gráficas en dos sesiones."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000203",
+      "estudiante_id": "00000000-0000-4000-8000-000000000014",
+      "dificultad": 3,
+      "minutos_estimados": 60,
+      "prioridad": 95,
+      "conceptos": [
+        "Salidas digitales",
+        "Función delay()",
+        "Estructura setup/loop"
+      ],
+      "pasos_sugeridos": [
+        "Arma el circuito con los 3 LED",
+        "Escribe el código del rojo primero",
+        "Agrega comentarios al final"
+      ],
+      "razon": "La fecha ya pasó: sube tu evidencia y explica el código que entregaste en Classroom."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000201",
+      "estudiante_id": "00000000-0000-4000-8000-000000000014",
+      "dificultad": 3,
+      "minutos_estimados": 40,
+      "prioridad": 80,
+      "conceptos": [
+        "Despejar x",
+        "Operaciones inversas",
+        "Comprobar la solución"
+      ],
+      "pasos_sugeridos": [
+        "Resuelve 1 a 4",
+        "Descansa 5 minutos",
+        "Resuelve 5 a 8 y comprueba"
+      ],
+      "razon": "Ya verificaste esta tarea: practica la comprobación de tus resultados."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000204",
+      "estudiante_id": "00000000-0000-4000-8000-000000000014",
+      "dificultad": 4,
+      "minutos_estimados": 55,
+      "prioridad": 70,
+      "conceptos": [
+        "Ley de Ohm",
+        "Resistencia equivalente en serie",
+        "Unidades eléctricas"
+      ],
+      "pasos_sugeridos": [
+        "Calcula la resistencia total de cada circuito",
+        "Aplica V = I · R",
+        "Revisa las unidades"
+      ],
+      "razon": "Es de las más difíciles de la semana; conviene empezar temprano."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000205",
+      "estudiante_id": "00000000-0000-4000-8000-000000000014",
+      "dificultad": 3,
+      "minutos_estimados": 45,
+      "prioridad": 65,
+      "conceptos": [
+        "Razón y proporción",
+        "Regla de tres directa",
+        "Interpretar el resultado"
+      ],
+      "pasos_sugeridos": [
+        "Anota los datos de cada problema",
+        "Justifica la relación directa",
+        "Comprueba las unidades"
+      ],
+      "razon": "Practica recetas y mapas justificando la relación entre las cantidades."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000202",
+      "estudiante_id": "00000000-0000-4000-8000-000000000014",
+      "dificultad": 2,
+      "minutos_estimados": 30,
+      "prioridad": 45,
+      "conceptos": [
+        "Mínimo común múltiplo",
+        "Fracciones equivalentes"
+      ],
+      "pasos_sugeridos": [
+        "Calcula el MCM de cada par",
+        "Resuelve 5 por sesión"
+      ],
+      "razon": "Es un repaso; tienes hasta el viernes."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000207",
+      "estudiante_id": "00000000-0000-4000-8000-000000000014",
+      "dificultad": 3,
+      "minutos_estimados": 50,
+      "prioridad": 40,
+      "conceptos": [
+        "Variables numéricas",
+        "Ciclo for",
+        "Condicional if"
+      ],
+      "pasos_sugeridos": [
+        "Pide las 5 notas con un ciclo",
+        "Calcula el promedio",
+        "Muestra el resultado con if"
+      ],
+      "razon": "Entrega el sábado; programa en dos sesiones cortas."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000206",
+      "estudiante_id": "00000000-0000-4000-8000-000000000014",
+      "dificultad": 2,
+      "minutos_estimados": 45,
+      "prioridad": 20,
+      "conceptos": [
+        "Primitivas 3D",
+        "Agrupar y restar formas",
+        "Exportar STL"
+      ],
+      "pasos_sugeridos": [
+        "Haz el contorno del llavero",
+        "Agrega tu inicial en relieve",
+        "Exporta y revisa el archivo"
+      ],
+      "razon": "Entrega la próxima semana; puedes dejarla para el fin de semana."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000208",
+      "estudiante_id": "00000000-0000-4000-8000-000000000014",
+      "dificultad": 4,
+      "minutos_estimados": 60,
+      "prioridad": 15,
+      "conceptos": [
+        "Tabla de valores",
+        "Pendiente",
+        "Punto de corte"
+      ],
+      "pasos_sugeridos": [
+        "Completa las tablas de valores",
+        "Grafica las rectas y comprueba su corte"
+      ],
+      "razon": "Es para la próxima semana; divide las tablas y las gráficas en dos sesiones."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000203",
+      "estudiante_id": "00000000-0000-4000-8000-000000000015",
+      "dificultad": 3,
+      "minutos_estimados": 60,
+      "prioridad": 95,
+      "conceptos": [
+        "Salidas digitales",
+        "Función delay()",
+        "Estructura setup/loop"
+      ],
+      "pasos_sugeridos": [
+        "Arma el circuito con los 3 LED",
+        "Escribe el código del rojo primero",
+        "Agrega comentarios al final"
+      ],
+      "razon": "La fecha ya pasó: sube tu evidencia y explica el código que entregaste en Classroom."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000201",
+      "estudiante_id": "00000000-0000-4000-8000-000000000015",
+      "dificultad": 3,
+      "minutos_estimados": 40,
+      "prioridad": 80,
+      "conceptos": [
+        "Despejar x",
+        "Operaciones inversas",
+        "Comprobar la solución"
+      ],
+      "pasos_sugeridos": [
+        "Resuelve 1 a 4",
+        "Descansa 5 minutos",
+        "Resuelve 5 a 8 y comprueba"
+      ],
+      "razon": "Ya verificaste esta tarea: practica la comprobación de tus resultados."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000204",
+      "estudiante_id": "00000000-0000-4000-8000-000000000015",
+      "dificultad": 4,
+      "minutos_estimados": 55,
+      "prioridad": 70,
+      "conceptos": [
+        "Ley de Ohm",
+        "Resistencia equivalente en serie",
+        "Unidades eléctricas"
+      ],
+      "pasos_sugeridos": [
+        "Calcula la resistencia total de cada circuito",
+        "Aplica V = I · R",
+        "Revisa las unidades"
+      ],
+      "razon": "Es de las más difíciles de la semana; conviene empezar temprano."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000205",
+      "estudiante_id": "00000000-0000-4000-8000-000000000015",
+      "dificultad": 3,
+      "minutos_estimados": 45,
+      "prioridad": 65,
+      "conceptos": [
+        "Razón y proporción",
+        "Regla de tres directa",
+        "Interpretar el resultado"
+      ],
+      "pasos_sugeridos": [
+        "Anota los datos de cada problema",
+        "Justifica la relación directa",
+        "Comprueba las unidades"
+      ],
+      "razon": "Practica recetas y mapas justificando la relación entre las cantidades."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000202",
+      "estudiante_id": "00000000-0000-4000-8000-000000000015",
+      "dificultad": 2,
+      "minutos_estimados": 30,
+      "prioridad": 45,
+      "conceptos": [
+        "Mínimo común múltiplo",
+        "Fracciones equivalentes"
+      ],
+      "pasos_sugeridos": [
+        "Calcula el MCM de cada par",
+        "Resuelve 5 por sesión"
+      ],
+      "razon": "Es un repaso; tienes hasta el viernes."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000207",
+      "estudiante_id": "00000000-0000-4000-8000-000000000015",
+      "dificultad": 3,
+      "minutos_estimados": 50,
+      "prioridad": 40,
+      "conceptos": [
+        "Variables numéricas",
+        "Ciclo for",
+        "Condicional if"
+      ],
+      "pasos_sugeridos": [
+        "Pide las 5 notas con un ciclo",
+        "Calcula el promedio",
+        "Muestra el resultado con if"
+      ],
+      "razon": "Entrega el sábado; programa en dos sesiones cortas."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000206",
+      "estudiante_id": "00000000-0000-4000-8000-000000000015",
+      "dificultad": 2,
+      "minutos_estimados": 45,
+      "prioridad": 20,
+      "conceptos": [
+        "Primitivas 3D",
+        "Agrupar y restar formas",
+        "Exportar STL"
+      ],
+      "pasos_sugeridos": [
+        "Haz el contorno del llavero",
+        "Agrega tu inicial en relieve",
+        "Exporta y revisa el archivo"
+      ],
+      "razon": "Entrega la próxima semana; puedes dejarla para el fin de semana."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000208",
+      "estudiante_id": "00000000-0000-4000-8000-000000000015",
+      "dificultad": 4,
+      "minutos_estimados": 60,
+      "prioridad": 15,
+      "conceptos": [
+        "Tabla de valores",
+        "Pendiente",
+        "Punto de corte"
+      ],
+      "pasos_sugeridos": [
+        "Completa las tablas de valores",
+        "Grafica las rectas y comprueba su corte"
+      ],
+      "razon": "Es para la próxima semana; divide las tablas y las gráficas en dos sesiones."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000203",
+      "estudiante_id": "00000000-0000-4000-8000-000000000016",
+      "dificultad": 3,
+      "minutos_estimados": 60,
+      "prioridad": 95,
+      "conceptos": [
+        "Salidas digitales",
+        "Función delay()",
+        "Estructura setup/loop"
+      ],
+      "pasos_sugeridos": [
+        "Arma el circuito con los 3 LED",
+        "Escribe el código del rojo primero",
+        "Agrega comentarios al final"
+      ],
+      "razon": "La fecha ya pasó: sube tu evidencia y explica el código que entregaste en Classroom."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000201",
+      "estudiante_id": "00000000-0000-4000-8000-000000000016",
+      "dificultad": 3,
+      "minutos_estimados": 40,
+      "prioridad": 80,
+      "conceptos": [
+        "Despejar x",
+        "Operaciones inversas",
+        "Comprobar la solución"
+      ],
+      "pasos_sugeridos": [
+        "Resuelve 1 a 4",
+        "Descansa 5 minutos",
+        "Resuelve 5 a 8 y comprueba"
+      ],
+      "razon": "Ya verificaste esta tarea: practica la comprobación de tus resultados."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000204",
+      "estudiante_id": "00000000-0000-4000-8000-000000000016",
+      "dificultad": 4,
+      "minutos_estimados": 55,
+      "prioridad": 70,
+      "conceptos": [
+        "Ley de Ohm",
+        "Resistencia equivalente en serie",
+        "Unidades eléctricas"
+      ],
+      "pasos_sugeridos": [
+        "Calcula la resistencia total de cada circuito",
+        "Aplica V = I · R",
+        "Revisa las unidades"
+      ],
+      "razon": "Es de las más difíciles de la semana; conviene empezar temprano."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000205",
+      "estudiante_id": "00000000-0000-4000-8000-000000000016",
+      "dificultad": 3,
+      "minutos_estimados": 45,
+      "prioridad": 65,
+      "conceptos": [
+        "Razón y proporción",
+        "Regla de tres directa",
+        "Interpretar el resultado"
+      ],
+      "pasos_sugeridos": [
+        "Anota los datos de cada problema",
+        "Justifica la relación directa",
+        "Comprueba las unidades"
+      ],
+      "razon": "Practica recetas y mapas justificando la relación entre las cantidades."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000202",
+      "estudiante_id": "00000000-0000-4000-8000-000000000016",
+      "dificultad": 2,
+      "minutos_estimados": 30,
+      "prioridad": 45,
+      "conceptos": [
+        "Mínimo común múltiplo",
+        "Fracciones equivalentes"
+      ],
+      "pasos_sugeridos": [
+        "Calcula el MCM de cada par",
+        "Resuelve 5 por sesión"
+      ],
+      "razon": "Es un repaso; tienes hasta el viernes."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000207",
+      "estudiante_id": "00000000-0000-4000-8000-000000000016",
+      "dificultad": 3,
+      "minutos_estimados": 50,
+      "prioridad": 40,
+      "conceptos": [
+        "Variables numéricas",
+        "Ciclo for",
+        "Condicional if"
+      ],
+      "pasos_sugeridos": [
+        "Pide las 5 notas con un ciclo",
+        "Calcula el promedio",
+        "Muestra el resultado con if"
+      ],
+      "razon": "Entrega el sábado; programa en dos sesiones cortas."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000206",
+      "estudiante_id": "00000000-0000-4000-8000-000000000016",
+      "dificultad": 2,
+      "minutos_estimados": 45,
+      "prioridad": 20,
+      "conceptos": [
+        "Primitivas 3D",
+        "Agrupar y restar formas",
+        "Exportar STL"
+      ],
+      "pasos_sugeridos": [
+        "Haz el contorno del llavero",
+        "Agrega tu inicial en relieve",
+        "Exporta y revisa el archivo"
+      ],
+      "razon": "Entrega la próxima semana; puedes dejarla para el fin de semana."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000208",
+      "estudiante_id": "00000000-0000-4000-8000-000000000016",
+      "dificultad": 4,
+      "minutos_estimados": 60,
+      "prioridad": 15,
+      "conceptos": [
+        "Tabla de valores",
+        "Pendiente",
+        "Punto de corte"
+      ],
+      "pasos_sugeridos": [
+        "Completa las tablas de valores",
+        "Grafica las rectas y comprueba su corte"
+      ],
+      "razon": "Es para la próxima semana; divide las tablas y las gráficas en dos sesiones."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000203",
+      "estudiante_id": "00000000-0000-4000-8000-000000000017",
+      "dificultad": 3,
+      "minutos_estimados": 60,
+      "prioridad": 95,
+      "conceptos": [
+        "Salidas digitales",
+        "Función delay()",
+        "Estructura setup/loop"
+      ],
+      "pasos_sugeridos": [
+        "Arma el circuito con los 3 LED",
+        "Escribe el código del rojo primero",
+        "Agrega comentarios al final"
+      ],
+      "razon": "La fecha ya pasó: sube tu evidencia y explica el código que entregaste en Classroom."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000201",
+      "estudiante_id": "00000000-0000-4000-8000-000000000017",
+      "dificultad": 3,
+      "minutos_estimados": 40,
+      "prioridad": 80,
+      "conceptos": [
+        "Despejar x",
+        "Operaciones inversas",
+        "Comprobar la solución"
+      ],
+      "pasos_sugeridos": [
+        "Resuelve 1 a 4",
+        "Descansa 5 minutos",
+        "Resuelve 5 a 8 y comprueba"
+      ],
+      "razon": "Ya verificaste esta tarea: practica la comprobación de tus resultados."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000204",
+      "estudiante_id": "00000000-0000-4000-8000-000000000017",
+      "dificultad": 4,
+      "minutos_estimados": 55,
+      "prioridad": 70,
+      "conceptos": [
+        "Ley de Ohm",
+        "Resistencia equivalente en serie",
+        "Unidades eléctricas"
+      ],
+      "pasos_sugeridos": [
+        "Calcula la resistencia total de cada circuito",
+        "Aplica V = I · R",
+        "Revisa las unidades"
+      ],
+      "razon": "Es de las más difíciles de la semana; conviene empezar temprano."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000205",
+      "estudiante_id": "00000000-0000-4000-8000-000000000017",
+      "dificultad": 3,
+      "minutos_estimados": 45,
+      "prioridad": 65,
+      "conceptos": [
+        "Razón y proporción",
+        "Regla de tres directa",
+        "Interpretar el resultado"
+      ],
+      "pasos_sugeridos": [
+        "Anota los datos de cada problema",
+        "Justifica la relación directa",
+        "Comprueba las unidades"
+      ],
+      "razon": "Practica recetas y mapas justificando la relación entre las cantidades."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000202",
+      "estudiante_id": "00000000-0000-4000-8000-000000000017",
+      "dificultad": 2,
+      "minutos_estimados": 30,
+      "prioridad": 45,
+      "conceptos": [
+        "Mínimo común múltiplo",
+        "Fracciones equivalentes"
+      ],
+      "pasos_sugeridos": [
+        "Calcula el MCM de cada par",
+        "Resuelve 5 por sesión"
+      ],
+      "razon": "Es un repaso; tienes hasta el viernes."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000207",
+      "estudiante_id": "00000000-0000-4000-8000-000000000017",
+      "dificultad": 3,
+      "minutos_estimados": 50,
+      "prioridad": 40,
+      "conceptos": [
+        "Variables numéricas",
+        "Ciclo for",
+        "Condicional if"
+      ],
+      "pasos_sugeridos": [
+        "Pide las 5 notas con un ciclo",
+        "Calcula el promedio",
+        "Muestra el resultado con if"
+      ],
+      "razon": "Entrega el sábado; programa en dos sesiones cortas."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000206",
+      "estudiante_id": "00000000-0000-4000-8000-000000000017",
+      "dificultad": 2,
+      "minutos_estimados": 45,
+      "prioridad": 20,
+      "conceptos": [
+        "Primitivas 3D",
+        "Agrupar y restar formas",
+        "Exportar STL"
+      ],
+      "pasos_sugeridos": [
+        "Haz el contorno del llavero",
+        "Agrega tu inicial en relieve",
+        "Exporta y revisa el archivo"
+      ],
+      "razon": "Entrega la próxima semana; puedes dejarla para el fin de semana."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000208",
+      "estudiante_id": "00000000-0000-4000-8000-000000000017",
+      "dificultad": 4,
+      "minutos_estimados": 60,
+      "prioridad": 15,
+      "conceptos": [
+        "Tabla de valores",
+        "Pendiente",
+        "Punto de corte"
+      ],
+      "pasos_sugeridos": [
+        "Completa las tablas de valores",
+        "Grafica las rectas y comprueba su corte"
+      ],
+      "razon": "Es para la próxima semana; divide las tablas y las gráficas en dos sesiones."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000203",
+      "estudiante_id": "00000000-0000-4000-8000-000000000018",
+      "dificultad": 3,
+      "minutos_estimados": 60,
+      "prioridad": 95,
+      "conceptos": [
+        "Salidas digitales",
+        "Función delay()",
+        "Estructura setup/loop"
+      ],
+      "pasos_sugeridos": [
+        "Arma el circuito con los 3 LED",
+        "Escribe el código del rojo primero",
+        "Agrega comentarios al final"
+      ],
+      "razon": "La fecha ya pasó: sube tu evidencia y explica el código que entregaste en Classroom."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000201",
+      "estudiante_id": "00000000-0000-4000-8000-000000000018",
+      "dificultad": 3,
+      "minutos_estimados": 40,
+      "prioridad": 80,
+      "conceptos": [
+        "Despejar x",
+        "Operaciones inversas",
+        "Comprobar la solución"
+      ],
+      "pasos_sugeridos": [
+        "Resuelve 1 a 4",
+        "Descansa 5 minutos",
+        "Resuelve 5 a 8 y comprueba"
+      ],
+      "razon": "Ya verificaste esta tarea: practica la comprobación de tus resultados."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000204",
+      "estudiante_id": "00000000-0000-4000-8000-000000000018",
+      "dificultad": 4,
+      "minutos_estimados": 55,
+      "prioridad": 70,
+      "conceptos": [
+        "Ley de Ohm",
+        "Resistencia equivalente en serie",
+        "Unidades eléctricas"
+      ],
+      "pasos_sugeridos": [
+        "Calcula la resistencia total de cada circuito",
+        "Aplica V = I · R",
+        "Revisa las unidades"
+      ],
+      "razon": "Es de las más difíciles de la semana; conviene empezar temprano."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000205",
+      "estudiante_id": "00000000-0000-4000-8000-000000000018",
+      "dificultad": 3,
+      "minutos_estimados": 45,
+      "prioridad": 65,
+      "conceptos": [
+        "Razón y proporción",
+        "Regla de tres directa",
+        "Interpretar el resultado"
+      ],
+      "pasos_sugeridos": [
+        "Anota los datos de cada problema",
+        "Justifica la relación directa",
+        "Comprueba las unidades"
+      ],
+      "razon": "Practica recetas y mapas justificando la relación entre las cantidades."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000202",
+      "estudiante_id": "00000000-0000-4000-8000-000000000018",
+      "dificultad": 2,
+      "minutos_estimados": 30,
+      "prioridad": 45,
+      "conceptos": [
+        "Mínimo común múltiplo",
+        "Fracciones equivalentes"
+      ],
+      "pasos_sugeridos": [
+        "Calcula el MCM de cada par",
+        "Resuelve 5 por sesión"
+      ],
+      "razon": "Es un repaso; tienes hasta el viernes."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000207",
+      "estudiante_id": "00000000-0000-4000-8000-000000000018",
+      "dificultad": 3,
+      "minutos_estimados": 50,
+      "prioridad": 40,
+      "conceptos": [
+        "Variables numéricas",
+        "Ciclo for",
+        "Condicional if"
+      ],
+      "pasos_sugeridos": [
+        "Pide las 5 notas con un ciclo",
+        "Calcula el promedio",
+        "Muestra el resultado con if"
+      ],
+      "razon": "Entrega el sábado; programa en dos sesiones cortas."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000206",
+      "estudiante_id": "00000000-0000-4000-8000-000000000018",
+      "dificultad": 2,
+      "minutos_estimados": 45,
+      "prioridad": 20,
+      "conceptos": [
+        "Primitivas 3D",
+        "Agrupar y restar formas",
+        "Exportar STL"
+      ],
+      "pasos_sugeridos": [
+        "Haz el contorno del llavero",
+        "Agrega tu inicial en relieve",
+        "Exporta y revisa el archivo"
+      ],
+      "razon": "Entrega la próxima semana; puedes dejarla para el fin de semana."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000208",
+      "estudiante_id": "00000000-0000-4000-8000-000000000018",
+      "dificultad": 4,
+      "minutos_estimados": 60,
+      "prioridad": 15,
+      "conceptos": [
+        "Tabla de valores",
+        "Pendiente",
+        "Punto de corte"
+      ],
+      "pasos_sugeridos": [
+        "Completa las tablas de valores",
+        "Grafica las rectas y comprueba su corte"
+      ],
+      "razon": "Es para la próxima semana; divide las tablas y las gráficas en dos sesiones."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000203",
+      "estudiante_id": "00000000-0000-4000-8000-000000000019",
+      "dificultad": 3,
+      "minutos_estimados": 60,
+      "prioridad": 95,
+      "conceptos": [
+        "Salidas digitales",
+        "Función delay()",
+        "Estructura setup/loop"
+      ],
+      "pasos_sugeridos": [
+        "Arma el circuito con los 3 LED",
+        "Escribe el código del rojo primero",
+        "Agrega comentarios al final"
+      ],
+      "razon": "La fecha ya pasó: sube tu evidencia y explica el código que entregaste en Classroom."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000201",
+      "estudiante_id": "00000000-0000-4000-8000-000000000019",
+      "dificultad": 3,
+      "minutos_estimados": 40,
+      "prioridad": 80,
+      "conceptos": [
+        "Despejar x",
+        "Operaciones inversas",
+        "Comprobar la solución"
+      ],
+      "pasos_sugeridos": [
+        "Resuelve 1 a 4",
+        "Descansa 5 minutos",
+        "Resuelve 5 a 8 y comprueba"
+      ],
+      "razon": "Ya verificaste esta tarea: practica la comprobación de tus resultados."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000204",
+      "estudiante_id": "00000000-0000-4000-8000-000000000019",
+      "dificultad": 4,
+      "minutos_estimados": 55,
+      "prioridad": 70,
+      "conceptos": [
+        "Ley de Ohm",
+        "Resistencia equivalente en serie",
+        "Unidades eléctricas"
+      ],
+      "pasos_sugeridos": [
+        "Calcula la resistencia total de cada circuito",
+        "Aplica V = I · R",
+        "Revisa las unidades"
+      ],
+      "razon": "Es de las más difíciles de la semana; conviene empezar temprano."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000205",
+      "estudiante_id": "00000000-0000-4000-8000-000000000019",
+      "dificultad": 3,
+      "minutos_estimados": 45,
+      "prioridad": 65,
+      "conceptos": [
+        "Razón y proporción",
+        "Regla de tres directa",
+        "Interpretar el resultado"
+      ],
+      "pasos_sugeridos": [
+        "Anota los datos de cada problema",
+        "Justifica la relación directa",
+        "Comprueba las unidades"
+      ],
+      "razon": "Practica recetas y mapas justificando la relación entre las cantidades."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000202",
+      "estudiante_id": "00000000-0000-4000-8000-000000000019",
+      "dificultad": 2,
+      "minutos_estimados": 30,
+      "prioridad": 45,
+      "conceptos": [
+        "Mínimo común múltiplo",
+        "Fracciones equivalentes"
+      ],
+      "pasos_sugeridos": [
+        "Calcula el MCM de cada par",
+        "Resuelve 5 por sesión"
+      ],
+      "razon": "Es un repaso; tienes hasta el viernes."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000207",
+      "estudiante_id": "00000000-0000-4000-8000-000000000019",
+      "dificultad": 3,
+      "minutos_estimados": 50,
+      "prioridad": 40,
+      "conceptos": [
+        "Variables numéricas",
+        "Ciclo for",
+        "Condicional if"
+      ],
+      "pasos_sugeridos": [
+        "Pide las 5 notas con un ciclo",
+        "Calcula el promedio",
+        "Muestra el resultado con if"
+      ],
+      "razon": "Entrega el sábado; programa en dos sesiones cortas."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000206",
+      "estudiante_id": "00000000-0000-4000-8000-000000000019",
+      "dificultad": 2,
+      "minutos_estimados": 45,
+      "prioridad": 20,
+      "conceptos": [
+        "Primitivas 3D",
+        "Agrupar y restar formas",
+        "Exportar STL"
+      ],
+      "pasos_sugeridos": [
+        "Haz el contorno del llavero",
+        "Agrega tu inicial en relieve",
+        "Exporta y revisa el archivo"
+      ],
+      "razon": "Entrega la próxima semana; puedes dejarla para el fin de semana."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000208",
+      "estudiante_id": "00000000-0000-4000-8000-000000000019",
+      "dificultad": 4,
+      "minutos_estimados": 60,
+      "prioridad": 15,
+      "conceptos": [
+        "Tabla de valores",
+        "Pendiente",
+        "Punto de corte"
+      ],
+      "pasos_sugeridos": [
+        "Completa las tablas de valores",
+        "Grafica las rectas y comprueba su corte"
+      ],
+      "razon": "Es para la próxima semana; divide las tablas y las gráficas en dos sesiones."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000203",
+      "estudiante_id": "00000000-0000-4000-8000-000000000020",
+      "dificultad": 3,
+      "minutos_estimados": 60,
+      "prioridad": 95,
+      "conceptos": [
+        "Salidas digitales",
+        "Función delay()",
+        "Estructura setup/loop"
+      ],
+      "pasos_sugeridos": [
+        "Arma el circuito con los 3 LED",
+        "Escribe el código del rojo primero",
+        "Agrega comentarios al final"
+      ],
+      "razon": "La fecha ya pasó: sube tu evidencia y explica el código que entregaste en Classroom."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000201",
+      "estudiante_id": "00000000-0000-4000-8000-000000000020",
+      "dificultad": 3,
+      "minutos_estimados": 40,
+      "prioridad": 80,
+      "conceptos": [
+        "Despejar x",
+        "Operaciones inversas",
+        "Comprobar la solución"
+      ],
+      "pasos_sugeridos": [
+        "Resuelve 1 a 4",
+        "Descansa 5 minutos",
+        "Resuelve 5 a 8 y comprueba"
+      ],
+      "razon": "Ya verificaste esta tarea: practica la comprobación de tus resultados."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000204",
+      "estudiante_id": "00000000-0000-4000-8000-000000000020",
+      "dificultad": 4,
+      "minutos_estimados": 55,
+      "prioridad": 70,
+      "conceptos": [
+        "Ley de Ohm",
+        "Resistencia equivalente en serie",
+        "Unidades eléctricas"
+      ],
+      "pasos_sugeridos": [
+        "Calcula la resistencia total de cada circuito",
+        "Aplica V = I · R",
+        "Revisa las unidades"
+      ],
+      "razon": "Es de las más difíciles de la semana; conviene empezar temprano."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000205",
+      "estudiante_id": "00000000-0000-4000-8000-000000000020",
+      "dificultad": 3,
+      "minutos_estimados": 45,
+      "prioridad": 65,
+      "conceptos": [
+        "Razón y proporción",
+        "Regla de tres directa",
+        "Interpretar el resultado"
+      ],
+      "pasos_sugeridos": [
+        "Anota los datos de cada problema",
+        "Justifica la relación directa",
+        "Comprueba las unidades"
+      ],
+      "razon": "Practica recetas y mapas justificando la relación entre las cantidades."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000202",
+      "estudiante_id": "00000000-0000-4000-8000-000000000020",
+      "dificultad": 2,
+      "minutos_estimados": 30,
+      "prioridad": 45,
+      "conceptos": [
+        "Mínimo común múltiplo",
+        "Fracciones equivalentes"
+      ],
+      "pasos_sugeridos": [
+        "Calcula el MCM de cada par",
+        "Resuelve 5 por sesión"
+      ],
+      "razon": "Es un repaso; tienes hasta el viernes."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000207",
+      "estudiante_id": "00000000-0000-4000-8000-000000000020",
+      "dificultad": 3,
+      "minutos_estimados": 50,
+      "prioridad": 40,
+      "conceptos": [
+        "Variables numéricas",
+        "Ciclo for",
+        "Condicional if"
+      ],
+      "pasos_sugeridos": [
+        "Pide las 5 notas con un ciclo",
+        "Calcula el promedio",
+        "Muestra el resultado con if"
+      ],
+      "razon": "Entrega el sábado; programa en dos sesiones cortas."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000206",
+      "estudiante_id": "00000000-0000-4000-8000-000000000020",
+      "dificultad": 2,
+      "minutos_estimados": 45,
+      "prioridad": 20,
+      "conceptos": [
+        "Primitivas 3D",
+        "Agrupar y restar formas",
+        "Exportar STL"
+      ],
+      "pasos_sugeridos": [
+        "Haz el contorno del llavero",
+        "Agrega tu inicial en relieve",
+        "Exporta y revisa el archivo"
+      ],
+      "razon": "Entrega la próxima semana; puedes dejarla para el fin de semana."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000208",
+      "estudiante_id": "00000000-0000-4000-8000-000000000020",
+      "dificultad": 4,
+      "minutos_estimados": 60,
+      "prioridad": 15,
+      "conceptos": [
+        "Tabla de valores",
+        "Pendiente",
+        "Punto de corte"
+      ],
+      "pasos_sugeridos": [
+        "Completa las tablas de valores",
+        "Grafica las rectas y comprueba su corte"
+      ],
+      "razon": "Es para la próxima semana; divide las tablas y las gráficas en dos sesiones."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000203",
+      "estudiante_id": "00000000-0000-4000-8000-000000000021",
+      "dificultad": 3,
+      "minutos_estimados": 60,
+      "prioridad": 95,
+      "conceptos": [
+        "Salidas digitales",
+        "Función delay()",
+        "Estructura setup/loop"
+      ],
+      "pasos_sugeridos": [
+        "Arma el circuito con los 3 LED",
+        "Escribe el código del rojo primero",
+        "Agrega comentarios al final"
+      ],
+      "razon": "La fecha ya pasó: sube tu evidencia y explica el código que entregaste en Classroom."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000201",
+      "estudiante_id": "00000000-0000-4000-8000-000000000021",
+      "dificultad": 3,
+      "minutos_estimados": 40,
+      "prioridad": 80,
+      "conceptos": [
+        "Despejar x",
+        "Operaciones inversas",
+        "Comprobar la solución"
+      ],
+      "pasos_sugeridos": [
+        "Resuelve 1 a 4",
+        "Descansa 5 minutos",
+        "Resuelve 5 a 8 y comprueba"
+      ],
+      "razon": "Ya verificaste esta tarea: practica la comprobación de tus resultados."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000204",
+      "estudiante_id": "00000000-0000-4000-8000-000000000021",
+      "dificultad": 4,
+      "minutos_estimados": 55,
+      "prioridad": 70,
+      "conceptos": [
+        "Ley de Ohm",
+        "Resistencia equivalente en serie",
+        "Unidades eléctricas"
+      ],
+      "pasos_sugeridos": [
+        "Calcula la resistencia total de cada circuito",
+        "Aplica V = I · R",
+        "Revisa las unidades"
+      ],
+      "razon": "Es de las más difíciles de la semana; conviene empezar temprano."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000205",
+      "estudiante_id": "00000000-0000-4000-8000-000000000021",
+      "dificultad": 3,
+      "minutos_estimados": 45,
+      "prioridad": 65,
+      "conceptos": [
+        "Razón y proporción",
+        "Regla de tres directa",
+        "Interpretar el resultado"
+      ],
+      "pasos_sugeridos": [
+        "Anota los datos de cada problema",
+        "Justifica la relación directa",
+        "Comprueba las unidades"
+      ],
+      "razon": "Practica recetas y mapas justificando la relación entre las cantidades."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000202",
+      "estudiante_id": "00000000-0000-4000-8000-000000000021",
+      "dificultad": 2,
+      "minutos_estimados": 30,
+      "prioridad": 45,
+      "conceptos": [
+        "Mínimo común múltiplo",
+        "Fracciones equivalentes"
+      ],
+      "pasos_sugeridos": [
+        "Calcula el MCM de cada par",
+        "Resuelve 5 por sesión"
+      ],
+      "razon": "Es un repaso; tienes hasta el viernes."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000207",
+      "estudiante_id": "00000000-0000-4000-8000-000000000021",
+      "dificultad": 3,
+      "minutos_estimados": 50,
+      "prioridad": 40,
+      "conceptos": [
+        "Variables numéricas",
+        "Ciclo for",
+        "Condicional if"
+      ],
+      "pasos_sugeridos": [
+        "Pide las 5 notas con un ciclo",
+        "Calcula el promedio",
+        "Muestra el resultado con if"
+      ],
+      "razon": "Entrega el sábado; programa en dos sesiones cortas."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000206",
+      "estudiante_id": "00000000-0000-4000-8000-000000000021",
+      "dificultad": 2,
+      "minutos_estimados": 45,
+      "prioridad": 20,
+      "conceptos": [
+        "Primitivas 3D",
+        "Agrupar y restar formas",
+        "Exportar STL"
+      ],
+      "pasos_sugeridos": [
+        "Haz el contorno del llavero",
+        "Agrega tu inicial en relieve",
+        "Exporta y revisa el archivo"
+      ],
+      "razon": "Entrega la próxima semana; puedes dejarla para el fin de semana."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000208",
+      "estudiante_id": "00000000-0000-4000-8000-000000000021",
+      "dificultad": 4,
+      "minutos_estimados": 60,
+      "prioridad": 15,
+      "conceptos": [
+        "Tabla de valores",
+        "Pendiente",
+        "Punto de corte"
+      ],
+      "pasos_sugeridos": [
+        "Completa las tablas de valores",
+        "Grafica las rectas y comprueba su corte"
+      ],
+      "razon": "Es para la próxima semana; divide las tablas y las gráficas en dos sesiones."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000203",
+      "estudiante_id": "00000000-0000-4000-8000-000000000022",
+      "dificultad": 3,
+      "minutos_estimados": 60,
+      "prioridad": 95,
+      "conceptos": [
+        "Salidas digitales",
+        "Función delay()",
+        "Estructura setup/loop"
+      ],
+      "pasos_sugeridos": [
+        "Arma el circuito con los 3 LED",
+        "Escribe el código del rojo primero",
+        "Agrega comentarios al final"
+      ],
+      "razon": "La fecha ya pasó: sube tu evidencia y explica el código que entregaste en Classroom."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000201",
+      "estudiante_id": "00000000-0000-4000-8000-000000000022",
+      "dificultad": 3,
+      "minutos_estimados": 40,
+      "prioridad": 80,
+      "conceptos": [
+        "Despejar x",
+        "Operaciones inversas",
+        "Comprobar la solución"
+      ],
+      "pasos_sugeridos": [
+        "Resuelve 1 a 4",
+        "Descansa 5 minutos",
+        "Resuelve 5 a 8 y comprueba"
+      ],
+      "razon": "Ya verificaste esta tarea: practica la comprobación de tus resultados."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000204",
+      "estudiante_id": "00000000-0000-4000-8000-000000000022",
+      "dificultad": 4,
+      "minutos_estimados": 55,
+      "prioridad": 70,
+      "conceptos": [
+        "Ley de Ohm",
+        "Resistencia equivalente en serie",
+        "Unidades eléctricas"
+      ],
+      "pasos_sugeridos": [
+        "Calcula la resistencia total de cada circuito",
+        "Aplica V = I · R",
+        "Revisa las unidades"
+      ],
+      "razon": "Es de las más difíciles de la semana; conviene empezar temprano."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000205",
+      "estudiante_id": "00000000-0000-4000-8000-000000000022",
+      "dificultad": 3,
+      "minutos_estimados": 45,
+      "prioridad": 65,
+      "conceptos": [
+        "Razón y proporción",
+        "Regla de tres directa",
+        "Interpretar el resultado"
+      ],
+      "pasos_sugeridos": [
+        "Anota los datos de cada problema",
+        "Justifica la relación directa",
+        "Comprueba las unidades"
+      ],
+      "razon": "Practica recetas y mapas justificando la relación entre las cantidades."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000202",
+      "estudiante_id": "00000000-0000-4000-8000-000000000022",
+      "dificultad": 2,
+      "minutos_estimados": 30,
+      "prioridad": 45,
+      "conceptos": [
+        "Mínimo común múltiplo",
+        "Fracciones equivalentes"
+      ],
+      "pasos_sugeridos": [
+        "Calcula el MCM de cada par",
+        "Resuelve 5 por sesión"
+      ],
+      "razon": "Es un repaso; tienes hasta el viernes."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000207",
+      "estudiante_id": "00000000-0000-4000-8000-000000000022",
+      "dificultad": 3,
+      "minutos_estimados": 50,
+      "prioridad": 40,
+      "conceptos": [
+        "Variables numéricas",
+        "Ciclo for",
+        "Condicional if"
+      ],
+      "pasos_sugeridos": [
+        "Pide las 5 notas con un ciclo",
+        "Calcula el promedio",
+        "Muestra el resultado con if"
+      ],
+      "razon": "Entrega el sábado; programa en dos sesiones cortas."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000206",
+      "estudiante_id": "00000000-0000-4000-8000-000000000022",
+      "dificultad": 2,
+      "minutos_estimados": 45,
+      "prioridad": 20,
+      "conceptos": [
+        "Primitivas 3D",
+        "Agrupar y restar formas",
+        "Exportar STL"
+      ],
+      "pasos_sugeridos": [
+        "Haz el contorno del llavero",
+        "Agrega tu inicial en relieve",
+        "Exporta y revisa el archivo"
+      ],
+      "razon": "Entrega la próxima semana; puedes dejarla para el fin de semana."
+    },
+    {
+      "tarea_id": "00000000-0000-4000-8000-000000000208",
+      "estudiante_id": "00000000-0000-4000-8000-000000000022",
+      "dificultad": 4,
+      "minutos_estimados": 60,
+      "prioridad": 15,
+      "conceptos": [
+        "Tabla de valores",
+        "Pendiente",
+        "Punto de corte"
+      ],
+      "pasos_sugeridos": [
+        "Completa las tablas de valores",
+        "Grafica las rectas y comprueba su corte"
+      ],
+      "razon": "Es para la próxima semana; divide las tablas y las gráficas en dos sesiones."
     }
-   ],
-   "fortalezas": [
-    "Detecta y corrige algunos errores propios"
-   ],
-   "debilidades": [
-    "Elige la operación inversa equivocada",
-    "No comprueba resultados"
-   ],
-   "resumen_estudiante": "Vas en camino: entiendes partes de la tarea, pero algunos pasos todavía los haces sin estar seguro de por qué. Con la práctica de abajo los vas a dominar.",
-   "resumen_docente": "Comprensión parcial: resuelve con errores de procedimiento y no justifica las decisiones. Requiere práctica guiada en los conceptos marcados.",
-   "generado_en": "2026-10-25T21:00:00Z"
-  },
-  {
-   "entrega_id": "de000000-0000-4000-8000-000000000210",
-   "nivel_global": 4,
-   "por_concepto": [
+  ],
+  "informes": [
     {
-     "concepto": "Razón y proporción",
-     "competencia": "Aplica razones y proporciones en situaciones cotidianas",
-     "nivel": 4,
-     "evidencia": "es directa porque si hay más personas se usa más harina en la misma razón"
+      "entrega_id": "00000000-0000-4000-8000-000000000301",
+      "nivel_global": 3,
+      "por_concepto": [
+        {
+          "concepto": "Operaciones inversas",
+          "competencia": "Resuelve problemas con ecuaciones lineales",
+          "nivel": 4,
+          "evidencia": "“para quitarlo hago lo contrario, que es restar en los dos lados”"
+        },
+        {
+          "concepto": "Despejar x",
+          "competencia": "Resuelve problemas con ecuaciones lineales",
+          "nivel": 3,
+          "evidencia": "Resolvió bien el caso nuevo: “21 entre 3 es 7”"
+        },
+        {
+          "concepto": "Comprobar la solución",
+          "competencia": "Resuelve problemas con ecuaciones lineales",
+          "nivel": 1,
+          "evidencia": "“No sé, creo que lo hice bien”"
+        }
+      ],
+      "fortalezas": [
+        "Identifica la incógnita"
+      ],
+      "debilidades": [],
+      "resumen_estudiante": "Explicaste muy bien por qué restas para despejar, y resolviste un caso nuevo sin ayuda. Te falta aprender a comprobar tu respuesta sustituyendo x en la ecuación. Con 15 minutos de práctica lo vas a dominar.",
+      "resumen_docente": "Explica el equilibrio de la ecuación y valida sus resultados.",
+      "generado_en": "2026-10-22T23:45:00.000Z"
     },
     {
-     "concepto": "Regla de tres directa",
-     "competencia": "Aplica razones y proporciones en situaciones cotidianas",
-     "nivel": 4,
-     "evidencia": "multiplico en cruz: 300 por 10 y divido entre 4"
+      "entrega_id": "00000000-0000-4000-8000-000000000311",
+      "nivel_global": 3,
+      "por_concepto": [
+        {
+          "concepto": "Operaciones inversas",
+          "competencia": "Resuelve problemas con ecuaciones lineales",
+          "nivel": 3,
+          "evidencia": "Resto 5 en ambos lados para conservar la igualdad."
+        },
+        {
+          "concepto": "Despejar x",
+          "competencia": "Resuelve problemas con ecuaciones lineales",
+          "nivel": 3,
+          "evidencia": "Divido ambos lados entre 3: x vale 5."
+        },
+        {
+          "concepto": "Comprobar la solución",
+          "competencia": "Resuelve problemas con ecuaciones lineales",
+          "nivel": 3,
+          "evidencia": "Sustituyo: 3 por 5 más 5 da 20; ambos lados coinciden."
+        }
+      ],
+      "fortalezas": [
+        "Identifica la incógnita"
+      ],
+      "debilidades": [],
+      "resumen_estudiante": "Explicaste las operaciones y comprobaste tu resultado. Sigue practicando con un problema nuevo.",
+      "resumen_docente": "Explica el equilibrio de la ecuación y valida sus resultados.",
+      "generado_en": "2026-10-22T23:45:00.000Z"
     },
     {
-     "concepto": "Interpretar el resultado",
-     "competencia": "Aplica razones y proporciones en situaciones cotidianas",
-     "nivel": 3,
-     "evidencia": "750 gramos tiene sentido porque es más del doble de 300"
+      "entrega_id": "00000000-0000-4000-8000-000000000312",
+      "nivel_global": 1,
+      "por_concepto": [
+        {
+          "concepto": "Operaciones inversas",
+          "competencia": "Resuelve problemas con ecuaciones lineales",
+          "nivel": 1,
+          "evidencia": "Sumé 5, pero no sé si debía restarlo."
+        },
+        {
+          "concepto": "Despejar x",
+          "competencia": "Resuelve problemas con ecuaciones lineales",
+          "nivel": 1,
+          "evidencia": "Dividí entre 3 porque lo vi en el ejemplo."
+        },
+        {
+          "concepto": "Comprobar la solución",
+          "competencia": "Resuelve problemas con ecuaciones lineales",
+          "nivel": 1,
+          "evidencia": "No comprobé: no sé dónde poner el resultado."
+        }
+      ],
+      "fortalezas": [
+        "Reconoce que necesita explicar el procedimiento"
+      ],
+      "debilidades": [
+        "Justificar las operaciones inversas",
+        "Comprobar la solución"
+      ],
+      "resumen_estudiante": "Ya diste el primer paso. Practica las operaciones inversas y comprueba cada solución.",
+      "resumen_docente": "Necesita acompañamiento para justificar operaciones y comprobar resultados.",
+      "generado_en": "2026-10-22T23:45:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000313",
+      "nivel_global": 4,
+      "por_concepto": [
+        {
+          "concepto": "Operaciones inversas",
+          "competencia": "Resuelve problemas con ecuaciones lineales",
+          "nivel": 4,
+          "evidencia": "Resto 5 en ambos lados para conservar la igualdad."
+        },
+        {
+          "concepto": "Despejar x",
+          "competencia": "Resuelve problemas con ecuaciones lineales",
+          "nivel": 4,
+          "evidencia": "Divido ambos lados entre 3: x vale 5."
+        },
+        {
+          "concepto": "Comprobar la solución",
+          "competencia": "Resuelve problemas con ecuaciones lineales",
+          "nivel": 4,
+          "evidencia": "Sustituyo: 3 por 5 más 5 da 20; ambos lados coinciden."
+        }
+      ],
+      "fortalezas": [
+        "Identifica la incógnita"
+      ],
+      "debilidades": [],
+      "resumen_estudiante": "Explicaste las operaciones y comprobaste tu resultado. Sigue practicando con un problema nuevo.",
+      "resumen_docente": "Explica el equilibrio de la ecuación y valida sus resultados.",
+      "generado_en": "2026-10-22T23:45:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000314",
+      "nivel_global": 2,
+      "por_concepto": [
+        {
+          "concepto": "Operaciones inversas",
+          "competencia": "Resuelve problemas con ecuaciones lineales",
+          "nivel": 2,
+          "evidencia": "Sumé 5, pero no sé si debía restarlo."
+        },
+        {
+          "concepto": "Despejar x",
+          "competencia": "Resuelve problemas con ecuaciones lineales",
+          "nivel": 2,
+          "evidencia": "Dividí entre 3 porque lo vi en el ejemplo."
+        },
+        {
+          "concepto": "Comprobar la solución",
+          "competencia": "Resuelve problemas con ecuaciones lineales",
+          "nivel": 1,
+          "evidencia": "No comprobé: no sé dónde poner el resultado."
+        }
+      ],
+      "fortalezas": [
+        "Identifica la incógnita"
+      ],
+      "debilidades": [
+        "Justificar las operaciones inversas",
+        "Comprobar la solución"
+      ],
+      "resumen_estudiante": "Ya diste el primer paso. Practica las operaciones inversas y comprueba cada solución.",
+      "resumen_docente": "Necesita acompañamiento para justificar operaciones y comprobar resultados.",
+      "generado_en": "2026-10-22T23:45:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000315",
+      "nivel_global": 3,
+      "por_concepto": [
+        {
+          "concepto": "Operaciones inversas",
+          "competencia": "Resuelve problemas con ecuaciones lineales",
+          "nivel": 3,
+          "evidencia": "Resto 5 en ambos lados para conservar la igualdad."
+        },
+        {
+          "concepto": "Despejar x",
+          "competencia": "Resuelve problemas con ecuaciones lineales",
+          "nivel": 4,
+          "evidencia": "Divido ambos lados entre 3: x vale 5."
+        },
+        {
+          "concepto": "Comprobar la solución",
+          "competencia": "Resuelve problemas con ecuaciones lineales",
+          "nivel": 3,
+          "evidencia": "Sustituyo: 3 por 5 más 5 da 20; ambos lados coinciden."
+        }
+      ],
+      "fortalezas": [
+        "Identifica la incógnita"
+      ],
+      "debilidades": [],
+      "resumen_estudiante": "Explicaste las operaciones y comprobaste tu resultado. Sigue practicando con un problema nuevo.",
+      "resumen_docente": "Explica el equilibrio de la ecuación y valida sus resultados.",
+      "generado_en": "2026-10-22T23:45:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000316",
+      "nivel_global": 2,
+      "por_concepto": [
+        {
+          "concepto": "Operaciones inversas",
+          "competencia": "Resuelve problemas con ecuaciones lineales",
+          "nivel": 2,
+          "evidencia": "Sumé 5, pero no sé si debía restarlo."
+        },
+        {
+          "concepto": "Despejar x",
+          "competencia": "Resuelve problemas con ecuaciones lineales",
+          "nivel": 1,
+          "evidencia": "Dividí entre 3 porque lo vi en el ejemplo."
+        },
+        {
+          "concepto": "Comprobar la solución",
+          "competencia": "Resuelve problemas con ecuaciones lineales",
+          "nivel": 2,
+          "evidencia": "No comprobé: no sé dónde poner el resultado."
+        }
+      ],
+      "fortalezas": [
+        "Identifica la incógnita"
+      ],
+      "debilidades": [
+        "Justificar las operaciones inversas",
+        "Comprobar la solución"
+      ],
+      "resumen_estudiante": "Ya diste el primer paso. Practica las operaciones inversas y comprueba cada solución.",
+      "resumen_docente": "Necesita acompañamiento para justificar operaciones y comprobar resultados.",
+      "generado_en": "2026-10-22T23:45:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000317",
+      "nivel_global": 4,
+      "por_concepto": [
+        {
+          "concepto": "Operaciones inversas",
+          "competencia": "Resuelve problemas con ecuaciones lineales",
+          "nivel": 4,
+          "evidencia": "Resto 5 en ambos lados para conservar la igualdad."
+        },
+        {
+          "concepto": "Despejar x",
+          "competencia": "Resuelve problemas con ecuaciones lineales",
+          "nivel": 3,
+          "evidencia": "Divido ambos lados entre 3: x vale 5."
+        },
+        {
+          "concepto": "Comprobar la solución",
+          "competencia": "Resuelve problemas con ecuaciones lineales",
+          "nivel": 4,
+          "evidencia": "Sustituyo: 3 por 5 más 5 da 20; ambos lados coinciden."
+        }
+      ],
+      "fortalezas": [
+        "Identifica la incógnita"
+      ],
+      "debilidades": [],
+      "resumen_estudiante": "Explicaste las operaciones y comprobaste tu resultado. Sigue practicando con un problema nuevo.",
+      "resumen_docente": "Explica el equilibrio de la ecuación y valida sus resultados.",
+      "generado_en": "2026-10-22T23:45:00.000Z"
     }
-   ],
-   "fortalezas": [
-    "Justifica por qué la relación es directa",
-    "Revisa si el resultado es razonable"
-   ],
-   "debilidades": [],
-   "resumen_estudiante": "¡Excelente! Explicaste con claridad por qué funciona cada paso y revisaste tus resultados. Sigue con un reto para ir más allá.",
-   "resumen_docente": "Dominio sólido: justifica el procedimiento y valida sus resultados.",
-   "generado_en": "2026-10-25T21:00:00Z"
-  },
-  {
-   "entrega_id": "de000000-0000-4000-8000-000000000211",
-   "nivel_global": 2,
-   "por_concepto": [
+  ],
+  "rutas": [
     {
-     "concepto": "Razón y proporción",
-     "competencia": "Aplica razones y proporciones en situaciones cotidianas",
-     "nivel": 3,
-     "evidencia": "más personas, más harina"
+      "entrega_id": "00000000-0000-4000-8000-000000000301",
+      "pasos": [
+        {
+          "titulo": "Idea clave: sustituir para comprobar",
+          "tipo": "repaso",
+          "descripcion": "Para comprobar, cambia la x por tu resultado. Si los dos lados dan lo mismo, está bien.",
+          "concepto": "Comprobar la solución",
+          "minutos": 5
+        },
+        {
+          "titulo": "Comprueba estas tres",
+          "tipo": "ejercicio",
+          "descripcion": "¿x = 4 es solución de 5x − 3 = 17? ¿x = 2 de 3x + 4 = 11? ¿x = 6 de 2x + 1 = 13?",
+          "concepto": "Comprobar la solución",
+          "minutos": 10
+        },
+        {
+          "titulo": "Reto",
+          "tipo": "pregunta",
+          "descripcion": "Inventa una ecuación cuya solución sea x = 9 y compruébala.",
+          "concepto": "Despejar x",
+          "minutos": 5
+        }
+      ]
     },
     {
-     "concepto": "Regla de tres directa",
-     "competencia": "Aplica razones y proporciones en situaciones cotidianas",
-     "nivel": 2,
-     "evidencia": "multiplico los de abajo y divido, no sé bien cuál va arriba"
+      "entrega_id": "00000000-0000-4000-8000-000000000311",
+      "pasos": [
+        {
+          "titulo": "Idea clave: sustituir para comprobar",
+          "tipo": "repaso",
+          "descripcion": "Para comprobar, cambia la x por tu resultado. Si los dos lados dan lo mismo, está bien.",
+          "concepto": "Comprobar la solución",
+          "minutos": 5
+        },
+        {
+          "titulo": "Comprueba estas tres",
+          "tipo": "ejercicio",
+          "descripcion": "¿x = 4 es solución de 5x − 3 = 17? ¿x = 2 de 3x + 4 = 11? ¿x = 6 de 2x + 1 = 13?",
+          "concepto": "Comprobar la solución",
+          "minutos": 10
+        },
+        {
+          "titulo": "Reto",
+          "tipo": "pregunta",
+          "descripcion": "Inventa una ecuación cuya solución sea x = 9 y compruébala.",
+          "concepto": "Despejar x",
+          "minutos": 5
+        }
+      ]
     },
     {
-     "concepto": "Interpretar el resultado",
-     "competencia": "Aplica razones y proporciones en situaciones cotidianas",
-     "nivel": 2,
-     "evidencia": "17,5 kilómetros, no sé si es mucho"
+      "entrega_id": "00000000-0000-4000-8000-000000000312",
+      "pasos": [
+        {
+          "titulo": "Idea clave: sustituir para comprobar",
+          "tipo": "repaso",
+          "descripcion": "Para comprobar, cambia la x por tu resultado. Si los dos lados dan lo mismo, está bien.",
+          "concepto": "Comprobar la solución",
+          "minutos": 5
+        },
+        {
+          "titulo": "Comprueba estas tres",
+          "tipo": "ejercicio",
+          "descripcion": "¿x = 4 es solución de 5x − 3 = 17? ¿x = 2 de 3x + 4 = 11? ¿x = 6 de 2x + 1 = 13?",
+          "concepto": "Comprobar la solución",
+          "minutos": 10
+        },
+        {
+          "titulo": "Reto",
+          "tipo": "pregunta",
+          "descripcion": "Inventa una ecuación cuya solución sea x = 9 y compruébala.",
+          "concepto": "Despejar x",
+          "minutos": 5
+        }
+      ]
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000313",
+      "pasos": [
+        {
+          "titulo": "Idea clave: sustituir para comprobar",
+          "tipo": "repaso",
+          "descripcion": "Para comprobar, cambia la x por tu resultado. Si los dos lados dan lo mismo, está bien.",
+          "concepto": "Comprobar la solución",
+          "minutos": 5
+        },
+        {
+          "titulo": "Comprueba estas tres",
+          "tipo": "ejercicio",
+          "descripcion": "¿x = 4 es solución de 5x − 3 = 17? ¿x = 2 de 3x + 4 = 11? ¿x = 6 de 2x + 1 = 13?",
+          "concepto": "Comprobar la solución",
+          "minutos": 10
+        },
+        {
+          "titulo": "Reto",
+          "tipo": "pregunta",
+          "descripcion": "Inventa una ecuación cuya solución sea x = 9 y compruébala.",
+          "concepto": "Despejar x",
+          "minutos": 5
+        }
+      ]
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000314",
+      "pasos": [
+        {
+          "titulo": "Idea clave: sustituir para comprobar",
+          "tipo": "repaso",
+          "descripcion": "Para comprobar, cambia la x por tu resultado. Si los dos lados dan lo mismo, está bien.",
+          "concepto": "Comprobar la solución",
+          "minutos": 5
+        },
+        {
+          "titulo": "Comprueba estas tres",
+          "tipo": "ejercicio",
+          "descripcion": "¿x = 4 es solución de 5x − 3 = 17? ¿x = 2 de 3x + 4 = 11? ¿x = 6 de 2x + 1 = 13?",
+          "concepto": "Comprobar la solución",
+          "minutos": 10
+        },
+        {
+          "titulo": "Reto",
+          "tipo": "pregunta",
+          "descripcion": "Inventa una ecuación cuya solución sea x = 9 y compruébala.",
+          "concepto": "Despejar x",
+          "minutos": 5
+        }
+      ]
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000315",
+      "pasos": [
+        {
+          "titulo": "Idea clave: sustituir para comprobar",
+          "tipo": "repaso",
+          "descripcion": "Para comprobar, cambia la x por tu resultado. Si los dos lados dan lo mismo, está bien.",
+          "concepto": "Comprobar la solución",
+          "minutos": 5
+        },
+        {
+          "titulo": "Comprueba estas tres",
+          "tipo": "ejercicio",
+          "descripcion": "¿x = 4 es solución de 5x − 3 = 17? ¿x = 2 de 3x + 4 = 11? ¿x = 6 de 2x + 1 = 13?",
+          "concepto": "Comprobar la solución",
+          "minutos": 10
+        },
+        {
+          "titulo": "Reto",
+          "tipo": "pregunta",
+          "descripcion": "Inventa una ecuación cuya solución sea x = 9 y compruébala.",
+          "concepto": "Despejar x",
+          "minutos": 5
+        }
+      ]
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000316",
+      "pasos": [
+        {
+          "titulo": "Idea clave: sustituir para comprobar",
+          "tipo": "repaso",
+          "descripcion": "Para comprobar, cambia la x por tu resultado. Si los dos lados dan lo mismo, está bien.",
+          "concepto": "Comprobar la solución",
+          "minutos": 5
+        },
+        {
+          "titulo": "Comprueba estas tres",
+          "tipo": "ejercicio",
+          "descripcion": "¿x = 4 es solución de 5x − 3 = 17? ¿x = 2 de 3x + 4 = 11? ¿x = 6 de 2x + 1 = 13?",
+          "concepto": "Comprobar la solución",
+          "minutos": 10
+        },
+        {
+          "titulo": "Reto",
+          "tipo": "pregunta",
+          "descripcion": "Inventa una ecuación cuya solución sea x = 9 y compruébala.",
+          "concepto": "Despejar x",
+          "minutos": 5
+        }
+      ]
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000317",
+      "pasos": [
+        {
+          "titulo": "Idea clave: sustituir para comprobar",
+          "tipo": "repaso",
+          "descripcion": "Para comprobar, cambia la x por tu resultado. Si los dos lados dan lo mismo, está bien.",
+          "concepto": "Comprobar la solución",
+          "minutos": 5
+        },
+        {
+          "titulo": "Comprueba estas tres",
+          "tipo": "ejercicio",
+          "descripcion": "¿x = 4 es solución de 5x − 3 = 17? ¿x = 2 de 3x + 4 = 11? ¿x = 6 de 2x + 1 = 13?",
+          "concepto": "Comprobar la solución",
+          "minutos": 10
+        },
+        {
+          "titulo": "Reto",
+          "tipo": "pregunta",
+          "descripcion": "Inventa una ecuación cuya solución sea x = 9 y compruébala.",
+          "concepto": "Despejar x",
+          "minutos": 5
+        }
+      ]
     }
-   ],
-   "fortalezas": [
-    "Reconoce relaciones directas"
-   ],
-   "debilidades": [
-    "Duda al ubicar los datos en la regla de tres",
-    "No valora si el resultado es razonable"
-   ],
-   "resumen_estudiante": "Vas en camino: entiendes partes de la tarea, pero algunos pasos todavía los haces sin estar seguro de por qué. Con la práctica de abajo los vas a dominar.",
-   "resumen_docente": "Comprensión parcial: resuelve con errores de procedimiento y no justifica las decisiones. Requiere práctica guiada en los conceptos marcados.",
-   "generado_en": "2026-10-25T21:00:00Z"
-  },
-  {
-   "entrega_id": "de000000-0000-4000-8000-000000000212",
-   "nivel_global": 2,
-   "por_concepto": [
+  ],
+  "sesiones": [
     {
-     "concepto": "Razón y proporción",
-     "competencia": "Aplica razones y proporciones en situaciones cotidianas",
-     "nivel": 2,
-     "evidencia": "es directa porque es regla de tres"
+      "id": "00000000-0000-4000-8000-000000000401",
+      "entrega_id": "00000000-0000-4000-8000-000000000301",
+      "estado": "completada",
+      "preguntas": [
+        {
+          "id": "p1",
+          "texto": "Buen trabajo entregando. En el ejercicio 1 pasaste el 5 al otro lado restando. ¿Por qué restando y no sumando?",
+          "concepto": "Operaciones inversas",
+          "respuesta": "Porque está sumando, entonces para quitarlo hago lo contrario, que es restar en los dos lados.",
+          "via": "voz"
+        },
+        {
+          "id": "p2",
+          "texto": "Si en el ejercicio 1 el 20 fuera 26, ¿cuánto valdría x?",
+          "concepto": "Despejar x",
+          "respuesta": "26 menos 5 es 21, y 21 entre 3 es 7.",
+          "via": "voz"
+        },
+        {
+          "id": "p3",
+          "texto": "¿Cómo podrías comprobar que x = 8 es correcto en el ejercicio 2?",
+          "concepto": "Comprobar la solución",
+          "respuesta": "No sé, creo que lo hice bien.",
+          "via": "texto"
+        }
+      ]
     },
     {
-     "concepto": "Regla de tres directa",
-     "competencia": "Aplica razones y proporciones en situaciones cotidianas",
-     "nivel": 1,
-     "evidencia": "no sé de dónde salió el 1,260"
+      "id": "00000000-0000-4000-8000-000000000411",
+      "entrega_id": "00000000-0000-4000-8000-000000000311",
+      "estado": "completada",
+      "preguntas": [
+        {
+          "id": "p1",
+          "texto": "Buen trabajo entregando. En el ejercicio 1 pasaste el 5 al otro lado restando. ¿Por qué restando y no sumando?",
+          "concepto": "Operaciones inversas",
+          "respuesta": "Resto 5 en ambos lados para conservar la igualdad.",
+          "via": "voz"
+        },
+        {
+          "id": "p2",
+          "texto": "Si en el ejercicio 1 el 20 fuera 26, ¿cuánto valdría x?",
+          "concepto": "Despejar x",
+          "respuesta": "Divido ambos lados entre 3: x vale 5.",
+          "via": "voz"
+        },
+        {
+          "id": "p3",
+          "texto": "¿Cómo podrías comprobar que x = 8 es correcto en el ejercicio 2?",
+          "concepto": "Comprobar la solución",
+          "respuesta": "Sustituyo: 3 por 5 más 5 da 20; ambos lados coinciden.",
+          "via": "texto"
+        }
+      ]
     },
     {
-     "concepto": "Interpretar el resultado",
-     "competencia": "Aplica razones y proporciones en situaciones cotidianas",
-     "nivel": 2,
-     "evidencia": "el precio sube si compro más"
+      "id": "00000000-0000-4000-8000-000000000412",
+      "entrega_id": "00000000-0000-4000-8000-000000000312",
+      "estado": "completada",
+      "preguntas": [
+        {
+          "id": "p1",
+          "texto": "Buen trabajo entregando. En el ejercicio 1 pasaste el 5 al otro lado restando. ¿Por qué restando y no sumando?",
+          "concepto": "Operaciones inversas",
+          "respuesta": "Sumé 5, pero no sé si debía restarlo.",
+          "via": "voz"
+        },
+        {
+          "id": "p2",
+          "texto": "Si en el ejercicio 1 el 20 fuera 26, ¿cuánto valdría x?",
+          "concepto": "Despejar x",
+          "respuesta": "Dividí entre 3 porque lo vi en el ejemplo.",
+          "via": "voz"
+        },
+        {
+          "id": "p3",
+          "texto": "¿Cómo podrías comprobar que x = 8 es correcto en el ejercicio 2?",
+          "concepto": "Comprobar la solución",
+          "respuesta": "No comprobé: no sé dónde poner el resultado.",
+          "via": "texto"
+        }
+      ]
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000413",
+      "entrega_id": "00000000-0000-4000-8000-000000000313",
+      "estado": "completada",
+      "preguntas": [
+        {
+          "id": "p1",
+          "texto": "Buen trabajo entregando. En el ejercicio 1 pasaste el 5 al otro lado restando. ¿Por qué restando y no sumando?",
+          "concepto": "Operaciones inversas",
+          "respuesta": "Resto 5 en ambos lados para conservar la igualdad.",
+          "via": "voz"
+        },
+        {
+          "id": "p2",
+          "texto": "Si en el ejercicio 1 el 20 fuera 26, ¿cuánto valdría x?",
+          "concepto": "Despejar x",
+          "respuesta": "Divido ambos lados entre 3: x vale 5.",
+          "via": "voz"
+        },
+        {
+          "id": "p3",
+          "texto": "¿Cómo podrías comprobar que x = 8 es correcto en el ejercicio 2?",
+          "concepto": "Comprobar la solución",
+          "respuesta": "Sustituyo: 3 por 5 más 5 da 20; ambos lados coinciden.",
+          "via": "texto"
+        }
+      ]
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000414",
+      "entrega_id": "00000000-0000-4000-8000-000000000314",
+      "estado": "completada",
+      "preguntas": [
+        {
+          "id": "p1",
+          "texto": "Buen trabajo entregando. En el ejercicio 1 pasaste el 5 al otro lado restando. ¿Por qué restando y no sumando?",
+          "concepto": "Operaciones inversas",
+          "respuesta": "Sumé 5, pero no sé si debía restarlo.",
+          "via": "voz"
+        },
+        {
+          "id": "p2",
+          "texto": "Si en el ejercicio 1 el 20 fuera 26, ¿cuánto valdría x?",
+          "concepto": "Despejar x",
+          "respuesta": "Dividí entre 3 porque lo vi en el ejemplo.",
+          "via": "voz"
+        },
+        {
+          "id": "p3",
+          "texto": "¿Cómo podrías comprobar que x = 8 es correcto en el ejercicio 2?",
+          "concepto": "Comprobar la solución",
+          "respuesta": "No comprobé: no sé dónde poner el resultado.",
+          "via": "texto"
+        }
+      ]
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000415",
+      "entrega_id": "00000000-0000-4000-8000-000000000315",
+      "estado": "completada",
+      "preguntas": [
+        {
+          "id": "p1",
+          "texto": "Buen trabajo entregando. En el ejercicio 1 pasaste el 5 al otro lado restando. ¿Por qué restando y no sumando?",
+          "concepto": "Operaciones inversas",
+          "respuesta": "Resto 5 en ambos lados para conservar la igualdad.",
+          "via": "voz"
+        },
+        {
+          "id": "p2",
+          "texto": "Si en el ejercicio 1 el 20 fuera 26, ¿cuánto valdría x?",
+          "concepto": "Despejar x",
+          "respuesta": "Divido ambos lados entre 3: x vale 5.",
+          "via": "voz"
+        },
+        {
+          "id": "p3",
+          "texto": "¿Cómo podrías comprobar que x = 8 es correcto en el ejercicio 2?",
+          "concepto": "Comprobar la solución",
+          "respuesta": "Sustituyo: 3 por 5 más 5 da 20; ambos lados coinciden.",
+          "via": "texto"
+        }
+      ]
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000416",
+      "entrega_id": "00000000-0000-4000-8000-000000000316",
+      "estado": "completada",
+      "preguntas": [
+        {
+          "id": "p1",
+          "texto": "Buen trabajo entregando. En el ejercicio 1 pasaste el 5 al otro lado restando. ¿Por qué restando y no sumando?",
+          "concepto": "Operaciones inversas",
+          "respuesta": "Sumé 5, pero no sé si debía restarlo.",
+          "via": "voz"
+        },
+        {
+          "id": "p2",
+          "texto": "Si en el ejercicio 1 el 20 fuera 26, ¿cuánto valdría x?",
+          "concepto": "Despejar x",
+          "respuesta": "Dividí entre 3 porque lo vi en el ejemplo.",
+          "via": "voz"
+        },
+        {
+          "id": "p3",
+          "texto": "¿Cómo podrías comprobar que x = 8 es correcto en el ejercicio 2?",
+          "concepto": "Comprobar la solución",
+          "respuesta": "No comprobé: no sé dónde poner el resultado.",
+          "via": "texto"
+        }
+      ]
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000417",
+      "entrega_id": "00000000-0000-4000-8000-000000000317",
+      "estado": "completada",
+      "preguntas": [
+        {
+          "id": "p1",
+          "texto": "Buen trabajo entregando. En el ejercicio 1 pasaste el 5 al otro lado restando. ¿Por qué restando y no sumando?",
+          "concepto": "Operaciones inversas",
+          "respuesta": "Resto 5 en ambos lados para conservar la igualdad.",
+          "via": "voz"
+        },
+        {
+          "id": "p2",
+          "texto": "Si en el ejercicio 1 el 20 fuera 26, ¿cuánto valdría x?",
+          "concepto": "Despejar x",
+          "respuesta": "Divido ambos lados entre 3: x vale 5.",
+          "via": "voz"
+        },
+        {
+          "id": "p3",
+          "texto": "¿Cómo podrías comprobar que x = 8 es correcto en el ejercicio 2?",
+          "concepto": "Comprobar la solución",
+          "respuesta": "Sustituyo: 3 por 5 más 5 da 20; ambos lados coinciden.",
+          "via": "texto"
+        }
+      ]
     }
-   ],
-   "fortalezas": [],
-   "debilidades": [
-    "No sabe cómo obtuvo los resultados escritos",
-    "Confunde el método con la razón por la que funciona"
-   ],
-   "resumen_estudiante": "Vas en camino: entiendes partes de la tarea, pero algunos pasos todavía los haces sin estar seguro de por qué. Con la práctica de abajo los vas a dominar.",
-   "resumen_docente": "Comprensión parcial: resuelve con errores de procedimiento y no justifica las decisiones. Requiere práctica guiada en los conceptos marcados.",
-   "generado_en": "2026-10-25T21:00:00Z"
-  }
- ],
- "rutas": [
-  {
-   "entrega_id": "de000000-0000-4000-8000-000000000200",
-   "pasos": [
+  ],
+  "comentarios": [
     {
-     "titulo": "Idea clave: Comprobar la solución",
-     "tipo": "repaso",
-     "concepto": "Comprobar la solución",
-     "minutos": 5,
-     "descripcion": "Escribe en 3 líneas, con tus palabras, qué significa «Comprobar la solución» y para qué sirve en esta tarea."
+      "entrega_id": "00000000-0000-4000-8000-000000000301",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
     },
     {
-     "titulo": "Practica: Comprobar la solución",
-     "tipo": "ejercicio",
-     "concepto": "Comprobar la solución",
-     "minutos": 10,
-     "descripcion": "Resuelve 3 ejercicios nuevos de la guía y explica en voz alta un paso de cada uno."
+      "entrega_id": "00000000-0000-4000-8000-000000000311",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000312",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000313",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000314",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000315",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000316",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000317",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000318",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000319",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000320",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000321",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000520",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000521",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000522",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000523",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000524",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000525",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000526",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000527",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000528",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000529",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000530",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000531",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000560",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000561",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000562",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000563",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000564",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000565",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000566",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000567",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000568",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000569",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000570",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000571",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000580",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000581",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000582",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000583",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000584",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000585",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000586",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000587",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000588",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000589",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000590",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000591",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000620",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000621",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000622",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000623",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000624",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000625",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000626",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000627",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000628",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000629",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000630",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000631",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "Gracias por mostrar tu procedimiento. Explica cada operación y comprueba sustituyendo tu resultado.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000330",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "texto": "En y = 2x + 1 primero multiplica 2 por x. Revisa la tabla, comprueba los puntos y vuelve a entregar.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
     }
-   ]
-  },
-  {
-   "entrega_id": "de000000-0000-4000-8000-000000000201",
-   "pasos": [
+  ],
+  "calificaciones": [
     {
-     "titulo": "Reto: crea tu propio problema",
-     "tipo": "ejercicio",
-     "concepto": "Comprobar la solución",
-     "minutos": 15,
-     "descripcion": "Inventa un problema parecido a «Ecuaciones de primer grado: ejercicios 1-8», resuélvelo y explica cómo sabes que tu resultado es correcto."
+      "entrega_id": "00000000-0000-4000-8000-000000000301",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": 88,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000311",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": 85,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000312",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": 45,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000313",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": 100,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000314",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": 58,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000315",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": 90,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000316",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": 55,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000317",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": 96,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000318",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": null,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000319",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": 78,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000320",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": 82,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000321",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": 91,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000520",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": null,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000521",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": null,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000522",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": null,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000523",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": null,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000524",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": null,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000525",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": null,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000526",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": null,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000527",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": null,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000528",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": null,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000529",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": null,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000530",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": null,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000531",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": null,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000560",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": null,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000561",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": null,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000562",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": null,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000563",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": null,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000564",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": null,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000565",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": null,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000566",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": null,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000567",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": null,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000568",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": null,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000569",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": null,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000570",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": null,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000571",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": null,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000580",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": null,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000581",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": null,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000582",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": null,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000583",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": null,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000584",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": null,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000585",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": null,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000586",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": null,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000587",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": null,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000588",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": null,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000589",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": null,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000590",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": null,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000591",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": null,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000620",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": null,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000621",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": null,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000622",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": null,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000623",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": null,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000624",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": null,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000625",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": null,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000626",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": null,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000627",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": null,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000628",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": null,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000629",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": null,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000630",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": null,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000631",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": null,
+      "devuelta": false,
+      "motivo_devolucion": null,
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
+    },
+    {
+      "entrega_id": "00000000-0000-4000-8000-000000000330",
+      "docente_id": "00000000-0000-4000-8000-000000000001",
+      "nota": 40,
+      "devuelta": true,
+      "motivo_devolucion": "En y = 2x + 1 primero multiplica 2 por x. Revisa la tabla, comprueba los puntos y vuelve a entregar.",
+      "actualizado_en": "2026-10-26T15:05:00.000Z"
     }
-   ]
-  },
-  {
-   "entrega_id": "de000000-0000-4000-8000-000000000202",
-   "pasos": [
+  ],
+  "planes": [
     {
-     "titulo": "Idea clave: Operaciones inversas",
-     "tipo": "repaso",
-     "concepto": "Operaciones inversas",
-     "minutos": 5,
-     "descripcion": "Escribe en 3 líneas, con tus palabras, qué significa «Operaciones inversas» y para qué sirve en esta tarea."
+      "estudiante_id": "00000000-0000-4000-8000-000000000011",
+      "semana_inicio": "2026-10-26",
+      "bloques": [
+        {
+          "id": "demo-b1",
+          "tarea_id": "00000000-0000-4000-8000-000000000204",
+          "titulo": "Repasar: Ley de Ohm",
+          "inicio": "2026-10-26T19:00:00.000Z",
+          "fin": "2026-10-26T19:30:00.000Z",
+          "estado": "planificado"
+        },
+        {
+          "id": "demo-b2",
+          "tarea_id": "00000000-0000-4000-8000-000000000205",
+          "titulo": "Practicar: Razón y proporción",
+          "inicio": "2026-10-26T20:00:00.000Z",
+          "fin": "2026-10-26T20:30:00.000Z",
+          "estado": "planificado"
+        },
+        {
+          "id": "demo-b3",
+          "tarea_id": "00000000-0000-4000-8000-000000000202",
+          "titulo": "Repasar: Mínimo común múltiplo",
+          "inicio": "2026-10-27T19:00:00.000Z",
+          "fin": "2026-10-27T19:30:00.000Z",
+          "estado": "planificado"
+        },
+        {
+          "id": "demo-b4",
+          "tarea_id": "00000000-0000-4000-8000-000000000207",
+          "titulo": "Practicar: Variables numéricas",
+          "inicio": "2026-10-27T20:00:00.000Z",
+          "fin": "2026-10-27T20:30:00.000Z",
+          "estado": "planificado"
+        },
+        {
+          "id": "demo-b5",
+          "tarea_id": "00000000-0000-4000-8000-000000000206",
+          "titulo": "Repasar: Primitivas 3D",
+          "inicio": "2026-10-28T19:00:00.000Z",
+          "fin": "2026-10-28T19:30:00.000Z",
+          "estado": "planificado"
+        },
+        {
+          "id": "demo-b6",
+          "tarea_id": "00000000-0000-4000-8000-000000000208",
+          "titulo": "Practicar: Tabla de valores",
+          "inicio": "2026-10-28T20:00:00.000Z",
+          "fin": "2026-10-28T20:30:00.000Z",
+          "estado": "planificado"
+        },
+        {
+          "id": "demo-b7",
+          "tarea_id": "00000000-0000-4000-8000-000000000203",
+          "titulo": "Repasar: Salidas digitales",
+          "inicio": "2026-10-29T19:00:00.000Z",
+          "fin": "2026-10-29T19:30:00.000Z",
+          "estado": "planificado"
+        },
+        {
+          "id": "demo-b8",
+          "tarea_id": "00000000-0000-4000-8000-000000000201",
+          "titulo": "Practicar: Despejar x",
+          "inicio": "2026-10-29T20:00:00.000Z",
+          "fin": "2026-10-29T20:30:00.000Z",
+          "estado": "planificado"
+        },
+        {
+          "id": "demo-b9",
+          "tarea_id": "00000000-0000-4000-8000-000000000204",
+          "titulo": "Repasar: Ley de Ohm",
+          "inicio": "2026-10-30T19:00:00.000Z",
+          "fin": "2026-10-30T19:30:00.000Z",
+          "estado": "planificado"
+        },
+        {
+          "id": "demo-b10",
+          "tarea_id": "00000000-0000-4000-8000-000000000205",
+          "titulo": "Practicar: Razón y proporción",
+          "inicio": "2026-10-30T20:00:00.000Z",
+          "fin": "2026-10-30T20:30:00.000Z",
+          "estado": "planificado"
+        },
+        {
+          "id": "demo-b11",
+          "tarea_id": "00000000-0000-4000-8000-000000000202",
+          "titulo": "Repasar: Mínimo común múltiplo",
+          "inicio": "2026-10-31T13:00:00.000Z",
+          "fin": "2026-10-31T13:30:00.000Z",
+          "estado": "planificado"
+        },
+        {
+          "id": "demo-b12",
+          "tarea_id": "00000000-0000-4000-8000-000000000207",
+          "titulo": "Practicar: Variables numéricas",
+          "inicio": "2026-10-31T14:00:00.000Z",
+          "fin": "2026-10-31T14:30:00.000Z",
+          "estado": "planificado"
+        },
+        {
+          "id": "demo-b13",
+          "tarea_id": "00000000-0000-4000-8000-000000000206",
+          "titulo": "Repasar: Primitivas 3D",
+          "inicio": "2026-11-01T19:00:00.000Z",
+          "fin": "2026-11-01T19:30:00.000Z",
+          "estado": "planificado"
+        },
+        {
+          "id": "demo-b14",
+          "tarea_id": "00000000-0000-4000-8000-000000000208",
+          "titulo": "Practicar: Tabla de valores",
+          "inicio": "2026-11-01T20:00:00.000Z",
+          "fin": "2026-11-01T20:30:00.000Z",
+          "estado": "planificado"
+        }
+      ],
+      "avisos": [
+        "Llegó una tarea de Tecnología; reservé tiempo para practicar y comprobar las ecuaciones."
+      ],
+      "generado_en": "2026-10-26T15:05:00.000Z"
     },
     {
-     "titulo": "Practica: Operaciones inversas",
-     "tipo": "ejercicio",
-     "concepto": "Operaciones inversas",
-     "minutos": 10,
-     "descripcion": "Resuelve 3 ejercicios nuevos de la guía y explica en voz alta un paso de cada uno."
-    },
-    {
-     "titulo": "Idea clave: Despejar x",
-     "tipo": "repaso",
-     "concepto": "Despejar x",
-     "minutos": 5,
-     "descripcion": "Escribe en 3 líneas, con tus palabras, qué significa «Despejar x» y para qué sirve en esta tarea."
-    },
-    {
-     "titulo": "Practica: Despejar x",
-     "tipo": "ejercicio",
-     "concepto": "Despejar x",
-     "minutos": 10,
-     "descripcion": "Resuelve 3 ejercicios nuevos de la guía y explica en voz alta un paso de cada uno."
-    },
-    {
-     "titulo": "Idea clave: Comprobar la solución",
-     "tipo": "repaso",
-     "concepto": "Comprobar la solución",
-     "minutos": 5,
-     "descripcion": "Escribe en 3 líneas, con tus palabras, qué significa «Comprobar la solución» y para qué sirve en esta tarea."
-    },
-    {
-     "titulo": "Practica: Comprobar la solución",
-     "tipo": "ejercicio",
-     "concepto": "Comprobar la solución",
-     "minutos": 10,
-     "descripcion": "Resuelve 3 ejercicios nuevos de la guía y explica en voz alta un paso de cada uno."
+      "estudiante_id": "00000000-0000-4000-8000-000000000011",
+      "semana_inicio": "2026-11-02",
+      "bloques": [
+        {
+          "id": "demo-b1-proxima",
+          "tarea_id": "00000000-0000-4000-8000-000000000204",
+          "titulo": "Repasar: Ley de Ohm",
+          "inicio": "2026-11-02T19:00:00.000Z",
+          "fin": "2026-11-02T19:30:00.000Z",
+          "estado": "planificado"
+        },
+        {
+          "id": "demo-b2-proxima",
+          "tarea_id": "00000000-0000-4000-8000-000000000205",
+          "titulo": "Practicar: Razón y proporción",
+          "inicio": "2026-11-02T20:00:00.000Z",
+          "fin": "2026-11-02T20:30:00.000Z",
+          "estado": "planificado"
+        },
+        {
+          "id": "demo-b3-proxima",
+          "tarea_id": "00000000-0000-4000-8000-000000000202",
+          "titulo": "Repasar: Mínimo común múltiplo",
+          "inicio": "2026-11-03T19:00:00.000Z",
+          "fin": "2026-11-03T19:30:00.000Z",
+          "estado": "planificado"
+        },
+        {
+          "id": "demo-b4-proxima",
+          "tarea_id": "00000000-0000-4000-8000-000000000207",
+          "titulo": "Practicar: Variables numéricas",
+          "inicio": "2026-11-03T20:00:00.000Z",
+          "fin": "2026-11-03T20:30:00.000Z",
+          "estado": "planificado"
+        },
+        {
+          "id": "demo-b5-proxima",
+          "tarea_id": "00000000-0000-4000-8000-000000000206",
+          "titulo": "Repasar: Primitivas 3D",
+          "inicio": "2026-11-04T19:00:00.000Z",
+          "fin": "2026-11-04T19:30:00.000Z",
+          "estado": "planificado"
+        },
+        {
+          "id": "demo-b6-proxima",
+          "tarea_id": "00000000-0000-4000-8000-000000000208",
+          "titulo": "Practicar: Tabla de valores",
+          "inicio": "2026-11-04T20:00:00.000Z",
+          "fin": "2026-11-04T20:30:00.000Z",
+          "estado": "planificado"
+        },
+        {
+          "id": "demo-b7-proxima",
+          "tarea_id": "00000000-0000-4000-8000-000000000203",
+          "titulo": "Repasar: Salidas digitales",
+          "inicio": "2026-11-05T19:00:00.000Z",
+          "fin": "2026-11-05T19:30:00.000Z",
+          "estado": "planificado"
+        },
+        {
+          "id": "demo-b8-proxima",
+          "tarea_id": "00000000-0000-4000-8000-000000000201",
+          "titulo": "Practicar: Despejar x",
+          "inicio": "2026-11-05T20:00:00.000Z",
+          "fin": "2026-11-05T20:30:00.000Z",
+          "estado": "planificado"
+        },
+        {
+          "id": "demo-b9-proxima",
+          "tarea_id": "00000000-0000-4000-8000-000000000204",
+          "titulo": "Repasar: Ley de Ohm",
+          "inicio": "2026-11-06T19:00:00.000Z",
+          "fin": "2026-11-06T19:30:00.000Z",
+          "estado": "planificado"
+        },
+        {
+          "id": "demo-b10-proxima",
+          "tarea_id": "00000000-0000-4000-8000-000000000205",
+          "titulo": "Practicar: Razón y proporción",
+          "inicio": "2026-11-06T20:00:00.000Z",
+          "fin": "2026-11-06T20:30:00.000Z",
+          "estado": "planificado"
+        },
+        {
+          "id": "demo-b11-proxima",
+          "tarea_id": "00000000-0000-4000-8000-000000000202",
+          "titulo": "Repasar: Mínimo común múltiplo",
+          "inicio": "2026-11-07T13:00:00.000Z",
+          "fin": "2026-11-07T13:30:00.000Z",
+          "estado": "planificado"
+        },
+        {
+          "id": "demo-b12-proxima",
+          "tarea_id": "00000000-0000-4000-8000-000000000207",
+          "titulo": "Practicar: Variables numéricas",
+          "inicio": "2026-11-07T14:00:00.000Z",
+          "fin": "2026-11-07T14:30:00.000Z",
+          "estado": "planificado"
+        },
+        {
+          "id": "demo-b13-proxima",
+          "tarea_id": "00000000-0000-4000-8000-000000000206",
+          "titulo": "Repasar: Primitivas 3D",
+          "inicio": "2026-11-08T19:00:00.000Z",
+          "fin": "2026-11-08T19:30:00.000Z",
+          "estado": "planificado"
+        },
+        {
+          "id": "demo-b14-proxima",
+          "tarea_id": "00000000-0000-4000-8000-000000000208",
+          "titulo": "Practicar: Tabla de valores",
+          "inicio": "2026-11-08T20:00:00.000Z",
+          "fin": "2026-11-08T20:30:00.000Z",
+          "estado": "planificado"
+        }
+      ],
+      "avisos": [
+        "Llegó una tarea de Tecnología; reservé tiempo para practicar y comprobar las ecuaciones."
+      ],
+      "generado_en": "2026-10-26T15:05:00.000Z"
     }
-   ]
-  },
-  {
-   "entrega_id": "de000000-0000-4000-8000-000000000203",
-   "pasos": [
+  ],
+  "preferencias": [
     {
-     "titulo": "Idea clave: Despejar x",
-     "tipo": "repaso",
-     "concepto": "Despejar x",
-     "minutos": 5,
-     "descripcion": "Escribe en 3 líneas, con tus palabras, qué significa «Despejar x» y para qué sirve en esta tarea."
-    },
-    {
-     "titulo": "Practica: Despejar x",
-     "tipo": "ejercicio",
-     "concepto": "Despejar x",
-     "minutos": 10,
-     "descripcion": "Resuelve 3 ejercicios nuevos de la guía y explica en voz alta un paso de cada uno."
+      "estudiante_id": "00000000-0000-4000-8000-000000000011",
+      "horas_disponibles": [
+        {
+          "dia": 1,
+          "desde": "15:00",
+          "hasta": "18:00"
+        },
+        {
+          "dia": 2,
+          "desde": "15:00",
+          "hasta": "18:00"
+        },
+        {
+          "dia": 3,
+          "desde": "15:00",
+          "hasta": "18:00"
+        },
+        {
+          "dia": 4,
+          "desde": "15:00",
+          "hasta": "18:00"
+        },
+        {
+          "dia": 5,
+          "desde": "15:00",
+          "hasta": "18:00"
+        },
+        {
+          "dia": 0,
+          "desde": "15:00",
+          "hasta": "18:00"
+        },
+        {
+          "dia": 6,
+          "desde": "09:00",
+          "hasta": "12:00"
+        }
+      ],
+      "max_minutos_bloque": 45
     }
-   ]
-  },
-  {
-   "entrega_id": "de000000-0000-4000-8000-000000000204",
-   "pasos": [
-    {
-     "titulo": "Idea clave: Operaciones inversas",
-     "tipo": "repaso",
-     "concepto": "Operaciones inversas",
-     "minutos": 5,
-     "descripcion": "Escribe en 3 líneas, con tus palabras, qué significa «Operaciones inversas» y para qué sirve en esta tarea."
-    },
-    {
-     "titulo": "Practica: Operaciones inversas",
-     "tipo": "ejercicio",
-     "concepto": "Operaciones inversas",
-     "minutos": 10,
-     "descripcion": "Resuelve 3 ejercicios nuevos de la guía y explica en voz alta un paso de cada uno."
-    },
-    {
-     "titulo": "Idea clave: Despejar x",
-     "tipo": "repaso",
-     "concepto": "Despejar x",
-     "minutos": 5,
-     "descripcion": "Escribe en 3 líneas, con tus palabras, qué significa «Despejar x» y para qué sirve en esta tarea."
-    },
-    {
-     "titulo": "Practica: Despejar x",
-     "tipo": "ejercicio",
-     "concepto": "Despejar x",
-     "minutos": 10,
-     "descripcion": "Resuelve 3 ejercicios nuevos de la guía y explica en voz alta un paso de cada uno."
-    },
-    {
-     "titulo": "Idea clave: Comprobar la solución",
-     "tipo": "repaso",
-     "concepto": "Comprobar la solución",
-     "minutos": 5,
-     "descripcion": "Escribe en 3 líneas, con tus palabras, qué significa «Comprobar la solución» y para qué sirve en esta tarea."
-    },
-    {
-     "titulo": "Practica: Comprobar la solución",
-     "tipo": "ejercicio",
-     "concepto": "Comprobar la solución",
-     "minutos": 10,
-     "descripcion": "Resuelve 3 ejercicios nuevos de la guía y explica en voz alta un paso de cada uno."
-    }
-   ]
-  },
-  {
-   "entrega_id": "de000000-0000-4000-8000-000000000210",
-   "pasos": [
-    {
-     "titulo": "Reto: crea tu propio problema",
-     "tipo": "ejercicio",
-     "concepto": "Interpretar el resultado",
-     "minutos": 15,
-     "descripcion": "Inventa un problema parecido a «Proporciones y regla de tres», resuélvelo y explica cómo sabes que tu resultado es correcto."
-    }
-   ]
-  },
-  {
-   "entrega_id": "de000000-0000-4000-8000-000000000211",
-   "pasos": [
-    {
-     "titulo": "Idea clave: Regla de tres directa",
-     "tipo": "repaso",
-     "concepto": "Regla de tres directa",
-     "minutos": 5,
-     "descripcion": "Escribe en 3 líneas, con tus palabras, qué significa «Regla de tres directa» y para qué sirve en esta tarea."
-    },
-    {
-     "titulo": "Practica: Regla de tres directa",
-     "tipo": "ejercicio",
-     "concepto": "Regla de tres directa",
-     "minutos": 10,
-     "descripcion": "Resuelve 3 ejercicios nuevos de la guía y explica en voz alta un paso de cada uno."
-    },
-    {
-     "titulo": "Idea clave: Interpretar el resultado",
-     "tipo": "repaso",
-     "concepto": "Interpretar el resultado",
-     "minutos": 5,
-     "descripcion": "Escribe en 3 líneas, con tus palabras, qué significa «Interpretar el resultado» y para qué sirve en esta tarea."
-    },
-    {
-     "titulo": "Practica: Interpretar el resultado",
-     "tipo": "ejercicio",
-     "concepto": "Interpretar el resultado",
-     "minutos": 10,
-     "descripcion": "Resuelve 3 ejercicios nuevos de la guía y explica en voz alta un paso de cada uno."
-    }
-   ]
-  },
-  {
-   "entrega_id": "de000000-0000-4000-8000-000000000212",
-   "pasos": [
-    {
-     "titulo": "Idea clave: Razón y proporción",
-     "tipo": "repaso",
-     "concepto": "Razón y proporción",
-     "minutos": 5,
-     "descripcion": "Escribe en 3 líneas, con tus palabras, qué significa «Razón y proporción» y para qué sirve en esta tarea."
-    },
-    {
-     "titulo": "Practica: Razón y proporción",
-     "tipo": "ejercicio",
-     "concepto": "Razón y proporción",
-     "minutos": 10,
-     "descripcion": "Resuelve 3 ejercicios nuevos de la guía y explica en voz alta un paso de cada uno."
-    },
-    {
-     "titulo": "Idea clave: Regla de tres directa",
-     "tipo": "repaso",
-     "concepto": "Regla de tres directa",
-     "minutos": 5,
-     "descripcion": "Escribe en 3 líneas, con tus palabras, qué significa «Regla de tres directa» y para qué sirve en esta tarea."
-    },
-    {
-     "titulo": "Practica: Regla de tres directa",
-     "tipo": "ejercicio",
-     "concepto": "Regla de tres directa",
-     "minutos": 10,
-     "descripcion": "Resuelve 3 ejercicios nuevos de la guía y explica en voz alta un paso de cada uno."
-    },
-    {
-     "titulo": "Idea clave: Interpretar el resultado",
-     "tipo": "repaso",
-     "concepto": "Interpretar el resultado",
-     "minutos": 5,
-     "descripcion": "Escribe en 3 líneas, con tus palabras, qué significa «Interpretar el resultado» y para qué sirve en esta tarea."
-    },
-    {
-     "titulo": "Practica: Interpretar el resultado",
-     "tipo": "ejercicio",
-     "concepto": "Interpretar el resultado",
-     "minutos": 10,
-     "descripcion": "Resuelve 3 ejercicios nuevos de la guía y explica en voz alta un paso de cada uno."
-    }
-   ]
-  }
- ]
+  ]
 }

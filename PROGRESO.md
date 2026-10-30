@@ -14,6 +14,8 @@ Formato: `- AAAA-MM-DD HH:MM [Txx] qué se hizo / qué falta / decisión tomada`
 5. T08 demo y entregables
 
 ## Mejoras propuestas (por los agentes; el integrador decide)
+- [T15] Resolver por entrega y semana los datos del cliente mock compartido para que detalle, comentarios y navegación entre semanas coincidan con la demo de Supabase (solicitud concreta en T15).
+- [T15] Ampliar después la demo con evidencias ficticias de cuaderno y más verificaciones en Tecnología; hoy los niveles se concentran en la práctica de ecuaciones del guion.
 - [T10] Centralizar descargas binarias en api-cliente para comunicar errores del servidor dentro de la página.
 - [T10] Para clases grandes, paginar consultas y transmitir CSV para superar el límite de filas de Supabase.
 - [T09] Versionar los intentos de entrega/verificación para conservar evidencia histórica al corregir sin reutilizar preguntas o informes anteriores.
@@ -43,6 +45,7 @@ Formato: `- AAAA-MM-DD HH:MM [Txx] qué se hizo / qué falta / decisión tomada`
 - 2026-10-26 Discord: se permite cualquier herramienta de programación sin declararla; Muse Code es opcional.
 
 ## Bitácora
+- 2026-10-29 [T15] 6/7 criterios: 13 cuentas ficticias @muselearn.demo, 2 clases, 8 tareas en 4 modalidades, 62 entregas, 8 verificaciones/informes, 4 estudiantes en Necesitan apoyo, comentarios, notas y devolución de Elian; dos semanas de Camila con 14 bloques cada una. Generador único desde mocks, contraseña obligatoria solo de entorno y README. lint/typecheck OK; 212 pruebas pasan (10 omitidas); seed ejecutado dos veces en PostgreSQL 18 temporal local sin duplicados y con colisiones ajenas rechazadas; Hoy/Semana/General a 380/1280 px sin desbordamiento. Bloqueo: criterio 6 requiere conexiones de detalle/comentarios/semana en api-cliente.ts, fuera de alcance; documentado en ficha. Sin seed remoto, push ni merge.
 - 2026-10-29 [T10] CSV Excel de entregas y comprensión: sesión y dueño/RLS, BOM UTF-8, punto y coma, fechas en zona del centro, fórmulas neutralizadas, notas opcionales y botones es/en con mocks. lint/typecheck OK; 199 pruebas pasan (10 omitidas), 4 e2e de descarga OK a 380/1280 px y revisión visual. Ficha completa; sin push ni merge.
 - 2026-10-29 [T09] Calificaciones opcionales 0–100, devolución atómica con motivo y RLS en migración 0009 preparada sin aplicar; endpoints con pertenencia y Zod, UI docente/estudiante es/en, corrección que conserva texto/adjuntos y mocks persistentes. Lint/typecheck correctos, 191 pruebas unitarias correctas (10 omitidas), 4 e2e T09 correctos y capturas revisadas a 380/1280 px. Bloqueo del cuarto criterio: conectar `limpiarDevolucionPropia` en POST /api/entregas (ruta fuera de «Puedes tocar»), documentado en ficha; sin push.
 - 2026-10-27 [T06] Por instrucción explícita del usuario, se prepara commit de todo el trabajo tras repetir lint y typecheck (OK) y npm test (116 OK, 2 fallos del mock T04, 10 omitidas). La ficha mantiene documentados ambos bloqueos de integración.

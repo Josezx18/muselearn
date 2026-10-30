@@ -1,0 +1,93 @@
+[
+  {
+    "id": "00000000-0000-4000-8000-000000000001",
+    "rol": "docente",
+    "nombre": "Prof. Ana Rodríguez",
+    "idioma": "es",
+    "correo": "docente@muselearn.demo"
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000000011",
+    "rol": "estudiante",
+    "nombre": "Camila Pérez",
+    "idioma": "es",
+    "correo": "camila@muselearn.demo"
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000000012",
+    "rol": "estudiante",
+    "nombre": "Luis Martínez",
+    "idioma": "es",
+    "correo": "luis@muselearn.demo"
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000000013",
+    "rol": "estudiante",
+    "nombre": "Sofía Gómez",
+    "idioma": "es",
+    "correo": "sofia@muselearn.demo"
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000000014",
+    "rol": "estudiante",
+    "nombre": "Diego Fernández",
+    "idioma": "es",
+    "correo": "diego@muselearn.demo"
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000000015",
+    "rol": "estudiante",
+    "nombre": "Valeria Santos",
+    "idioma": "es",
+    "correo": "valeria@muselearn.demo"
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000000016",
+    "rol": "estudiante",
+    "nombre": "Yandel Rosario",
+    "idioma": "es",
+    "correo": "yandel@muselearn.demo"
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000000017",
+    "rol": "estudiante",
+    "nombre": "Alondra de la Cruz",
+    "idioma": "es",
+    "correo": "alondra@muselearn.demo"
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000000018",
+    "rol": "estudiante",
+    "nombre": "Dariel Jiménez",
+    "idioma": "es",
+    "correo": "dariel@muselearn.demo"
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000000019",
+    "rol": "estudiante",
+    "nombre": "Nayeli Tejada",
+    "idioma": "es",
+    "correo": "nayeli@muselearn.demo"
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000000020",
+    "rol": "estudiante",
+    "nombre": "Elian Alcántara",
+    "idioma": "es",
+    "correo": "elian@muselearn.demo"
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000000021",
+    "rol": "estudiante",
+    "nombre": "Kiara Peralta",
+    "idioma": "es",
+    "correo": "kiara@muselearn.demo"
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000000022",
+    "rol": "estudiante",
+    "nombre": "Jadiel Encarnación",
+    "idioma": "es",
+    "correo": "jadiel@muselearn.demo"
+  }
+]

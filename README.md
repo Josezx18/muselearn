@@ -28,6 +28,13 @@ MuseLearn keeps the classroom flow teachers already know (classes, tasks, submis
 | **4. Improve** | A personalized practice route of 2–6 steps for the weak concepts. | A **heatmap** (student × concept) with the concepts the class needs to review. |
 | **5. Teach** | Reads the teacher's comment on each submission. | **AI for the teacher:** drafts a full task from a topic, suggests a review plan from the heatmap (anonymous, aggregated data only), and drafts feedback for each submission that the teacher edits before sending. |
 
+- **Classroom:** import courses, students and upcoming tasks; submit evidence in MuseLearn after handing work in on the external platform.
+- **Feedback and CSV:** optional grades, return for correction, teacher comments, and Excel-friendly exports of submissions and comprehension.
+- **Voice and notices:** voice or text answers, language/speed/pause preferences, and notices when the study plan changes.
+- **Privacy:** required policy acceptance, per-user access, data download and account deletion; voice audio is not stored.
+
+Read [How it works (English)](https://muselearn-five.vercel.app/en/como-funciona) · [Cómo funciona (español)](https://muselearn-five.vercel.app/es/como-funciona).
+
 ### Screens
 
 **Student (390 px):** tap the companion to talk, provide evidence for a Classroom assignment, explain the work, and receive a practice path.
@@ -41,6 +48,7 @@ MuseLearn keeps the classroom flow teachers already know (classes, tasks, submis
 | Scene | Desktop | Phone |
 |---|---|---|
 | Create with AI | [1440 px](docs/capturas/demo-01-crear-ia-1440.png) | [390 px](docs/capturas/demo-01-crear-ia-390.png) |
+| Socratic tutor | [1440 px](docs/capturas/demo-04-tutor-1440.png) | [390 px](docs/capturas/demo-04-tutor-390.png) |
 | Today | [1440 px](docs/capturas/demo-02-hoy-1440.png) | [390 px](docs/capturas/demo-02-hoy-390.png) |
 | Classroom evidence | [1440 px](docs/capturas/demo-05-classroom-evidencia-1440.png) | [390 px](docs/capturas/demo-05-classroom-evidencia-390.png) |
 | Explanation | [1440 px](docs/capturas/demo-06-verificacion-1440.png) | [390 px](docs/capturas/demo-06-verificacion-390.png) |

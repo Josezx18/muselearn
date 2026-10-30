@@ -14,6 +14,7 @@ Formato: `- AAAA-MM-DD HH:MM [Txx] qué se hizo / qué falta / decisión tomada`
 5. T08 demo y entregables
 
 ## Mejoras propuestas (por los agentes; el integrador decide)
+- [T16] Renovar las capturas de T11 cuando se vuelva a ensayar la demo con los datos integrados de T15 y producir capturas equivalentes en ingles.
 - [T13] Validar y ajustar la detección de turnos con micrófonos reales y ruido de aula en Android/iOS.
 - [T15] Resolver por entrega y semana los datos del cliente mock compartido para que detalle, comentarios y navegación entre semanas coincidan con la demo de Supabase (solicitud concreta en T15).
 - [T15] Ampliar después la demo con evidencias ficticias de cuaderno y más verificaciones en Tecnología; hoy los niveles se concentran en la práctica de ecuaciones del guion.
@@ -69,3 +70,5 @@ Formato: `- AAAA-MM-DD HH:MM [Txx] qué se hizo / qué falta / decisión tomada`
 - 2026-10-28 [T07] Rediseño visual "el cuaderno": papel cuadriculado, tinta azul, verde pizarra, resaltador solo para "lo próximo" y la evidencia; tipografías Bricolage Grotesque (títulos), Lexend (lectura) y Caveat (lo que el estudiante "escribe"). Portada nueva con la hoja de cuaderno; Hoy como horario; tarea con instrucciones en papel; tutor tipo chat; verificación con botón de voz grande; panel docente con la comparación entregó/comprendió; informe con la evidencia resaltada. Arreglados los textos de nivel de ayuda que faltaban. 380 px y escritorio revisados; 123 pruebas y 14 e2e OK.
 
 - 2026-10-29 [T13] Voz configurable por idioma, velocidad y pausa persistidas localmente; fondo adaptable, medidor accesible, ayuda de permisos Android/iOS, limpieza de markdown/emojis/enlaces y reintento único con audio recuperable. lint/typecheck y 216 pruebas OK (10 omitidas); seis e2e con mocks y revisión visual a 380/1280 px, es/en. Falta ensayo con micrófono físico (documentado en ficha). Sin push ni merge.
+
+- 2026-10-29 [T16] Ficha completa: pagina publica como-funciona es/en con cinco capturas T11, tabla de modelos y privacidad; enlaces en portada/pie, README actualizado y tres versiones bilingues para X (<280 caracteres). lint/typecheck OK; 228 pruebas pasan (10 omitidas), cuatro e2e OK a 380/1280 px y revision visual. Capturas con datos ficticios y respuestas simuladas identificadas. Sin push ni merge.

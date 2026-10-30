@@ -166,5 +166,53 @@
     "salir": "Not now (sign out)",
     "falta": "Check the box to accept.",
     "error": "It couldn't be saved. Try again."
+  },
+  "comoFunciona": {
+    "titulo": "How it works",
+    "intro": "Handing in homework does not prove learning. MuseLearn connects study planning, guided help and the student’s explanation with what their teacher sees.",
+    "capturas": "Demo screenshots use fictional data. The pictured screens are in Spanish; AI responses in this demo are simulated.",
+    "secciones": [
+      [
+        "Plan",
+        "Each task is analyzed for difficulty, time and concepts. Today and Week fit the work around your schedule; notices explain changes to the plan.",
+        "Today study plan with blocks and priorities"
+      ],
+      [
+        "A tutor that does not do the homework",
+        "The tutor guides with questions and hints. The teacher chooses the help level: hints, similar examples or a concept explanation.",
+        "Socratic tutor asking a guiding question"
+      ],
+      [
+        "Check that you understood",
+        "After submitting text, files or a notebook photo, explain your own work by voice or text. Receive a report by concept and a practice route. You can also provide evidence for a Classroom task.",
+        "Comprehension check asking about submitted work"
+      ],
+      [
+        "The teacher sees understanding",
+        "The dashboard compares who submitted with who demonstrated understanding, with evidence by concept. Teachers can comment, optionally grade, return work for correction and export CSV. AI can make mistakes; the teacher makes the final assessment.",
+        "Teacher comprehension dashboard with fictional data"
+      ],
+      [
+        "AI for the teacher",
+        "AI proposes a task from a topic. It also suggests review activities using aggregated data without names and drafts feedback. The teacher reviews and edits before saving.",
+        "Creating a task from an AI proposal"
+      ]
+    ],
+    "modelos": "Meta models we use",
+    "columnas": [
+      "Job",
+      "Model",
+      "Provider"
+    ],
+    "trabajos": [
+      "Socratic tutor, comprehension questions, reading notebook photos, report and route",
+      "Voice answers (speech to text, Spanish/English)",
+      "Batch task analysis and weekly planning",
+      "Fallback"
+    ],
+    "privacidad": "Privacy",
+    "privacidadTexto": "Students access their own work and teachers their own classes. Audio is transcribed and not stored. You can download your data and delete your account. We do not use the Contributor tier with student data.",
+    "privacidadEnlace": "Read the privacy policy",
+    "volver": "Back to the home page"
   }
 }

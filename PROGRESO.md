@@ -14,6 +14,8 @@ Formato: `- AAAA-MM-DD HH:MM [Txx] qué se hizo / qué falta / decisión tomada`
 5. T08 demo y entregables
 
 ## Mejoras propuestas (por los agentes; el integrador decide)
+- [T09] Versionar los intentos de entrega/verificación para conservar evidencia histórica al corregir sin reutilizar preguntas o informes anteriores.
+- [T09] Cargar las calificaciones de una tarea en una consulta agrupada para evitar una petición por estudiante.
 - [T06] Guardar pasos completados por estudiante en DB para sincronizar dispositivos.
 - [T06] Paginar el mapa de calor y agrupar métricas/resúmenes en una sola consulta para clases grandes.
 - [T06] Hacer transaccional e idempotente la incorporación de rutas al plan, conservándolas al reorganizar.
@@ -39,6 +41,7 @@ Formato: `- AAAA-MM-DD HH:MM [Txx] qué se hizo / qué falta / decisión tomada`
 - 2026-10-26 Discord: se permite cualquier herramienta de programación sin declararla; Muse Code es opcional.
 
 ## Bitácora
+- 2026-10-29 [T09] Calificaciones opcionales 0–100, devolución atómica con motivo y RLS en migración 0009 preparada sin aplicar; endpoints con pertenencia y Zod, UI docente/estudiante es/en, corrección que conserva texto/adjuntos y mocks persistentes. Lint/typecheck correctos, 191 pruebas unitarias correctas (10 omitidas), 4 e2e T09 correctos y capturas revisadas a 380/1280 px. Bloqueo del cuarto criterio: conectar `limpiarDevolucionPropia` en POST /api/entregas (ruta fuera de «Puedes tocar»), documentado en ficha; sin push.
 - 2026-10-27 [T06] Por instrucción explícita del usuario, se prepara commit de todo el trabajo tras repetir lint y typecheck (OK) y npm test (116 OK, 2 fallos del mock T04, 10 omitidas). La ficha mantiene documentados ambos bloqueos de integración.
 - 2026-10-27 [T06] Ruta real con Muse y validación del prompt 05, endpoints de informe/ruta con permisos, panel docente calculado sin IA, mapa de calor, indicadores y detalle, informe y práctica marcable, es/en. lint/typecheck OK y 14 pruebas T06 OK; UI verificada en Chrome a 380/1280 px. Bloqueos: contrato de pasos en plan T03 y actualización de mock test T04 (suite global: 116 OK, 2 fallos, 10 omitidas). Sin commit por regla de suite completa; detalles y solicitudes en ficha.
 - 2026-10-27 [T04] Cierre de controles: lint y typecheck OK; suite local 94 pruebas OK (10 omitidas: 7 reales opt-in ya ejecutadas aparte y 3 preexistentes). Siete pruebas Muse reales OK. Permisos, WAV y recuperación probados; estado 🟨 por dependencias externas, sin marcar los cuatro criterios pendientes.

@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Badge, Button, Card, Textarea, useToast } from "@/components/ui";
-import { entregar, subirAdjuntoEntrega } from "@/lib/api-cliente";
+import { entregarCorreccion, subirAdjuntoEntrega } from "@/lib/api-cliente";
 import type { Adjunto, Entrega, Modalidad } from "@/types/contratos";
 
 const MAX_FOTOS = 4;
@@ -23,7 +23,7 @@ export interface FormularioEntregaProps {
   tareaId: string;
   /** Dónde se entrega la tarea: fuera de MuseLearn, aquí se sube una evidencia y se marca "ya la entregué". */
   modalidad?: Modalidad;
-  entregaExistente?: Pick<Entrega, "estado" | "adjuntos" | "contenido_texto"> | null;
+  entregaExistente?: Pick<Entrega, "id" | "estado" | "adjuntos" | "contenido_texto"> | null;
   alEntregar: (entrega: Entrega) => void;
 }
 
@@ -64,11 +64,12 @@ export function FormularioEntrega({ tareaId, modalidad = "muselearn", entregaExi
   const [enviando, setEnviando] = useState(false);
   const externa = modalidad === "classroom" || modalidad === "otra";
   const [yaEntregada, setYaEntregada] = useState(false);
+  const [conservados, setConservados] = useState<Adjunto[]>(entregaExistente?.adjuntos ?? []);
   const archivosRef = useRef<HTMLInputElement>(null);
   const camaraRef = useRef<HTMLInputElement>(null);
 
   const bloqueada = entregaExistente?.estado === "entregada" || entregaExistente?.estado === "verificando" || entregaExistente?.estado === "verificada";
-  const fotos = elementos.filter((e) => e.vista).length;
+  const fotos = elementos.filter((e) => e.vista).length + conservados.filter((a) => a.tipo_mime.startsWith("image/")).length;
 
   // Liberar las URLs de vista previa al desmontar.
   const elementosRef = useRef(elementos);
@@ -83,7 +84,7 @@ export function FormularioEntrega({ tareaId, modalidad = "muselearn", entregaExi
     let fotosLibres = MAX_FOTOS - fotos;
     setComprimiendo(true);
     for (const original of Array.from(lista)) {
-      if (elementos.length + nuevos.length >= MAX_ARCHIVOS) break;
+      if (elementos.length + conservados.length + nuevos.length >= MAX_ARCHIVOS) break;
       if (!TIPOS.includes(original.type)) {
         avisar(t("entrega.adjuntosErrorTipo"), "error");
         continue;
@@ -124,14 +125,14 @@ export function FormularioEntrega({ tareaId, modalidad = "muselearn", entregaExi
   async function enviar(evento: React.FormEvent) {
     evento.preventDefault();
     if (bloqueada) return avisar(t("entrega.yaEntregada"), "info");
-    if (!texto.trim() && elementos.length === 0) return avisar(t(externa ? "entrega.vaciaEvidencia" : "entrega.vacia"), "error");
+    if (!texto.trim() && elementos.length === 0 && conservados.length === 0) return avisar(t(externa ? "entrega.vaciaEvidencia" : "entrega.vacia"), "error");
     if (externa && !yaEntregada) return avisar(t("entrega.marcarExterna"), "error");
     setEnviando(true);
     try {
       // 1) Subir cada archivo a Storage (carpeta del estudiante).  2) Entregar con las rutas reales.
-      const adjuntos: Adjunto[] = [];
+      const adjuntos: Adjunto[] = [...conservados];
       for (const e of elementos) adjuntos.push(await subirAdjuntoEntrega(tareaId, e.archivo));
-      const entrega = await entregar({ tarea_id: tareaId, contenido_texto: texto.trim(), adjuntos, entregada_externamente: externa && yaEntregada });
+      const entrega = await entregarCorreccion({ tarea_id: tareaId, contenido_texto: texto.trim(), adjuntos, entregada_externamente: externa && yaEntregada }, entregaExistente?.id);
       avisar(t("entrega.exito"), "exito");
       alEntregar(entrega);
     } catch (err) {
@@ -173,6 +174,12 @@ export function FormularioEntrega({ tareaId, modalidad = "muselearn", entregaExi
         <div className="flex flex-col gap-2">
           <span className="text-sm font-medium">{t("entrega.adjuntos")}</span>
 
+          {conservados.length > 0 && <ul className="grid gap-2 text-sm">
+            {conservados.map((a) => <li key={a.ruta} className="flex min-w-0 items-center justify-between gap-2">
+              <span className="min-w-0 break-all">{a.nombre}</span>
+              {!bloqueada && <button type="button" className="shrink-0 underline" onClick={() => setConservados((xs) => xs.filter((x) => x.ruta !== a.ruta))}>{t("entrega.quitar")}</button>}
+            </li>)}
+          </ul>}
           {elementos.length > 0 && (
             <ul className="flex flex-wrap gap-2">
               {elementos.map((e, i) =>
@@ -234,7 +241,7 @@ export function FormularioEntrega({ tareaId, modalidad = "muselearn", entregaExi
               <Button type="button" variante="secundario" onClick={() => camaraRef.current?.click()} disabled={fotos >= MAX_FOTOS || comprimiendo}>
                 📷 {t("entrega.tomarFoto")}
               </Button>
-              <Button type="button" variante="secundario" tamano="sm" onClick={() => archivosRef.current?.click()} disabled={elementos.length >= MAX_ARCHIVOS || comprimiendo}>
+              <Button type="button" variante="secundario" tamano="sm" onClick={() => archivosRef.current?.click()} disabled={elementos.length + conservados.length >= MAX_ARCHIVOS || comprimiendo}>
                 {t("entrega.adjuntosAgregar")}
               </Button>
               <span className="text-sm text-tinta-suave">{t("entrega.contadorFotos", { fotos, maximo: MAX_FOTOS })}</span>

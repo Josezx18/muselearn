@@ -481,3 +481,46 @@ export const importarCursoClassroom = (curso_id: string) =>
 
 export const desconectarClassroom = () =>
   usarMocks() ? mock(null) : pedir("/api/integraciones/classroom/desconectar", z.null(), { method: "POST" });
+
+// ---------------- T09: calificar y devolver ----------------
+import { Calificacion, EntradaCalificacion, EntradaDevolucion } from "./db/calificaciones";
+import { leerCalificacionMock, escribirCalificacionMock, estadoCalificadoMock, escribirEntregaMock, leerEntregaMock } from "./mocks/calificaciones";
+
+export const obtenerCalificacion = (id: string) => usarMocks()
+  ? mock(leerCalificacionMock(id)) : pedir(`/api/entregas/${id}/calificacion`, Calificacion.nullable());
+export function guardarCalificacion(id: string, nota: number | null) {
+  const entrada = EntradaCalificacion.parse({ nota });
+  return usarMocks() ? mock(escribirCalificacionMock(id, entrada))
+    : pedir(`/api/entregas/${id}/calificacion`, Calificacion, { method: "PUT", body: JSON.stringify(entrada) });
+}
+export function devolverEntrega(id: string, motivo: string) {
+  const entrada = EntradaDevolucion.parse({ motivo });
+  return usarMocks() ? mock(escribirCalificacionMock(id, { devuelta: true, motivo_devolucion: entrada.motivo }))
+    : pedir(`/api/entregas/${id}/devolver`, Calificacion, json(entrada));
+}
+export async function listarEntregasCalificadas(tareaId: string) {
+  const entregas = await listarEntregas(tareaId);
+  return usarMocks() ? entregas.map(estadoCalificadoMock) : entregas;
+}
+export async function entregarCorreccion(datos: Parameters<typeof entregar>[0], entregaId?: string) {
+  const entrega = await entregar(datos);
+  if (usarMocks()) {
+    const previa = entregasMock.find((e) => e.id === entregaId);
+    const actual = escribirEntregaMock({ ...entrega, id: entregaId ?? entrega.id });
+    if (previa) Object.assign(previa, actual);
+    else entregasMock.push(actual);
+    if (entregaId && leerCalificacionMock(entregaId)?.devuelta)
+      escribirCalificacionMock(entregaId, { devuelta: false, motivo_devolucion: null });
+    return actual;
+  }
+  return entrega;
+}
+
+export async function obtenerDetalleEntregaCalificada(id: string) {
+  const detalle = await obtenerDetalleEntrega(id);
+  if (!usarMocks()) return detalle;
+  const nueva = leerEntregaMock(id);
+  return DetalleEntrega.parse({ ...detalle, entrega: estadoCalificadoMock(nueva ?? detalle.entrega),
+    ...(nueva ? { adjuntos: nueva.adjuntos.map((a) => ({ ...a, url: null })) } : {}),
+  });
+}

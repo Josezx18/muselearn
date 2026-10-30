@@ -3,8 +3,9 @@
 import { useEffect, useState } from "react";
 import { useFormatter, useTranslations } from "next-intl";
 import { Dialog, NivelDominio, Skeleton } from "@/components/ui";
-import { obtenerDetalleEntrega } from "@/lib/api-cliente";
+import { obtenerDetalleEntregaCalificada } from "@/lib/api-cliente";
 import type { DetalleEntrega } from "@/types/contratos";
+import { CalificacionEntrega } from "./CalificacionEntrega";
 import { ComentarioEntrega } from "./ComentarioEntrega";
 
 /** Lo que entregó el estudiante: texto, fotos y archivos, sus respuestas de la verificación y el informe. */
@@ -18,7 +19,7 @@ export function DialogoEntrega({ entregaId, nombre, alCerrar }: { entregaId: str
   useEffect(() => {
     if (!entregaId) return;
     let vivo = true;
-    obtenerDetalleEntrega(entregaId)
+    obtenerDetalleEntregaCalificada(entregaId)
       .then((d) => vivo && setDetalle(d))
       .catch(() => vivo && setError(true));
     return () => {
@@ -140,6 +141,7 @@ export function DialogoEntrega({ entregaId, nombre, alCerrar }: { entregaId: str
             </section>
           )}
 
+          <CalificacionEntrega key={`nota-${detalle.entrega.id}`} entregaId={detalle.entrega.id} />
           <ComentarioEntrega
             key={detalle.entrega.id}
             entregaId={detalle.entrega.id}

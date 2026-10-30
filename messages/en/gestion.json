@@ -80,5 +80,20 @@
       "ia": "The AI didn't respond. Try again in a moment.",
       "guardar": "The comment couldn't be saved."
     }
+  },
+  "calificacion": {
+    "titulo": "Grade and revision",
+    "nota": "Grade (0–100, optional)",
+    "guardar": "Save grade",
+    "motivo": "Reason for returning",
+    "devolver": "Return for revision",
+    "devuelta": "Returned",
+    "sinNota": "No grade",
+    "valor": "Grade: {nota}/100",
+    "aviso": "Your teacher asked you to revise: {motivo}",
+    "cargando": "Loading grade…",
+    "error": "Could not load or save the grade.",
+    "guardado": "Changes saved.",
+    "reintentar": "Retry"
   }
 }

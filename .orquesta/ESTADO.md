@@ -14,6 +14,7 @@ Estados: ⬜ sin empezar · 🟦 trabajando · 🟨 bloqueado · 🟩 lista para
 | T06 | Informes y panel docente | Codex | `T06-informes-codex` | t06-informes | ✅ | 28 oct: integrada con ruta de respaldo; "Agregar a mi semana" queda como mejora |
 | T07 | Integrador | Claude (chat) | `T07-integrador` | main | 🟦 | 27 oct: integró T01 y T03 |
 | T08 | Demo y entrega | José | — | — | ⬜ | |
+| T09 | Calificar y devolver | Codex | `T09-calificar` | t09-calificar | 🟨 | 29 oct: 8/9 criterios, 191 unitarias y 4 e2e OK; conectar limpieza en POST /api/entregas; 0009 sin aplicar |
 
 ## Orden de integración previsto
 T00 → T01 → T03 → T02 → T05 → T04 → T06 → seed demo → e2e → despliegue

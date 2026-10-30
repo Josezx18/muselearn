@@ -1,12 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { obtenerTarea, listarAnalisis, listarClases, listarEntregas } from "@/lib/api-cliente";
+import { obtenerTarea, listarAnalisis, listarClases, listarEntregasCalificadas } from "@/lib/api-cliente";
 import type { Tarea, AnalisisTarea, Entrega } from "@/types/contratos";
 import { FormularioEntrega } from "@/components/entregas";
 import { Button, Dificultad, Skeleton } from "@/components/ui";
 import { Link } from "@/i18n/navigation";
 import { enlaceArchivo } from "@/lib/archivos";
+import { CalificacionEntrega } from "@/components/gestion/CalificacionEntrega";
 import { ComentarioDocente } from "./ComentarioDocente";
 export function DetalleTarea({ id, estudianteId }: { id: string; estudianteId: string }) {
   const t = useTranslations("estudiante");
@@ -19,7 +20,7 @@ export function DetalleTarea({ id, estudianteId }: { id: string; estudianteId: s
   const [intento, setIntento] = useState(0);
   useEffect(() => {
     let activo = true;
-    Promise.all([obtenerTarea(id), listarAnalisis(estudianteId), listarClases(), listarEntregas(id)])
+    Promise.all([obtenerTarea(id), listarAnalisis(estudianteId), listarClases(), listarEntregasCalificadas(id)])
       .then(([ta, a, cs, es]) => {
         if (activo) {
           if (ta.id !== id) {
@@ -156,7 +157,8 @@ export function DetalleTarea({ id, estudianteId }: { id: string; estudianteId: s
               >
                 {t("tutor")}
               </Link>
-              <FormularioEntrega tareaId={id} modalidad={tarea.modalidad} entregaExistente={entrega} alEntregar={setEntrega} />
+              {entrega && <CalificacionEntrega key={`nota-${entrega.id}-${entrega.estado}`} entregaId={entrega.id} estudiante />}
+              <FormularioEntrega key={`${entrega?.id ?? id}-${entrega?.estado ?? "nueva"}`} tareaId={id} modalidad={tarea.modalidad} entregaExistente={entrega} alEntregar={setEntrega} />
               {entrega && entrega.estado !== "pendiente" && (
                 <Link
                   className="flex min-h-13 items-center justify-center rounded-xl bg-primario px-4 text-center font-bold text-white shadow-[0_3px_0_0_var(--color-primario-fuerte)] active:translate-y-[2px] active:shadow-none"
@@ -165,7 +167,7 @@ export function DetalleTarea({ id, estudianteId }: { id: string; estudianteId: s
                   {t(entrega.estado === "verificada" ? "verInforme" : "irVerificar")}
                 </Link>
               )}
-              {entrega && entrega.estado !== "pendiente" && <ComentarioDocente entregaId={entrega.id} />}
+              {entrega && <ComentarioDocente entregaId={entrega.id} />}
             </aside>
           </div>
         </>

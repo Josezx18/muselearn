@@ -3,9 +3,10 @@
 import { useCallback, useEffect, useState } from "react";
 import { useFormatter, useTranslations } from "next-intl";
 import { Button, Card, Badge, Dialog, Skeleton, useToast } from "@/components/ui";
-import { borrarTarea, editarTarea, listarEntregas, listarEstudiantes, subirAdjuntoTarea } from "@/lib/api-cliente";
+import { borrarTarea, editarTarea, listarEntregasCalificadas, listarEstudiantes, subirAdjuntoTarea } from "@/lib/api-cliente";
 import { useRouter } from "@/i18n/navigation";
 import { enlaceArchivo } from "@/lib/archivos";
+import { CalificacionEntrega } from "@/components/gestion/CalificacionEntrega";
 import { DialogoEntrega } from "@/components/gestion/DialogoEntrega";
 import { FormularioTarea } from "./FormularioTarea";
 import type { Tarea, Entrega, Usuario } from "@/types/contratos";
@@ -34,7 +35,7 @@ export function DetalleTareaDocente({ tarea: inicial }: DetalleTareaDocenteProps
 
   const cargar = useCallback(async () => {
     try {
-      const [ents, ests] = await Promise.all([listarEntregas(tarea.id), listarEstudiantes(tarea.clase_id)]);
+      const [ents, ests] = await Promise.all([listarEntregasCalificadas(tarea.id), listarEstudiantes(tarea.clase_id)]);
       setEntregas(ents);
       setEstudiantes(ests);
       setError(false);
@@ -242,7 +243,8 @@ export function DetalleTareaDocente({ tarea: inicial }: DetalleTareaDocenteProps
                   <span className="font-bold">{estudiante.nombre}</span>
                   <Badge tono={entrega ? obtenerTonoEstado(entrega.estado) : "neutro"}>{obtenerEstadoTexto(entrega?.estado ?? "pendiente")}</Badge>
                 </div>
-                {entrega && entrega.estado !== "pendiente" ? (
+                {entrega && <CalificacionEntrega key={`${entrega.id}-${entrega.estado}-${abierta?.id ?? "cerrada"}`} entregaId={entrega.id} resumen />}
+                {entrega ? (
                   <Button variante="secundario" tamano="sm" onClick={() => setAbierta({ id: entrega.id, nombre: estudiante.nombre })}>
                     {t("detalle.verEntrega")}
                   </Button>
@@ -254,7 +256,7 @@ export function DetalleTareaDocente({ tarea: inicial }: DetalleTareaDocenteProps
           </ul>
         )}
       </div>
-      <DialogoEntrega entregaId={abierta?.id ?? null} nombre={abierta?.nombre ?? ""} alCerrar={() => setAbierta(null)} />
+      <DialogoEntrega entregaId={abierta?.id ?? null} nombre={abierta?.nombre ?? ""} alCerrar={() => { setAbierta(null); void cargar(); }} />
     </div>
   );
 }

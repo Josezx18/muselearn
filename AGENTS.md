@@ -10,6 +10,8 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 # AGENTS.md — Reglas para TODOS los agentes de MuseLearn
 
+> **Integrador en relevo:** si eres Codex y José te pide seguir el trabajo de Claude, lee primero `.orquesta/RELEVO-CODEX.md`.
+
 Lo leen Claude Code (vía CLAUDE.md), Codex, OpenCode y Muse Code. Aplica a cada sesión y subagente.
 
 ## Antes de escribir código

@@ -1,3 +1,4 @@
+import { avisarEstudianteDeEntrega } from "@/lib/db/avisos";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { errorHttp } from "@/lib/db/http";
@@ -72,14 +73,9 @@ export async function PUT(
       "Escribe el comentario (máximo 4000 caracteres).",
     );
   try {
-    return NextResponse.json(
-      await guardarComentario(
-        actual.db,
-        actual.usuario.id,
-        id,
-        entrada.data.texto,
-      ),
-    );
+    const comentario = await guardarComentario(actual.db, actual.usuario.id, id, entrada.data.texto);
+    await avisarEstudianteDeEntrega(id, "comentario", "Tu docente comentó tu entrega");
+    return NextResponse.json(comentario);
   } catch (e) {
     console.error("[entregas/comentario]", e instanceof Error ? e.message : e);
     return errorHttp(500, "error_interno", "No se pudo guardar el comentario.");

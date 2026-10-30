@@ -106,3 +106,23 @@ export interface Aviso {
   leido: boolean;
   creado_en: string;
 }
+/**
+ * Aviso para el estudiante dueño de una entrega (comentario, nota o devolución del docente).
+ * Lleva a la página de la tarea. Nunca lanza: si algo falla, solo registra.
+ */
+export async function avisarEstudianteDeEntrega(entregaId: string, tipo: "comentario" | "nota" | "entrega_devuelta", titulo: string) {
+  try {
+    const admin = crearClienteAdmin();
+    const { data } = await admin.from("entregas").select("estudiante_id, tarea_id, tareas(titulo)").eq("id", entregaId).maybeSingle();
+    if (!data) return;
+    const tarea = (Array.isArray(data.tareas) ? data.tareas[0] : data.tareas) as { titulo?: string } | null;
+    await crearAviso(admin, {
+      usuarioIds: [data.estudiante_id as string],
+      tipo,
+      titulo: tarea?.titulo ? `${titulo}: ${tarea.titulo}`.slice(0, 200) : titulo,
+      enlace: `/estudiante/tarea/${data.tarea_id as string}`,
+    });
+  } catch (e) {
+    console.warn("[avisos] no se pudo avisar al estudiante:", e instanceof Error ? e.message : e);
+  }
+}

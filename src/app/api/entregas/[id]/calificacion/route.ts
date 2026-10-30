@@ -1,3 +1,4 @@
+import { avisarEstudianteDeEntrega } from "@/lib/db/avisos";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { obtenerUsuarioActual } from "@/lib/db/sesion";
@@ -28,7 +29,9 @@ export async function PUT(peticion: Request, { params }: RouteContext<"/api/entr
     if (!entrega) return errorHttp(404, "no_encontrada", "Entrega no encontrada.");
     const entrada = EntradaCalificacion.safeParse(await peticion.json().catch(() => null));
     if (!entrada.success) return errorHttp(400, "datos_invalidos", "Datos inválidos.");
-    return NextResponse.json(await guardarCalificacion(actual.db, actual.usuario.id, id, entrada.data.nota));
+    const calificacion = await guardarCalificacion(actual.db, actual.usuario.id, id, entrada.data.nota);
+    if (entrada.data.nota !== null) await avisarEstudianteDeEntrega(id, "nota", "Tu docente puso tu nota");
+    return NextResponse.json(calificacion);
   } catch {
     return errorHttp(500, "error_interno", "No se pudo procesar la calificación.");
   }

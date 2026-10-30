@@ -35,7 +35,7 @@ export function MenuUsuario({ nombre, rol }: { nombre: string; rol: "docente" | 
         aria-expanded={abierto}
         aria-label={`${t("abrir")}: ${primerNombre}`}
         onClick={() => setAbierto((a) => !a)}
-        className="flex items-center gap-2 rounded-full border border-borde bg-superficie py-1 pl-1 pr-3 hover:border-tinta-suave"
+        className="flex items-center gap-1 rounded-full border border-borde bg-superficie py-1 pl-1 pr-1.5 hover:border-tinta-suave sm:gap-2 sm:pr-3"
       >
         <span
           aria-hidden

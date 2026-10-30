@@ -26,4 +26,5 @@ Que el recorrido de `.orquesta/DEMO.md` funcione sin tropiezos con IA real, en c
 ## Solicitudes al integrador
 ## Decisiones
 ## Bloqueos
+- 2026-10-30 [T07, actualización]: ensayo automatizado completado (150 e2e correctas/2 omitidas; tutor/evaluación y analizador con IA real correctos), sin fallos funcionales confirmados. ENSAYO.md ya contiene resultados; siguen pendientes cámara/micrófono físicos y persistencia autenticada. No hay criterios de reparación concretos que implementar todavía.
 - 2026-10-30 [T07]: pendiente el ensayo real de José. `.orquesta/ENSAYO.md` contiene solo una plantilla; no hay fallos observados que convertir en criterios. Su mera existencia no habilita el inicio de T19.

@@ -13,7 +13,7 @@ Estados: ⬜ sin empezar · 🟦 trabajando · 🟨 bloqueado · ✅ integrada
 | T04 | Tutor y verificación | Codex | t04-tutor-verificacion | ✅ | Fotos y micrófono reales pendientes del ensayo. |
 | T05 | Dashboard estudiante | Codex | t05-dashboard | ✅ | Hoy, Semana y entrega conectadas. |
 | T06 | Informes y panel docente | Codex | t06-informes | ✅ | Agregar práctica a la semana sigue como mejora. |
-| T07 | Integrador | Codex (relevo) | main | 🟦 | Relevo leído; tablero contrastado con ramas integradas. |
+| T07 | Integrador | Codex (relevo) | main | 🟦 | Ensayo automatizado: 150 e2e correctas, 2 omitidas; tutor/evaluación y analizador reales correctos. |
 | T08 | Demo y entrega | José | — | ⬜ | Ensayo real, video y entrega del hackathon. |
 | T09 | Calificar y devolver | Codex | t09-calificar | ✅ | Reentrega conectada, 0009 aplicada según relevo y ciclo renovado por T17. |
 | T10 | Exportación CSV | Codex | t10-csv | ✅ | CSV integrado. |
@@ -25,13 +25,13 @@ Estados: ⬜ sin empezar · 🟦 trabajando · 🟨 bloqueado · ✅ integrada
 | T16 | Cómo funciona y publicaciones | Codex | t16-como-funciona | ✅ | Página pública, README y publicaciones integrados. |
 | T17 | Mocks y deudas | Codex | t17-deuda | ✅ | Mocks por entrega y nueva verificación tras corregir. |
 | T18 | Pruebas RLS | Codex | t18-rls | ✅ | H01 corregido con 0011; 214/214 RLS según relevo. |
-| T19 | Arreglos del ensayo | Codex | t19-ensayo | 🟨 | Faltan observaciones reales de José en ENSAYO.md. |
+| T19 | Arreglos del ensayo | Codex | t19-ensayo | 🟨 | Sin fallos funcionales confirmados en el ensayo automatizado; falta ensayo físico y persistencia autenticada. |
 | T20 | Rendimiento móvil | OpenCode | t20-rendimiento | ⬜ | Objetivos definidos; sesión aún no creada. |
 
 ## Cierre del hackathon
 
 Sigue `.orquesta/CIERRE-HACKATHON.md`: ensayo real → criterios concretos en T19/T20 → revisión e integración → segundo ensayo → congelar el 3 nov → entregar el 4 nov.
 
-La plantilla `.orquesta/ENSAYO.md` no acredita que José haya realizado el recorrido ni desbloquea T19 por sí sola. El integrador copia únicamente observaciones reales a las fichas y evita solapar archivos entre T19 y T20.
+`.orquesta/ENSAYO.md` contiene resultados automatizados y pruebas separadas de IA real; no acredita un recorrido completo con dispositivos físicos ni con cuentas autenticadas en producción. El integrador copia únicamente fallos observados a las fichas y evita solapar archivos entre T19 y T20.
 
 No hacer push desde esta sesión. Mantener la autoría de los commits del dueño del repositorio.

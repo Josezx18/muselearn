@@ -29,6 +29,7 @@ Que `main` siempre compile y funcione, y que al final exista una demo desplegada
 | 27 oct | t03-motor-ia | ✅ | conflicto solo en PROGRESO.md; `ZONA_OFFSET_MIN` en .env.example; 0004 quita EXECUTE de anon a funciones RLS |
 
 ## Relevo del 30 oct — Codex
+- Ensayo posterior solicitado por José: 150 e2e correctas y 2 omitidas; guion de demo en escritorio/celular, tutor/evaluación reales (7 casos) y analizador real (3 casos en vivo) correctos. ENSAYO.md contiene el detalle y los límites; no se marca completo el ensayo físico ni el recorrido autenticado de producción.
 - Ficha T07 asignada expresamente por José; no existe `.ficha-actual` en la carpeta principal. No se altera la asignación de los worktrees.
 - Todas las ramas T01–T18 aparecen en `git branch --merged main`; no queda ninguna de ellas por integrar. Se actualizó el tablero, que conservaba estados previos a esas integraciones.
 - T19 requiere observaciones reales de José: se creó una plantilla en `.orquesta/ENSAYO.md` y se aclaró que su mera existencia no habilita la ficha. T20 conserva su alcance para OpenCode; no se abrió una sesión ni se modificó su código.

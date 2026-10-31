@@ -1,0 +1,154 @@
+{
+  "registrado_en": "2026-10-31T01:09:37.622763+00:00",
+  "entorno": "Chrome local, Next build+start con mocks, movil 360x640, CPU x4, pruebas secuenciales",
+  "metodo": "Mediana de cinco muestras por pagina; accesibilidad minima de las cinco. No se descartan las muestras inferiores al umbral.",
+  "resultados": [
+    {
+      "pagina": "Hoy",
+      "performance": [
+        82,
+        93,
+        94,
+        91,
+        95
+      ],
+      "cpuBenchmark": [
+        1054.5,
+        1396.5,
+        1417,
+        1163,
+        1565.5
+      ],
+      "accessibility": [
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "mediana": 93,
+      "fuente": "Salida de consola de la corrida de cinco muestras anterior al ajuste exclusivo de Comprension."
+    },
+    {
+      "pagina": "Tarea",
+      "performance": [
+        88,
+        90,
+        83,
+        93,
+        92
+      ],
+      "cpuBenchmark": [
+        838,
+        1024,
+        1033.5,
+        1308.5,
+        1201.5
+      ],
+      "accessibility": [
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "mediana": 90,
+      "fuente": "Salida de consola de la corrida de cinco muestras anterior al ajuste exclusivo de Comprension."
+    },
+    {
+      "pagina": "Comprensión",
+      "performance": [
+        85,
+        96,
+        97,
+        96,
+        97
+      ],
+      "cpuBenchmark": [
+        1528.5,
+        1333,
+        1582.5,
+        1578,
+        1498
+      ],
+      "accessibility": [
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "mediana": 96,
+      "fecha": "2026-10-31T01:08:53.543Z",
+      "metricas": [
+        {
+          "first-contentful-paint": 926.2940000000001,
+          "largest-contentful-paint": 3522.441,
+          "total-blocking-time": 266.9999999999998,
+          "cumulative-layout-shift": 0
+        },
+        {
+          "first-contentful-paint": 917.0623,
+          "largest-contentful-paint": 917.0623,
+          "total-blocking-time": 210.99999999999977,
+          "cumulative-layout-shift": 0
+        },
+        {
+          "first-contentful-paint": 915.7911999999999,
+          "largest-contentful-paint": 915.7911999999999,
+          "total-blocking-time": 208,
+          "cumulative-layout-shift": 0
+        },
+        {
+          "first-contentful-paint": 923.0772999999999,
+          "largest-contentful-paint": 923.0772999999999,
+          "total-blocking-time": 241.99999999999977,
+          "cumulative-layout-shift": 0
+        },
+        {
+          "first-contentful-paint": 916.5341000000001,
+          "largest-contentful-paint": 916.5341000000001,
+          "total-blocking-time": 192.99999999999977,
+          "cumulative-layout-shift": 0
+        }
+      ],
+      "fuente": "Informe de la version final: solo el mapa se difiere; General y Por estudiante conservan su estado."
+    }
+  ],
+  "historico_individual": {
+    "corrida_1": [
+      94,
+      98,
+      97
+    ],
+    "corrida_2": [
+      82,
+      81,
+      97
+    ],
+    "corrida_3": [
+      91,
+      83,
+      81
+    ]
+  },
+  "orden_historico": [
+    "Hoy",
+    "Tarea",
+    "Comprension"
+  ],
+  "historico_comprension_antes_de_diferir_mapa": [
+    91,
+    78,
+    80,
+    77,
+    90
+  ],
+  "historico_comprension_mapa_diferido_intermedio": [
+    96,
+    90,
+    96,
+    96,
+    96
+  ]
+}

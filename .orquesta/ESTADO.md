@@ -12,21 +12,21 @@ Estados: ⬜ sin empezar · 🟦 trabajando · 🟨 bloqueado · ✅ integrada
 | T03 | Motor IA | Claude Code | t03-motor-ia | ✅ | Comprobar IA y tiempos en ensayo real. |
 | T04 | Tutor y verificación | Codex | t04-tutor-verificacion | ✅ | Fotos y micrófono reales pendientes del ensayo. |
 | T05 | Dashboard estudiante | Codex | t05-dashboard | ✅ | Hoy, Semana y entrega conectadas. |
-| T06 | Informes y panel docente | Codex | t06-informes | ✅ | Agregar práctica a la semana sigue como mejora. |
+| T06 | Informes y panel docente | Codex | t06-informes | ✅ | Informes, panel y práctica en Semana integrados. |
 | T07 | Integrador | Codex (relevo) | main | 🟦 | Ensayo automatizado: 150 e2e correctas, 2 omitidas; tutor/evaluación y analizador reales correctos. |
-| T08 | Demo y entrega | José | — | ⬜ | Ensayo real, video y entrega del hackathon. |
+| T08 | Demo y entrega | José | — | 🟦 | Materiales listos; pendientes ensayo físico, video y envío del formulario. |
 | T09 | Calificar y devolver | Codex | t09-calificar | ✅ | Reentrega conectada, 0009 aplicada según relevo y ciclo renovado por T17. |
 | T10 | Exportación CSV | Codex | t10-csv | ✅ | CSV integrado. |
 | T11 | Guion de demo | Codex | t11-demo | ✅ | Ensayar con IA real y cuentas ficticias. |
 | T12 | Avisos | OpenCode | t12-avisos | ✅ | 0010 aplicada según relevo; comprobar en ensayo real. |
 | T13 | Voz | Codex | t13-voz | ✅ | Pendiente ensayo con micrófono físico. |
-| T14 | Accesibilidad | OpenCode | t14-a11y | ✅ | Rendimiento pendiente en T20. |
+| T14 | Accesibilidad | OpenCode | t14-a11y | ✅ | Accesibilidad conservada por T20; rendimiento móvil verificado. |
 | T15 | Datos demo | Codex | t15-demo-datos | ✅ | Mocks completados por T17; carga remota de demo a cargo de José. |
 | T16 | Cómo funciona y publicaciones | Codex | t16-como-funciona | ✅ | Página pública, README y publicaciones integrados. |
 | T17 | Mocks y deudas | Codex | t17-deuda | ✅ | Mocks por entrega y nueva verificación tras corregir. |
 | T18 | Pruebas RLS | Codex | t18-rls | ✅ | H01 corregido con 0011; 214/214 RLS según relevo. |
 | T19 | Arreglos del ensayo | Codex | t19-ensayo | 🟨 | Sin fallos funcionales confirmados en el ensayo automatizado; falta ensayo físico y persistencia autenticada. |
-| T20 | Rendimiento móvil | OpenCode | t20-rendimiento | 🟦 | Revisión de 33e1e1c: devuelta para corregir carga real en servidor, navegación semanal y regresiones de accesibilidad; no integrada. |
+| T20 | Rendimiento móvil | OpenCode + T07 | t20-rendimiento | ✅ | Integrada localmente con correcciones T07. Medianas Lighthouse: Hoy 93 / Tarea 90 / Comprensión 96; A11y 100. 245 unitarias y flujos afectados verificados. Sin publicar. |
 
 ## Cierre del hackathon
 

@@ -1,56 +1,86 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { addDays, format, startOfWeek, isSameDay } from "date-fns";
+import { addDays } from "date-fns";
+import { diaCentro, formatearCentro } from "@/lib/fechas-centro";
 import { Link } from "@/i18n/navigation";
-import { actualizarBloque, listarAnalisis, listarClases, listarTareas, obtenerPlan, recalcularPlan } from "@/lib/api-cliente";
+import { actualizarBloque, obtenerPlan, recalcularPlan } from "@/lib/api-cliente";
 import { Button, Card, Skeleton } from "@/components/ui";
 import type { Usuario, PlanSemanal, Tarea, AnalisisTarea, Clase, BloquePlan, EstadoBloque } from "@/types/contratos";
 import { TarjetaTarea } from "./TarjetaTarea";
 import { enlaceDeBloque } from "@/lib/practica";
-import { Mascota } from "@/components/comun/mascotas/Mascota";
-import { ConMascota, MascotaBoton } from "@/components/comun/mascotas/ConMascota";
-export function Dashboard({ vista, usuario }: { vista: "hoy" | "semana"; usuario: Usuario }) {
+import dynamic from "next/dynamic";
+
+const MascotaSidebar = dynamic(() => import("@/components/comun/mascotas/MascotaSidebar").then((m) => m.MascotaSidebar), { ssr: false });
+const MascotaBoton = dynamic(() => import("@/components/comun/mascotas/ConMascota").then((m) => m.MascotaBoton), { ssr: false });
+
+const isoFecha = (d: Date) =>
+  `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+
+interface DashboardProps {
+  vista: "hoy" | "semana";
+  usuario: Usuario;
+  plan: PlanSemanal | null;
+  tareas: Tarea[];
+  analisis: AnalisisTarea[];
+  clases: Clase[];
+  semana: string;
+  ahora: string;
+  offsetMin: number;
+}
+
+export function Dashboard({ vista, usuario, plan: planInicial, tareas: tareasIniciales, analisis: analisisInicial, clases: clasesIniciales, semana: semanaInicial, ahora: ahoraInicial, offsetMin }: DashboardProps) {
   const t = useTranslations("estudiante");
   const locale = useLocale();
   const tm = useTranslations("mascota.hoy");
-  const [semana, setSemana] = useState(() => format(startOfWeek(new Date(), { weekStartsOn: 1 }), "yyyy-MM-dd"));
-  const [plan, setPlan] = useState<PlanSemanal | null>(null);
-  const [tareas, setTareas] = useState<Tarea[]>([]);
-  const [analisis, setAnalisis] = useState<AnalisisTarea[]>([]);
-  const [clases, setClases] = useState<Clase[]>([]);
-  const [cargando, setCargando] = useState(true);
+  const [semana, setSemana] = useState(semanaInicial);
+  const [semanaPendiente, setSemanaPendiente] = useState(semanaInicial);
+  const [plan, setPlan] = useState<PlanSemanal | null>(planInicial);
+  const [tareas] = useState<Tarea[]>(tareasIniciales);
+  const [analisis] = useState<AnalisisTarea[]>(analisisInicial);
+  const [clases] = useState<Clase[]>(clasesIniciales);
+  const [cargando, setCargando] = useState(planInicial === null);
   const [error, setError] = useState(false);
-  const [intento, setIntento] = useState(0);
   const [ocupado, setOcupado] = useState(false);
   const [cerrados, setCerrados] = useState<string[]>([]);
   const refHoy = useRef<HTMLElement | null>(null);
-  // En Semana (celular), mostrar primero el día de hoy.
+  const [ahora, setAhora] = useState(ahoraInicial);
+
+  useEffect(() => {
+    const reloj = setInterval(() => setAhora(new Date().toISOString()), 60_000);
+    return () => clearInterval(reloj);
+  }, []);
+
+  useEffect(() => {
+    if (planInicial !== null) return;
+    let activo = true;
+    obtenerPlan(semanaInicial)
+      .then((p) => { if (activo) setPlan(p); })
+      .catch(() => { if (activo) setError(true); })
+      .finally(() => { if (activo) setCargando(false); });
+    return () => { activo = false; };
+  }, [planInicial, semanaInicial]);
+
   useEffect(() => {
     if (vista === "semana" && !cargando) refHoy.current?.scrollIntoView({ block: "nearest", inline: "start" });
   }, [vista, cargando]);
-  useEffect(() => {
-    let activo = true;
-    Promise.all([obtenerPlan(semana), listarTareas(), listarAnalisis(usuario.id), listarClases()])
-      .then(([p, ts, a, cs]) => {
-        if (activo) {
-          setPlan(p);
-          setTareas(ts);
-          setAnalisis(a);
-          setClases(cs);
-          setError(false);
-        }
-      })
-      .catch(() => {
-        if (activo) setError(true);
-      })
-      .finally(() => {
-        if (activo) setCargando(false);
-      });
-    return () => {
-      activo = false;
-    };
-  }, [semana, usuario.id, intento]);
+
+  async function cargarSemana(nuevaSemana: string) {
+    setSemanaPendiente(nuevaSemana);
+    setCargando(true);
+    setError(false);
+    try {
+      const nuevoPlan = await obtenerPlan(nuevaSemana);
+      setPlan(nuevoPlan);
+      setSemana(nuevaSemana);
+      setCerrados([]);
+    } catch {
+      setError(true);
+    } finally {
+      setCargando(false);
+    }
+  }
+
   async function reorganizar() {
     setOcupado(true);
     setError(false);
@@ -63,6 +93,15 @@ export function Dashboard({ vista, usuario }: { vista: "hoy" | "semana"; usuario
       setOcupado(false);
     }
   }
+
+  function mover(n: number) {
+    const base = new Date(`${semana}T12:00:00`);
+    base.setDate(base.getDate() + n * 7);
+    const lunes = new Date(base);
+    lunes.setDate(lunes.getDate() - ((lunes.getDay() + 6) % 7));
+    void cargarSemana(isoFecha(lunes));
+  }
+
   async function cambiar(b: BloquePlan, estado: EstadoBloque) {
     setOcupado(true);
     setError(false);
@@ -75,20 +114,17 @@ export function Dashboard({ vista, usuario }: { vista: "hoy" | "semana"; usuario
       setOcupado(false);
     }
   }
-  function mover(n: number) {
-    setCargando(true);
-    setSemana(format(addDays(new Date(`${semana}T12:00:00`), n * 7), "yyyy-MM-dd"));
-  }
-  const hoy = new Date();
-  const inicioHoy = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
+
+  const hoy = new Date(ahora);
+  const diaHoy = diaCentro(hoy, offsetMin);
   const bloques = [...(plan?.bloques ?? [])].sort((a, b) => a.inicio.localeCompare(b.inicio));
   const proximo = bloques.find((b) => b.estado === "planificado" && new Date(b.fin) > hoy);
-  const delDia = (d: Date) => bloques.filter((b) => isSameDay(new Date(b.inicio), d));
+  const delDia = (dia: string) => bloques.filter((b) => diaCentro(b.inicio, offsetMin) === dia);
   const proximasEntregas = [...tareas]
-    .filter((ta) => new Date(ta.fecha_entrega) >= inicioHoy)
+    .filter((ta) => diaCentro(ta.fecha_entrega, offsetMin) >= diaHoy)
     .sort((a, b) => a.fecha_entrega.localeCompare(b.fecha_entrega))
     .slice(0, 6);
-  const hora = (iso: string) => new Date(iso).toLocaleTimeString(locale, { hour: "2-digit", minute: "2-digit" });
+  const hora = (iso: string) => formatearCentro(iso, locale, { hour: "2-digit", minute: "2-digit" }, offsetMin);
   const minutos = (b: BloquePlan) => Math.round((Date.parse(b.fin) - Date.parse(b.inicio)) / 60000);
   const materiaDe = (tareaId: string) => clases.find((c) => c.id === tareas.find((x) => x.id === tareaId)?.clase_id)?.materia;
   const tarjeta = (ta: Tarea) => (
@@ -97,10 +133,10 @@ export function Dashboard({ vista, usuario }: { vista: "hoy" | "semana"; usuario
       tarea={ta}
       analisis={analisis.find((a) => a.tarea_id === ta.id)}
       materia={clases.find((c) => c.id === ta.clase_id)?.materia}
+      offsetMin={offsetMin}
     />
   );
 
-  /** Una fila del horario: hora a la izquierda, bloque a la derecha (como el horario de clases). */
   function fila(b: BloquePlan) {
     const hecho = b.estado === "hecho";
     const omitido = b.estado === "omitido";
@@ -153,8 +189,9 @@ export function Dashboard({ vista, usuario }: { vista: "hoy" | "semana"; usuario
 
   const conversar = proximo ? `/estudiante/tarea/${proximo.tarea_id}/conversar` : undefined;
   const mensajeMascota = proximo ? tm("conProximo", { titulo: proximo.titulo }) : tm("sinPendientes");
+
   return (
-    <ConMascota expresion={proximo ? "hola" : "lograste"} mensaje={mensajeMascota} hrefConversar={conversar}>
+    <div className="min-w-0 lg:grid lg:grid-cols-[minmax(0,1fr)_16rem] lg:gap-8">
       <div className="min-w-0 space-y-8">
         <header className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div className="flex items-end gap-3">
@@ -176,10 +213,7 @@ export function Dashboard({ vista, usuario }: { vista: "hoy" | "semana"; usuario
             <Button
               variante="secundario"
               tamano="sm"
-              onClick={() => {
-                setCargando(true);
-                setIntento((i) => i + 1);
-              }}
+              onClick={() => void cargarSemana(semanaPendiente)}
             >
               {t("reintentar")}
             </Button>
@@ -218,7 +252,7 @@ export function Dashboard({ vista, usuario }: { vista: "hoy" | "semana"; usuario
 
             {!tareas.length && (
               <Card className="papel flex flex-col items-center gap-2 text-center text-lg">
-                <Mascota expresion="lograste" className="size-24" />
+                <MascotaBoton expresion="lograste" className="size-24" />
                 {t("vacio")}
               </Card>
             )}
@@ -236,9 +270,9 @@ export function Dashboard({ vista, usuario }: { vista: "hoy" | "semana"; usuario
                         <span className="resaltado">{proximo.titulo}</span>
                       </p>
                       <p className="mt-2 text-tinta-suave tabular-nums">
-                        {isSameDay(new Date(proximo.inicio), hoy)
+                        {diaCentro(proximo.inicio, offsetMin) === diaHoy
                           ? ""
-                          : `${new Date(proximo.inicio).toLocaleDateString(locale, { weekday: "long" })}, `}
+                          : `${formatearCentro(proximo.inicio, locale, { weekday: "long" }, offsetMin)}, `}
                         {hora(proximo.inicio)} – {hora(proximo.fin)} ({t("minutos", { n: minutos(proximo) })})
                       </p>
                       <div className="mt-4 flex flex-wrap gap-2">
@@ -262,8 +296,8 @@ export function Dashboard({ vista, usuario }: { vista: "hoy" | "semana"; usuario
                   <h2 id="titulo-bloques" className="text-2xl font-extrabold">
                     {t("bloques")}
                   </h2>
-                  {delDia(hoy).length ? (
-                    <ol className="mt-3 space-y-3">{delDia(hoy).map(fila)}</ol>
+                  {delDia(diaHoy).length ? (
+                    <ol className="mt-3 space-y-3">{delDia(diaHoy).map(fila)}</ol>
                   ) : (
                     <p className="mt-3 text-tinta-suave">{t("sinBloques")}</p>
                   )}
@@ -293,8 +327,9 @@ export function Dashboard({ vista, usuario }: { vista: "hoy" | "semana"; usuario
                   className="-mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-4 lg:mx-0 lg:grid lg:grid-cols-7 lg:px-0"
                 >
                   {Array.from({ length: 7 }, (_, i) => addDays(new Date(`${semana}T12:00:00`), i)).map((d) => {
-                    const esHoy = isSameDay(d, hoy);
-                    const entregasDia = tareas.filter((ta) => isSameDay(new Date(ta.fecha_entrega), d));
+                    const dia = isoFecha(d);
+                    const esHoy = dia === diaHoy;
+                    const entregasDia = tareas.filter((ta) => diaCentro(ta.fecha_entrega, offsetMin) === dia);
                     return (
                       <section
                         key={d.toISOString()}
@@ -304,7 +339,7 @@ export function Dashboard({ vista, usuario }: { vista: "hoy" | "semana"; usuario
                         <h2
                           className={`rounded-xl px-3 py-2 text-base font-extrabold capitalize ${esHoy ? "bg-tinta text-white" : "bg-superficie border-2 border-borde"}`}
                         >
-                          {d.toLocaleDateString(locale, { weekday: "long", day: "numeric" })}
+                          <time dateTime={isoFecha(d)}>{d.toLocaleDateString(locale, { weekday: "long", day: "numeric" })}</time>
                         </h2>
                         {entregasDia.map((ta) => (
                           <Link
@@ -315,7 +350,7 @@ export function Dashboard({ vista, usuario }: { vista: "hoy" | "semana"; usuario
                             {t("entregaDia", { titulo: ta.titulo })}
                           </Link>
                         ))}
-                        {delDia(d).map((b) => (
+                        {delDia(dia).map((b) => (
                           <Link
                             key={b.id}
                             href={enlaceDeBloque(b)}
@@ -325,7 +360,7 @@ export function Dashboard({ vista, usuario }: { vista: "hoy" | "semana"; usuario
                             {b.titulo}
                           </Link>
                         ))}
-                        {!delDia(d).length && !entregasDia.length && <p className="px-1 text-sm text-tinta-suave">{t("sinBloques")}</p>}
+                        {!delDia(dia).length && !entregasDia.length && <p className="px-1 text-sm text-tinta-suave">{t("sinBloques")}</p>}
                       </section>
                     );
                   })}
@@ -335,6 +370,9 @@ export function Dashboard({ vista, usuario }: { vista: "hoy" | "semana"; usuario
           </>
         )}
       </div>
-    </ConMascota>
+      <aside className="hidden lg:block">
+        <MascotaSidebar expresion={proximo ? "hola" : "lograste"} mensaje={mensajeMascota} hrefConversar={conversar} />
+      </aside>
+    </div>
   );
 }

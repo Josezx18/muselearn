@@ -27,6 +27,7 @@ Que `main` siempre compile y funcione, y que al final exista una demo desplegada
 |---|---|---|---|
 | 27 oct | t01-auth-clases | ✅ | sin conflictos; RLS → migración 0003 aplicada; script `seed:auth` agregado |
 | 27 oct | t03-motor-ia | ✅ | conflicto solo en PROGRESO.md; `ZONA_OFFSET_MIN` en .env.example; 0004 quita EXECUTE de anon a funciones RLS |
+| 30 oct | t20-rendimiento | ✅ | Integración local con validación SSR, entrega reactiva, fechas coherentes y mapa diferido; Lighthouse mediana 93/90/96, A11y 100; 245 unitarias y flujos afectados correctos; sin push. |
 
 ## Relevo del 30 oct — Codex
 - Ensayo posterior solicitado por José: 150 e2e correctas y 2 omitidas; guion de demo en escritorio/celular, tutor/evaluación reales (7 casos) y analizador real (3 casos en vivo) correctos. ENSAYO.md contiene el detalle y los límites; no se marca completo el ensayo físico ni el recorrido autenticado de producción.

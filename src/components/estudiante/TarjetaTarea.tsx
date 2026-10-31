@@ -2,10 +2,11 @@
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Dificultad } from "@/components/ui";
+import { formatearCentro } from "@/lib/fechas-centro";
 import type { Tarea, AnalisisTarea } from "@/types/contratos";
 
 /** Tarjeta de una tarea: materia, título, fecha de entrega y el análisis (dificultad, minutos, prioridad y por qué). */
-export function TarjetaTarea({ tarea, analisis, materia }: { tarea: Tarea; analisis?: AnalisisTarea; materia?: string }) {
+export function TarjetaTarea({ tarea, analisis, materia, offsetMin = -240 }: { tarea: Tarea; analisis?: AnalisisTarea; materia?: string; offsetMin?: number }) {
   const t = useTranslations("estudiante");
   const locale = useLocale();
   const fecha = new Date(tarea.fecha_entrega);
@@ -15,7 +16,7 @@ export function TarjetaTarea({ tarea, analisis, materia }: { tarea: Tarea; anali
       <div className="flex items-center justify-between gap-2">
         <p className="text-sm font-bold text-primario-fuerte">{materia ?? t("materia")}</p>
         <time dateTime={tarea.fecha_entrega} className={`rounded-full px-2.5 py-0.5 text-xs font-bold ${urgente ? "bg-peligro-claro text-peligro" : "bg-fondo text-tinta-suave"}`}>
-          {fecha.toLocaleDateString(locale, { weekday: "short", day: "numeric", month: "short" })}
+          {formatearCentro(fecha, locale, { weekday: "short", day: "numeric", month: "short" }, offsetMin)}
         </time>
       </div>
       <h3 className="text-lg font-bold leading-snug">

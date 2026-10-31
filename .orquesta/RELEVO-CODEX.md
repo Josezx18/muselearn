@@ -96,6 +96,7 @@ todos los criterios de tu ficha, sin preguntarme si continuar."
 - Las fichas en modo automático no hacen merge ni push; si una sesión pide permiso, José elige la opción 2.
 
 ## 7. Bitácora del integrador (agrega una línea por cambio, la más nueva arriba)
+- 2026-10-30 — Codex: T20 integrada localmente desde dbbee50 con correcciones de validación SSR/RLS, entrega reactiva, fechas, plan inicial y mapa diferido. Lint/typecheck, 245 unitarias y build OK; flujos afectados y accesibilidad comprobados. Lighthouse mediana5: Hoy 93/Tarea 90/Comprensión 96, A11y 100; muestras y límites en .orquesta/evidencia/T20. Sin push: producción sigue sin esta integración.
 - 2026-10-30 — Codex: materiales T08 preparados en docs/ENTREGA.md y docs/video/ (narración + SRT EN 2:55); README actualizado y capturas renovadas con mocks de main. T20 sigue corrigiéndose sin nuevo commit listo; no integrada. Falta video de José y ensayo físico/autenticado. Sin publicación ni push.
 - 2026-10-30 — Codex: T20 33e1e1c revisada y devuelta a OpenCode, no integrada: fetch relativo en servidor sin sesión, Semana/reintento sin recarga y 34 fallos axe declarados. Correcciones y ampliación mínima autorizada en ficha T20. main sin cambios de aplicación; sin push.
 - 2026-10-30 — Codex: ensayo automatizado completo, 150 e2e OK/2 omitidas con mocks; tutor/evaluación reales 7/7 y analizador 12/12 (incluye tres casos en vivo). Cinco páginas públicas de producción HTTP 200. ENSAYO.md actualizado con evidencia y límites; falta ensayo físico y persistencia autenticada. Sin push en esta ronda.

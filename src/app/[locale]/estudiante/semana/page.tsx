@@ -1,7 +1,8 @@
+import { obtenerDatosSemana, semanaActual } from "@/lib/server/data";
 import { Dashboard } from "@/components/estudiante/Dashboard";
-import { sesionEstudiante } from "@/components/estudiante/sesion";
-export default async function Pagina({ params }: PageProps<"/[locale]/estudiante/semana">) {
-  const { locale } = await params;
-  const usuario = await sesionEstudiante(locale);
-  return <Dashboard vista="semana" usuario={usuario} />;
+
+export default async function Pagina(): Promise<React.ReactElement> {
+  const semana = semanaActual();
+  const { usuario, plan, tareas, analisis, clases, ahora, offsetMin } = await obtenerDatosSemana(semana);
+  return <Dashboard vista="semana" usuario={usuario} plan={plan} tareas={tareas} analisis={analisis} clases={clases} semana={semana} ahora={ahora} offsetMin={offsetMin} />;
 }

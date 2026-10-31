@@ -10,8 +10,9 @@ async function pantalla(page: Page, info: TestInfo, nombre: string) {
   await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(0);
   if (process.env.DEMO_CAPTURAS === "true") {
     await mkdir("docs/capturas", { recursive: true });
+    if (nombre !== "10-comentario") await page.evaluate(() => window.scrollTo(0, 0));
     // En celular, conservar la vista real: una captura larga coloca la barra fija sobre el contenido.
-    await page.screenshot({ path: `docs/capturas/demo-${nombre}-${info.project.name === "celular" ? 390 : 1440}.png`, fullPage: info.project.name !== "celular" && nombre !== "10-comentario", animations: "disabled", scale: "css" });
+    await page.screenshot({ path: `docs/capturas/demo-${nombre}-${info.project.name === "celular" ? 390 : 1440}.png`, fullPage: info.project.name !== "celular" && nombre !== "10-comentario", animations: "disabled", scale: "css", style: "nextjs-portal { display: none !important; }" });
   }
 }
 
@@ -87,6 +88,9 @@ test("guion: crear con IA → organizar → voz → evidencia Classroom → expl
     await pantalla(page, info, "05-classroom-evidencia");
     await page.getByRole("button", { name: "Entregar", exact: true }).click();
     await expect(page.getByText("¡Tarea entregada correctamente!", { exact: true })).toBeVisible();
+    // La entrega debe actualizar la pantalla sin recargar: impedir un segundo envío y permitir verificar.
+    await expect(page.getByRole("button", { name: "Entregar", exact: true })).toHaveCount(0);
+    await expect(page.getByRole("link", { name: "Comprobar lo que aprendí", exact: true })).toBeVisible();
     // El mock de verificación contiene preguntas de ecuaciones, no de Arduino.
     // Corte explícito a la entrega de ecuaciones ya disponible; no fingir continuidad.
   });

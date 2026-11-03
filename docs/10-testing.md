@@ -8,9 +8,9 @@ Results below were measured on November 3, 2026, in the Windows T26 checkout bas
 |---|---|---|
 | Lint | `npm run lint` | Passed, exit 0 |
 | Unit suite | `npm test` | 267 passed, 10 skipped; 277 total across 40 files (39 passed, one skipped); 16.33 seconds |
-| Generated route types and TypeScript | `npm run typecheck` | Failed before TypeScript: Next type generation could not load the SWC native binding |
+| Generated route types and TypeScript | `npm run typecheck` | Passed on Linux (Node 22) at `3cede1d`. On the Windows T26 checkout it could not start: Next type generation could not load the SWC native binding |
 | E2E inventory | `npx playwright test --list` | 190 test instances in 19 files across desktop and mobile projects |
-| E2E run with mocks | `npm run e2e` with mock mode and isolated port | Web server failed to start because of the same SWC binding/cache problem; no browser tests executed |
+| E2E run with mocks | `npm run e2e` with mock mode | Linux, November 3 at `0d4bc4c`: 181 passed, 8 skipped (Google sign-in tests that need the feature flag), 1 failed ("an expired link explains what to do"), which passed when re-run alone; it is timing-sensitive under full-suite load. On the Windows T26 checkout the web server did not start (same SWC problem) |
 | RLS isolation | `npm run rls` | 214/214 passed, zero failures; local ephemeral PostgreSQL with all 15 migrations loaded |
 | Production build | Not run in this session | No new build result claimed |
 | Live model / physical audio / real Classroom | Not run in this session | No fresh result claimed |

@@ -66,7 +66,7 @@ sequenceDiagram
       API->>AI: Evaluate with checkable answer evidence
       API->>AI: Generate practice route
       Note over API,AI: Use a basic route if practice generation fails
-      API->>DB: Upsert report and route; complete session
+      API->>DB: Upsert report and route, complete session
       API-->>S: Understanding report
     end
   end

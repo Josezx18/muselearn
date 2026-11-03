@@ -3,7 +3,7 @@ import { BotonExportar } from "@/lib/exportar/BotonExportar";
 
 import { useEffect, useState, type FormEvent } from "react";
 import { useTranslations } from "next-intl";
-import { useRouter } from "@/i18n/navigation";
+import { Link, useRouter } from "@/i18n/navigation";
 import { Button, Card, Dialog, Input, Skeleton, Tabs, useToast } from "@/components/ui";
 import { ListaTareas } from "@/components/tareas";
 import { borrarClase, cambiarCodigoClase, editarClase, listarEstudiantes, listarTareas, quitarEstudiante } from "@/lib/api-cliente";
@@ -226,7 +226,7 @@ function ListaEstudiantes({ claseId }: { claseId: string }) {
         <ul className="grid gap-2">
           {lista.map((u) => (
             <li key={u.id} className="flex items-center justify-between gap-3 rounded-xl border-2 border-borde bg-superficie p-3">
-              <span className="flex min-w-0 items-center gap-3">
+              <Link href={`/docente/clases/${claseId}/estudiantes/${u.id}`} className="flex min-h-11 min-w-0 items-center gap-3 rounded-lg text-primario-fuerte underline-offset-4 hover:underline focus-visible:outline-2">
                 <span
                   aria-hidden
                   className="grid size-9 shrink-0 place-items-center rounded-full bg-primario-claro font-bold text-primario-fuerte"
@@ -234,7 +234,7 @@ function ListaEstudiantes({ claseId }: { claseId: string }) {
                   {u.nombre.charAt(0).toUpperCase()}
                 </span>
                 <span className="truncate font-bold">{u.nombre}</span>
-              </span>
+              </Link>
               <Button variante="fantasma" tamano="sm" onClick={() => setQuitando(u)}>
                 {t("estudiantes.quitar")}
               </Button>

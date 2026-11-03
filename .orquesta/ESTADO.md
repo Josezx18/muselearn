@@ -28,6 +28,8 @@ Estados: ⬜ sin empezar · 🟦 trabajando · 🟨 bloqueado · ✅ integrada
 | T19 | Arreglos del ensayo | Codex | t19-ensayo | 🟨 | Sin fallos funcionales confirmados en el ensayo automatizado; falta ensayo físico y persistencia autenticada. |
 | T20 | Rendimiento móvil | OpenCode + T07 | t20-rendimiento | ✅ | Integrada localmente con correcciones T07. Medianas Lighthouse: Hoy 93 / Tarea 90 / Comprensión 96; A11y 100. 245 unitarias y flujos afectados verificados. Sin publicar. |
 
+| T22 | Perfil del estudiante | Codex | t22-perfil-estudiante | 🟩 lista para integrar | Perfil por clase con sesión/RLS, resumen e historial es/en; lint/tipos, 247 unitarias y 6 e2e OK. Sin push. |
+
 ## Cierre del hackathon
 
 Sigue `.orquesta/CIERRE-HACKATHON.md`: ensayo real → criterios concretos en T19/T20 → revisión e integración → segundo ensayo → congelar el 3 nov → entregar el 4 nov.

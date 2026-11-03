@@ -1,7 +1,7 @@
 import { createServerClient } from "@supabase/ssr";
 import { createClient } from "@supabase/supabase-js";
 import { cookies } from "next/headers";
-import { configSupabase } from "./config";
+import { configSupabase, OPCIONES_COOKIE_SESION } from "./config";
 
 // Cliente de Supabase con la sesión del usuario (Server Components, Route Handlers, Server Actions).
 // Respeta RLS: el usuario solo ve lo que sus políticas permiten.
@@ -11,6 +11,7 @@ export async function crearClienteServidor() {
   const almacen = await cookies();
 
   return createServerClient(config.url, config.clave, {
+    cookieOptions: OPCIONES_COOKIE_SESION,
     cookies: {
       getAll() {
         return almacen.getAll();

@@ -28,7 +28,7 @@ Built for the **Meta AI Developer Hackathon 2026**, Indie track, theme *Build fo
 - [Demo data](#demo-data)
 - [Testing](#testing)
 - [Project structure](#project-structure)
-- [Privacy and security](#privacy-and-security)
+- [Privacy and security](#privacy-and-security) ([security policy](SECURITY.md))
 - [How it was built](#how-it-was-built)
 - [License](#license)
 
@@ -199,6 +199,7 @@ docs/                  project documentation and screenshots
 - Verification audio is transcribed in memory and is not stored.
 - Daily AI limits per account protect the model credits of a public demo.
 - Users can download all their data and delete their account from *Settings → Privacy and data*.
+- Session cookies are HttpOnly, data-changing API requests from other sites are rejected, and security headers block framing. See [`SECURITY.md`](SECURITY.md) to report a problem.
 
 ## How it was built
 

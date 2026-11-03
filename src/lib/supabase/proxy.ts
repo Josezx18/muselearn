@@ -1,6 +1,6 @@
 import { createServerClient } from "@supabase/ssr";
 import type { NextRequest, NextResponse } from "next/server";
-import { configSupabase } from "./config";
+import { configSupabase, OPCIONES_COOKIE_SESION } from "./config";
 
 // Refresca la sesión de Supabase en cada petición y copia las cookies a la respuesta.
 // Devuelve el usuario (o null) para que el proxy pueda proteger rutas (T01 agrega las reglas por rol).
@@ -9,6 +9,7 @@ export async function refrescarSesion(peticion: NextRequest, respuesta: NextResp
   if (!config) return { usuario: null };
 
   const supabase = createServerClient(config.url, config.clave, {
+    cookieOptions: OPCIONES_COOKIE_SESION,
     cookies: {
       getAll() {
         return peticion.cookies.getAll();

@@ -2,6 +2,7 @@ import createIntlMiddleware from "next-intl/middleware";
 import { NextResponse, type NextRequest } from "next/server";
 import { routing } from "./i18n/routing";
 import { refrescarSesion, rutaDeRedireccion } from "./lib/supabase/proxy";
+import { origenPermitido } from "./lib/seguridad/origen";
 
 // Next.js 16: este archivo reemplaza a middleware.ts.
 // 1) next-intl agrega el idioma a la URL (/ → /es).  2) Supabase refresca la sesión.
@@ -9,6 +10,14 @@ import { refrescarSesion, rutaDeRedireccion } from "./lib/supabase/proxy";
 const intl = createIntlMiddleware(routing);
 
 export default async function proxy(peticion: NextRequest) {
+  // API: solo la protección CSRF (cada ruta comprueba su sesión). Sin idioma ni redirecciones.
+  if (peticion.nextUrl.pathname.startsWith("/api/")) {
+    if (origenPermitido(peticion.method, peticion.headers)) return NextResponse.next();
+    return NextResponse.json(
+      { error: { codigo: "origen_no_permitido", mensaje: "Petición rechazada: no viene de MuseLearn." } },
+      { status: 403 },
+    );
+  }
   const respuesta = intl(peticion);
   const { usuario } = await refrescarSesion(peticion, respuesta);
 
@@ -28,5 +37,6 @@ export default async function proxy(peticion: NextRequest) {
 
 export const config = {
   // Todo excepto API, archivos internos de Next y archivos con extensión.
-  matcher: ["/((?!api|_next|_vercel|.*\\..*).*)"],
+  // Páginas (todo excepto API, archivos internos de Next y archivos con extensión) y la API (solo CSRF).
+  matcher: ["/api/:path*", "/((?!api|_next|_vercel|.*\\..*).*)"],
 };

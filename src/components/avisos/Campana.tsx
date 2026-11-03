@@ -91,7 +91,8 @@ export function Campana() {
       }
     }
     setAbierto(false);
-    router.push(aviso.enlace);
+    // Solo rutas internas de la app ("/docente/…"): nunca otra web ni "//dominio".
+    if (/^\/(?![\/\\])/.test(aviso.enlace)) router.push(aviso.enlace);
   };
 
   const manejarMarcarTodosLeidos = async () => {

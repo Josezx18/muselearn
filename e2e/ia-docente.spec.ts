@@ -41,3 +41,13 @@ test("el docente pide un borrador de comentario, lo edita y lo envía", async ({
   await page.getByRole("button", { name: "Actualizar", exact: true }).click();
   await expect(page.getByText("Comentario enviado.", { exact: true })).toBeVisible();
 });
+
+test("las tareas se filtran por clase y muestran cuáles se hicieron con IA", async ({ page }) => {
+  await page.goto("/es/docente/tareas");
+  const selector = page.getByLabel("Clase");
+  await selector.selectOption({ label: "Tecnología 4to B" });
+  await expect(page.getByRole("heading", { name: "Semáforo con Arduino" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Repaso de fracciones" })).toHaveCount(0);
+  await selector.selectOption({ label: "Matemática 4to A" });
+  await expect(page.getByText("Creada con IA")).toBeVisible();
+});

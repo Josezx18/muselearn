@@ -47,6 +47,9 @@ export const EnlaceExterno = z
   .max(500)
   .regex(/^https?:\/\//i, "enlace_invalido");
 
+/** De dónde salió la tarea; null = creada a mano. */
+export const OrigenTarea = z.enum(["ia", "repaso_ia", "classroom"]);
+
 export const Tarea = z.object({
   id: z.string().uuid(),
   clase_id: z.string().uuid(),
@@ -58,6 +61,7 @@ export const Tarea = z.object({
   nivel_ayuda: NivelAyuda.default("pistas"),
   modalidad: Modalidad.default("muselearn"),
   enlace_externo: EnlaceExterno.nullable().default(null), // Classroom, Moodle, Teams…
+  origen: OrigenTarea.nullable().default(null),
   creada_en: FechaHora,
 });
 
@@ -317,6 +321,7 @@ export type DetalleEntrega = z.infer<typeof DetalleEntrega>;
 export type ComentarioDocente = z.infer<typeof ComentarioDocente>;
 export type PedidoPropuestaTarea = z.infer<typeof PedidoPropuestaTarea>;
 export type PropuestaTarea = z.infer<typeof PropuestaTarea>;
+export type OrigenTarea = z.infer<typeof OrigenTarea>;
 export type SugerenciaRepaso = z.infer<typeof SugerenciaRepaso>;
 export type BorradorComentario = z.infer<typeof BorradorComentario>;
 

@@ -143,5 +143,15 @@
       "classroom": "El estudiante la entrega en Classroom y aquí sube una evidencia y marca que ya la entregó. Así puede hacer la verificación.",
       "otra": "Moodle, Teams u otra: el estudiante la entrega allá y aquí sube una evidencia y marca que ya la entregó."
     }
+  },
+  "origen": {
+    "ia": "Creada con IA",
+    "repaso_ia": "Repaso con IA",
+    "classroom": "De Classroom"
+  },
+  "filtro": {
+    "clase": "Clase",
+    "todas": "Todas las clases",
+    "vacio": "Esta clase todavía no tiene tareas."
   }
 }

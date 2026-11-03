@@ -36,6 +36,7 @@ const tarea = (n: number, fecha: string): Tarea => ({
   nivel_ayuda: "pistas",
   modalidad: "muselearn",
   enlace_externo: null,
+    origen: null,
   creada_en: "2026-10-01T00:00:00Z",
 });
 const T1 = tarea(1, "2026-10-20T00:00:00Z"); // vencida

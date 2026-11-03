@@ -7,6 +7,7 @@ import { Button, Card, Badge, Skeleton } from "@/components/ui";
 import { crearTarea, listarTareas, subirAdjuntoTarea, type NuevaTarea } from "@/lib/api-cliente";
 import type { Tarea } from "@/types/contratos";
 import { FormularioTarea } from "./FormularioTarea";
+import { OrigenTarea } from "./OrigenTarea";
 
 interface ListaTareasProps {
   claseId: string;
@@ -95,6 +96,7 @@ export function ListaTareas({ claseId }: ListaTareasProps) {
           <li key={tarea.id}>
             <Card className="flex h-full flex-col gap-3">
               <div>
+                <OrigenTarea origen={tarea.origen} />
                 <h3 className="text-lg font-semibold">{tarea.titulo}</h3>
                 <p className="text-sm text-tinta-suave">
                   {t("detalle.fechaEntrega")} {formato.dateTime(new Date(tarea.fecha_entrega), { dateStyle: "medium", timeStyle: "short" })}

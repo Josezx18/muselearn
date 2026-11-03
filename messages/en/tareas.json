@@ -143,5 +143,15 @@
       "classroom": "The student hands it in on Classroom, then uploads evidence here and marks it as handed in, so they can do the comprehension check.",
       "otra": "Moodle, Teams or another: the student hands it in there, then uploads evidence here and marks it as handed in."
     }
+  },
+  "origen": {
+    "ia": "Made with AI",
+    "repaso_ia": "AI review",
+    "classroom": "From Classroom"
+  },
+  "filtro": {
+    "clase": "Class",
+    "todas": "All classes",
+    "vacio": "This class has no tasks yet."
   }
 }

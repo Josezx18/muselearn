@@ -17,6 +17,7 @@ export const tareasMock: Tarea[] = [
     nivel_ayuda: "pistas",
     modalidad: "muselearn",
     enlace_externo: null,
+    origen: null,
     creada_en: enSemana(-10, 8),
   },
   {
@@ -30,6 +31,7 @@ export const tareasMock: Tarea[] = [
     nivel_ayuda: "ejemplos",
     modalidad: "cuaderno",
     enlace_externo: null,
+    origen: null,
     creada_en: enSemana(0, 8, 30),
   },
   {
@@ -43,6 +45,7 @@ export const tareasMock: Tarea[] = [
     nivel_ayuda: "explicacion",
     modalidad: "classroom",
     enlace_externo: "https://classroom.google.com/",
+    origen: null,
     creada_en: enSemana(-10, 9),
   },
   {
@@ -56,6 +59,7 @@ export const tareasMock: Tarea[] = [
     nivel_ayuda: "pistas",
     modalidad: "muselearn",
     enlace_externo: null,
+    origen: null,
     creada_en: enSemana(0, 10),
   },
   {
@@ -69,6 +73,7 @@ export const tareasMock: Tarea[] = [
     nivel_ayuda: "pistas",
     modalidad: "muselearn",
     enlace_externo: null,
+    origen: null,
     creada_en: enSemana(0, 11),
   },
   {
@@ -82,6 +87,7 @@ export const tareasMock: Tarea[] = [
     nivel_ayuda: "explicacion",
     modalidad: "otra",
     enlace_externo: "https://www.tinkercad.com/",
+    origen: null,
     creada_en: enSemana(1, 9),
   },
   {
@@ -95,6 +101,7 @@ export const tareasMock: Tarea[] = [
     nivel_ayuda: "ejemplos",
     modalidad: "muselearn",
     enlace_externo: null,
+    origen: null,
     creada_en: enSemana(1, 10),
   },
   {
@@ -108,6 +115,7 @@ export const tareasMock: Tarea[] = [
     nivel_ayuda: "pistas",
     modalidad: "muselearn",
     enlace_externo: null,
+    origen: "ia",
     creada_en: enSemana(2, 8),
   },
 ];

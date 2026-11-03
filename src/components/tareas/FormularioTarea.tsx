@@ -30,6 +30,7 @@ export function FormularioTarea({ claseId, tareaExistente, alGuardar, alCancelar
   const [nivelAyuda, setNivelAyuda] = useState<NivelAyuda>(tareaExistente?.nivel_ayuda ?? "pistas");
   const [modalidad, setModalidad] = useState<Modalidad>(tareaExistente?.modalidad ?? "muselearn");
   const [enlace, setEnlace] = useState(tareaExistente?.enlace_externo ?? "");
+  const [origen, setOrigen] = useState(tareaExistente?.origen ?? null);
   const conEnlace = modalidad === "classroom" || modalidad === "otra";
   const [adjuntos, setAdjuntos] = useState<File[]>([]);
   const [adjuntosExistentes, setAdjuntosExistentes] = useState<Adjunto[]>(tareaExistente?.adjuntos ?? []);
@@ -82,6 +83,7 @@ export function FormularioTarea({ claseId, tareaExistente, alGuardar, alCancelar
     setInstrucciones(p.instrucciones);
     setCompetencias(p.competencias);
     setNivelAyuda(p.nivel_ayuda);
+    setOrigen("ia");
   }, []);
 
   const validar = useCallback(() => {
@@ -119,6 +121,7 @@ export function FormularioTarea({ claseId, tareaExistente, alGuardar, alCancelar
         nivel_ayuda: nivelAyuda,
         modalidad,
         enlace_externo: modalidad === "classroom" || modalidad === "otra" ? enlace.trim() || null : null,
+        origen,
         adjuntos: adjuntosExistentes,
       };
       await alGuardar(datos, adjuntos);

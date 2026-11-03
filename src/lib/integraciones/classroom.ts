@@ -254,6 +254,7 @@ export function tareaDesdeClassroom(t: TareaClassroom, claseId: string, ahora: D
     nivel_ayuda: "pistas" as const,
     modalidad: "classroom" as const,
     enlace_externo: enlaceSeguro(t.alternateLink),
+    origen: "classroom" as const,
     adjuntos: [],
   };
 }

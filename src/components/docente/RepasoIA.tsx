@@ -192,6 +192,7 @@ function AsignarActividad({
         fecha_entrega: new Date(fecha).toISOString(),
         modalidad: "muselearn",
         enlace_externo: null,
+        origen: "repaso_ia",
         adjuntos: [],
       });
       setTareaId(tarea.id);

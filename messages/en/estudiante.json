@@ -42,7 +42,7 @@
   "entregaDia": "Due: {titulo}",
   "clases": "My classes",
   "docente": "Teacher: {nombre}",
-  "tareasPendientes": "{n} pending tasks",
+  "tareasPendientes": "{n, plural, one {1 pending task} other {# pending tasks}}",
   "proximaEntrega": "Next delivery: {fecha}",
   "sinProximaEntrega": "No upcoming delivery",
   "volverAClases": "Back to classes",

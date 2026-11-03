@@ -42,7 +42,7 @@
   "entregaDia": "Se entrega: {titulo}",
   "clases": "Mis clases",
   "docente": "Docente: {nombre}",
-  "tareasPendientes": "{n} tareas pendientes",
+  "tareasPendientes": "{n, plural, one {1 tarea pendiente} other {# tareas pendientes}}",
   "proximaEntrega": "Próxima entrega: {fecha}",
   "sinProximaEntrega": "Sin próxima entrega",
   "volverAClases": "Volver a clases",

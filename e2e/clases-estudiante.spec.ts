@@ -15,8 +15,8 @@ test.describe("Mis clases (estudiante)", () => {
     await irAClases(page);
     await expect(page.getByRole("link", { name: /Matemática 4to A/ })).toBeVisible();
     await expect(page.getByRole("link", { name: /Tecnología 4to B/ })).toBeVisible();
-    await expect(page.getByText(/Prof\. Ana Rodríguez/)).toBeVisible();
-    await expect(page.getByText(/1 tareas pendientes/)).toBeVisible();
+    await expect(page.getByText(/Prof\. Ana Rodríguez/).first()).toBeVisible();
+    await expect(page.getByText(/1 tarea pendiente/)).toBeVisible();
     await expect(page.getByText(/2 tareas pendientes/)).toBeVisible();
   });
 

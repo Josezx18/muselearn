@@ -1,119 +1,139 @@
 # MuseLearn
 
-**An AI study companion that plans each student's week, tutors without doing the homework, and checks that the student really understood.**
+**An AI study companion for secondary school: it plans each student's week, tutors without doing the homework, and checks that the student really understood what they handed in.**
 
-**Live demo:** https://muselearn-five.vercel.app · demo accounts are listed in [`supabase/seed-auth.ts`](supabase/seed-auth.ts) (fictional data only).
+[![Live demo](https://img.shields.io/badge/demo-muselearn--five.vercel.app-1f6f5c)](https://muselearn-five.vercel.app)
+![Next.js 16](https://img.shields.io/badge/Next.js-16-black)
+![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178c6)
+![Supabase](https://img.shields.io/badge/Supabase-Postgres%20%2B%20RLS-3ecf8e)
+![Meta models](https://img.shields.io/badge/AI-Muse%20Spark%20%C2%B7%20Muse%20Voice-0866ff)
+[![License: MIT](https://img.shields.io/badge/license-MIT-yellow)](LICENSE)
 
-Built for the **Meta AI Developer Hackathon 2026** — Indie track, theme *Build for Your World*.
+**[Live demo](https://muselearn-five.vercel.app)** · **[How it works](https://muselearn-five.vercel.app/en/como-funciona)** ([español](https://muselearn-five.vercel.app/es/como-funciona)) · **[Documentation](docs/)**
+
+Built for the **Meta AI Developer Hackathon 2026**, Indie track, theme *Build for Your World*.
 
 > *Español:* MuseLearn es una plataforma para docentes y estudiantes de secundaria. La interfaz está en español e inglés.
 
 ![MuseLearn landing page: a notebook page with a handwritten equation and the question MuseLearn asks about line 2](docs/capturas/pc-portada.png)
 
----
+## Contents
 
-## Why
+- [The problem](#the-problem)
+- [What it does](#what-it-does)
+- [Screens](#screens)
+- [Built on Meta models](#built-on-meta-models)
+- [Architecture](#architecture)
+- [Run it locally](#run-it-locally)
+- [Demo data](#demo-data)
+- [Testing](#testing)
+- [Project structure](#project-structure)
+- [Privacy and security](#privacy-and-security)
+- [How it was built](#how-it-was-built)
+- [License](#license)
 
-I teach technology at a public secondary school in the Dominican Republic. My students juggle many subjects, and AI chatbots now make it easy to hand in work they don't understand. Teachers find out too late — at the exam.
+## The problem
 
-MuseLearn keeps the classroom flow teachers already know (classes, tasks, submissions) and adds an agent that works **for learning, not around it**.
+I teach technology at a public secondary school in the Dominican Republic. My students juggle many subjects, and AI chatbots now make it easy to hand in work they don't understand. Teachers find out too late, at the exam.
+
+MuseLearn keeps the classroom flow teachers already know (classes, tasks, submissions) and adds an agent that works **for learning, not around it**: every submission ends with the student explaining their own work, and the teacher sees *understood*, not just *submitted*.
 
 ## What it does
 
 | | For the student | For the teacher |
 |---|---|---|
-| **1. Plan** | Each new task is analyzed (difficulty, minutes, priority, concepts) and the week is re-planned around the student's real schedule. *Today* shows what to do now. | Sees which tasks will be hard for whom before the due date. |
-| **2. Tutor** | A Socratic tutor answers with questions and hints at the help level the teacher chose — it **never solves the task**. | Chooses the help level per task: hints, worked examples, or explanation. |
-| **3. Verify** | After submitting — including **photos of the handwritten notebook** — the student answers 3–5 short questions about *their own* work, by **voice** or text. | Gets a comprehension report per student and concept, not just "submitted". |
-| **4. Improve** | A personalized practice route of 2–6 steps for the weak concepts. | A **heatmap** (student × concept) with the concepts the class needs to review. |
-| **5. Teach** | Reads the teacher's comment on each submission. | **AI for the teacher:** drafts a full task from a topic, suggests a review plan from the heatmap (anonymous, aggregated data only), and drafts feedback for each submission that the teacher edits before sending. |
+| **Plan** | Each new task is analyzed (difficulty, minutes, priority, concepts) and the week is re-planned around the student's real schedule. *Today* shows what to do now; *Classes* shows every subject, its teacher and its tasks. | Sees which tasks will be hard for whom before the due date. Creates a full task from a topic with AI. |
+| **Tutor** | A Socratic tutor answers with questions and hints at the help level the teacher chose. It **never solves the task**. Text or voice conversation. | Chooses the help level per task: hints, worked examples, or explanation. |
+| **Verify** | After submitting, including **photos of the handwritten notebook**, the student answers 3–5 short questions about *their own* work, by **voice** (with a live waveform) or text. | Gets a notice when a student submits, and a comprehension report per student and concept. |
+| **Review** | Reads the teacher's comment, grade or request to correct. | Reviews submissions one after another, Classroom-style, with photos in a built-in viewer. **Review with AI** checks the work against the task's instructions and suggests a grade and comments; **Review all with AI** prepares every submission in one go. The teacher decides what is saved and sent. |
+| **Improve** | A personalized practice route of 2–6 steps for the weak concepts, which can be added to the week. A *Finish* button closes the task. | A class overview, a per-student profile (history, grades, understanding by concept) and a **heatmap** (student × concept). AI suggests review activities and turns them into practice tasks. |
 
-- **Classroom:** import courses, students and upcoming tasks; submit evidence in MuseLearn after handing work in on the external platform.
-- **Feedback and CSV:** optional grades, return for correction, teacher comments, and Excel-friendly exports of submissions and comprehension.
-- **Voice and notices:** voice or text answers, language/speed/pause preferences, and notices when the study plan changes.
-- **Privacy:** required policy acceptance, per-user access, data download and account deletion; voice audio is not stored.
+Also:
 
-Read [How it works (English)](https://muselearn-five.vercel.app/en/como-funciona) · [Cómo funciona (español)](https://muselearn-five.vercel.app/es/como-funciona).
+- **Works with the platforms schools already use:** a task can be done in MuseLearn, in the notebook, on Google Classroom or on another platform (Moodle, Teams…). Classroom import brings courses, students and upcoming tasks.
+- **Feedback and exports:** optional grades, return for correction, teacher comments, and Excel-friendly CSV exports of submissions and comprehension.
+- **Accounts:** email and password with recovery by email (Google sign-in is built and can be switched on), Spanish and English, light and dark themes.
+- **Privacy built in:** required policy acceptance, per-user access enforced in the database, data download and account deletion. Voice audio is not stored.
 
-### Screens
+## Screens
 
-**Student (390 px):** tap the companion to talk, provide evidence for a Classroom assignment, explain the work, and receive a practice path.
+**Student (390 px):** talk to the companion, provide evidence for a Classroom assignment, explain the work and receive a practice path.
 
 ![Voice conversation with the study companion](docs/capturas/demo-03-voz-390.png)
 
-**Teacher (1440 px):** create a task with AI, compare submission with demonstrated understanding, move from General to each student, and review AI-drafted feedback.
+**Teacher (1440 px):** compare submission with demonstrated understanding, move from the class overview to each student, and review AI-drafted feedback.
 
-![General view: 100 percent submitted and 42 percent demonstrated understanding](docs/capturas/demo-08-general-1440.png)
+![Class overview: 100 percent submitted and 42 percent demonstrated understanding](docs/capturas/demo-08-general-1440.png)
 
 | Scene | Desktop | Phone |
 |---|---|---|
-| Create with AI | [1440 px](docs/capturas/demo-01-crear-ia-1440.png) | [390 px](docs/capturas/demo-01-crear-ia-390.png) |
-| Socratic tutor | [1440 px](docs/capturas/demo-04-tutor-1440.png) | [390 px](docs/capturas/demo-04-tutor-390.png) |
+| Create a task with AI | [1440 px](docs/capturas/demo-01-crear-ia-1440.png) | [390 px](docs/capturas/demo-01-crear-ia-390.png) |
 | Today | [1440 px](docs/capturas/demo-02-hoy-1440.png) | [390 px](docs/capturas/demo-02-hoy-390.png) |
+| Socratic tutor | [1440 px](docs/capturas/demo-04-tutor-1440.png) | [390 px](docs/capturas/demo-04-tutor-390.png) |
 | Classroom evidence | [1440 px](docs/capturas/demo-05-classroom-evidencia-1440.png) | [390 px](docs/capturas/demo-05-classroom-evidencia-390.png) |
-| Explanation | [1440 px](docs/capturas/demo-06-verificacion-1440.png) | [390 px](docs/capturas/demo-06-verificacion-390.png) |
+| Explaining the work | [1440 px](docs/capturas/demo-06-verificacion-1440.png) | [390 px](docs/capturas/demo-06-verificacion-390.png) |
 | Report and practice | [1440 px](docs/capturas/demo-07-informe-1440.png) | [390 px](docs/capturas/demo-07-informe-390.png) |
 | Per student | [1440 px](docs/capturas/demo-09-estudiante-1440.png) | [390 px](docs/capturas/demo-09-estudiante-390.png) |
 | Reviewed feedback draft | [1440 px](docs/capturas/demo-10-comentario-1440.png) | [390 px](docs/capturas/demo-10-comentario-390.png) |
 
-*Captured October 30, 2026 with fictional data (`NEXT_PUBLIC_USAR_MOCKS=true`). Reports and AI replies are fixed mocks; voice input in the automated rehearsal is synthetic. Classroom submission is the student's confirmation, not a submission sent to Google. The automated desktop/phone rehearsal is in [`e2e/demo-guion.spec.ts`](e2e/demo-guion.spec.ts).*
+*Captured with fictional data in mock mode (`NEXT_PUBLIC_USAR_MOCKS=true`): reports and AI replies are fixed samples and voice input is synthetic. The automated desktop/phone walkthrough is [`e2e/demo-guion.spec.ts`](e2e/demo-guion.spec.ts).*
 
 ### Why it is not "another chatbot"
-- The agent acts on its own when something happens (new task, submission, missed study block) instead of waiting for a prompt.
+
+- The agent acts when something happens (a new task, a submission, a missed study block) instead of waiting for a prompt.
 - Its output is a **plan, a verification and a report**, not a chat transcript.
-- It reads the student's real work — including handwriting from notebook photos — and asks about specific steps ("in line 3 you wrote…").
+- It reads the student's real work, including handwriting from notebook photos, and asks about specific steps ("in line 3 you wrote…").
 
 ## Built on Meta models
 
-| Job | Model | Where |
+| Job | Model | Provider |
 |---|---|---|
-| Socratic tutor, comprehension questions, reading notebook photos, report and route | **Muse Spark 1.3** | Meta Model API |
-| Voice answers (speech to text, Spanish/English) | **Muse Voice Transcribe 1.0** | Meta Model API |
-| Batch task analysis and weekly planning | **Muse Spark Open** (open weights) | Baseten · Modal |
-| Fallback | **Muse Glimmer 30B** | NVIDIA |
+| Socratic tutor, comprehension questions, report, practice route, AI for the teacher | **Muse Spark 1.3** | Meta Model API (fallback: Muse Spark Open) |
+| Reading notebook photos, reviewing submissions with photos | **Muse Spark 1.3** (vision) | Meta Model API |
+| Voice answers (speech to text, Spanish and English) | **Muse Voice Transcribe 1.0** | Meta Model API |
+| Task analysis and weekly planning (batch) | **Muse Spark Open** (open weights) | Baseten (fallbacks: Meta Model API, NVIDIA) |
 
-Every call goes through one client (`src/lib/ia/cliente.ts`) that picks the provider per job, validates the JSON output against Zod schemas, retries once and falls back to the next provider.
+Every call goes through one client, [`src/lib/ia/cliente.ts`](src/lib/ia/cliente.ts), which picks the provider per job, validates the JSON output against Zod schemas, retries once and falls back to the next provider. Reading aloud uses the browser's own speech synthesis. Student data is never sent to Meta's *Contributor* tier.
 
-### Meta open-weight models
+## Architecture
 
-Task analysis and planning prefer the configured Muse Spark Open endpoint, with Baseten as the project's primary open-weight provider. `MODELO_ABIERTO_URL`, `MODELO_ABIERTO_ID` and the server-only `MODELO_ABIERTO_KEY` select that endpoint. If it is unavailable, the client tries its configured Meta API and NVIDIA fallbacks. The provider actually used is recorded in server logs; mock demonstrations do not call any provider.
+```mermaid
+flowchart LR
+  subgraph Browser["Browser (phone or PC)"]
+    UI["Next.js pages<br/>React 19 · next-intl es/en"]
+  end
+  subgraph Vercel["Vercel"]
+    SSR["Server components"]
+    API["API routes<br/>Zod validation · daily AI limits"]
+    IA["AI client<br/>provider routing + fallback"]
+  end
+  subgraph Supabase["Supabase"]
+    DB[("Postgres<br/>Row Level Security")]
+    AUTH["Auth"]
+    ST[("Private storage<br/>attachments, notebook photos")]
+  end
+  META["Meta Model API<br/>Muse Spark · Muse Voice"]
+  OPEN["Baseten<br/>Muse Spark Open"]
+  GC["Google Classroom API"]
 
-## Stack
+  UI --> SSR & API
+  SSR --> DB
+  API --> DB & AUTH & ST
+  API --> IA
+  IA --> META & OPEN
+  API --> GC
+```
 
-- **Next.js 16** (App Router, React 19) · TypeScript · Tailwind CSS 4 · `next-intl` (es/en)
-- **Supabase**: Postgres with Row Level Security, Auth and private attachment storage; voice transcription processes audio in memory without storing it
-- Vitest and Playwright for tests
-- Mobile-first: everything works at 380 px wide, so students can use their phones
+- **Next.js 16** (App Router, React 19), TypeScript (strict), Tailwind CSS 4, `next-intl` (Spanish and English).
+- **Supabase**: Postgres with Row Level Security on every table, Auth (email/password and Google), private storage for attachments.
+- Every API input and every AI output is validated with the shared Zod contracts in [`src/types/contratos.ts`](src/types/contratos.ts).
+- Mobile first: everything works at 360 px wide, so students can use their phones.
 
-## Status
-
-Work in progress during the hackathon (Oct 27 – Nov 4, 2026).
-
-- [x] Teacher and student accounts, roles, classes with a 6-character join code
-- [x] Tasks with attachments; submissions with text, files and notebook photos (compressed on the phone)
-- [x] AI task analysis and weekly planner with automatic re-planning
-- [x] Socratic tutor (streaming, respects the teacher's help level)
-- [x] Comprehension check by voice or text, with evidence quoted from the student's own answers
-- [x] Student dashboard (*Today*, *Week*, task page)
-- [x] Understanding report, practice route and teacher heatmap ("submitted" vs. "understood")
-- [x] "Add to my week": the practice route becomes study blocks (one step per day) that re-planning keeps
-- [x] Daily AI usage limits per account, so a public demo can't drain the model credits
-- [x] AI for the teacher: create a task with AI, review suggestions from the heatmap, feedback drafts
-- [x] Google Classroom import (test mode): bring a course and its students into MuseLearn
-- [x] Sign in with Google and password recovery by email
-- [x] Tasks can be done in MuseLearn, in the notebook, on Google Classroom or another platform (Moodle, Teams…): the student uploads evidence and still does the comprehension check
-- [x] Classroom import brings the course's upcoming tasks too, and students who join late get their pending tasks planned
-- [x] Privacy policy and Terms of use (Dominican Law 172-13), required acceptance, data download and account deletion
-- [x] Teacher comprehension panel with overview (by concept, by task, who needs support), per-student profile and heatmap
-- [ ] Notebook-photo reading tested with real handwriting
-- [x] Public deployment (Vercel)
-- [ ] Demo video
+Full design documentation (vision, requirements, use cases, architecture, diagrams, data model, API, security, testing, operations and user guide) is in **[`docs/`](docs/)**.
 
 ## Run it locally
 
-- `npm run rls` — tests RLS against an isolated local PostgreSQL cluster (requires PostgreSQL binaries in PATH or `RLS_PG_BIN`); see [instructions](supabase/pruebas-rls/README.md).
-
-Requirements: Node.js 22+, a Supabase project and a Meta Model API key.
+Requirements: Node.js 22+. For real data, a Supabase project and a Meta Model API key.
 
 ```bash
 npm install
@@ -121,74 +141,81 @@ cp .env.example .env.local      # fill in the keys (never committed)
 npm run dev                     # http://localhost:3000
 ```
 
-- **No keys yet?** Keep `NEXT_PUBLIC_USAR_MOCKS=true` in `.env.local` and the UI runs on sample data.
-- `npm run prueba:ia` — checks that each AI provider in `.env.local` answers.
-- `npm run seed:auth` — creates fictional demo users and a demo class; then run `supabase/seed-demo.sql` in the Supabase SQL Editor for demo tasks, submissions and reports.
-- `npm run e2e` — end-to-end tests of the demo flow (desktop and phone); set `NEXT_PUBLIC_USAR_MOCKS=true` in the test process and local server environment.
-- Database schema and RLS policies: `supabase/migrations/`.
-- `npm run lint`, `npm run typecheck`, `npm test`, `npm run build`.
+- **No keys yet?** Keep `NEXT_PUBLIC_USAR_MOCKS=true` in `.env.local` and the whole UI runs on sample data.
+- Database: apply the migrations in [`supabase/migrations/`](supabase/migrations/) in order (`0001` … `0015`).
+- `npm run prueba:ia` checks that each AI provider configured in `.env.local` answers.
 
-## Demo accounts and data
+## Demo data
 
-All names and work are invented. The shared dataset contains one teacher,
-twelve students and two classes: **Matemática 4to A** (`MAT4KQ`) and
-**Tecnología 4to B** (`TEC4ZR`). Every student is enrolled in both classes.
+All names and work are invented. The dataset has one teacher, twelve students and two classes, **Matemática 4to A** and **Tecnología 4to B**; every student is enrolled in both. Use `docente@muselearn.demo` for the teacher and `camila@muselearn.demo` for the student. The full roster is in [`supabase/demo/cuentas.json`](supabase/demo/cuentas.json).
 
-Use `docente@muselearn.demo` for the teacher and `camila@muselearn.demo` for
-the student in the script. Other student accounts are `luis`, `sofia`, `diego`,
-`valeria`, `yandel`, `alondra`, `dariel`, `nayeli`, `elian`, `kiara` and `jadiel`,
-all at `@muselearn.demo`. The full roster is in
-[`supabase/demo/cuentas.json`](supabase/demo/cuentas.json).
+To load it into a **dedicated** Supabase project:
 
-To load a **dedicated demo Supabase project** (the integrator runs these steps):
+1. Apply all migrations in order.
+2. In `.env.local`, set that project's `NEXT_PUBLIC_SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY`, and `DEMO_CONTRASENA` to a private password of at least 12 characters. There is no default password and the seed never prints it.
+3. Run `npm run seed:auth`, then execute [`supabase/seed-demo.sql`](supabase/seed-demo.sql) in that project's SQL Editor.
+4. Sign in with the accounts above and accept the terms on first sign-in.
 
-1. Apply all existing migrations in order, currently through `0011_proteger_identidad_entrega.sql`.
-2. Set that project's `NEXT_PUBLIC_SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY`
-   in `.env.local`. Set `DEMO_CONTRASENA` there to a private password of at least
-   12 characters. There is no default password and the seed never prints it.
-3. Run `npm run seed:auth`, then execute `supabase/seed-demo.sql` in the same
-   project's SQL Editor. Never run either seed against production.
-4. Sign in with the accounts above and the password from `.env.local`.
-   Accept the terms on first sign-in. Use `NEXT_PUBLIC_USAR_MOCKS=false` for this mode.
+Both seeds can be repeated safely: IDs are fixed, only the fictional accounts are touched, and dates follow the current week. After editing mock data, `node supabase/demo/generar.mjs` regenerates the SQL ([details](supabase/demo/PRUEBAS.md)).
 
-Both seeds can be repeated. IDs are fixed; occupied IDs/emails belonging to other
-accounts cause an error. The SQL transaction resets only the specified fictional
-submissions and their evidence; other accounts and classes remain untouched.
-Dates follow the current week in `America/Santo_Domingo`: overdue work, current
-week and next week. Camila has two study blocks each day and plans for both weeks.
-Mathematics includes levels 1–4, four students needing support, teacher comments,
-optional grades and Elian's returned submission for correction.
+## Testing
 
-Without keys, set `NEXT_PUBLIC_USAR_MOCKS=true`. The roster, tasks, overview,
-Camila's plan and initial grades use the same dataset. Reports and verification
-questions are selected per submission, teacher comments start from demo fixtures,
-and the planner selects the requested week. Generated AI replies remain fixed
-mocks, and newly created tasks do not persist across navigation in this mode.
+| Suite | Command | What it covers |
+|---|---|---|
+| Unit | `npm test` | 260+ Vitest tests: contracts, AI client routing and fallback, prompts, planner, verification flow, permissions of each endpoint |
+| End to end | `npm run e2e` | 170+ Playwright checks on desktop and phone viewports, in mock mode: the full demo flow, accessibility (axe), voice, review, exports |
+| Database security | `npm run rls` | 214 checks of Row Level Security against an isolated local PostgreSQL ([how to run](supabase/pruebas-rls/README.md)) |
+| Static | `npm run lint`, `npm run typecheck` | ESLint and strict TypeScript |
 
-For the currently hosted demo, José manages its fictional accounts separately.
-The dedicated-project setup
-above is the recommended local/test setup and does not authorize reseeding a
-shared production project.
+Run end-to-end tests with `NEXT_PUBLIC_USAR_MOCKS=true` so they never call a model or a real database.
 
-After editing mock data, run `node supabase/demo/generar.mjs` to regenerate the
-SQL and validation fixtures, then `npm run lint`, `npm run typecheck`, `npm test`.
-For the isolated PostgreSQL repeatability check, see
-[`supabase/demo/PRUEBAS.md`](supabase/demo/PRUEBAS.md).
+## Project structure
 
-## Privacy
+```
+src/
+  app/[locale]/        pages for teachers, students, sign-in and legal pages (es/en)
+  app/api/             API routes: classes, tasks, submissions, tutor, verification,
+                       reports, teacher AI, voice, notices, Classroom, profile
+  components/          UI by area (student, teacher, tasks, verification, reports, ui/)
+  lib/ia/              AI client, prompts, analyzer, planner, tutor, verifier, teacher AI
+  lib/db/              data access, limits, storage, notices (server only)
+  lib/integraciones/   Google Classroom
+  types/contratos.ts   shared Zod contracts for API and AI outputs
+messages/{es,en}/      interface text
+supabase/
+  migrations/          schema and RLS policies
+  demo/                fictional demo dataset and generator
+  pruebas-rls/         database security tests
+e2e/                   Playwright tests
+docs/                  project documentation and screenshots
+```
+
+## Privacy and security
 
 - Only fictional data in this repository and in the seeds.
-- Each student sees only their own work; teachers see only their own classes (enforced by RLS in the database, not just in the UI).
-- Verification audio is transcribed in memory and is not stored by MuseLearn.
-- Users can download all their data and delete their account from Settings → Privacy and data.
-- Student data is never sent to Meta's *Contributor* tier.
+- Each student sees only their own work and teachers see only their own classes. This is enforced by Row Level Security in the database, not just in the interface, and tested by `npm run rls`.
+- API keys live only on the server; the browser never receives them.
+- Uploaded files are private; teachers get short-lived signed links only for their own classes.
+- Verification audio is transcribed in memory and is not stored.
+- Daily AI limits per account protect the model credits of a public demo.
+- Users can download all their data and delete their account from *Settings → Privacy and data*.
 
 ## How it was built
 
-All product code was written during the hackathon build period, starting **October 27, 2026**. Architecture notes, task sheets and draft prompts were prepared before the build started; product code and subsequent changes can be checked in the Git history.
+All product code was written during the hackathon build period, starting **October 27, 2026**. Architecture notes, task sheets and draft prompts were prepared before the build started; the Git history records the implementation.
 
-I designed the architecture and the contracts (types, API and database schema) first, then built the pieces in parallel with AI coding agents (Claude Code, Codex, OpenCode), each working on its own branch with strict file ownership, and integrated and reviewed every piece myself. The project documentation (vision, requirements, architecture, data model, API, security and tests) is in [`docs/proyecto/`](docs/proyecto/). The original design notes, task sheets and agent prompts used during the build are preserved in the Git history, for example in [`.orquesta/` at commit 0edadd6](https://github.com/Josezx18/muselearn/tree/0edadd6/.orquesta).
+I designed the product, the architecture and the contracts (types, API and database schema) first. The pieces were then built in parallel by AI coding agents, each on its own branch with strict file ownership, following task sheets I wrote with them:
+
+- **Claude Code** (Anthropic): architecture and contracts, the first modules, integration and review of every branch, database migrations and deployment.
+- **Codex** (OpenAI): most of the features in the second half of the build, such as the tutor, verification and reports, grading, CSV export, voice, demo data, database security tests and the AI review of submissions.
+- **OpenCode**: interface work such as notices, accessibility, mobile performance and the students' *Classes* section.
+
+I directed the work, tested it with my own devices and approved every change before it was published. The original design notes, task sheets and agent prompts are preserved in the Git history, for example in [`.orquesta/` at commit 0edadd6](https://github.com/Josezx18/muselearn/tree/0edadd6/.orquesta).
+
+## License
+
+[MIT](LICENSE) © 2026 José Enrique Ulloa
 
 ## Author
 
-**José Enrique Ulloa** — technology teacher, Dominican Republic.
+**José Enrique Ulloa**, technology teacher, Dominican Republic · josejx18@gmail.com

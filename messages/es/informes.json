@@ -26,5 +26,7 @@
   "yaEstaba": "Esta ruta ya está en tu semana.",
   "sinUbicar": "{n, plural, one {1 paso no cupo} other {# pasos no cupieron}} en tus horas libres. Puedes ampliarlas en Semana.",
   "errorAgregar": "No pudimos agregarla a tu semana. Inténtalo de nuevo.",
-  "agregarAyuda": "Pondré un paso por día en tus horas libres, sin mover tus tareas."
+  "agregarAyuda": "Pondré un paso por día en tus horas libres, sin mover tus tareas.",
+  "terminar": "Terminar",
+  "completada": "¡Tarea completada!"
 }

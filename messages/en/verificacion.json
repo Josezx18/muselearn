@@ -23,7 +23,6 @@
     "callar": "Stop",
     "hablale": "Talk to the tutor"
   },
-  "volumen": "Volume: {n} %",
   "nivelMicrofono": "Microphone level",
   "permisoChrome": "Chrome Android: tap the icon beside the address → Permissions → Microphone → Allow. Also check Android Settings → Apps → Chrome → Permissions.",
   "permisoSafari": "Safari iOS: page menu → Website Settings → Microphone → Allow. Also check Settings → Apps → Safari → Microphone.",

@@ -8,6 +8,7 @@ import { Mascota } from "@/components/comun/mascotas/Mascota";
 import { grabarWav, transcribirConReintento } from "@/components/verificacion/wav";
 import { useVozSalida, leerPreferenciasVoz } from "@/lib/voz-salida";
 import { AJUSTES_TURNO, nuevoTurno, procesarNivel } from "@/lib/turno-voz";
+import { OndaVoz } from "@/components/verificacion/OndaVoz";
 
 type Estado = "inicio" | "escuchando" | "pensando" | "hablando" | "pausa";
 type Aviso = null | "silencio" | "noTeEscuche" | "sinMicrofono" | "error" | "limite";
@@ -209,7 +210,7 @@ export function ModoConversacion({ tareaId }: { tareaId: string }) {
           {textoEstado}
         </p>
 
-        {estado === "escuchando" && <label className="w-full max-w-xs">{t("volumen", {n: Math.min(100, Math.round(volumen * 500))})}<meter className="block w-full" min={0} max={100} value={Math.min(100, Math.round(volumen * 500))} aria-label={t("nivelMicrofono")} /></label>}
+        {estado === "escuchando" && <OndaVoz nivel={Math.min(1, volumen * 5)} etiqueta={t("nivelMicrofono")} />}
         {aviso === "sinMicrofono" && <div className="max-w-md text-sm"><p>{t("permisoChrome")}</p><p>{t("permisoSafari")}</p></div>}
         {estado === "pausa" && audioPendiente && <div className="grid gap-3">
           <p role="alert">{t("audioConservado")}</p>

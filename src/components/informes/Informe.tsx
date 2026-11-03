@@ -3,14 +3,16 @@ import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { agregarRutaASemana, obtenerInforme, type InformeConRuta } from "@/lib/api-cliente";
 import type { PracticaAgregada } from "@/types/contratos";
-import { Link } from "@/i18n/navigation";
-import { Card, Button, NivelDominio } from "@/components/ui";
+import { Link, useRouter } from "@/i18n/navigation";
+import { Card, Button, NivelDominio, useToast } from "@/components/ui";
 import { z } from "zod";
 import { ConMascota, MascotaBoton } from "@/components/comun/mascotas/ConMascota";
 type Datos = z.infer<typeof InformeConRuta>;
 export function Informe({ id }: { id: string }) {
   const t = useTranslations("informes");
   const tm = useTranslations("mascota.informe");
+  const router = useRouter();
+  const avisar = useToast();
   const [datos, setDatos] = useState<Datos | null>(null);
   const [error, setError] = useState(false);
   const [intento, setIntento] = useState(0);
@@ -172,9 +174,22 @@ export function Informe({ id }: { id: string }) {
               {agregada.sin_ubicar > 0 && <p className="mt-1 text-tinta-suave">{t("sinUbicar", { n: agregada.sin_ubicar })}</p>}
             </div>
           )}
-          <Link className="inline-flex min-h-11 items-center font-semibold text-primario underline" href="/estudiante/semana">
-            {t("semana")}
-          </Link>
+          <div className="flex flex-wrap items-center gap-3">
+            <Button
+              tamano="lg"
+              variante={ruta && !agregada ? "secundario" : "primario"}
+              className="w-full sm:w-auto"
+              onClick={() => {
+                avisar(t("completada"), "exito");
+                router.push("/estudiante/hoy");
+              }}
+            >
+              {t("terminar")}
+            </Button>
+            <Link className="inline-flex min-h-11 items-center font-semibold text-primario underline" href="/estudiante/semana">
+              {t("semana")}
+            </Link>
+          </div>
         </section>
       </div>
     </ConMascota>

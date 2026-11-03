@@ -4,6 +4,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { Button } from "@/components/ui";
 
 import { grabarWav, transcribirConReintento } from "./wav";
+import { OndaVoz } from "./OndaVoz";
 
 interface Reconocimiento {
   lang: string;
@@ -122,7 +123,7 @@ export function EntradaVoz({
   }
   return (
     <div className="flex flex-col gap-2">
-      {grabando && <label>{t("volumen", {n: Math.min(100, Math.round(volumen * 500))})}<meter className="block w-full" min={0} max={100} value={Math.min(100, Math.round(volumen * 500))} aria-label={t("nivelMicrofono")} /></label>}
+      {grabando && <OndaVoz nivel={Math.min(1, volumen * 5)} etiqueta={t("nivelMicrofono")} />}
       {disponible && (
         <button
           type="button"

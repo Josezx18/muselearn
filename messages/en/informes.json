@@ -26,5 +26,7 @@
   "yaEstaba": "This path is already in your week.",
   "sinUbicar": "{n, plural, one {1 step didn't fit} other {# steps didn't fit}} in your free hours. You can add more in Week.",
   "errorAgregar": "We couldn't add it to your week. Please try again.",
-  "agregarAyuda": "I'll place one step per day in your free hours, without moving your tasks."
+  "agregarAyuda": "I'll place one step per day in your free hours, without moving your tasks.",
+  "terminar": "Finish",
+  "completada": "Task completed!"
 }

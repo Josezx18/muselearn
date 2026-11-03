@@ -31,3 +31,23 @@ npm-debug.log*
 
 # Resultado local de scripts/windows/probar-claves.bat
 prueba-claves.log
+
+# Herramientas de trabajo locales (orquestación de agentes, guiones de Windows, notas internas de entrega).
+# Siguen en la PC de José y en el historial de Git, pero no forman parte de la app publicada.
+/.orquesta/
+/AGENTS.md
+/CLAUDE.md
+/PROGRESO.md
+/META.md
+/.claude/
+/.agents/
+/scripts/windows/
+/scripts/hooks/
+/scripts/git-hooks/
+/scripts/bucle-autonomo.sh
+/scripts/crear-worktrees.sh
+/scripts/instalar-kit.sh
+/scripts/muse-claude.sh
+/docs/ENTREGA.md
+/docs/PUBLICACION-X.md
+/docs/video/

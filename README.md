@@ -56,7 +56,7 @@ Read [How it works (English)](https://muselearn-five.vercel.app/en/como-funciona
 | Per student | [1440 px](docs/capturas/demo-09-estudiante-1440.png) | [390 px](docs/capturas/demo-09-estudiante-390.png) |
 | Reviewed feedback draft | [1440 px](docs/capturas/demo-10-comentario-1440.png) | [390 px](docs/capturas/demo-10-comentario-390.png) |
 
-*Captured October 30, 2026 with fictional data (`NEXT_PUBLIC_USAR_MOCKS=true`). Reports and AI replies are fixed mocks; voice input in the automated rehearsal is synthetic. Classroom submission is the student's confirmation, not a submission sent to Google. See the [2:55 script](.orquesta/DEMO.md), [English subtitles](docs/video/subtitulos-en.srt) and [desktop/phone rehearsal](e2e/demo-guion.spec.ts).*
+*Captured October 30, 2026 with fictional data (`NEXT_PUBLIC_USAR_MOCKS=true`). Reports and AI replies are fixed mocks; voice input in the automated rehearsal is synthetic. Classroom submission is the student's confirmation, not a submission sent to Google. The automated desktop/phone rehearsal is in [`e2e/demo-guion.spec.ts`](e2e/demo-guion.spec.ts).*
 
 ### Why it is not "another chatbot"
 - The agent acts on its own when something happens (new task, submission, missed study block) instead of waiting for a prompt.
@@ -165,8 +165,8 @@ questions are selected per submission, teacher comments start from demo fixtures
 and the planner selects the requested week. Generated AI replies remain fixed
 mocks, and newly created tasks do not persist across navigation in this mode.
 
-For the currently hosted demo, José manages its fictional accounts separately;
-see [the closing plan](.orquesta/CIERRE-HACKATHON.md). The dedicated-project setup
+For the currently hosted demo, José manages its fictional accounts separately.
+The dedicated-project setup
 above is the recommended local/test setup and does not authorize reseeding a
 shared production project.
 
@@ -187,7 +187,7 @@ For the isolated PostgreSQL repeatability check, see
 
 All product code was written during the hackathon build period, starting **October 27, 2026**. Architecture notes, task sheets and draft prompts were prepared before the build started; product code and subsequent changes can be checked in the Git history.
 
-I designed the architecture and the contracts (types, API and database schema) first, then built the pieces in parallel with AI coding agents (Claude Code, Codex, OpenCode), each working on its own branch with strict file ownership, and integrated and reviewed every piece myself. The design documents, task sheets and the prompts used by the app's own agents are in [`.orquesta/`](.orquesta/).
+I designed the architecture and the contracts (types, API and database schema) first, then built the pieces in parallel with AI coding agents (Claude Code, Codex, OpenCode), each working on its own branch with strict file ownership, and integrated and reviewed every piece myself. The project documentation (vision, requirements, architecture, data model, API, security and tests) is in [`docs/proyecto/`](docs/proyecto/). The original design notes, task sheets and agent prompts used during the build are preserved in the Git history, for example in [`.orquesta/` at commit 0edadd6](https://github.com/Josezx18/muselearn/tree/0edadd6/.orquesta).
 
 ## Author
 

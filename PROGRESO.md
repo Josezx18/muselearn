@@ -97,3 +97,9 @@ Formato: `- AAAA-MM-DD HH:MM [Txx] qué se hizo / qué falta / decisión tomada`
 - 2026-10-29 [T17] Ficha completa: nueva sesion tras corregir, rechazo 409 de sesiones anteriores y reemplazo del informe conservando recuperacion de cierres interrumpidos. Pruebas unitarias de inicio/cierre y selectores e2e de comentarios precargados. Lint/typecheck OK, 235 unitarias correctas (10 omitidas) y suite e2e completa: 82 correctas, 2 omitidas por Google desactivado. Capturas revisadas a 380/1280 px. Puerto 3001 aislado de T16; sin push ni merge.
 
 - 2026-10-30 [T20] Rendimiento movil y detalles visuales: fuentes con `next/font`; data fetching autenticado en servidor (`src/lib/server/data.ts`, RLS) para Hoy/Semana/Tarea/Comprension; contenido inicial en SSR y solo lo pesado diferido; navegacion semanal con lunes como inicio, reintento y e2e nuevo (`e2e/semana.spec.ts`); 34 target-size y contraste de `.aparece` corregidos. Lighthouse movil reproducible con build+start y mocks (`playwright.lighthouse.config.ts`): Hoy 92, Tarea 93, Comprension 88, Accessibility 100. lint/typecheck OK, 235 unitarias (10 omitidas), a11y 64/64 y semana 6/6. Sin push ni merge; rutas auxiliares para revisar en la ficha.
+
+- 2026-11-03 [T22] Ficha del estudiante desde la clase: carga servidor con sesión/RLS, propiedad e inscripción; resumen, puntualidad, promedio, comprensión por concepto, historial con notas/devolución/comentarios y enlaces. Textos es/en, 360 px sin desbordamiento; capturas 360/1280 revisadas y axe sin serious/critical. Lint/typecheck y 247 unitarias OK (10 omitidas); Playwright T22 6/6. Mocks y esquema vigente; sin prueba autenticada remota. Sin merge ni push.
+
+## Mejoras propuestas por T22
+- Considerar un registro de eventos de devolución si se necesita saber si una entrega fue devuelta antes de corregirse: el esquema actual conserva solo el estado vigente.
+- Para clases con muchas tareas, añadir filtros por periodo o paginación al historial.

@@ -29,6 +29,7 @@ Estados: ⬜ sin empezar · 🟦 trabajando · 🟨 bloqueado · 🟩 lista para
 | T20 | Rendimiento móvil | OpenCode + T07 | t20-rendimiento | ✅ | Integrada localmente con correcciones T07. Medianas Lighthouse: Hoy 93 / Tarea 90 / Comprensión 96; A11y 100. 245 unitarias y flujos afectados verificados. Sin publicar. |
 
 | T21 | Revisi?n de entregas con IA | Codex | t21-revision | ?? | Implementaci?n y pruebas en curso. |
+| T22 | Perfil del estudiante | Codex | t22-perfil-estudiante | 🟩 lista para integrar | Perfil por clase con sesión/RLS, resumen e historial es/en; lint/tipos, 247 unitarias y 6 e2e OK. Sin push. |
 
 ## Cierre del hackathon
 

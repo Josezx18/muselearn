@@ -164,5 +164,37 @@
     "verEntrega": "See submission"
   },
   "exportarError": "Could not download the CSV.",
-  "exportarComprension": "Download understanding (CSV)"
+  "exportarComprension": "Download understanding (CSV)",
+  "perfil": {
+    "volver": "Back to class",
+    "resumen": "Student summary",
+    "entregadas": "Submitted assignments / total",
+    "aTiempo": "On time",
+    "tarde": "Late",
+    "promedio": "Average grade",
+    "comprension": "Demonstrated understanding",
+    "actividad": "Last student activity",
+    "sinDato": "No data",
+    "base": "Understanding: assignments at level 3 or 4 out of all assignments in this class. Average: assigned grades only (0–100). Dates use the school time zone (Santo Domingo).",
+    "sinEntregas": "This student has no submissions in this class yet.",
+    "conceptos": "Understanding by concept",
+    "sinInformes": "No understanding report",
+    "historial": "Assignment history",
+    "sinTareas": "This class has no assignments yet.",
+    "estado": "Submission status",
+    "fecha": "Submission date",
+    "nota": "Grade",
+    "nivel": "Understanding level",
+    "devolucion": "Current return status",
+    "devuelta": "Returned for revision",
+    "noDevuelta": "No pending revision",
+    "comentario": "Teacher feedback",
+    "sinComentario": "No feedback",
+    "estados": {
+      "pendiente": "Pending",
+      "entregada": "Submitted",
+      "verificando": "Being verified",
+      "verificada": "Verified"
+    }
+  }
 }

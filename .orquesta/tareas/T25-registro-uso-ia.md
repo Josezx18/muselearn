@@ -4,7 +4,7 @@
 |---|---|
 | Plataforma | Codex |
 | Rama / carpeta | `t25-uso-ia` / `../MuseLearn-T25` |
-| Puedes tocar | `src/lib/ia/cliente.ts` (solo para registrar, sin cambiar rutas ni prompts), `src/lib/ia/cliente.test.ts`, `src/lib/ia/registro-uso.ts` (nuevo), `src/lib/ia/precios.ts` (nuevo), `src/lib/db/uso-ia.ts` (nuevo), `supabase/migrations/0016_uso_ia.sql` (nuevo), página nueva `src/app/[locale]/docente/uso-ia/page.tsx` y sus componentes en `src/components/uso-ia/`, `messages/{es,en}/uso-ia.json` (nuevo; regístralo en `src/i18n/espacios.ts`), `src/components/comun/MenuUsuario.tsx` (solo el enlace para admin), `.env.example` (solo las variables nuevas), `README.md` (solo una sección "Uso de la IA") |
+| Puedes tocar | `src/lib/ia/cliente.ts` (solo para registrar, sin cambiar rutas ni prompts), `src/lib/ia/cliente.test.ts`, `src/lib/ia/registro-uso.ts` (nuevo), `src/lib/ia/precios.ts` (nuevo), `src/lib/db/uso-ia.ts` (nuevo), `supabase/migrations/0016_uso_ia.sql` (nuevo), página nueva `src/app/[locale]/docente/uso-ia/page.tsx` y sus componentes en `src/components/uso-ia/`, `messages/{es,en}/uso-ia.json` (nuevo; regístralo en `src/i18n/espacios.ts`), `src/components/cuenta/MenuUsuario.tsx` (solo el enlace para admin), `.env.example` (solo las variables nuevas), `README.md` (solo una sección "Uso de la IA") |
 | No toques | prompts, `RUTAS`, `ESFUERZO_POR_DEFECTO`, contratos existentes, otras migraciones (la 0015 ya existe: `revisiones_ia`), `package.json` |
 
 ## Contexto

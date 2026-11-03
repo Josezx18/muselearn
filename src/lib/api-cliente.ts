@@ -559,3 +559,19 @@ export const marcarAvisosLeidos = (ids?: string[]) =>
     : pedir("/api/avisos/leidos", z.object({ ok: z.literal(true) }), { method: "POST", body: JSON.stringify({ ids }) });
 
 import { comentariosDemoMock } from "./mocks/devoluciones";
+
+// ---------------- T21: revisión de entregas ----------------
+import { PedidoRevisionEntrega, RevisionEntrega } from "@/types/contratos";
+import { revisionEntregaMock } from "./mocks/revision";
+export function revisarEntregaIA(entrega_id: string) {
+  const entrada = PedidoRevisionEntrega.parse({ entrega_id });
+  return usarMocks() ? mock(RevisionEntrega.parse(revisionEntregaMock), 900)
+    : pedir("/api/docente/ia/revision", RevisionEntrega, json(entrada));
+}
+
+import { fotoRevisionMock } from "./mocks/revision";
+export async function obtenerDetalleRevision(id: string) {
+  const detalle = await obtenerDetalleEntregaCalificada(id);
+  return usarMocks() && detalle.adjuntos.length === 0
+    ? DetalleEntrega.parse({ ...detalle, adjuntos: [fotoRevisionMock] }) : detalle;
+}

@@ -36,7 +36,8 @@
     "guardada": "Task updated. If you changed the date, your students' weeks are re-planned automatically.",
     "confirmarBorrar": "This deletes the task, its submissions, tutor conversations and reports. It cannot be undone.",
     "borrada": "Task deleted.",
-    "cancelar": "Cancel"
+    "cancelar": "Cancel",
+    "actualizarRevision": "Refresh submissions"
   },
   "entrega": {
     "titulo": "{nombre}'s submission",
@@ -97,5 +98,38 @@
     "error": "Could not load or save the grade.",
     "guardado": "Changes saved.",
     "reintentar": "Retry"
+  },
+  "revision": {
+    "anterior": "Previous",
+    "siguiente": "Next",
+    "sinCalificar": "Next ungraded",
+    "actualizar": "Refresh submissions",
+    "estudiantes": "Students",
+    "sinEntrega": "Not submitted",
+    "calificada": "Graded",
+    "devuelta": "Returned",
+    "entregada": "Submitted",
+    "verificada": "Verified",
+    "verificando": "Verifying",
+    "revisar": "Review with AI",
+    "pensando": "Reviewing…",
+    "aviso": "This is a suggestion: review it.",
+    "usarNota": "Use suggested grade",
+    "usarComentario": "Copy suggestions to comment",
+    "nota": "Suggested grade: {nota}/100",
+    "confianza": "Confidence: {valor}",
+    "alta": "high",
+    "media": "medium",
+    "baja": "low",
+    "si": "Meets requirements",
+    "parcial": "Partially meets requirements",
+    "no": "Does not meet requirements",
+    "no_se_puede": "Cannot evaluate",
+    "error": "Review failed. Try again.",
+    "limite": "You reached the daily AI limit.",
+    "zoom": "Fit / actual size",
+    "cerrarImagen": "Close image",
+    "visor": "Image viewer",
+    "estado": "Status: {estado}"
   }
 }

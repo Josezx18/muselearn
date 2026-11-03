@@ -2,7 +2,7 @@
 
 Actualizado por T07 el 30 oct de 2026. Las ramas T01–T18 figuran integradas en `main`, comprobado con `git branch --merged main`. Publicación y migraciones según el relevo; no se ha consultado producción.
 
-Estados: ⬜ sin empezar · 🟦 trabajando · 🟨 bloqueado · ✅ integrada
+Estados: ⬜ sin empezar · 🟦 trabajando · 🟨 bloqueado · 🟩 lista para integrar · ✅ integrada
 
 | Ficha | Pieza | Plataforma | Rama | Estado | Último avance / siguiente paso |
 |---|---|---|---|---|---|
@@ -27,6 +27,8 @@ Estados: ⬜ sin empezar · 🟦 trabajando · 🟨 bloqueado · ✅ integrada
 | T18 | Pruebas RLS | Codex | t18-rls | ✅ | H01 corregido con 0011; 214/214 RLS según relevo. |
 | T19 | Arreglos del ensayo | Codex | t19-ensayo | 🟨 | Sin fallos funcionales confirmados en el ensayo automatizado; falta ensayo físico y persistencia autenticada. |
 | T20 | Rendimiento móvil | OpenCode + T07 | t20-rendimiento | ✅ | Integrada localmente con correcciones T07. Medianas Lighthouse: Hoy 93 / Tarea 90 / Comprensión 96; A11y 100. 245 unitarias y flujos afectados verificados. Sin publicar. |
+
+| T21 | Revisi?n de entregas con IA | Codex | t21-revision | ?? | Implementaci?n y pruebas en curso. |
 
 ## Cierre del hackathon
 

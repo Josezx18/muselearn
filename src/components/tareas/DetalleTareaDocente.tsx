@@ -1,15 +1,15 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useFormatter, useTranslations } from "next-intl";
 import { Button, Card, Badge, Dialog, Skeleton, useToast } from "@/components/ui";
-import { borrarTarea, editarTarea, listarEntregasCalificadas, listarEstudiantes, subirAdjuntoTarea } from "@/lib/api-cliente";
+import { borrarTarea, editarTarea, listarEntregasCalificadas, listarEstudiantes, obtenerCalificacion, subirAdjuntoTarea } from "@/lib/api-cliente";
 import { useRouter } from "@/i18n/navigation";
 import { enlaceArchivo } from "@/lib/archivos";
 import { CalificacionEntrega } from "@/components/gestion/CalificacionEntrega";
 import { DialogoEntrega } from "@/components/gestion/DialogoEntrega";
 import { FormularioTarea } from "./FormularioTarea";
-import type { Tarea, Entrega, Usuario } from "@/types/contratos";
+import type { Tarea, Entrega, Usuario, Calificacion } from "@/types/contratos";
 
 interface DetalleTareaDocenteProps {
   tarea: Tarea;
@@ -30,25 +30,39 @@ export function DetalleTareaDocente({ tarea: inicial }: DetalleTareaDocenteProps
   const formato = useFormatter();
   const [entregas, setEntregas] = useState<Entrega[] | null>(null);
   const [estudiantes, setEstudiantes] = useState<Usuario[] | null>(null);
+  const [notas, setNotas] = useState<Record<string, Calificacion | null>>({});
   const [error, setError] = useState(false);
   const [cargando, setCargando] = useState(true);
 
+  const cargaActual = useRef(0);
   const cargar = useCallback(async () => {
+    const numero = ++cargaActual.current;
     try {
       const [ents, ests] = await Promise.all([listarEntregasCalificadas(tarea.id), listarEstudiantes(tarea.clase_id)]);
+      const registros = await Promise.all(ents.map(async (e) => [e.id, await obtenerCalificacion(e.id)] as const));
+      if (numero !== cargaActual.current) return;
+      setNotas(Object.fromEntries(registros));
       setEntregas(ents);
       setEstudiantes(ests);
       setError(false);
     } catch {
-      setError(true);
+      if (numero === cargaActual.current) setError(true);
     } finally {
-      setCargando(false);
+      if (numero === cargaActual.current) setCargando(false);
     }
   }, [tarea.id, tarea.clase_id]);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- carga inicial desde la API
     cargar();
+  }, [cargar]);
+
+  useEffect(() => {
+    const refrescar = () => { if (document.visibilityState === "visible") void cargar(); };
+    window.addEventListener("focus", refrescar);
+    document.addEventListener("visibilitychange", refrescar);
+    const intervalo = window.setInterval(refrescar, 30_000);
+    return () => { window.removeEventListener("focus", refrescar); document.removeEventListener("visibilitychange", refrescar); clearInterval(intervalo); };
   }, [cargar]);
 
   if (cargando) {
@@ -61,7 +75,7 @@ export function DetalleTareaDocente({ tarea: inicial }: DetalleTareaDocenteProps
     );
   }
 
-  if (error)
+  if (error && !entregas)
     return (
       <p role="alert" className="text-sm font-medium text-peligro">
         {t("lista.error")}
@@ -230,6 +244,8 @@ export function DetalleTareaDocente({ tarea: inicial }: DetalleTareaDocenteProps
       )}
 
       <div>
+        {error && <p role="alert">{t("lista.error")}</p>}
+        <Button variante="secundario" onClick={() => void cargar()}>{tg("actualizarRevision")}</Button>
         <h2 className="text-xl font-bold mb-3">
           {t("detalle.estudiantes")} ({filas.length})
         </h2>
@@ -256,7 +272,14 @@ export function DetalleTareaDocente({ tarea: inicial }: DetalleTareaDocenteProps
           </ul>
         )}
       </div>
-      <DialogoEntrega entregaId={abierta?.id ?? null} nombre={abierta?.nombre ?? ""} alCerrar={() => { setAbierta(null); void cargar(); }} />
+      <DialogoEntrega entregaId={abierta?.id ?? null} nombre={abierta?.nombre ?? ""}
+        filas={filas.map(({ estudiante, entrega }) => ({ id: estudiante.id, nombre: estudiante.nombre,
+          entregaId: entrega?.id ?? null, sinNota: !entrega || notas[entrega.id]?.nota == null,
+          estado: entrega && notas[entrega.id]?.devuelta ? "devuelta" : entrega && notas[entrega.id]?.nota != null ? "calificada" : !entrega || entrega.estado === "pendiente" ? "sinEntrega" : entrega.estado,
+        }))}
+        alSeleccionar={(fila) => fila.entregaId && setAbierta({ id: fila.entregaId, nombre: fila.nombre })}
+        alActualizar={() => void cargar()}
+        alCerrar={() => { setAbierta(null); void cargar(); }} />
     </div>
   );
 }

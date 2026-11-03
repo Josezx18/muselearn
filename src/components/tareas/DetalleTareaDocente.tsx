@@ -3,13 +3,13 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useFormatter, useTranslations } from "next-intl";
 import { Button, Card, Badge, Dialog, Skeleton, useToast } from "@/components/ui";
-import { borrarTarea, editarTarea, listarEntregasCalificadas, listarEstudiantes, obtenerCalificacion, subirAdjuntoTarea } from "@/lib/api-cliente";
+import { borrarTarea, editarTarea, ErrorApi, listarEntregasCalificadas, listarEstudiantes, listarRevisionesIA, obtenerCalificacion, revisarEntregaIA, subirAdjuntoTarea } from "@/lib/api-cliente";
 import { useRouter } from "@/i18n/navigation";
 import { enlaceArchivo } from "@/lib/archivos";
 import { CalificacionEntrega } from "@/components/gestion/CalificacionEntrega";
 import { DialogoEntrega } from "@/components/gestion/DialogoEntrega";
 import { FormularioTarea } from "./FormularioTarea";
-import type { Tarea, Entrega, Usuario, Calificacion } from "@/types/contratos";
+import type { Tarea, Entrega, Usuario, Calificacion, RevisionGuardada } from "@/types/contratos";
 
 interface DetalleTareaDocenteProps {
   tarea: Tarea;
@@ -31,6 +31,8 @@ export function DetalleTareaDocente({ tarea: inicial }: DetalleTareaDocenteProps
   const [entregas, setEntregas] = useState<Entrega[] | null>(null);
   const [estudiantes, setEstudiantes] = useState<Usuario[] | null>(null);
   const [notas, setNotas] = useState<Record<string, Calificacion | null>>({});
+  const [revisiones, setRevisiones] = useState<Record<string, RevisionGuardada>>({});
+  const [lote, setLote] = useState<{ hechas: number; total: number } | null>(null);
   const [error, setError] = useState(false);
   const [cargando, setCargando] = useState(true);
 
@@ -38,10 +40,15 @@ export function DetalleTareaDocente({ tarea: inicial }: DetalleTareaDocenteProps
   const cargar = useCallback(async () => {
     const numero = ++cargaActual.current;
     try {
-      const [ents, ests] = await Promise.all([listarEntregasCalificadas(tarea.id), listarEstudiantes(tarea.clase_id)]);
+      const [ents, ests, revs] = await Promise.all([
+        listarEntregasCalificadas(tarea.id),
+        listarEstudiantes(tarea.clase_id),
+        listarRevisionesIA(tarea.id).catch(() => [] as RevisionGuardada[]),
+      ]);
       const registros = await Promise.all(ents.map(async (e) => [e.id, await obtenerCalificacion(e.id)] as const));
       if (numero !== cargaActual.current) return;
       setNotas(Object.fromEntries(registros));
+      setRevisiones(Object.fromEntries(revs.map((r) => [r.entrega_id, r])));
       setEntregas(ents);
       setEstudiantes(ests);
       setError(false);
@@ -64,6 +71,44 @@ export function DetalleTareaDocente({ tarea: inicial }: DetalleTareaDocenteProps
     const intervalo = window.setInterval(refrescar, 30_000);
     return () => { window.removeEventListener("focus", refrescar); document.removeEventListener("visibilitychange", refrescar); clearInterval(intervalo); };
   }, [cargar]);
+
+  /** La revisión guardada vale si corresponde a la versión actual de la entrega. */
+  const revisionVigente = (entrega: Entrega) => {
+    const r = revisiones[entrega.id];
+    return r && (r.entregada_en ?? "") === (entrega.entregada_en ?? "") ? r : undefined;
+  };
+
+  /** Revisa con IA, de dos en dos, las entregas enviadas que no tienen revisión vigente. */
+  async function revisarTodas() {
+    const pendientes = (entregas ?? []).filter((e) => e.estado !== "pendiente" && !revisionVigente(e));
+    if (!pendientes.length) {
+      avisar(tg("revisarTodasNada"), "info");
+      return;
+    }
+    setLote({ hechas: 0, total: pendientes.length });
+    let hechas = 0;
+    let fallos = 0;
+    let limite = false;
+    const cola = [...pendientes];
+    const trabajador = async () => {
+      for (let e = cola.shift(); e && !limite; e = cola.shift()) {
+        try {
+          await revisarEntregaIA(e.id);
+        } catch (error) {
+          if (error instanceof ErrorApi && error.codigo === "limite_diario_ia_docente") limite = true;
+          else fallos++;
+        }
+        hechas++;
+        setLote({ hechas, total: pendientes.length });
+      }
+    };
+    await Promise.all([trabajador(), trabajador()]);
+    setLote(null);
+    await cargar();
+    if (limite) avisar(tg("revisarTodasLimite"), "error");
+    else if (fallos) avisar(tg("revisarTodasFallos", { n: fallos }), "error");
+    else avisar(tg("revisarTodasListo", { n: pendientes.length }), "exito");
+  }
 
   if (cargando) {
     return (
@@ -245,7 +290,13 @@ export function DetalleTareaDocente({ tarea: inicial }: DetalleTareaDocenteProps
 
       <div>
         {error && <p role="alert">{t("lista.error")}</p>}
-        <Button variante="secundario" onClick={() => void cargar()}>{tg("actualizarRevision")}</Button>
+        <div className="mb-3 flex flex-wrap items-center gap-2">
+          <Button variante="secundario" onClick={() => void cargar()}>{tg("actualizarRevision")}</Button>
+          <Button onClick={() => void revisarTodas()} cargando={!!lote} disabled={!!lote}>
+            <span aria-hidden>✦</span> {lote ? tg("revisarTodasProgreso", { hechas: lote.hechas, total: lote.total }) : tg("revisarTodas")}
+          </Button>
+        </div>
+        {lote && <p role="status" className="mb-3 text-sm text-tinta-suave">{tg("revisarTodasAyuda")}</p>}
         <h2 className="text-xl font-bold mb-3">
           {t("detalle.estudiantes")} ({filas.length})
         </h2>
@@ -258,6 +309,7 @@ export function DetalleTareaDocente({ tarea: inicial }: DetalleTareaDocenteProps
                 <div className="flex min-w-0 flex-wrap items-center gap-2">
                   <span className="font-bold">{estudiante.nombre}</span>
                   <Badge tono={entrega ? obtenerTonoEstado(entrega.estado) : "neutro"}>{obtenerEstadoTexto(entrega?.estado ?? "pendiente")}</Badge>
+                  {entrega && revisionVigente(entrega) && <Badge tono="acento"><span aria-hidden>✦</span>{tg("revisadaIA")}</Badge>}
                 </div>
                 {entrega && <CalificacionEntrega key={`${entrega.id}-${entrega.estado}-${abierta?.id ?? "cerrada"}`} entregaId={entrega.id} resumen />}
                 {entrega ? (
@@ -273,6 +325,7 @@ export function DetalleTareaDocente({ tarea: inicial }: DetalleTareaDocenteProps
         )}
       </div>
       <DialogoEntrega entregaId={abierta?.id ?? null} nombre={abierta?.nombre ?? ""}
+        revision={(() => { const e = entregas?.find((x) => x.id === abierta?.id); return e ? revisionVigente(e)?.revision : undefined; })()}
         filas={filas.map(({ estudiante, entrega }) => ({ id: estudiante.id, nombre: estudiante.nombre,
           entregaId: entrega?.id ?? null, sinNota: !entrega || notas[entrega.id]?.nota == null,
           estado: entrega && notas[entrega.id]?.devuelta ? "devuelta" : entrega && notas[entrega.id]?.nota != null ? "calificada" : !entrega || entrega.estado === "pendiente" ? "sinEntrega" : entrega.estado,

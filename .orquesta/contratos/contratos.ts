@@ -358,3 +358,12 @@ export const RevisionEntrega = z.object({
   message: "Una entrega no evaluable no puede tener nota sugerida", path: ["nota_sugerida"],
 });
 export type RevisionEntrega = z.infer<typeof RevisionEntrega>;
+
+/** Revisión con IA guardada (0015). `entregada_en` es la versión revisada: si no coincide con la entrega, está desactualizada. */
+export const RevisionGuardada = z.object({
+  entrega_id: z.string().uuid(),
+  revision: RevisionEntrega,
+  entregada_en: FechaHora.nullable(),
+  creada_en: FechaHora,
+});
+export type RevisionGuardada = z.infer<typeof RevisionGuardada>;

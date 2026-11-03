@@ -561,12 +561,26 @@ export const marcarAvisosLeidos = (ids?: string[]) =>
 import { comentariosDemoMock } from "./mocks/devoluciones";
 
 // ---------------- T21: revisión de entregas ----------------
-import { PedidoRevisionEntrega, RevisionEntrega } from "@/types/contratos";
+import { PedidoRevisionEntrega, RevisionEntrega, RevisionGuardada } from "@/types/contratos";
 import { revisionEntregaMock } from "./mocks/revision";
+/** Revisiones guardadas en mocks (en el servidor real las guarda la ruta, migración 0015). */
+const revisionesMock = new Map<string, RevisionGuardada>();
 export function revisarEntregaIA(entrega_id: string) {
   const entrada = PedidoRevisionEntrega.parse({ entrega_id });
-  return usarMocks() ? mock(RevisionEntrega.parse(revisionEntregaMock), 900)
-    : pedir("/api/docente/ia/revision", RevisionEntrega, json(entrada));
+  if (usarMocks()) {
+    const revision = RevisionEntrega.parse(revisionEntregaMock);
+    const entrega = entregasMock.find((e) => e.id === entrega_id);
+    revisionesMock.set(entrega_id, { entrega_id, revision, entregada_en: entrega?.entregada_en ?? null, creada_en: new Date().toISOString() });
+    return mock(revision, 900);
+  }
+  return pedir("/api/docente/ia/revision", RevisionEntrega, json(entrada));
+}
+export function listarRevisionesIA(tareaId: string) {
+  if (usarMocks()) {
+    const ids = new Set(entregasMock.filter((e) => e.tarea_id === tareaId).map((e) => e.id));
+    return mock([...revisionesMock.values()].filter((r) => ids.has(r.entrega_id)));
+  }
+  return pedir(`/api/docente/ia/revision?tarea_id=${encodeURIComponent(tareaId)}`, z.array(RevisionGuardada));
 }
 
 import { fotoRevisionMock } from "./mocks/revision";

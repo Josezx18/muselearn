@@ -37,7 +37,15 @@
     "confirmarBorrar": "Se borrarán la tarea, sus entregas, las conversaciones con el tutor y los informes. No se puede deshacer.",
     "borrada": "Tarea borrada.",
     "cancelar": "Cancelar",
-    "actualizarRevision": "Actualizar entregas"
+    "actualizarRevision": "Actualizar entregas",
+    "revisarTodas": "Revisar todas con IA",
+    "revisarTodasProgreso": "Revisando {hechas} de {total}…",
+    "revisarTodasAyuda": "Muse revisa las entregas de dos en dos. Puedes seguir trabajando; no cierres la página.",
+    "revisarTodasNada": "Todas las entregas ya tienen una revisión con IA vigente.",
+    "revisarTodasListo": "{n, plural, one {1 entrega revisada} other {# entregas revisadas}}. Ábrelas para ver la sugerencia.",
+    "revisarTodasFallos": "{n, plural, one {1 entrega no se pudo revisar} other {# entregas no se pudieron revisar}}. Prueba otra vez.",
+    "revisarTodasLimite": "Llegaste al máximo de ayudas de IA por hoy; algunas entregas quedaron sin revisar.",
+    "revisadaIA": "Revisada con IA"
   },
   "entrega": {
     "titulo": "Entrega de {nombre}",
@@ -132,6 +140,7 @@
     "visor": "Visor de imagen",
     "estado": "Estado: {estado}",
     "errorImagen": "No se pudieron leer las fotos de esta entrega (formato o tamaño). Revísalas a mano.",
-    "errorSinEntregar": "Esta entrega todavía no se ha enviado."
+    "errorSinEntregar": "Esta entrega todavía no se ha enviado.",
+    "revisarOtra": "Revisar otra vez"
   }
 }

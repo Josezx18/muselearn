@@ -37,7 +37,15 @@
     "confirmarBorrar": "This deletes the task, its submissions, tutor conversations and reports. It cannot be undone.",
     "borrada": "Task deleted.",
     "cancelar": "Cancel",
-    "actualizarRevision": "Refresh submissions"
+    "actualizarRevision": "Refresh submissions",
+    "revisarTodas": "Review all with AI",
+    "revisarTodasProgreso": "Reviewing {hechas} of {total}…",
+    "revisarTodasAyuda": "Muse reviews two submissions at a time. You can keep working; don't close the page.",
+    "revisarTodasNada": "All submissions already have a current AI review.",
+    "revisarTodasListo": "{n, plural, one {1 submission reviewed} other {# submissions reviewed}}. Open them to see the suggestion.",
+    "revisarTodasFallos": "{n, plural, one {1 submission could not be reviewed} other {# submissions could not be reviewed}}. Try again.",
+    "revisarTodasLimite": "You reached today's AI help limit; some submissions were not reviewed.",
+    "revisadaIA": "AI reviewed"
   },
   "entrega": {
     "titulo": "{nombre}'s submission",
@@ -132,6 +140,7 @@
     "visor": "Image viewer",
     "estado": "Status: {estado}",
     "errorImagen": "This submission's photos could not be read (format or size). Review them by hand.",
-    "errorSinEntregar": "This task has not been submitted yet."
+    "errorSinEntregar": "This task has not been submitted yet.",
+    "revisarOtra": "Review again"
   }
 }

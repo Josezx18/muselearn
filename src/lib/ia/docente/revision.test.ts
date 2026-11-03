@@ -6,8 +6,9 @@ import { usuariosMock } from "@/lib/mocks/clases";
 import { revisarEntrega } from "./revision";
 import * as revision from "./revision";
 import { crearLlamador, type ClienteChat } from "../cliente";
-const controles = vi.hoisted(() => ({ sesion: vi.fn(), detalle: vi.fn(), tarea: vi.fn(), almacen: vi.fn() }));
-vi.mock("@/lib/supabase/servidor", () => ({ crearClienteAdmin: () => ({ storage: { from: controles.almacen } }) }));
+const controles = vi.hoisted(() => ({ sesion: vi.fn(), detalle: vi.fn(), tarea: vi.fn(), almacen: vi.fn(), guardar: vi.fn(async () => ({ error: null })) }));
+vi.mock("@/lib/supabase/servidor", () => ({ crearClienteAdmin: () => ({ storage: { from: controles.almacen }, from: () => ({ upsert: controles.guardar }) }) }));
+vi.mock("@/lib/db/sesion", () => ({ obtenerUsuarioActual: vi.fn() }));
 vi.mock("@/app/api/docente/ia/_comun", () => ({ docenteConCupo: controles.sesion, errorIADocente: () => Response.json({}, { status: 502 }) }));
 vi.mock("@/lib/db/gestion", () => ({ detalleEntrega: controles.detalle, tareaDelDocente: controles.tarea }));
 // La función real de IA se prueba arriba del límite HTTP, sin solicitudes externas.
@@ -114,5 +115,20 @@ describe("normalización de la respuesta del modelo", () => {
     expect(r.criterios[0].evidencia).toBe("—");
     expect(r.sugerencias_para_estudiante).toEqual(["Revisa el paso 2"]);
     expect(normalizarRevision({ ...r, cumple: "no_se_puede", nota_sugerida: 70 }).nota_sugerida).toBeNull();
+  });
+});
+
+describe("revisión guardada", () => {
+  it("guarda la revisión de la entrega con la versión entregada", async () => {
+    controles.sesion.mockResolvedValue({ actual: { db: {}, usuario: { id: "docente" } }, registrar: vi.fn() });
+    controles.tarea.mockResolvedValue(tarea);
+    controles.detalle.mockResolvedValue(detalle);
+    vi.spyOn(revision, "revisarEntrega").mockResolvedValue(revisionEntregaMock);
+    const r = await POST(new Request("http://local/api/docente/ia/revision", { method: "POST", body: JSON.stringify({ entrega_id: entrega.id }) }));
+    expect(r.status).toBe(200);
+    expect(controles.guardar).toHaveBeenCalledWith(
+      expect.objectContaining({ entrega_id: entrega.id, revision: revisionEntregaMock, entregada_en: detalle.entrega.entregada_en }),
+      { onConflict: "entrega_id" },
+    );
   });
 });

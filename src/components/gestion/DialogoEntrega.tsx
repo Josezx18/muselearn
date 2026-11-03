@@ -6,7 +6,7 @@ import { Button, Dialog, NivelDominio, Skeleton } from "@/components/ui";
 import { obtenerDetalleRevision } from "@/lib/api-cliente";
 import { ReporteRevision } from "./revision/ReporteRevision";
 import { VisorImagen } from "./revision/VisorImagen";
-import type { DetalleEntrega } from "@/types/contratos";
+import type { DetalleEntrega, RevisionEntrega } from "@/types/contratos";
 import { CalificacionEntrega } from "./CalificacionEntrega";
 import { ComentarioEntrega } from "./ComentarioEntrega";
 
@@ -15,12 +15,14 @@ export interface FilaRevision { id: string; nombre: string; entregaId: string | 
 interface PropsRevision {
   entregaId: string | null; nombre: string; alCerrar: () => void;
   filas?: FilaRevision[]; alSeleccionar?: (fila: FilaRevision) => void; alActualizar?: () => void;
+  /** Revisión con IA guardada y vigente para esta entrega, si existe. */
+  revision?: RevisionEntrega;
 }
 /** Cada entrega y reapertura empieza con un reporte nuevo y sin sugerencias pendientes de otra entrega. */
 export function DialogoEntrega(props: PropsRevision) {
   return <ContenidoDialogoEntrega key={props.entregaId ?? "cerrada"} {...props} />;
 }
-function ContenidoDialogoEntrega({ entregaId, nombre, alCerrar, filas = [], alSeleccionar, alActualizar }: PropsRevision) {
+function ContenidoDialogoEntrega({ entregaId, nombre, alCerrar, filas = [], alSeleccionar, alActualizar, revision }: PropsRevision) {
   const t = useTranslations("gestion.entrega");
   const tr = useTranslations("gestion.revision");
   const ti = useTranslations("informes");
@@ -188,7 +190,7 @@ function ContenidoDialogoEntrega({ entregaId, nombre, alCerrar, filas = [], alSe
             </section>
           )}
 
-          <ReporteRevision key={`revision-${detalle.entrega.id}`} entregaId={detalle.entrega.id}
+          <ReporteRevision key={`revision-${detalle.entrega.id}`} entregaId={detalle.entrega.id} guardada={revision}
             alNota={(valor) => setNotaSugerida({ valor, vez: Date.now() })}
             alComentario={(valor) => setComentarioSugerido({ valor, vez: Date.now() })} />
           <CalificacionEntrega key={`nota-${detalle.entrega.id}`} entregaId={detalle.entrega.id} sugerida={notaSugerida} alGuardar={alActualizar} />

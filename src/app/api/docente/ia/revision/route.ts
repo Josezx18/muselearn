@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
-import { PedidoRevisionEntrega, RevisionEntrega } from "@/types/contratos";
+import { PedidoRevisionEntrega, RevisionEntrega, RevisionGuardada } from "@/types/contratos";
+import { z } from "zod";
+import { obtenerUsuarioActual } from "@/lib/db/sesion";
 import { detalleEntrega, tareaDelDocente } from "@/lib/db/gestion";
 import { errorHttp } from "@/lib/db/http";
 import { revisarEntrega } from "@/lib/ia/docente/revision";
@@ -38,6 +40,36 @@ export async function POST(peticion: Request) {
     }
     // Categoría compatible con el registro y CHECK actuales; comparte el cupo docente.
     await registrar("borrador_comentario");
-    return NextResponse.json(RevisionEntrega.parse(await revisarEntrega(tarea, detalle, fotos)));
+    const revision = RevisionEntrega.parse(await revisarEntrega(tarea, detalle, fotos));
+    // Se guarda para leerla al recorrer las entregas (0015). Si falla el guardado, igual se devuelve la revisión.
+    const { error: errorGuardar } = await crearClienteAdmin().from("revisiones_ia").upsert(
+      { entrega_id: detalle.entrega.id, revision, entregada_en: detalle.entrega.entregada_en, creada_en: new Date().toISOString() },
+      { onConflict: "entrega_id" },
+    );
+    if (errorGuardar) console.warn("[docente/ia] no se pudo guardar la revisión:", errorGuardar.message);
+    return NextResponse.json(revision);
   } catch (e) { return errorIADocente(e, "revisión de entrega"); }
+}
+
+/** GET ?tarea_id= → revisiones guardadas de las entregas de esa tarea (RLS: solo el docente de la tarea). */
+export async function GET(peticion: Request) {
+  const actual = await obtenerUsuarioActual();
+  if (!actual) return errorHttp(401, "no_autenticado", "Inicia sesión para continuar.");
+  if (actual.usuario.rol !== "docente") return errorHttp(403, "solo_docente", "Solo los docentes usan esta ayuda.");
+  const tareaId = z.string().uuid().safeParse(new URL(peticion.url).searchParams.get("tarea_id"));
+  if (!tareaId.success) return errorHttp(400, "datos_invalidos", "Identificador inválido.");
+  const { data, error } = await actual.db
+    .from("revisiones_ia")
+    .select("entrega_id, revision, entregada_en, creada_en, entregas!inner(tarea_id)")
+    .eq("entregas.tarea_id", tareaId.data);
+  if (error) {
+    // Migración 0015 aún no aplicada: sin revisiones guardadas.
+    if (error.code === "42P01" || error.code === "PGRST205") return NextResponse.json([]);
+    return errorHttp(500, "error_interno", "No se pudieron cargar las revisiones.");
+  }
+  const validas = (data ?? []).flatMap((fila) => {
+    const r = RevisionGuardada.safeParse(fila);
+    return r.success ? [r.data] : [];
+  });
+  return NextResponse.json(validas);
 }

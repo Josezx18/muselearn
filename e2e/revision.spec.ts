@@ -73,3 +73,14 @@ test("refresca al volver y cada treinta segundos conservando entrega y borrador"
   await dialogo.getByRole("button", { name: "Siguiente sin calificar", exact: true }).click();
   await expect(dialogo.getByRole("heading", { level: 2 })).toHaveText(titulo);
 });
+
+test("revisar todas con IA marca las entregas y la revisión queda lista al abrirlas", async ({ page }) => {
+  await page.goto(ruta);
+  await page.getByRole("button", { name: /Revisar todas con IA/ }).click();
+  await expect(page.getByText(/entregas revisadas/)).toBeVisible({ timeout: 30_000 });
+  await expect(page.getByText("Revisada con IA").first()).toBeVisible();
+  await page.getByRole("button", { name: "Ver entrega", exact: true }).first().click();
+  const dialogo = page.getByRole("dialog");
+  await expect(dialogo.getByText("Cumple parcialmente", { exact: true }).first()).toBeVisible();
+  await expect(dialogo.getByRole("button", { name: "Revisar otra vez", exact: true })).toBeVisible();
+});

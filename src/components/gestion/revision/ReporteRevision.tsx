@@ -4,11 +4,11 @@ import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui";
 import { ErrorApi, revisarEntregaIA } from "@/lib/api-cliente";
 import type { RevisionEntrega } from "@/types/contratos";
-export function ReporteRevision({ entregaId, alNota, alComentario }: {
-  entregaId: string; alNota: (nota: number) => void; alComentario: (texto: string) => void;
+export function ReporteRevision({ entregaId, guardada, alNota, alComentario }: {
+  entregaId: string; guardada?: RevisionEntrega; alNota: (nota: number) => void; alComentario: (texto: string) => void;
 }) {
   const t = useTranslations("gestion.revision");
-  const [reporte, setReporte] = useState<RevisionEntrega | null>(null);
+  const [reporte, setReporte] = useState<RevisionEntrega | null>(guardada ?? null);
   const [ocupado, setOcupado] = useState(false);
   const [error, setError] = useState<string | null>(null);
   return <section className="grid min-w-0 gap-3 rounded-xl border-2 border-primario p-3">
@@ -22,7 +22,7 @@ export function ReporteRevision({ entregaId, alNota, alComentario }: {
           : codigo === "sin_entregar" ? "errorSinEntregar" : "error"));
       }
       finally { setOcupado(false); }
-    }}>{ocupado ? t("pensando") : t("revisar")}</Button>
+    }}>{ocupado ? t("pensando") : reporte ? t("revisarOtra") : t("revisar")}</Button>
     <p className="text-sm font-bold">{t("aviso")}</p>
     {error && <p role="alert" className="text-sm font-medium text-peligro">{error}</p>}
     {reporte && <div className="grid gap-3" role="status">

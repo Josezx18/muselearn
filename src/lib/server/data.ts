@@ -152,7 +152,8 @@ export async function obtenerMisClases(): Promise<MisClase[]> {
   if (!ids.length) return [];
   const { data: filas, error: e2 } = await db
     .from("clases")
-    .select("*, docente:perfiles(id, rol, nombre)")
+    // Con FK explícita: clases y perfiles también se relacionan por inscripciones y PostgREST la vería ambigua.
+    .select("*, docente:perfiles!clases_docente_id_fkey(id, rol, nombre, idioma)")
     .in("id", ids)
     .order("creada_en", { ascending: false });
   if (e2) throw e2;
@@ -220,7 +221,7 @@ export async function obtenerTareasDeClase(claseId: string): Promise<MisTareasDe
   const { data: inscripcion, error } = await db.from("inscripciones").select("clase_id").eq("clase_id", claseId).eq("estudiante_id", usuario.id).maybeSingle();
   if (error) throw error;
   if (!inscripcion) return null;
-  const { data: filas, error: e2 } = await db.from("clases").select("*, docente:perfiles(id, rol, nombre)").eq("id", claseId).maybeSingle();
+  const { data: filas, error: e2 } = await db.from("clases").select("*, docente:perfiles!clases_docente_id_fkey(id, rol, nombre, idioma)").eq("id", claseId).maybeSingle();
   if (e2) throw e2;
   if (!filas) return null;
   const clase = Clase.parse(filas);

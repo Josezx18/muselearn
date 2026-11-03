@@ -14,6 +14,8 @@ test("la IA propone una tarea y llena el formulario", async ({ page }) => {
   await expect(page.getByText(/Listo: llené el formulario/)).toBeVisible();
   await expect(page.locator("#titulo")).toHaveValue(/ecuaciones con fracciones/);
   await expect(page.locator("#instrucciones")).toHaveValue(/cuaderno/);
+  await page.getByRole("button", { name: /Revisar y guardar/ }).click();
+  await expect(page.locator("#guardarTarea")).toBeFocused();
 });
 
 test("la IA sugiere un repaso desde el panel de comprensión", async ({ page }) => {
@@ -23,6 +25,10 @@ test("la IA sugiere un repaso desde el panel de comprensión", async ({ page }) 
   await boton.click();
   await expect(page.getByText("Es una sugerencia: adáptala a tu grupo.")).toBeVisible();
   await expect(page.getByText("En grupos").first()).toBeVisible();
+  await page.getByRole("button", { name: "Asignar como tarea" }).first().click();
+  await page.getByRole("button", { name: "Asignar", exact: true }).click();
+  await expect(page.getByText("Tarea asignada a la clase.")).toBeVisible();
+  await expect(page.getByRole("link", { name: "Ver tarea" })).toBeVisible();
 });
 
 test("el docente pide un borrador de comentario, lo edita y lo envía", async ({ page }) => {

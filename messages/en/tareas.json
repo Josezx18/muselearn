@@ -127,7 +127,8 @@
       "tema": "Write the topic (at least 3 characters).",
       "limite": "You reached today's limit of AI help. Try again tomorrow.",
       "general": "The AI didn't respond. Try again in a moment."
-    }
+    },
+    "revisar": "Review and save"
   },
   "modalidad": {
     "titulo": "Where is it done and handed in?",

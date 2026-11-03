@@ -127,7 +127,8 @@
       "tema": "Escribe el tema (mínimo 3 caracteres).",
       "limite": "Llegaste al máximo de ayudas de IA por hoy. Vuelve a intentarlo mañana.",
       "general": "La IA no respondió. Inténtalo de nuevo en un momento."
-    }
+    },
+    "revisar": "Revisar y guardar"
   },
   "modalidad": {
     "titulo": "¿Dónde se hace y se entrega?",

@@ -131,6 +131,21 @@ export function AsistenteTarea({
             {propuesta.razon}
           </p>
         )}
+        {propuesta && !cargando && (
+          <div className="flex justify-end">
+            <Button
+              type="button"
+              tamano="sm"
+              onClick={() => {
+                const boton = document.getElementById("guardarTarea");
+                boton?.scrollIntoView({ behavior: "smooth", block: "center" });
+                boton?.focus({ preventScroll: true });
+              }}
+            >
+              {t("revisar")} ↓
+            </Button>
+          </div>
+        )}
       </div>
     </section>
   );

@@ -117,6 +117,18 @@
       "limite": "Llegaste al máximo de ayudas de IA por hoy. Vuelve a intentarlo mañana.",
       "sinInformes": "Todavía no hay informes de comprensión en esta clase.",
       "general": "La IA no respondió. Inténtalo de nuevo en un momento."
+    },
+    "asignar": {
+      "boton": "Asignar como tarea",
+      "fecha": "Fecha de entrega",
+      "ayuda": "Se crea una tarea en esta clase con la actividad como instrucciones. Después puedes editarla.",
+      "confirmar": "Asignar",
+      "cancelar": "Cancelar",
+      "tituloTarea": "Repaso: {concepto}",
+      "listo": "Tarea asignada a la clase.",
+      "ver": "Ver tarea",
+      "error": "No se pudo crear la tarea. Inténtalo de nuevo.",
+      "errorFecha": "Elige una fecha futura."
     }
   },
   "vistas": {

@@ -300,7 +300,7 @@ export function FormularioTarea({ claseId, tareaExistente, alGuardar, alCancelar
           <Button type="button" variante="secundario" onClick={alCancelar} disabled={cargando}>
             {t("nueva.cancelar")}
           </Button>
-          <Button type="submit" disabled={cargando} cargando={cargando}>
+          <Button id="guardarTarea" type="submit" disabled={cargando} cargando={cargando}>
             {cargando ? t("nueva.guardando") : t("nueva.guardar")}
           </Button>
         </div>

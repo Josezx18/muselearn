@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { Button } from "@/components/ui";
-import { ErrorApi, sugerirRepasoIA } from "@/lib/api-cliente";
+import { Button, Input } from "@/components/ui";
+import { Link } from "@/i18n/navigation";
+import { ErrorApi, crearTarea, sugerirRepasoIA } from "@/lib/api-cliente";
 import type { SugerenciaRepaso } from "@/types/contratos";
 
 /**
@@ -113,6 +114,11 @@ export function RepasoIA({
                   <strong>{t("porQue")}</strong> {a.por_que}
                 </p>
                 <p className="mt-2 whitespace-pre-wrap">{a.actividad}</p>
+                <AsignarActividad
+                  claseId={claseId}
+                  concepto={a.concepto}
+                  actividad={a.actividad}
+                />
               </li>
             ))}
           </ol>
@@ -120,5 +126,109 @@ export function RepasoIA({
         </div>
       )}
     </section>
+  );
+}
+
+/** Fecha local "YYYY-MM-DDTHH:mm" para un input datetime-local: dentro de dos días, a las 23:59. */
+function fechaPorDefecto() {
+  const d = new Date();
+  d.setDate(d.getDate() + 2);
+  d.setHours(23, 59, 0, 0);
+  const dos = (n: number) => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${dos(d.getMonth() + 1)}-${dos(d.getDate())}T${dos(d.getHours())}:${dos(d.getMinutes())}`;
+}
+
+/**
+ * Convierte una actividad sugerida en una tarea de la clase: el docente elige la fecha y la asigna.
+ * Después puede editarla desde el detalle de la tarea.
+ */
+function AsignarActividad({
+  claseId,
+  concepto,
+  actividad,
+}: {
+  claseId: string;
+  concepto: string;
+  actividad: string;
+}) {
+  const t = useTranslations("docente.repaso.asignar");
+  const [abierto, setAbierto] = useState(false);
+  const [fecha, setFecha] = useState(fechaPorDefecto);
+  const [cargando, setCargando] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [tareaId, setTareaId] = useState<string | null>(null);
+
+  async function asignar() {
+    if (!fecha || new Date(fecha) <= new Date()) {
+      setError(t("errorFecha"));
+      return;
+    }
+    setCargando(true);
+    setError(null);
+    try {
+      const tarea = await crearTarea({
+        clase_id: claseId,
+        titulo: t("tituloTarea", { concepto }).slice(0, 200),
+        instrucciones: actividad,
+        fecha_entrega: new Date(fecha).toISOString(),
+        competencias: [concepto],
+        nivel_ayuda: "pistas",
+        modalidad: "muselearn",
+        enlace_externo: null,
+        adjuntos: [],
+      });
+      setTareaId(tarea.id);
+      setAbierto(false);
+    } catch {
+      setError(t("error"));
+    } finally {
+      setCargando(false);
+    }
+  }
+
+  if (tareaId) {
+    return (
+      <p role="status" className="mt-3 flex flex-wrap items-center gap-2 text-sm font-bold text-primario">
+        ✓ {t("listo")}
+        <Link href={`/docente/tareas/${tareaId}`} className="text-primario underline">
+          {t("ver")}
+        </Link>
+      </p>
+    );
+  }
+
+  if (!abierto) {
+    return (
+      <div className="mt-3 flex justify-end">
+        <Button type="button" tamano="sm" onClick={() => setAbierto(true)}>
+          {t("boton")}
+        </Button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="mt-3 grid gap-2 rounded-xl bg-fondo p-3">
+      <Input
+        etiqueta={t("fecha")}
+        type="datetime-local"
+        value={fecha}
+        onChange={(e) => setFecha(e.target.value)}
+      />
+      <p className="text-xs text-tinta-suave">{t("ayuda")}</p>
+      {error && (
+        <p role="alert" className="text-sm font-medium text-peligro">
+          {error}
+        </p>
+      )}
+      <div className="flex flex-wrap justify-end gap-2">
+        <Button type="button" variante="secundario" tamano="sm" onClick={() => setAbierto(false)} disabled={cargando}>
+          {t("cancelar")}
+        </Button>
+        <Button type="button" tamano="sm" onClick={asignar} cargando={cargando}>
+          {t("confirmar")}
+        </Button>
+      </div>
+    </div>
   );
 }

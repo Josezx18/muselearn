@@ -117,6 +117,18 @@
       "limite": "You reached today's limit of AI help. Try again tomorrow.",
       "sinInformes": "There are no comprehension reports in this class yet.",
       "general": "The AI didn't respond. Try again in a moment."
+    },
+    "asignar": {
+      "boton": "Assign as homework",
+      "fecha": "Due date",
+      "ayuda": "A task is created in this class with the activity as instructions. You can edit it later.",
+      "confirmar": "Assign",
+      "cancelar": "Cancel",
+      "tituloTarea": "Review: {concepto}",
+      "listo": "Task assigned to the class.",
+      "ver": "View task",
+      "error": "The task could not be created. Try again.",
+      "errorFecha": "Choose a future date."
     }
   },
   "vistas": {

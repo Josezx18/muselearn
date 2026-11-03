@@ -338,3 +338,22 @@ export const Calificacion = z.object({
 });
 export type Calificacion = z.infer<typeof Calificacion>;
 
+
+// ---------- Revisión con IA (T21) ----------
+export const PedidoRevisionEntrega = z.object({ entrega_id: z.string().uuid() }).strict();
+export const CumplimientoRevision = z.enum(["si", "parcial", "no", "no_se_puede"]);
+export const RevisionEntrega = z.object({
+  cumple: CumplimientoRevision,
+  resumen: z.string().trim().min(1).max(2000),
+  criterios: z.array(z.object({
+    criterio: z.string().trim().min(1).max(500),
+    cumple: CumplimientoRevision,
+    evidencia: z.string().trim().min(1).max(1000),
+  })).max(12),
+  sugerencias_para_estudiante: z.array(z.string().trim().min(1).max(600)).max(6),
+  nota_sugerida: z.number().min(0).max(100).multipleOf(0.01).nullable(),
+  confianza: z.enum(["alta", "media", "baja"]),
+}).refine((r) => r.cumple !== "no_se_puede" || r.nota_sugerida === null, {
+  message: "Una entrega no evaluable no puede tener nota sugerida", path: ["nota_sugerida"],
+});
+export type RevisionEntrega = z.infer<typeof RevisionEntrega>;

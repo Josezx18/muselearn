@@ -14,6 +14,9 @@ Formato: `- AAAA-MM-DD HH:MM [Txx] qué se hizo / qué falta / decisión tomada`
 5. T08 demo y entregables
 
 ## Mejoras propuestas (por los agentes; el integrador decide)
+- [T21] Añadir una categoría `revision_entrega` a `FuncionIADocente` y al CHECK de uso de IA para distinguirla de los borradores; hoy comparten categoría y cupo, sin migración.
+- [T21] Conservar borradores por entrega al recorrer estudiantes o avisar antes de descartar cambios sin guardar; el refresco del listado ya los conserva.
+
 - [T16] Renovar las capturas de T11 cuando se vuelva a ensayar la demo con los datos integrados de T15 y producir capturas equivalentes en ingles.
 - [T17] Incorporar un identificador de intento y cierre transaccional para resolver carreras entre devolver, volver a entregar y evaluar en peticiones simultaneas.
 - [T17] Hacer que el generador del seed consuma los fixtures compartidos de comentarios y calificaciones para evitar duplicar sus reglas.
@@ -51,6 +54,8 @@ Formato: `- AAAA-MM-DD HH:MM [Txx] qué se hizo / qué falta / decisión tomada`
 - 2026-10-26 Discord: se permite cualquier herramienta de programación sin declararla; Muse Code es opcional.
 
 ## Bitácora
+- 2026-11-03 [T21] Revisión docente amplia con listado por estado, anterior/siguiente y flechas, salto sin nota, visor de imágenes con zoom/Esc y actualización manual, por foco/visibilidad y cada 30 s sin perder selección/borradores. Endpoint de revisión IA con sesión, dueño, cupo, descarga autenticada de imágenes, Zod y reporte efímero; aceptar nota/comentario solo rellena campos. Mocks y es/en. Lint/typecheck y 256 unitarias correctas (10 omitidas); 16 e2e revision/calificar/ia-docente correctas, cuatro de revisión repetidas tras aislar sugerencias. Capturas revisadas a 360 px/escritorio sin desbordamiento. Ficha completa, sin push ni merge; IA real pendiente de ensayo.
+
 - 2026-10-30 [T07] Integrada localmente T20 con correcciones: carga SSR validada con sesión/RLS, errores propagados, recuperación de plan ausente, entrega reactiva y correcciones mock persistentes, fechas estables entre zonas y mapa montado solo al abrirlo. Lint/typecheck, 245 unitarias y build OK; 64 a11y y seis Semana correctas en suite completa; UTC 2/2 y panel/demo/repaso/comentario 16/16 tras ajustes. Lighthouse mediana de cinco: Hoy 93, Tarea 90, Comprensión 96, A11y 100 en todas. Evidencia incluye muestras bajas y corridas previas fallidas; ver .orquesta/evidencia/T20. main actualizado localmente: rebase desde main recomendado para trabajo posterior. Sin push ni migraciones.
 - 2026-10-30 [T07] Materiales T08 verificados: lint/typecheck y 235 pruebas OK (10 omitidas); guion e2e 2/2, 22 capturas 1440/390 px y revisión visual. SRT EN de 28 bloques/2:55, enlaces locales y ocho textos X validados. Capturas móviles como viewport 390×900 para evitar barra fija sobre el contenido de imágenes largas. T20 continúa sin nuevo commit listo; sin push.
 - 2026-10-30 [T07] Preparación de entrega: guion y narración por escenas, SRT EN de 28 bloques/2:55, borrador de formulario y textos X con enlace a la app. README corregido (0011, mocks integrados, audio en memoria y preparación previa declarada); capturas renovadas con mocks de main. T20 aún sin nuevo commit listo: no se integró. Sin publicación externa ni push.

@@ -6,8 +6,8 @@ import { Button, Input, Textarea } from "@/components/ui";
 import { obtenerCalificacion, guardarCalificacion, devolverEntrega } from "@/lib/api-cliente";
 import { EntradaCalificacion, type Calificacion } from "@/lib/db/calificaciones";
 
-export function CalificacionEntrega({ entregaId, estudiante = false, resumen = false }: {
-  entregaId: string; estudiante?: boolean; resumen?: boolean;
+export function CalificacionEntrega({ entregaId, estudiante = false, resumen = false, sugerida, alGuardar }: {
+  entregaId: string; estudiante?: boolean; resumen?: boolean; sugerida?: { valor: number; vez: number }; alGuardar?: () => void;
 }) {
   const t = useTranslations("gestion.calificacion");
   const formato = useFormatter();
@@ -28,12 +28,16 @@ export function CalificacionEntrega({ entregaId, estudiante = false, resumen = f
     }).catch(() => { if (vivo) { setError(true); setCargando(false); } });
     return () => { vivo = false; };
   }, [entregaId, intento]);
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- acción explícita del docente al aceptar la sugerencia
+    if (sugerida) { setNota(String(sugerida.valor)); setGuardado(false); }
+  }, [sugerida]);
   const entrada = EntradaCalificacion.safeParse({ nota: nota.trim() === "" ? null : Number(nota) });
   async function guardar(devolver = false) {
     setOcupado(true); setError(false); setGuardado(false);
     try {
       const c = devolver ? await devolverEntrega(entregaId, motivo) : await guardarCalificacion(entregaId, entrada.success ? entrada.data.nota : null);
-      setRegistro(c); setGuardado(true);
+      setRegistro(c); setGuardado(true); alGuardar?.();
     } catch { setError(true); } finally { setOcupado(false); }
   }
   if (cargando) return <p role="status" className="text-sm">{t("cargando")}</p>;

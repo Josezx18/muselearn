@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFormatter, useTranslations } from "next-intl";
 import { Button, Textarea, useToast } from "@/components/ui";
 import {
@@ -19,10 +19,12 @@ export function ComentarioEntrega({
   entregaId,
   inicial,
   entregada,
+  sugerido,
 }: {
   entregaId: string;
   inicial: ComentarioDocente | null;
   entregada: boolean;
+  sugerido?: { valor: string; vez: number };
 }) {
   const t = useTranslations("gestion.comentario");
   const formato = useFormatter();
@@ -33,6 +35,10 @@ export function ComentarioEntrega({
   const [guardando, setGuardando] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- el docente solicita rellenar el borrador; no se envía
+    if (sugerido) setTexto(sugerido.valor.slice(0, 4000));
+  }, [sugerido]);
   const cambiado = texto.trim() !== (guardado?.texto ?? "");
 
   async function borrador() {

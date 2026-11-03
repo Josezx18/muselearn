@@ -36,7 +36,8 @@
     "guardada": "Tarea actualizada. Si cambiaste la fecha, la semana de tus estudiantes se reorganiza sola.",
     "confirmarBorrar": "Se borrarán la tarea, sus entregas, las conversaciones con el tutor y los informes. No se puede deshacer.",
     "borrada": "Tarea borrada.",
-    "cancelar": "Cancelar"
+    "cancelar": "Cancelar",
+    "actualizarRevision": "Actualizar entregas"
   },
   "entrega": {
     "titulo": "Entrega de {nombre}",
@@ -97,5 +98,38 @@
     "error": "No se pudo cargar o guardar la calificación.",
     "guardado": "Cambios guardados.",
     "reintentar": "Reintentar"
+  },
+  "revision": {
+    "anterior": "Anterior",
+    "siguiente": "Siguiente",
+    "sinCalificar": "Siguiente sin calificar",
+    "actualizar": "Actualizar entregas",
+    "estudiantes": "Estudiantes",
+    "sinEntrega": "Sin entregar",
+    "calificada": "Calificada",
+    "devuelta": "Devuelta",
+    "entregada": "Entregada",
+    "verificada": "Verificada",
+    "verificando": "Verificando",
+    "revisar": "Revisar con IA",
+    "pensando": "Revisando…",
+    "aviso": "Es una sugerencia: revísala.",
+    "usarNota": "Usar la nota sugerida",
+    "usarComentario": "Pasar sugerencias al comentario",
+    "nota": "Nota sugerida: {nota}/100",
+    "confianza": "Confianza: {valor}",
+    "alta": "alta",
+    "media": "media",
+    "baja": "baja",
+    "si": "Cumple",
+    "parcial": "Cumple parcialmente",
+    "no": "No cumple",
+    "no_se_puede": "No se puede evaluar",
+    "error": "No se pudo revisar. Inténtalo de nuevo.",
+    "limite": "Llegaste al límite diario de ayudas de IA.",
+    "zoom": "Ajustar / tamaño real",
+    "cerrarImagen": "Cerrar imagen",
+    "visor": "Visor de imagen",
+    "estado": "Estado: {estado}"
   }
 }

@@ -74,6 +74,7 @@ if /i "%F%"=="T21" set "RAMA=t21-revision"
 if /i "%F%"=="T22" set "RAMA=t22-perfil-estudiante"
 if /i "%F%"=="T23" set "RAMA=t23-clases-estudiante"
 if /i "%F%"=="T24" set "RAMA=t24-voz-cierre"
+if /i "%F%"=="T25" set "RAMA=t25-uso-ia"
 if "%RAMA%"=="" (echo Ficha desconocida: %F% & exit /b 1)
 set "DIR=%RAIZ%-%F%"
 if exist "%DIR%" (
@@ -117,6 +118,7 @@ if /i "%F%"=="T21" set "PLAT=codex"
 if /i "%F%"=="T22" set "PLAT=codex"
 if /i "%F%"=="T23" set "PLAT=opencode"
 if /i "%F%"=="T24" set "PLAT=opencode"
+if /i "%F%"=="T25" set "PLAT=codex"
 set "TITULO=%F%-%PLAT%"
 rem Codex: se usa codex.cmd (la version de consola instalada con npm), no el alias de la app.
 set "EXE=%PLAT%"

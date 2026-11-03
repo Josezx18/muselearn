@@ -130,6 +130,8 @@
     "zoom": "Fit / actual size",
     "cerrarImagen": "Close image",
     "visor": "Image viewer",
-    "estado": "Status: {estado}"
+    "estado": "Status: {estado}",
+    "errorImagen": "This submission's photos could not be read (format or size). Review them by hand.",
+    "errorSinEntregar": "This task has not been submitted yet."
   }
 }

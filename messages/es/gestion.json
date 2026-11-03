@@ -130,6 +130,8 @@
     "zoom": "Ajustar / tamaño real",
     "cerrarImagen": "Cerrar imagen",
     "visor": "Visor de imagen",
-    "estado": "Estado: {estado}"
+    "estado": "Estado: {estado}",
+    "errorImagen": "No se pudieron leer las fotos de esta entrega (formato o tamaño). Revísalas a mano.",
+    "errorSinEntregar": "Esta entrega todavía no se ha enviado."
   }
 }

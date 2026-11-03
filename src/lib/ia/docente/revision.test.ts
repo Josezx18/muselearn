@@ -6,7 +6,8 @@ import { usuariosMock } from "@/lib/mocks/clases";
 import { revisarEntrega } from "./revision";
 import * as revision from "./revision";
 import { crearLlamador, type ClienteChat } from "../cliente";
-const controles = vi.hoisted(() => ({ sesion: vi.fn(), detalle: vi.fn(), tarea: vi.fn() }));
+const controles = vi.hoisted(() => ({ sesion: vi.fn(), detalle: vi.fn(), tarea: vi.fn(), almacen: vi.fn() }));
+vi.mock("@/lib/supabase/servidor", () => ({ crearClienteAdmin: () => ({ storage: { from: controles.almacen } }) }));
 vi.mock("@/app/api/docente/ia/_comun", () => ({ docenteConCupo: controles.sesion, errorIADocente: () => Response.json({}, { status: 502 }) }));
 vi.mock("@/lib/db/gestion", () => ({ detalleEntrega: controles.detalle, tareaDelDocente: controles.tarea }));
 // La función real de IA se prueba arriba del límite HTTP, sin solicitudes externas.
@@ -61,11 +62,10 @@ describe("autorización del endpoint", () => {
     expect(registrar).toHaveBeenCalledExactlyOnceWith("borrador_comentario");
     expect(revisar).toHaveBeenCalledWith(tarea, detalle, []);
   });
-  it("descarga la foto con Storage autenticado y pasa su contenido al modelo", async () => {
-    const imagen = { nombre: "foto.png", ruta: "entregas/tarea/estudiante/foto.png", tipo_mime: "image/png" };
+  it("descarga la foto (con el cliente del servidor, tras comprobar la tarea) y pasa su contenido al modelo", async () => {
+    const imagen = { nombre: "foto.png", ruta: `entregas/${entrega.tarea_id}/${entrega.estudiante_id}/foto.png`, tipo_mime: "image/png" };
     const download = vi.fn().mockResolvedValue({ data: new Blob(["foto"], { type: "image/png" }), error: null });
-    const from = vi.fn().mockReturnValue({ download });
-    controles.sesion.mockResolvedValue({ actual: { db: { storage: { from } }, usuario: { id: "docente" } }, registrar });
+    const from = controles.almacen.mockReturnValue({ download });
     const conFoto = { ...detalle, entrega: { ...entrega, adjuntos: [imagen] } };
     controles.detalle.mockResolvedValue(conFoto);
     const revisar = vi.spyOn(revision, "revisarEntrega").mockResolvedValue(revisionEntregaMock);
@@ -75,8 +75,8 @@ describe("autorización del endpoint", () => {
   });
   it("no llama al modelo cuando Storage no permite leer la foto", async () => {
     const download = vi.fn().mockResolvedValue({ data: null, error: new Error("denegado") });
-    controles.sesion.mockResolvedValue({ actual: { db: { storage: { from: () => ({ download }) } }, usuario: { id: "docente" } }, registrar });
-    controles.detalle.mockResolvedValue({ ...detalle, entrega: { ...entrega, adjuntos: [{ nombre: "foto", ruta: "ajena", tipo_mime: "image/png" }] } });
+    controles.almacen.mockReturnValue({ download });
+    controles.detalle.mockResolvedValue({ ...detalle, entrega: { ...entrega, adjuntos: [{ nombre: "foto", ruta: `entregas/${entrega.tarea_id}/${entrega.estudiante_id}/foto.png`, tipo_mime: "image/png" }] } });
     expect((await POST(pedido())).status).toBe(400); expect(registrar).not.toHaveBeenCalled();
   });
   it("rechaza imágenes excesivas y formatos no admitidos antes de llamar a IA", async () => {
@@ -92,5 +92,27 @@ describe("autorización del endpoint", () => {
     controles.tarea.mockResolvedValueOnce(null); expect((await POST(pedido())).status).toBe(403);
     controles.detalle.mockResolvedValueOnce({ ...detalle, entrega: { ...entrega, estado: "pendiente" } });
     expect((await POST(pedido())).status).toBe(409); expect(registrar).not.toHaveBeenCalled();
+  });
+});
+
+describe("imágenes de la entrega", () => {
+  it("rechaza rutas de imagen que no pertenecen a la carpeta de esa entrega", async () => {
+    controles.sesion.mockResolvedValue({ actual: { db: {}, usuario: { id: "docente" } }, registrar: vi.fn() });
+    controles.tarea.mockResolvedValue(tarea);
+    controles.detalle.mockResolvedValue({ ...detalle, entrega: { ...detalle.entrega, estado: "entregada", adjuntos: [{ nombre: "x.jpg", ruta: "entregas/otra/otro/x.jpg", tipo_mime: "image/jpeg" }] } });
+    const r = await POST(new Request("http://local/api/docente/ia/revision", { method: "POST", body: JSON.stringify({ entrega_id: entrega.id }) }));
+    expect(r.status).toBe(400);
+    expect((await r.json()).error.codigo).toBe("imagen_no_disponible");
+  });
+});
+
+describe("normalización de la respuesta del modelo", () => {
+  it("redondea la nota, la anula si no se puede evaluar y rellena evidencias vacías", async () => {
+    const { normalizarRevision } = await import("./revision");
+    const r = normalizarRevision({ cumple: "parcial", resumen: "Bien", criterios: [{ criterio: "Despeja x", cumple: "si", evidencia: "" }], sugerencias_para_estudiante: [" ", "Revisa el paso 2"], nota_sugerida: 85.3333, confianza: "media" });
+    expect(r.nota_sugerida).toBe(85.33);
+    expect(r.criterios[0].evidencia).toBe("—");
+    expect(r.sugerencias_para_estudiante).toEqual(["Revisa el paso 2"]);
+    expect(normalizarRevision({ ...r, cumple: "no_se_puede", nota_sugerida: 70 }).nota_sugerida).toBeNull();
   });
 });

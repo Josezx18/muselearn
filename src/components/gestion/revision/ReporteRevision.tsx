@@ -15,11 +15,16 @@ export function ReporteRevision({ entregaId, alNota, alComentario }: {
     <Button cargando={ocupado} onClick={async () => {
       setOcupado(true); setError(null);
       try { setReporte(await revisarEntregaIA(entregaId)); }
-      catch (e) { setError(t(e instanceof ErrorApi && e.codigo === "limite_diario_ia_docente" ? "limite" : "error")); }
+      catch (e) {
+        const codigo = e instanceof ErrorApi ? e.codigo : "";
+        setError(t(codigo === "limite_diario_ia_docente" ? "limite"
+          : ["imagen_no_disponible", "imagen_no_admitida", "demasiadas_imagenes"].includes(codigo) ? "errorImagen"
+          : codigo === "sin_entregar" ? "errorSinEntregar" : "error"));
+      }
       finally { setOcupado(false); }
     }}>{ocupado ? t("pensando") : t("revisar")}</Button>
     <p className="text-sm font-bold">{t("aviso")}</p>
-    {error && <p role="alert">{error}</p>}
+    {error && <p role="alert" className="text-sm font-medium text-peligro">{error}</p>}
     {reporte && <div className="grid gap-3" role="status">
       <h3 className="font-bold">{t(reporte.cumple)}</h3><p>{reporte.resumen}</p>
       <ul className="grid gap-2">{reporte.criterios.map((c, i) => <li key={i} className="rounded-lg bg-fondo p-2">

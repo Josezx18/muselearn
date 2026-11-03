@@ -121,14 +121,17 @@
     "asignar": {
       "boton": "Asignar como tarea",
       "fecha": "Fecha de entrega",
-      "ayuda": "Se crea una tarea en esta clase con la actividad como instrucciones. Después puedes editarla.",
+      "ayuda": "Muse convierte esta actividad en una práctica para tus estudiantes y la crea en esta clase. Después puedes editarla.",
       "confirmar": "Asignar",
       "cancelar": "Cancelar",
       "tituloTarea": "Repaso: {concepto}",
       "listo": "Tarea asignada a la clase.",
       "ver": "Ver tarea",
       "error": "No se pudo crear la tarea. Inténtalo de nuevo.",
-      "errorFecha": "Elige una fecha futura."
+      "errorFecha": "Elige una fecha futura.",
+      "creando": "Muse está creando la práctica…",
+      "temaIA": "Repaso de {concepto}",
+      "detallesIA": "Práctica de repaso para hacer en casa, con ejercicios parecidos a los de esta actividad de clase. Lo que mostraron los informes: {porQue} Actividad de clase: {actividad}"
     }
   },
   "vistas": {

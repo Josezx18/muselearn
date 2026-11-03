@@ -4,8 +4,8 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { Button, Input } from "@/components/ui";
 import { Link } from "@/i18n/navigation";
-import { ErrorApi, crearTarea, sugerirRepasoIA } from "@/lib/api-cliente";
-import type { SugerenciaRepaso } from "@/types/contratos";
+import { ErrorApi, crearTarea, proponerTareaIA, sugerirRepasoIA } from "@/lib/api-cliente";
+import type { NivelAyuda, SugerenciaRepaso } from "@/types/contratos";
 
 /**
  * "Sugerir repaso": Muse lee el mapa de comprensión de la clase (solo datos agregados, sin nombres)
@@ -117,6 +117,7 @@ export function RepasoIA({
                 <AsignarActividad
                   claseId={claseId}
                   concepto={a.concepto}
+                  porQue={a.por_que}
                   actividad={a.actividad}
                 />
               </li>
@@ -139,16 +140,19 @@ function fechaPorDefecto() {
 }
 
 /**
- * Convierte una actividad sugerida en una tarea de la clase: el docente elige la fecha y la asigna.
- * Después puede editarla desde el detalle de la tarea.
+ * Convierte una actividad sugerida en una tarea de práctica para los estudiantes: Muse reescribe la
+ * actividad (pensada para el docente) como instrucciones para el estudiante y se crea la tarea con la
+ * fecha elegida. Si la IA no responde, se usa el texto de la actividad. El docente puede editarla después.
  */
 function AsignarActividad({
   claseId,
   concepto,
+  porQue,
   actividad,
 }: {
   claseId: string;
   concepto: string;
+  porQue: string;
   actividad: string;
 }) {
   const t = useTranslations("docente.repaso.asignar");
@@ -166,13 +170,26 @@ function AsignarActividad({
     setCargando(true);
     setError(null);
     try {
-      const tarea = await crearTarea({
-        clase_id: claseId,
+      let contenido = {
         titulo: t("tituloTarea", { concepto }).slice(0, 200),
         instrucciones: actividad,
-        fecha_entrega: new Date(fecha).toISOString(),
         competencias: [concepto],
-        nivel_ayuda: "pistas",
+        nivel_ayuda: "pistas" as NivelAyuda,
+      };
+      try {
+        const p = await proponerTareaIA({
+          clase_id: claseId,
+          tema: t("temaIA", { concepto }).slice(0, 500),
+          detalles: t("detallesIA", { porQue, actividad }).slice(0, 1500),
+        });
+        contenido = { titulo: p.titulo, instrucciones: p.instrucciones, competencias: p.competencias, nivel_ayuda: p.nivel_ayuda };
+      } catch {
+        // Sin IA (límite diario o error): se asigna la actividad tal como la sugirió Muse.
+      }
+      const tarea = await crearTarea({
+        clase_id: claseId,
+        ...contenido,
+        fecha_entrega: new Date(fecha).toISOString(),
         modalidad: "muselearn",
         enlace_externo: null,
         adjuntos: [],
@@ -226,7 +243,7 @@ function AsignarActividad({
           {t("cancelar")}
         </Button>
         <Button type="button" tamano="sm" onClick={asignar} cargando={cargando}>
-          {t("confirmar")}
+          {cargando ? t("creando") : t("confirmar")}
         </Button>
       </div>
     </div>

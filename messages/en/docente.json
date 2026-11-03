@@ -121,14 +121,17 @@
     "asignar": {
       "boton": "Assign as homework",
       "fecha": "Due date",
-      "ayuda": "A task is created in this class with the activity as instructions. You can edit it later.",
+      "ayuda": "Muse turns this activity into practice for your students and creates it in this class. You can edit it later.",
       "confirmar": "Assign",
       "cancelar": "Cancel",
       "tituloTarea": "Review: {concepto}",
       "listo": "Task assigned to the class.",
       "ver": "View task",
       "error": "The task could not be created. Try again.",
-      "errorFecha": "Choose a future date."
+      "errorFecha": "Choose a future date.",
+      "creando": "Muse is creating the practice…",
+      "temaIA": "Review of {concepto}",
+      "detallesIA": "Review practice to do at home, with exercises similar to this class activity. What the reports showed: {porQue} Class activity: {actividad}"
     }
   },
   "vistas": {

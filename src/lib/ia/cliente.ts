@@ -48,7 +48,7 @@ export const ESFUERZO_POR_DEFECTO: Record<FuncionIA, Esfuerzo> = {
   planificar: "low",
   leer_cuaderno: "medium",
   tutor: "high",
-  verificar: "high",
+  verificar: "medium", // una pregunta corta: "high" hacía esperar al estudiante en cada turno
   evaluar: "high",
   ruta: "medium",
   docente: "medium",

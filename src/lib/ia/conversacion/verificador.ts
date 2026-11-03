@@ -5,7 +5,12 @@ import { SISTEMA_EVALUACION, SISTEMA_PREGUNTAS } from "./prompts";
 import { contextoEntrega } from "./servidor";
 
 type Contexto = Awaited<ReturnType<typeof contextoEntrega>>;
-export async function contenidoEntrega(ctx: Contexto) {
+/**
+ * Lo que la IA necesita de la entrega. La lectura de las fotos (visión, lo más lento) se hace una sola vez por
+ * sesión: si ya se guardó en `sesiones_verificacion.cuaderno`, se pasa en `cuadernoGuardado` y no se repite.
+ */
+export async function contenidoEntrega(ctx: Contexto, cuadernoGuardado?: string | null) {
+  if (typeof cuadernoGuardado === "string") return { tarea: ctx.tarea, entrega: ctx.entrega, cuaderno: cuadernoGuardado };
   const fotos = ctx.entrega.adjuntos.filter((a) => a.tipo_mime.startsWith("image/"));
   if (fotos.length > 6) throw new Error("demasiadas_imagenes");
   let cuaderno = "";

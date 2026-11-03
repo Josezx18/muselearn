@@ -26,14 +26,16 @@ export async function POST(request: Request) {
     if ((await verificacionesHoy(ctx.admin, ctx.usuario.id)) >= LIMITES.verificaciones) {
       throw new ErrorConversacion(429, "limite_diario_verificaciones");
     }
-    const pregunta = await siguientePregunta(await contenidoEntrega(ctx), [], ctx.usuario.idioma);
+    const contenido = await contenidoEntrega(ctx);
+    const pregunta = await siguientePregunta(contenido, [], ctx.usuario.idioma);
     const sesion = SesionVerificacion.parse({
       id: crypto.randomUUID(),
       entrega_id: ctx.entrega.id,
       preguntas: [pregunta],
       estado: "en_curso",
     });
-    comprobarEscritura(await ctx.admin.from("sesiones_verificacion").insert(sesion));
+    // Se guarda la lectura del cuaderno para no repetirla en cada respuesta (0014).
+    comprobarEscritura(await ctx.admin.from("sesiones_verificacion").insert({ ...sesion, cuaderno: contenido.cuaderno }));
     comprobarEscritura(await ctx.admin.from("entregas").update({ estado: "verificando" }).eq("id", ctx.entrega.id));
     return Response.json(sesion);
   } catch (e) {

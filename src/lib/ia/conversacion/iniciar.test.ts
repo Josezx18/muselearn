@@ -3,7 +3,7 @@ import { entregasMock } from "@/lib/mocks/tareas";
 import { sesionVerificacionMock } from "@/lib/mocks/conversacion";
 const m = vi.hoisted(() => ({ contexto: vi.fn(), siguiente: vi.fn() }));
 vi.mock("./servidor", () => ({ contextoEntrega: m.contexto, comprobarEscritura: (r: { error: unknown }) => { if (r.error) throw r.error; } }));
-vi.mock("./verificador", () => ({ contenidoEntrega: vi.fn(), siguientePregunta: m.siguiente }));
+vi.mock("./verificador", () => ({ contenidoEntrega: vi.fn(async () => ({ cuaderno: "" })), siguientePregunta: m.siguiente }));
 vi.mock("@/lib/db/limites", () => ({ LIMITES: { verificaciones: 10 }, verificacionesHoy: vi.fn(async () => 0) }));
 import { POST } from "@/app/api/verificacion/iniciar/route";
 const entrega = { ...entregasMock[0], estado: "entregada", entregada_en: "2026-10-29T12:00:00Z" };
@@ -32,6 +32,6 @@ it("crea otra sesión cuando se volvió a entregar después de la sesión anteri
   const nueva = await r.json();
   expect(nueva.id).not.toBe(previa.id);
   expect(nueva.entrega_id).toBe(entrega.id);
-  expect(insert).toHaveBeenCalledWith(nueva);
+  expect(insert).toHaveBeenCalledWith({ ...nueva, cuaderno: "" });
   expect(update).toHaveBeenCalledWith({ estado: "verificando" });
 });

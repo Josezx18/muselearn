@@ -5,7 +5,8 @@ export type TipoAviso =
   | "entrega_devuelta"
   | "comentario"
   | "nota"
-  | "tareas_importadas";
+  | "tareas_importadas"
+  | "entrega_nueva";
 
 export interface CrearAvisoParams {
   usuarioIds: string[];
@@ -124,5 +125,21 @@ export async function avisarEstudianteDeEntrega(entregaId: string, tipo: "coment
     });
   } catch (e) {
     console.warn("[avisos] no se pudo avisar al estudiante:", e instanceof Error ? e.message : e);
+  }
+}
+
+/** Avisa al docente que un estudiante entregó (o volvió a entregar) una tarea. Nunca lanza. */
+export async function avisarDocenteDeEntrega(docenteId: string, tareaId: string, nombreEstudiante: string) {
+  try {
+    const admin = crearClienteAdmin();
+    const { data: tarea } = await admin.from("tareas").select("titulo").eq("id", tareaId).maybeSingle();
+    await crearAviso(admin, {
+      usuarioIds: [docenteId],
+      tipo: "entrega_nueva",
+      titulo: `${nombreEstudiante} entregó: ${tarea?.titulo ?? "una tarea"}`.slice(0, 200),
+      enlace: `/docente/tareas/${tareaId}`,
+    });
+  } catch (e) {
+    console.warn("[avisos] no se pudo avisar al docente:", e instanceof Error ? e.message : e);
   }
 }

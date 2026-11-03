@@ -41,7 +41,8 @@ export async function POST(request: Request) {
     const preguntas = sesion.preguntas.map((p) =>
       p.id === entrada.pregunta_id ? { ...p, respuesta: entrada.respuesta, via: entrada.via } : p,
     );
-    const contenido = await contenidoEntrega(ctx);
+    const cuadernoGuardado = typeof data.cuaderno === "string" ? data.cuaderno : null;
+    const contenido = await contenidoEntrega(ctx, cuadernoGuardado);
     let salida;
     if (preguntas.length < 3) {
       const siguiente = await siguientePregunta(contenido, preguntas, ctx.usuario.idioma);

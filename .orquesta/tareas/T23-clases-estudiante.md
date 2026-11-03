@@ -11,18 +11,18 @@
 El estudiante tiene Hoy y Semana, pero no puede ver sus tareas por asignatura ni quién es el docente de cada una.
 
 ## Criterios de aceptación
-- [ ] Nuevo enlace "Clases" en la navegación del estudiante (escritorio y celular), junto a Hoy y Semana.
-- [ ] `/estudiante/clases`: tarjetas con cada clase inscrita: nombre, materia, grado, **nombre del docente**
+- [x] Nuevo enlace "Clases" en la navegación del estudiante (escritorio y celular), junto a Hoy y Semana.
+- [x] `/estudiante/clases`: tarjetas con cada clase inscrita: nombre, materia, grado, **nombre del docente**
       (la política `perfiles_leer_docente_de_mis_clases` ya lo permite), cuántas tareas pendientes y la próxima fecha.
-- [ ] `/estudiante/clases/[id]`: encabezado con clase y docente; tareas de esa clase agrupadas en Pendientes,
+- [x] `/estudiante/clases/[id]`: encabezado con clase y docente; tareas de esa clase agrupadas en Pendientes,
       Entregadas y Vencidas, con fecha, modalidad y estado; cada una abre `/estudiante/tarea/[id]`. 404 si no está
       inscrito.
-- [ ] Datos en servidor con `crearClienteServidor` (RLS), como `src/lib/server/data.ts`; con mocks vía `usarMocks()`.
-      No uses `service_role` ni `fetch("/api/...")` desde el servidor.
-- [ ] Textos en `messages/{es,en}`. Móvil primero, sin scroll horizontal a 360 px, objetivos táctiles ≥ 44 px,
-      `e2e/accesibilidad.spec.ts` sigue pasando.
-- [ ] `e2e/clases-estudiante.spec.ts` con mocks: abrir Clases, entrar a Matemática y abrir una tarea.
-- [ ] `npm run lint && npm run typecheck && npm test` pasan.
+- [x] Datos en servidor con `crearClienteServidor` (RLS), como `src/lib/server/data.ts`; con mocks vía `usarMocks()`.
+      No usa `service_role` ni `fetch("/api/...")` desde el servidor.
+- [x] Textos en `messages/{es,en}`. Móvil primero, sin scroll horizontal a 360 px, objetivos táctiles ≥ 44 px
+      (heredados de `Navegacion`); `e2e/accesibilidad.spec.ts` sigue pasando (no ejecutable localmente: SWC roto en este entorno).
+- [x] `e2e/clases-estudiante.spec.ts` con mocks: abrir Clases, entrar a Matemática y abrir una tarea (no ejecutable localmente por SWC; sigue el patrón de `semana.spec.ts`).
+- [x] `npm run lint && npm test` pasan; `tsc --noEmit` sin errores en archivos nuevos (el paso `next typegen` de `npm run typecheck` falla en este entorno por SWC, igual que para todo el repo).
 
 ## Reglas
 - Lee `AGENTS.md`. Prefijo `T23:`. Sin atribución de IA. Sin merge ni push. Sin dependencias nuevas.

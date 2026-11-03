@@ -40,6 +40,24 @@
   "irVerificar": "Comprobar lo que aprendí",
   "verInforme": "Ver mi informe de comprensión",
   "entregaDia": "Se entrega: {titulo}",
+  "clases": "Mis clases",
+  "docente": "Docente: {nombre}",
+  "tareasPendientes": "{n} tareas pendientes",
+  "proximaEntrega": "Próxima entrega: {fecha}",
+  "sinProximaEntrega": "Sin próxima entrega",
+  "volverAClases": "Volver a clases",
+  "grupoPendientes": "Pendientes",
+  "grupoEntregadas": "Entregadas",
+  "grupoVencidas": "Vencidas",
+  "estado": {
+    "sinEntregar": "Sin entregar",
+    "pendiente": "Pendiente",
+    "entregada": "Entregada",
+    "verificando": "En verificación",
+    "verificada": "Verificada"
+  },
+  "sinClases": "No estás inscrito en ninguna clase todavía.",
+  "sinTareasEnGrupo": "Sin tareas en este grupo.",
   "comentario": {
     "titulo": "Comentario de tu docente"
   },

@@ -27,6 +27,7 @@ Estados: ⬜ sin empezar · 🟦 trabajando · 🟨 bloqueado · 🟩 lista para
 | T18 | Pruebas RLS | Codex | t18-rls | ✅ | H01 corregido con 0011; 214/214 RLS según relevo. |
 | T19 | Arreglos del ensayo | Codex | t19-ensayo | 🟨 | Sin fallos funcionales confirmados en el ensayo automatizado; falta ensayo físico y persistencia autenticada. |
 | T20 | Rendimiento móvil | OpenCode + T07 | t20-rendimiento | ✅ | Integrada localmente con correcciones T07. Medianas Lighthouse: Hoy 93 / Tarea 90 / Comprensión 96; A11y 100. 245 unitarias y flujos afectados verificados. Sin publicar. |
+| T23 | Mis clases estudiante | OpenCode | t23-clases-estudiante | 🟩 | Criterios completados: navegación Clases, listado y detalle con entregas. lint OK, 251 pruebas unitarias, tsc limpio; e2e/a11y y typegen no ejecutables localmente (SWC roto en el entorno). Revisar en CI. |
 
 | T21 | Revisi?n de entregas con IA | Codex | t21-revision | ?? | Implementaci?n y pruebas en curso. |
 | T22 | Perfil del estudiante | Codex | t22-perfil-estudiante | 🟩 lista para integrar | Perfil por clase con sesión/RLS, resumen e historial es/en; lint/tipos, 247 unitarias y 6 e2e OK. Sin push. |

@@ -103,3 +103,4 @@ Formato: `- AAAA-MM-DD HH:MM [Txx] qué se hizo / qué falta / decisión tomada`
 ## Mejoras propuestas por T22
 - Considerar un registro de eventos de devolución si se necesita saber si una entrega fue devuelta antes de corregirse: el esquema actual conserva solo el estado vigente.
 - Para clases con muchas tareas, añadir filtros por periodo o paginación al historial.
+- 2026-11-03 [T23] "Mis clases" para el estudiante: enlace Clases en navegación (layout + Navegacion con clave ya existente), páginas /estudiante/clases y /estudiante/clases/[id] con 404 si no inscrito, componentes TarjetaClase/MisClases/DetalleClase, funciones obtenerMisClases y obtenerTareasDeClase en src/lib/server/data.ts con RLS y mocks, textos es/en, pruebas unitarias y e2e. lint OK, 251 pruebas unitarias OK, tsc limpio en archivos nuevos. e2e y next typegen no ejecutables localmente (SWC nativo roto por DACL de Windows en todo el repo). Rama t23-clases-estudiante, sin push.

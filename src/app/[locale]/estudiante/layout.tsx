@@ -8,6 +8,7 @@ import { usarMocks } from "@/lib/api-cliente";
 const items: ItemNav[] = [
   { href: "/estudiante/hoy", clave: "hoy" },
   { href: "/estudiante/semana", clave: "semana" },
+  { href: "/estudiante/clases", clave: "clases" },
 ];
 
 export default async function LayoutEstudiante({ children, params }: LayoutProps<"/[locale]/estudiante">) {

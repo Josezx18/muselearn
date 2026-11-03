@@ -40,6 +40,24 @@
   "irVerificar": "Check what I learned",
   "verInforme": "See my understanding report",
   "entregaDia": "Due: {titulo}",
+  "clases": "My classes",
+  "docente": "Teacher: {nombre}",
+  "tareasPendientes": "{n} pending tasks",
+  "proximaEntrega": "Next delivery: {fecha}",
+  "sinProximaEntrega": "No upcoming delivery",
+  "volverAClases": "Back to classes",
+  "grupoPendientes": "Pending",
+  "grupoEntregadas": "Handed in",
+  "grupoVencidas": "Overdue",
+  "estado": {
+    "sinEntregar": "Not handed in",
+    "pendiente": "Pending",
+    "entregada": "Handed in",
+    "verificando": "Verifying",
+    "verificada": "Verified"
+  },
+  "sinClases": "You are not enrolled in any class yet.",
+  "sinTareasEnGrupo": "No tasks in this group.",
   "comentario": {
     "titulo": "Your teacher's comment"
   },

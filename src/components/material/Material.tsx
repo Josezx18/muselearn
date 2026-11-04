@@ -1,4 +1,5 @@
 "use client";
+import { Formatos } from "./Formatos";
 import { useEffect, useId, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Button, Card } from "@/components/ui";
@@ -26,12 +27,12 @@ export function Material({ tareaId, docente = false }: { tareaId: string; docent
     return () => { activo = false; };
   }, [tareaId, docente, t, recarga]);
 
-  async function actuar(accion: "generar" | "guardar" | "publicar" | "borrar") {
+  async function actuar(accion: "generar" | "guardar" | "publicar" | "borrar", formato: import("@/types/contratos").FormatoMaterial = "guia") {
     if (ocupado) return;
     setOcupado(true); setError(""); setAviso(""); voz.callar();
     try {
       let r: MaterialGuardado | null;
-      if (accion === "generar") r = await generarMaterialEstudio(tareaId);
+      if (accion === "generar") r = await generarMaterialEstudio(tareaId, formato);
       else if (accion === "borrar") { await borrarMaterial(tareaId); r = null; }
       else {
         const validacion = MaterialEstudio.safeParse(contenido);
@@ -61,6 +62,7 @@ export function Material({ tareaId, docente = false }: { tareaId: string; docent
       <p className="my-3 text-tinta-suave">{t("revisar")}</p>
       {registro && <p className="mb-3 font-bold">{t(registro.publicado ? "publicado" : "borrador")}</p>}
       <Button disabled={ocupado || !!error && !registro} onClick={() => void actuar("generar")}>{t(registro ? "crearOtro" : "crear")}</Button>
+      {(["diapositivas", "mapa", "infografia"] as const).map(f => <Button key={f} disabled={ocupado || !!error && !registro} onClick={() => void actuar("generar", f)}>{contenido?.[f] ? t("regenerar", { formato: t(f) }) : `✦ ${t(f)}`}</Button>)}
       {registro && <p className="mt-2 text-sm text-tinta-suave">{t("reemplazar")}</p>}
     </>}
     {contenido && <div className="mt-4 space-y-4">
@@ -86,7 +88,7 @@ export function Material({ tareaId, docente = false }: { tareaId: string; docent
           <Button variante="secundario" disabled={ocupado} onClick={() => void actuar("borrar")}>{t("borrar")}</Button>
         </div>
       </> : <>
-        <h3 className="font-bold">{contenido.titulo}</h3><p className="whitespace-pre-wrap">{contenido.resumen}</p>
+        <h3 className="font-bold">{t("guia")}</h3><h4 className="font-bold">{contenido.titulo}</h4><p className="whitespace-pre-wrap">{contenido.resumen}</p>
         <h3 className="font-bold">{t("conceptos")}</h3>
         {contenido.conceptos.map((c, i) => <Card key={i}><h4 className="font-bold">{c.nombre}</h4><p className="mt-2 whitespace-pre-wrap">{c.explicacion}</p><p className="mt-2 whitespace-pre-wrap"><strong>{t("ejemplo")}: </strong>{c.ejemplo}</p></Card>)}
         <h3 className="font-bold">{t("errores")}</h3>
@@ -95,6 +97,7 @@ export function Material({ tareaId, docente = false }: { tareaId: string; docent
         <p>{t("tocar")}</p>
         {contenido.autoevaluacion.map((a, i) => <details key={i} className="rounded-xl border-2 border-borde p-3"><summary className="flex min-h-11 cursor-pointer items-center font-bold">{a.pregunta}</summary><p className="mt-3 whitespace-pre-wrap">{a.respuesta}</p></details>)}
       </>}
+      <Formatos contenido={contenido} docente={docente} ocupado={ocupado} cambiar={setContenido} />
       <Button className="min-h-12 w-full sm:w-auto" disabled={!voz.disponible || ocupado} onClick={() => voz.hablando ? voz.callar() : voz.hablar(contenido.guion_audio, { forzar: true })}>{t(voz.hablando ? "detener" : "escuchar")}</Button>
       {!voz.disponible && <p className="text-sm">{t("sinVoz")}</p>}
     </div>}

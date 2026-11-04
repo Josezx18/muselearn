@@ -292,3 +292,16 @@
   40% { transform: scale(1.12) rotate(-10deg); }
   100% { transform: scale(1) rotate(0); }
 }
+
+@media print {
+  html[data-material-imprimir] body *:not(.material-formato[data-imprimiendo]):not(.material-formato[data-imprimiendo] *):not(:has(.material-formato[data-imprimiendo])) { display: none !important; }
+  html[data-material-imprimir] body * { visibility: hidden !important; }
+  html[data-material-imprimir] .material-formato[data-imprimiendo], html[data-material-imprimir] .material-formato[data-imprimiendo] * { visibility: visible !important; }
+  html[data-material-imprimir] .material-formato[data-imprimiendo] { position: absolute; inset: 0; width: 100%; }
+  html[data-material-imprimir] .material-formato > div { max-height: none; overflow: visible; }
+  html[data-material-imprimir] .material-diapositiva { display: block !important; break-after: page; overflow: visible; }
+  html[data-material-imprimir] .material-controles { display: none !important; }
+  html[data-material-imprimir] .material-formato svg[role="img"] { display: none !important; }
+  html[data-material-imprimir] .material-mapa-texto { position: static; width: auto; height: auto; margin: 0; overflow: visible; clip: auto; white-space: normal; }
+
+}

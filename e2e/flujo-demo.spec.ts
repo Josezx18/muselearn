@@ -18,11 +18,12 @@ function vigilarErrores(page: Page) {
 }
 
 test.describe("estudiante", () => {
-  test("Hoy muestra lo próximo, avisos y entregas", async ({ page }) => {
+  test("Hoy muestra lo próximo y los bloques, sin la lista de entregas", async ({ page }) => {
     const errores = vigilarErrores(page);
     await page.goto("/es/estudiante/hoy");
     await expect(page.getByRole("heading", { name: "Lo próximo que te toca" })).toBeVisible();
-    await expect(page.getByRole("heading", { name: "Entregas próximas" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Bloques del día" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Entregas próximas" })).toHaveCount(0);
     await expect(page.getByRole("button", { name: "Reorganizar mi semana" })).toBeEnabled();
     await sinScrollHorizontal(page);
     expect(errores).toEqual([]);

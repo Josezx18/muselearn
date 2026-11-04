@@ -66,7 +66,6 @@ test("guion: crear con IA → organizar → voz → evidencia Classroom → expl
   await test.step("Estudiante: Hoy y conversación al tocar la mascota", async () => {
     await page.goto("/es/estudiante/hoy");
     await expect(page.getByRole("heading", { name: "Lo próximo que te toca" })).toBeVisible();
-    await page.locator("summary").first().click();
     await pantalla(page, info, "02-hoy");
     await page.getByRole("button", { name: "Tócame para hablar conmigo", exact: true }).filter({ visible: true }).first().click();
     await expect(page.getByRole("heading", { name: "Conversación con tu tutor" })).toBeVisible();

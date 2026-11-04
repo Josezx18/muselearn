@@ -7,7 +7,6 @@ import { Link } from "@/i18n/navigation";
 import { actualizarBloque, obtenerPlan, recalcularPlan } from "@/lib/api-cliente";
 import { Button, Card, Skeleton } from "@/components/ui";
 import type { Usuario, PlanSemanal, Tarea, AnalisisTarea, Clase, BloquePlan, EstadoBloque } from "@/types/contratos";
-import { TarjetaTarea } from "./TarjetaTarea";
 import { enlaceDeBloque } from "@/lib/practica";
 import dynamic from "next/dynamic";
 
@@ -29,7 +28,7 @@ interface DashboardProps {
   offsetMin: number;
 }
 
-export function Dashboard({ vista, usuario, plan: planInicial, tareas: tareasIniciales, analisis: analisisInicial, clases: clasesIniciales, semana: semanaInicial, ahora: ahoraInicial, offsetMin }: DashboardProps) {
+export function Dashboard({ vista, usuario, plan: planInicial, tareas: tareasIniciales, clases: clasesIniciales, semana: semanaInicial, ahora: ahoraInicial, offsetMin }: DashboardProps) {
   const t = useTranslations("estudiante");
   const locale = useLocale();
   const tm = useTranslations("mascota.hoy");
@@ -37,7 +36,6 @@ export function Dashboard({ vista, usuario, plan: planInicial, tareas: tareasIni
   const [semanaPendiente, setSemanaPendiente] = useState(semanaInicial);
   const [plan, setPlan] = useState<PlanSemanal | null>(planInicial);
   const [tareas] = useState<Tarea[]>(tareasIniciales);
-  const [analisis] = useState<AnalisisTarea[]>(analisisInicial);
   const [clases] = useState<Clase[]>(clasesIniciales);
   const [cargando, setCargando] = useState(planInicial === null);
   const [error, setError] = useState(false);
@@ -120,22 +118,9 @@ export function Dashboard({ vista, usuario, plan: planInicial, tareas: tareasIni
   const bloques = [...(plan?.bloques ?? [])].sort((a, b) => a.inicio.localeCompare(b.inicio));
   const proximo = bloques.find((b) => b.estado === "planificado" && new Date(b.fin) > hoy);
   const delDia = (dia: string) => bloques.filter((b) => diaCentro(b.inicio, offsetMin) === dia);
-  const proximasEntregas = [...tareas]
-    .filter((ta) => diaCentro(ta.fecha_entrega, offsetMin) >= diaHoy)
-    .sort((a, b) => a.fecha_entrega.localeCompare(b.fecha_entrega))
-    .slice(0, 6);
   const hora = (iso: string) => formatearCentro(iso, locale, { hour: "2-digit", minute: "2-digit" }, offsetMin);
   const minutos = (b: BloquePlan) => Math.round((Date.parse(b.fin) - Date.parse(b.inicio)) / 60000);
   const materiaDe = (tareaId: string) => clases.find((c) => c.id === tareas.find((x) => x.id === tareaId)?.clase_id)?.materia;
-  const tarjeta = (ta: Tarea) => (
-    <TarjetaTarea
-      key={ta.id}
-      tarea={ta}
-      analisis={analisis.find((a) => a.tarea_id === ta.id)}
-      materia={clases.find((c) => c.id === ta.clase_id)?.materia}
-      offsetMin={offsetMin}
-    />
-  );
 
   function fila(b: BloquePlan) {
     const hecho = b.estado === "hecho";
@@ -303,12 +288,6 @@ export function Dashboard({ vista, usuario, plan: planInicial, tareas: tareasIni
                   )}
                 </section>
 
-                <section aria-labelledby="titulo-entregas">
-                  <h2 id="titulo-entregas" className="text-2xl font-extrabold">
-                    {t("entregas")}
-                  </h2>
-                  <div className="mt-3 grid gap-3 sm:grid-cols-2">{proximasEntregas.map(tarjeta)}</div>
-                </section>
               </>
             ) : (
               <>

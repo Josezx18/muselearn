@@ -8,13 +8,13 @@ const oyentes = new Set<() => void>();
 
 /** Preferencias locales compartidas por todas las salidas de voz. */
 export interface PreferenciasVoz { voces: Record<string, string>; velocidad: number; pausaMs: number }
-export function leerPreferenciasVoz(): PreferenciasVoz {
-  const defecto = { voces: {}, velocidad: 1, pausaMs: 1300 };
+export function leerPreferenciasVoz(pausaDefecto = 1300): PreferenciasVoz {
+  const defecto = { voces: {}, velocidad: 1, pausaMs: pausaDefecto };
   try {
     const p = JSON.parse(localStorage.getItem("muselearn-voz-ajustes") ?? "null") as {voces?: unknown; velocidad?: unknown; pausaMs?: unknown} | null;
     return { voces: typeof p?.voces === "object" && p.voces !== null ? Object.fromEntries(Object.entries(p.voces).filter((entrada): entrada is [string, string] => typeof entrada[1] === "string")) : {},
       velocidad: typeof p?.velocidad === "number" && p.velocidad >= 0.8 && p.velocidad <= 1.3 ? p.velocidad : 1,
-      pausaMs: typeof p?.pausaMs === "number" && p.pausaMs >= 1000 && p.pausaMs <= 2000 ? p.pausaMs : 1300 };
+      pausaMs: typeof p?.pausaMs === "number" && p.pausaMs >= 1000 && p.pausaMs <= 2000 ? p.pausaMs : pausaDefecto };
   } catch { return defecto; }
 }
 export function guardarPreferenciasVoz(p: PreferenciasVoz): boolean {
@@ -91,6 +91,7 @@ export function useVozSalida(locale: string) {
   const activa = useSyncExternalStore(suscribir, leerActiva, () => false);
   const [hablando, setHablando] = useState(false);
   const voz = useRef<SpeechSynthesisVoice | null>(null);
+  const cancelarLectura = useRef<() => void>(() => {});
   const idioma: "es" | "en" = locale === "en" ? "en" : "es";
 
   useEffect(() => {
@@ -106,6 +107,7 @@ export function useVozSalida(locale: string) {
     elegir();
     window.speechSynthesis.addEventListener("voiceschanged", elegir);
     return () => {
+      cancelarLectura.current();
       window.speechSynthesis.removeEventListener("voiceschanged", elegir);
       window.speechSynthesis.cancel();
     };
@@ -113,6 +115,7 @@ export function useVozSalida(locale: string) {
 
   const callar = useCallback(() => {
     if (!disponible) return;
+    cancelarLectura.current();
     window.speechSynthesis.cancel();
     setHablando(false);
   }, [disponible]);
@@ -122,10 +125,11 @@ export function useVozSalida(locale: string) {
    * `alTerminar` se llama al acabar o si la voz falla. Devuelve false si no se pudo leer.
    */
   const hablar = useCallback(
-    (texto: string, opciones: { forzar?: boolean; alTerminar?: () => void } = {}): boolean => {
+    (texto: string, opciones: { forzar?: boolean; respaldo?: boolean; alTerminar?: () => void; alPalabra?: () => void } = {}): boolean => {
       if (!disponible || (!opciones.forzar && !leerActiva())) return false;
       const limpio = textoParaVoz(texto);
       if (!limpio) return false;
+      cancelarLectura.current();
       window.speechSynthesis.cancel();
       const u = new SpeechSynthesisUtterance(limpio);
       u.lang = voz.current?.lang ?? (idioma === "es" ? "es-US" : "en-US");
@@ -135,15 +139,23 @@ export function useVozSalida(locale: string) {
       if (elegida) { u.voice = elegida; u.lang = elegida.lang; }
       u.rate = preferencias.velocidad;
       u.pitch = 1.05;
-      u.onstart = () => setHablando(true);
-      u.onend = () => {
+      let terminado = false;
+      const terminar = () => {
+        if (terminado) return;
+        terminado = true;
+        clearTimeout(reloj);
         setHablando(false);
         opciones.alTerminar?.();
       };
-      u.onerror = () => {
-        setHablando(false);
-        opciones.alTerminar?.();
-      };
+      cancelarLectura.current = () => { terminado = true; clearTimeout(reloj); };
+      u.onstart = () => { if (!terminado) setHablando(true); };
+      u.onboundary = () => { if (!terminado) opciones.alPalabra?.(); };
+      u.onend = terminar;
+      u.onerror = terminar;
+      // Android puede omitir onend. Los fragmentos de conversación duran menos de ~15 s.
+      const reloj = opciones.respaldo
+        ? setTimeout(() => { if (!terminado) { window.speechSynthesis.cancel(); terminar(); } }, Math.min(30000, Math.max(4000, limpio.length * 90 / u.rate + 2000)))
+        : undefined;
       window.speechSynthesis.speak(u);
       return true;
     },

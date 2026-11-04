@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 /** Orbe decorativo: el estado accesible se anuncia una sola vez junto al control. */
 export function Orbe({ estado, volumen, palabra }: { estado: string; volumen: number; palabra: number }) {

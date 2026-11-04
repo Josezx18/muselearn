@@ -366,3 +366,30 @@ export const RevisionGuardada = z.object({
   creada_en: FechaHora,
 });
 export type RevisionGuardada = z.infer<typeof RevisionGuardada>;
+// ---------- Material de estudio (T28) ----------
+export const MaterialEstudio = z.object({
+  titulo: z.string().trim().min(2).max(160),
+  resumen: z.string().trim().min(30).max(1600),
+  conceptos: z.array(z.object({
+    nombre: z.string().trim().min(1).max(160),
+    explicacion: z.string().trim().min(10).max(2000),
+    ejemplo: z.string().trim().min(10).max(2000),
+  })).min(1).max(8),
+  errores_comunes: z.array(z.string().trim().min(5).max(600)).min(1).max(8),
+  autoevaluacion: z.array(z.object({
+    pregunta: z.string().trim().min(5).max(500),
+    respuesta: z.string().trim().min(5).max(1000),
+  })).min(3).max(6),
+  guion_audio: z.string().trim().min(400).max(2400),
+});
+export type MaterialEstudio = z.infer<typeof MaterialEstudio>;
+export const MaterialGuardado = z.object({
+  tarea_id: z.string().uuid(), contenido: MaterialEstudio, publicado: z.boolean(),
+  creado_en: FechaHora, actualizado_en: FechaHora,
+});
+export type MaterialGuardado = z.infer<typeof MaterialGuardado>;
+export const PedidoMaterial = z.object({ tarea_id: z.string().uuid() }).strict();
+export const EdicionMaterial = z.object({
+  contenido: MaterialEstudio.optional(), publicado: z.boolean().optional(),
+}).strict().refine(v => v.contenido !== undefined || v.publicado !== undefined, "sin_cambios");
+export type EdicionMaterial = z.infer<typeof EdicionMaterial>;

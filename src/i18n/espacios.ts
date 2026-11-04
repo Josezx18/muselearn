@@ -1,6 +1,7 @@
 // Espacios de nombres de traducción. Cada módulo es dueño de su archivo en messages/{es,en}/.
 // Para usar: const t = useTranslations("tareas");  →  t("titulo")
 export const espacios = [
+  "material", // T28
   "comun", // T00 (congelado)
   "auth", // T01
   "clases", // T01

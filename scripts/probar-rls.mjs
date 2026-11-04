@@ -6,6 +6,8 @@ import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createServer } from 'node:net';
 import { casos, datos } from '../supabase/pruebas-rls/casos.mjs';
+import { casosMaterial, datosMaterial } from '../supabase/pruebas-rls/material.mjs';
+casos.push(...casosMaterial);
 
 const raiz = fileURLToPath(new URL('../', import.meta.url));
 const windows = process.platform === 'win32';
@@ -53,7 +55,10 @@ try {
   const migraciones = readdirSync(resolve(raiz, 'supabase/migrations')).filter((f) => /^\d{4}_.*\.sql$/.test(f)).sort();
   if (migraciones.length < 11) throw new Error('Faltan migraciones: se esperan 0001 en adelante');
   for (const archivo of migraciones) exigir(sql(readFileSync(resolve(raiz, 'supabase/migrations', archivo), 'utf8')));
+  // T28: repetir únicamente la migración nueva prueba su idempotencia en el clúster temporal.
+  exigir(sql(readFileSync(resolve(raiz, 'supabase/migrations/0017_material_estudio.sql'), 'utf8')));
   exigir(sql(datos));
+  exigir(sql(datosMaterial));
   console.log(`PostgreSQL local: 10 migraciones completas; ${casos.length} casos aislados con ROLLBACK.`);
   const resultados = [];
   for (const caso of casos) {

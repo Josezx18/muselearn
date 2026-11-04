@@ -37,5 +37,5 @@ export async function exigirRol(rol: Rol, locale: string) {
   if (actual.terminos.aplica && debeAceptarTerminos(actual.terminos.version)) {
     return redirect({ href: "/aceptar-terminos", locale });
   }
-  return { ...actual.usuario, ...actual.apariencia };
+  return { ...actual.usuario, ...actual.apariencia, correo: actual.correo };
 }

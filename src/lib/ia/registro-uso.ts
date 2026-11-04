@@ -1,3 +1,4 @@
+import { after } from "next/server";
 import type { FuncionIA, IdProveedor } from "./cliente";
 
 export interface UsoIA {
@@ -19,11 +20,24 @@ export const registrarUso: RegistradorUso = async (uso) => {
   await insertarUso(uso);
 };
 
-/** Nunca propaga errores ni espera a la base de datos. No guarda mensajes ni errores del SDK. */
+/**
+ * Nunca propaga errores ni hace esperar al usuario. No guarda mensajes ni errores del SDK.
+ * Dentro de una petición se agenda con `after()`: Vercel mantiene viva la función hasta guardarlo (una promesa
+ * suelta se cortaba al terminar la respuesta y el registro se perdía). Fuera de una petición (pruebas, scripts),
+ * se lanza sin esperar.
+ */
 export function registrarSinEsperar(registrar: RegistradorUso, uso: UsoIA): void {
-  void Promise.resolve().then(() => registrar(uso)).catch(() => {
-    console.warn("[uso-ia] no se pudo guardar el registro");
-  });
+  const guardar = () =>
+    Promise.resolve()
+      .then(() => registrar(uso))
+      .catch(() => {
+        console.warn("[uso-ia] no se pudo guardar el registro");
+      });
+  try {
+    after(guardar);
+  } catch {
+    void guardar();
+  }
 }
 
 /** Los mensajes del SDK pueden contener prompts, respuestas o credenciales: solo códigos seguros. */

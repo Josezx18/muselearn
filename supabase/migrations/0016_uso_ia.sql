@@ -7,7 +7,7 @@ create table if not exists public.uso_ia (
   modelo text not null,
   tokens_entrada bigint check (tokens_entrada >= 0),
   tokens_salida bigint check (tokens_salida >= 0),
-  audio_ms bigint check (audio_ms >= 0 and funcion = 'voz'),
+  audio_ms bigint,
   stream boolean not null default false,
   ok boolean not null,
   error varchar(300),

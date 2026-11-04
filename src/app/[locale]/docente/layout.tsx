@@ -4,6 +4,7 @@ import { SincronizarApariencia } from "@/components/cuenta/SincronizarApariencia
 import { usuariosMock } from "@/lib/mocks/clases";
 import { exigirRol } from "@/lib/db/sesion";
 import { usarMocks } from "@/lib/api-cliente";
+import { esAdmin } from "@/lib/db/uso-ia";
 
 const items: ItemNav[] = [
   { href: "/docente/clases", clave: "clases" },
@@ -15,12 +16,12 @@ export default async function LayoutDocente({ children, params }: LayoutProps<"/
   const { locale } = await params;
   // T01: sin sesión → login; otro rol → su inicio. En modo mocks, un usuario ficticio.
   const usuario = usarMocks()
-    ? { ...(usuariosMock.find((u) => u.rol === "docente") ?? usuariosMock[0]), tema: null, mascota: null }
+    ? { ...(usuariosMock.find((u) => u.rol === "docente") ?? usuariosMock[0]), tema: null, mascota: null, correo: "" }
     : await exigirRol("docente", locale);
   return (
     <>
       {usuario.tema && usuario.mascota && <SincronizarApariencia tema={usuario.tema} mascota={usuario.mascota} />}
-      <Navegacion items={items} accion={<MenuUsuario nombre={usuario.nombre} rol="docente" />} />
+      <Navegacion items={items} accion={<MenuUsuario nombre={usuario.nombre} rol="docente" esAdmin={esAdmin(usuario.correo)} />} />
       <main className="mx-auto w-full max-w-5xl flex-1 px-4 pb-28 pt-6 sm:pb-12">{children}</main>
     </>
   );

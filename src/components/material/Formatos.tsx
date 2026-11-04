@@ -41,9 +41,51 @@ export function Formatos({ contenido, docente, ocupado, cambiar }: { contenido: 
         </div>
         <div className="material-controles mt-3 flex flex-wrap items-center gap-3"><Button disabled={actual === 0} onClick={() => setIndice(actual-1)}>{t("anterior")}</Button><span role="status">{actual+1} / {ds.length}</span><Button disabled={actual === ds.length-1} onClick={() => setIndice(actual+1)}>{t("siguiente")}</Button><Button onClick={() => { setError(false); const p = document.fullscreenElement ? document.exitFullscreen?.() : visor.current?.requestFullscreen?.(); if(p) void p.catch(() => setError(true)); else setError(true); }}>{t("pantalla")}</Button>{error && <p role="alert">{t("errorPantalla")}</p>}</div>
       </div>}
-      {f === "mapa" && mapa && <><svg role="img" aria-labelledby={`${id}-mapa`} viewBox={`0 0 700 ${mapa.ramas.length*260}`} className="hidden w-full min-[481px]:block"><title id={`${id}-mapa`}>{mapa.central}</title><rect x="5" y={mapa.ramas.length*130-100} width="170" height="200" rx="15" fill="var(--color-superficie)" stroke="currentColor"/><foreignObject x="10" y={mapa.ramas.length*130-90} width="160" height="180"><p className="break-words p-2 text-xl font-bold">{mapa.central}</p></foreignObject>{mapa.ramas.map((r,i) => <g key={i}><path d={`M175,${mapa.ramas.length*130} H185 V${i*260+120} H340`} fill="none" stroke="currentColor"/><foreignObject x="195" y={i*260+10} width="140" height="105"><p className="break-words text-base">{r.relacion}</p></foreignObject><rect x="340" y={i*260+5} width="350" height="245" rx="12" fill="var(--color-superficie)" stroke="currentColor"/><foreignObject x="345" y={i*260+10} width="340" height="235"><div className="break-words p-2 text-lg"><strong>{r.concepto}</strong><ul className="mt-2 list-disc space-y-2 pl-4">{r.hijos.map((h,j) => <li key={j}>{h.relacion} → {h.concepto}</li>)}</ul></div></foreignObject></g>)}</svg><div className="material-mapa-texto space-y-3"><h4 className="font-bold">{mapa.central}</h4>{listaMapa}</div></>}
+      {f === "mapa" && mapa && <><MapaSvg mapa={mapa} id={id} /><div className="material-mapa-texto space-y-3 min-[481px]:sr-only"><h4 className="font-bold">{mapa.central}</h4>{listaMapa}</div></>}
       {f === "infografia" && inf && <article className="space-y-5 rounded-2xl border-2 border-borde bg-superficie p-4 sm:p-8"><h4 className="text-2xl font-extrabold text-primario">{inf.titulo}</h4>{inf.dato_clave && <p className="rounded-xl border-2 border-borde p-5"><strong className="block text-5xl">{inf.dato_clave.valor}</strong>{inf.dato_clave.texto}</p>}<div className="grid gap-4 sm:grid-cols-2">{inf.secciones.map((s,i) => <section key={i} className="rounded-xl border border-borde p-4"><svg aria-hidden="true" width="32" height="32" viewBox="0 0 32 32" className="text-primario"><circle cx="16" cy="16" r="13" fill="none" stroke="currentColor" strokeWidth="2"/><path d={({idea:"M16 7v12m-4 5h8",pasos:"M9 10h14M9 16h14M9 22h14",alerta:"M16 8v12m0 3v2",ejemplo:"M9 9h14v14H9z",pregunta:"M12 12a4 4 0 118 0c0 4-4 3-4 7m0 3v2",meta:"M8 24V8l16 4-16 5"})[s.icono]} fill="none" stroke="currentColor" strokeWidth="2"/></svg><h5 className="mt-2 font-bold">{s.titulo}</h5><p>{s.texto}</p></section>)}</div>{inf.pasos && <ol className="list-decimal space-y-3 pl-6">{inf.pasos.map((p,i) => <li key={i}>{p}</li>)}</ol>}<p className="border-t-2 border-borde pt-4 font-bold">{inf.cierre}</p></article>}
       </div>
     </section>)}
   </div>;
+}
+
+/** Mapa conceptual dibujado en SVG: concepto central a la izquierda, ramas a la derecha con la relación sobre la línea. */
+function MapaSvg({ mapa, id }: { mapa: NonNullable<MaterialEstudio["mapa"]>; id: string }) {
+  const ANCHO = 720, X_RAMA = 360, ANCHO_RAMA = 340, SEP = 18;
+  const alturas = mapa.ramas.map((r) => 56 + r.hijos.length * 30);
+  const total = alturas.reduce((a, b) => a + b + SEP, -SEP);
+  const ys: number[] = [];
+  alturas.reduce((y, h) => { ys.push(y); return y + h + SEP; }, 0);
+  const altoCentral = 96;
+  const yCentral = Math.max(0, total / 2 - altoCentral / 2);
+  const alto = Math.max(total, altoCentral);
+  return (
+    <svg role="img" aria-labelledby={`${id}-mapa`} viewBox={`0 0 ${ANCHO} ${alto}`} className="hidden w-full min-[481px]:block">
+      <title id={`${id}-mapa`}>{mapa.central}</title>
+      {mapa.ramas.map((r, i) => {
+        const yMedio = ys[i] + alturas[i] / 2;
+        const x0 = 200, y0 = yCentral + altoCentral / 2;
+        return (
+          <g key={i}>
+            <path d={`M${x0},${y0} C${x0 + 70},${y0} ${X_RAMA - 70},${yMedio} ${X_RAMA},${yMedio}`} fill="none" stroke="var(--color-primario)" strokeWidth="2" opacity="0.6" />
+            <foreignObject x={x0 + 8} y={(y0 + yMedio) / 2 - 22} width={X_RAMA - x0 - 16} height="44">
+              <p className="text-center text-xs font-semibold leading-tight text-tinta-suave">{r.relacion}</p>
+            </foreignObject>
+            <rect x={X_RAMA} y={ys[i]} width={ANCHO_RAMA} height={alturas[i]} rx="14" fill="var(--color-primario-claro)" stroke="var(--color-primario)" strokeWidth="1.5" />
+            <foreignObject x={X_RAMA + 6} y={ys[i] + 4} width={ANCHO_RAMA - 12} height={alturas[i] - 8}>
+              <div className="px-2 py-1 text-tinta">
+                <p className="font-bold leading-snug">{r.concepto}</p>
+                <ul className="mt-1 space-y-1 text-sm leading-snug">
+                  {r.hijos.map((h, j) => <li key={j}><span className="text-tinta-suave">{h.relacion}</span> → <strong className="font-semibold">{h.concepto}</strong></li>)}
+                </ul>
+              </div>
+            </foreignObject>
+          </g>
+        );
+      })}
+      <rect x="0" y={yCentral} width="200" height={altoCentral} rx="48" fill="var(--color-primario)" />
+      <foreignObject x="10" y={yCentral + 6} width="180" height={altoCentral - 12}>
+        <div className="grid h-full place-items-center px-2 text-center text-lg font-extrabold leading-tight text-white">{mapa.central}</div>
+      </foreignObject>
+    </svg>
+  );
 }

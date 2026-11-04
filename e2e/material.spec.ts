@@ -68,7 +68,8 @@ test("docente crea, edita, publica; estudiante repasa y escucha", async ({ page 
     document.documentElement.setAttribute("data-material-imprimir", "prueba");
     document.querySelector('[data-material-formato$="-diapositivas"]')?.setAttribute("data-imprimiendo", "");
   });
-  for (const diapositiva of await page.locator(".material-diapositiva").all()) await expect(diapositiva).toBeVisible();
+  // Al imprimir, todas las diapositivas se muestran (una por página), no solo la actual.
+  await expect.poll(() => page.evaluate(() => [...document.querySelectorAll(".material-diapositiva")].every((e) => getComputedStyle(e).display !== "none"))).toBe(true);
   await expect(seccion.getByRole("button",{name:"Siguiente",exact:true})).toBeHidden();
   await expect(page.getByRole("heading",{name:"Instrucciones",exact:true})).toBeHidden();
   await page.screenshot({path:test.info().outputPath("diapositivas-impresion.png"),fullPage:true});

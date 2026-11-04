@@ -14,7 +14,7 @@ export const LIMITES = {
   docenteIA: numero(process.env.LIMITE_IA_DOCENTE_DIA, 40),
 } as const;
 
-export type FuncionIADocente = "proponer_tarea" | "sugerir_repaso" | "borrador_comentario";
+export type FuncionIADocente = "proponer_tarea" | "sugerir_repaso" | "borrador_comentario" | "material_estudio";
 
 /** Tabla aún no creada (migración 0007 sin aplicar): el tope no bloquea, solo se avisa en el registro. */
 const sinTabla = (e: { code?: string } | null) => e?.code === "42P01" || e?.code === "PGRST205";

@@ -589,3 +589,36 @@ export async function obtenerDetalleRevision(id: string) {
   return usarMocks() && detalle.adjuntos.length === 0
     ? DetalleEntrega.parse({ ...detalle, adjuntos: [fotoRevisionMock] }) : detalle;
 }
+
+// ---------------- T28 — material de estudio ----------------
+import { MaterialGuardado, EdicionMaterial, PedidoMaterial } from "@/types/contratos";
+import { materialMock, leerMaterialMock, guardarMaterialMock, borrarMaterialMock } from "./mocks/material";
+export async function obtenerMaterial(tareaId: string, estudiante = false) {
+  PedidoMaterial.parse({ tarea_id: tareaId });
+  if (usarMocks()) {
+    const registro = leerMaterialMock(tareaId);
+    return mock(estudiante && !registro?.publicado ? null : registro);
+  }
+  try { return await pedir(`/api/tareas/${tareaId}/material`, MaterialGuardado); }
+  catch (e) { if (e instanceof ErrorApi && e.estado === 404) return null; throw e; }
+}
+export async function generarMaterialEstudio(tareaId: string) {
+  const datos = PedidoMaterial.parse({ tarea_id: tareaId });
+  return usarMocks() ? mock(guardarMaterialMock(tareaId, materialMock, false))
+    : pedir("/api/docente/ia/material", MaterialGuardado, json(datos));
+}
+export async function guardarMaterial(tareaId: string, edicion: import("@/types/contratos").EdicionMaterial) {
+  PedidoMaterial.parse({ tarea_id: tareaId });
+  const datos = EdicionMaterial.parse(edicion);
+  if (usarMocks()) {
+    const previo = leerMaterialMock(tareaId);
+    if (!previo) throw new ErrorApi(404, "no_encontrado", "Material no encontrado");
+    return mock(guardarMaterialMock(tareaId, datos.contenido ?? previo.contenido, datos.publicado ?? previo.publicado));
+  }
+  return pedir(`/api/tareas/${tareaId}/material`, MaterialGuardado, { method: "PUT", body: JSON.stringify(datos) });
+}
+export async function borrarMaterial(tareaId: string) {
+  PedidoMaterial.parse({ tarea_id: tareaId });
+  if (usarMocks()) { borrarMaterialMock(tareaId); return; }
+  await pedir(`/api/tareas/${tareaId}/material`, z.null(), { method: "DELETE" });
+}

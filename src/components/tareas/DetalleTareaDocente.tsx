@@ -1,5 +1,6 @@
 "use client";
 
+import { Material } from "@/components/material/Material";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useFormatter, useTranslations } from "next-intl";
 import { Button, Card, Badge, Dialog, Skeleton, useToast } from "@/components/ui";
@@ -324,6 +325,7 @@ export function DetalleTareaDocente({ tarea: inicial }: DetalleTareaDocenteProps
           </ul>
         )}
       </div>
+      <Material key={tarea.id} tareaId={tarea.id} docente />
       <DialogoEntrega entregaId={abierta?.id ?? null} nombre={abierta?.nombre ?? ""}
         revision={(() => { const e = entregas?.find((x) => x.id === abierta?.id); return e ? revisionVigente(e)?.revision : undefined; })()}
         filas={filas.map(({ estudiante, entrega }) => ({ id: estudiante.id, nombre: estudiante.nombre,

@@ -1,4 +1,5 @@
 "use client";
+import { Material } from "@/components/material/Material";
 import { useEffect, useState } from "react";
 import { listarEntregasCalificadas, usarMocks } from "@/lib/api-cliente";
 import { ESTUDIANTE_ACTUAL } from "@/lib/mocks/base";
@@ -112,6 +113,8 @@ export function DetalleTarea({ tarea, analisis, materia, entrega: entregaInicial
               </ul>
             )}
           </section>
+
+          <Material key={tarea.id} tareaId={tarea.id} />
 
           <section aria-labelledby="titulo-analisis" className="rounded-2xl border-2 border-borde bg-superficie p-5">
             <h2 id="titulo-analisis" className="text-xl font-extrabold">

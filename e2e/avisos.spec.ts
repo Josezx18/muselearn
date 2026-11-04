@@ -32,7 +32,7 @@ test.describe("Campana de avisos", () => {
     await expect(items).toHaveCount(5);
   });
 
-  test("muestra el título, enlace y fecha de cada aviso", async ({ page }) => {
+  test("muestra el título y la fecha de cada aviso, sin rutas internas", async ({ page }) => {
     const campana = page.getByRole("button", { name: /notificaciones/i });
     await campana.click();
 
@@ -40,7 +40,7 @@ test.describe("Campana de avisos", () => {
     const primerAviso = lista.getByRole("option").first();
 
     await expect(primerAviso).toContainText(/nueva tarea/i);
-    await expect(primerAviso).toContainText(/estudiante\/tarea/);
+    await expect(primerAviso).not.toContainText(/estudiante\/tarea/);
   });
 
   test("marca aviso como leído al hacer click y navega a su enlace", async ({ page }) => {

@@ -214,7 +214,7 @@ function HorasDeEstudio() {
 
   const horas = Math.round((minutosSemana(franjas) / 60) * 10) / 10;
   return (
-    <Card>
+    <Card id="mis-horas" className="scroll-mt-24">
       <h2 className="text-xl font-bold">{t("horas.titulo")}</h2>
       <p className="mt-1 text-tinta-suave">{t("horas.intro")}</p>
       <ul className="mt-4 grid gap-3">

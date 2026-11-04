@@ -26,6 +26,9 @@ test.describe("estudiante", () => {
     await expect(page.getByRole("heading", { name: "Entregas próximas" })).toHaveCount(0);
     await expect(page.getByRole("button", { name: "Reorganizar mi semana" })).toBeEnabled();
     await sinScrollHorizontal(page);
+    await page.getByRole("link", { name: "Mis horas de estudio" }).click();
+    await expect(page).toHaveURL(/\/estudiante\/configuracion#mis-horas$/);
+    await expect(page.getByRole("heading", { name: "Mis horas de estudio" })).toBeVisible();
     expect(errores).toEqual([]);
   });
 

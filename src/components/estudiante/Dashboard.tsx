@@ -187,9 +187,17 @@ export function Dashboard({ vista, usuario, plan: planInicial, tareas: tareasIni
               <p className="mt-1 text-tinta-suave">{t("subtitulo")}</p>
             </div>
           </div>
-          <Button variante="secundario" cargando={ocupado} disabled={cargando || !plan} onClick={() => void reorganizar()}>
-            {t("reorganizar")}
-          </Button>
+          <div className="flex flex-wrap gap-2">
+            <Link
+              href="/estudiante/configuracion#mis-horas"
+              className="inline-flex min-h-11 items-center rounded-xl border-2 border-borde bg-superficie px-4 font-bold text-tinta hover:border-primario"
+            >
+              {t("misHoras")}
+            </Link>
+            <Button variante="secundario" cargando={ocupado} disabled={cargando || !plan} onClick={() => void reorganizar()}>
+              {t("reorganizar")}
+            </Button>
+          </div>
         </header>
 
         {error && (

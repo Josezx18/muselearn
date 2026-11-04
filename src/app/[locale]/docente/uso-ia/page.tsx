@@ -24,16 +24,19 @@ export default async function UsoIA({ params, searchParams }: PageProps<"/[local
   const dinero = (n: number) => new Intl.NumberFormat(locale, { style: "currency", currency: "USD", maximumFractionDigits: 4 }).format(n);
   const numero = (n: number) => new Intl.NumberFormat(locale).format(n);
   const nombres = { meta: "Meta", abierto: "Baseten", nvidia: "NVIDIA" };
-  const resumen = (grupo: typeof filas) => {
+  // Costo = suma de las llamadas con tokens conocidos. Solo dice "sin precio" si ese proveedor no tiene precios
+  // configurados; la voz (por audio) y las llamadas sin tokens no suman, pero no anulan el total.
+  const resumen = (grupo: typeof filas, proveedor: IdProveedor | undefined = grupo[0]?.proveedor) => {
     const entrada = grupo.reduce((s, f) => s + (f.tokens_entrada ?? 0), 0);
     const salida = grupo.reduce((s, f) => s + (f.tokens_salida ?? 0), 0);
-    const costos = grupo.map(f => f.funcion === "voz" ? null : calcularCosto(f.proveedor, f.tokens_entrada, f.tokens_salida));
-    return { entrada, salida, fallos: grupo.filter(f => !f.ok).length, costo: (costos.some(c => c === null) || (!grupo.length && calcularCosto("abierto", 0, 0) === null)) ? null : costos.reduce<number>((s, c) => s + (c ?? 0), 0) };
+    const conPrecio = proveedor !== undefined && calcularCosto(proveedor, 0, 0) !== null;
+    const costo = !conPrecio ? null : grupo.reduce((s, f) => s + (f.funcion === "voz" ? 0 : calcularCosto(f.proveedor, f.tokens_entrada ?? 0, f.tokens_salida ?? 0) ?? 0), 0);
+    return { entrada, salida, fallos: grupo.filter(f => !f.ok).length, costo };
   };
   const credito = precio(process.env.CREDITO_ABIERTO_USD) ?? 100;
   // El crédito siempre usa todo el historial, independientemente del filtro del panel.
   let abiertoTotal: ReturnType<typeof resumen> | null = null;
-  try { abiertoTotal = resumen((filtro === "todo" ? filas : await leerUso(null)).filter(f => f.proveedor === "abierto")); } catch { /* no mostrar crédito parcial */ }
+  try { abiertoTotal = resumen((filtro === "todo" ? filas : await leerUso(null)).filter(f => f.proveedor === "abierto"), "abierto"); } catch { /* no mostrar crédito parcial */ }
   const grupos = new Map<string, typeof filas>();
   const dias = new Map<string, number>();
   const offset = Number(process.env.ZONA_OFFSET_MIN ?? -240);
@@ -49,7 +52,7 @@ export default async function UsoIA({ params, searchParams }: PageProps<"/[local
     <p className="rounded-xl border border-borde p-4">{t("aviso")}</p>
     <nav className="flex flex-wrap gap-3">{["hoy", "7", "30", "todo"].map(p => <Link key={p} href={`/docente/uso-ia?periodo=${p}`} aria-current={filtro === p ? "page" : undefined} className="rounded-lg border border-borde px-3 py-2 aria-[current=page]:bg-acento">{t(p)}</Link>)}</nav>
     <div className="grid gap-4 md:grid-cols-3">{(["abierto", "meta", "nvidia"] as IdProveedor[]).map(proveedor => {
-      const grupo = filas.filter(f => f.proveedor === proveedor); const r = resumen(grupo);
+      const grupo = filas.filter(f => f.proveedor === proveedor); const r = resumen(grupo, proveedor);
       return <section key={proveedor} className="rounded-xl border border-borde p-4"><h2 className="text-xl font-bold">{nombres[proveedor]}</h2><dl>{[["llamadas", grupo.length], ["fallos", r.fallos], ["entrada", r.entrada], ["salida", r.salida]].map(([k,v]) => <div key={k} className="flex flex-wrap justify-between gap-2"><dt>{t(String(k))}</dt><dd>{numero(Number(v))}</dd></div>)}</dl><p>{t("costo")}: {r.costo === null || !grupo.length ? t("sinPrecio") : dinero(r.costo)}</p></section>;
     })}</div>
     <section className="rounded-xl border border-borde p-4"><h2 className="font-bold">Baseten</h2>{abiertoTotal?.costo !== null && abiertoTotal !== null ? <><p>{t("credito", { usado: dinero(abiertoTotal.costo), total: dinero(credito) })}</p><progress className="w-full" aria-label={t("costo")} value={Math.min(credito, abiertoTotal.costo)} max={credito || 1} /></> : <p>{t("sinPrecio")}</p>}</section>

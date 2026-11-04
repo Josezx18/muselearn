@@ -192,3 +192,19 @@ I designed the architecture and the contracts (types, API and database schema) f
 ## Author
 
 **José Enrique Ulloa** — technology teacher, Dominican Republic.
+
+## Uso de la IA
+
+El integrador debe aplicar `0016_uso_ia.sql`. Configura `ADMIN_CORREOS` (correos separados por comas) para permitir `/docente/uso-ia`. Define `PRECIO_META_ENTRADA`, `PRECIO_META_SALIDA`, `PRECIO_ABIERTO_ENTRADA`, `PRECIO_ABIERTO_SALIDA`, `PRECIO_NVIDIA_ENTRADA` y `PRECIO_NVIDIA_SALIDA` en USD por millón de tokens según tu contrato. Sin precios o tokens conocidos no se calcula costo. `CREDITO_ABIERTO_USD` es 100 por defecto; los créditos usados se calculan sobre todo el historial desde que se activó el registro, no sobre el filtro. Voz no tiene tarifa estimada. El saldo real solo lo ve el dueño de la clave. Los registros son asíncronos: no constituyen facturación y pueden perderse al terminar una instancia.
+
+Consulta de respaldo en el editor SQL de Supabase (multiplica los tokens por tus tarifas y divide por 1000000):
+
+```sql
+select proveedor, modelo, count(*) llamadas,
+       count(*) filter (where not ok) fallidas,
+       sum(tokens_entrada) entrada, sum(tokens_salida) salida,
+       count(*) filter (where tokens_entrada is null or tokens_salida is null) sin_tokens,
+       sum(audio_ms) audio_ms
+from public.uso_ia
+group by proveedor, modelo order by proveedor, modelo;
+```

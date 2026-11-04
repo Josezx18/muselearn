@@ -2,6 +2,7 @@
 // MuseLearn — ÚNICO punto de acceso a los modelos (ver AGENTS.md).
 // Dueño: T03. Solo se usa en el servidor (Route Handlers / Server Actions).
 // =====================================================================
+import { registrarUso, registrarSinEsperar, codigoError, type RegistradorUso, type UsoIA } from "./registro-uso";
 import OpenAI from "openai";
 import type { ChatCompletionMessageParam } from "openai/resources/chat/completions";
 import { z } from "zod";
@@ -88,6 +89,7 @@ export function proveedoresDesdeEntorno(env: NodeJS.ProcessEnv = process.env): P
 }
 
 export interface OpcionesLlamada<T> {
+  usuarioId?: string;
   funcion: FuncionIA;
   /** Prompt de sistema de la función (las reglas comunes se anteponen solas). */
   sistema: string;
@@ -144,6 +146,7 @@ interface RespuestaChat {
 export function crearLlamador(
   proveedores: Partial<Record<IdProveedor, Proveedor>> = proveedoresDesdeEntorno(),
   fabrica: FabricaCliente = fabricaReal,
+  registrar: RegistradorUso = fabrica === fabricaReal ? registrarUso : async () => {},
 ) {
   return async function llamarMuse<T = string>(op: OpcionesLlamada<T>): Promise<ResultadoIA<T>> {
     const candidatos = RUTAS[op.funcion]
@@ -163,6 +166,7 @@ export function crearLlamador(
 
       // Hasta 2 vueltas por proveedor: la segunda solo si el JSON no cumplió el esquema.
       for (let vuelta = 0; vuelta < 2; vuelta++) {
+        let uso: UsoIA = { funcion: op.funcion, proveedor: p.id, modelo: p.modelo, tokens_entrada: null, tokens_salida: null, audio_ms: null, stream: false, ok: false, error: null, usuario_id: op.usuarioId ?? null };
         try {
           const cuerpo: Record<string, unknown> = {
             model: p.modelo,
@@ -180,11 +184,13 @@ export function crearLlamador(
           }
 
           const r = (await cliente.chat.completions.create(cuerpo)) as RespuestaChat;
+          uso = { ...uso, tokens_entrada: r.usage?.prompt_tokens ?? null, tokens_salida: r.usage?.completion_tokens ?? null };
           const texto = r.choices?.[0]?.message?.content ?? "";
           const tokens = { entrada: r.usage?.prompt_tokens ?? 0, salida: r.usage?.completion_tokens ?? 0 };
           console.info(`[ia] ${op.funcion} ${p.id}/${p.modelo} entrada=${tokens.entrada} salida=${tokens.salida}`);
 
           if (!op.esquema) {
+            uso.ok = true;
             return { datos: texto as T, texto, proveedor: p.id, modelo: p.modelo, tokens };
           }
 
@@ -200,6 +206,7 @@ export function crearLlamador(
           }
           const validado = op.esquema.safeParse(crudo);
           if (validado.success) {
+            uso.ok = true;
             return { datos: validado.data, texto, proveedor: p.id, modelo: p.modelo, tokens };
           }
           if (vuelta === 0) {
@@ -212,9 +219,13 @@ export function crearLlamador(
           }
           throw new Error(`JSON inválido tras reintento: ${validado.error.message}`);
         } catch (e) {
+          uso.error = codigoError(e);
           intentos.push({ proveedor: p.id, error: (e as Error).message });
           console.warn(`[ia] ${op.funcion} falló en ${p.id}: ${(e as Error).message}`);
           break; // pasar al siguiente proveedor (respaldo)
+        } finally {
+          if (!uso.ok && !uso.error) uso.error = "respuesta_invalida";
+          registrarSinEsperar(registrar, uso);
         }
       }
     }
@@ -226,6 +237,7 @@ export function crearLlamador(
 export function crearLlamadorStream(
   proveedores: Partial<Record<IdProveedor, Proveedor>> = proveedoresDesdeEntorno(),
   fabrica: FabricaCliente = fabricaReal,
+  registrar: RegistradorUso = fabrica === fabricaReal ? registrarUso : async () => {},
 ) {
   return async function* llamarMuseStream(op: Omit<OpcionesLlamada<string>, "esquema">): AsyncGenerator<string> {
     const candidatos = RUTAS[op.funcion].map((id) => proveedores[id]).filter((p): p is Proveedor => Boolean(p));
@@ -238,6 +250,7 @@ ${op.sistema}`;
     const intentos: { proveedor: IdProveedor; error: string }[] = [];
 
     for (const p of candidatos) {
+      const uso: UsoIA = { funcion: op.funcion, proveedor: p.id, modelo: p.modelo, tokens_entrada: null, tokens_salida: null, audio_ms: null, stream: true, ok: false, error: null, usuario_id: op.usuarioId ?? null };
       let emitido = false;
       try {
         const cuerpo: Record<string, unknown> = {
@@ -245,24 +258,32 @@ ${op.sistema}`;
           messages: [{ role: "system", content: sistema }, ...op.mensajes],
           max_tokens: op.maxTokens ?? 4096,
           stream: true,
+          stream_options: { include_usage: true },
         };
         if (p.avanzado) cuerpo.reasoning_effort = op.esfuerzo ?? ESFUERZO_POR_DEFECTO[op.funcion];
         const flujo = (await fabrica(p).chat.completions.create(cuerpo)) as AsyncIterable<{
+          usage?: { prompt_tokens?: number; completion_tokens?: number };
           choices?: { delta?: { content?: string | null } }[];
         }>;
         for await (const trozo of flujo) {
+          if (trozo.usage) { uso.tokens_entrada = trozo.usage.prompt_tokens ?? null; uso.tokens_salida = trozo.usage.completion_tokens ?? null; }
           const texto = trozo.choices?.[0]?.delta?.content;
           if (texto) {
             emitido = true;
             yield texto;
           }
         }
+        uso.ok = true;
         console.info(`[ia] ${op.funcion} ${p.id}/${p.modelo} (stream)`);
         return;
       } catch (e) {
+        uso.error = codigoError(e);
         if (emitido) throw e; // ya se envió texto: no se puede cambiar de proveedor a mitad
         intentos.push({ proveedor: p.id, error: (e as Error).message });
         console.warn(`[ia] ${op.funcion} (stream) falló en ${p.id}: ${(e as Error).message}`);
+      } finally {
+        if (!uso.ok && !uso.error) uso.error = "stream_interrumpido";
+        registrarSinEsperar(registrar, uso);
       }
     }
     throw new ErrorIA(`Ningún proveedor respondió para "${op.funcion}"`, intentos);
@@ -280,6 +301,7 @@ export const llamarMuse = crearLlamador();
 
 export interface OpcionesTranscripcion {
   /** WAV RIFF mono, PCM 16 bits, 16 o 24 kHz. */
+  usuarioId?: string;
   wav: Blob;
   idioma?: "es" | "en";
   /** Términos de la tarea que el modelo podría oír mal (conceptos, nombres). Máx. 30. */
@@ -305,7 +327,7 @@ export function palabrasClaveVoz(fuentes: string[]): string[] {
   return salida.slice(0, 30);
 }
 
-export function crearTranscriptor(env: NodeJS.ProcessEnv = process.env, hacerFetch: typeof fetch = fetch) {
+export function crearTranscriptor(env: NodeJS.ProcessEnv = process.env, hacerFetch: typeof fetch = fetch, registrar: RegistradorUso = hacerFetch === fetch ? registrarUso : async () => {}) {
   return async function transcribirAudio(op: OpcionesTranscripcion): Promise<string> {
     if (!env.MODEL_API_KEY) throw new ErrorIA("No hay MODEL_API_KEY para transcribir voz. Revisa .env.local");
     const base = (env.META_API_URL || "https://api.meta.ai/v1").replace(/\/$/, "");
@@ -325,6 +347,8 @@ export function crearTranscriptor(env: NodeJS.ProcessEnv = process.env, hacerFet
       const cuerpo = new FormData();
       cuerpo.append("request", new Blob([JSON.stringify(ajustes)], { type: "application/json" }));
       cuerpo.append("audio", op.wav, "respuesta.wav");
+      const uso: UsoIA = { funcion: "voz", proveedor: "meta", modelo, tokens_entrada: null, tokens_salida: null, audio_ms: null, stream: false, ok: false, error: null, usuario_id: op.usuarioId ?? null };
+      try {
       const r = await hacerFetch(`${base}/asr/transcribe`, {
         method: "POST",
         headers: { Authorization: `Bearer ${env.MODEL_API_KEY}` },
@@ -336,9 +360,12 @@ export function crearTranscriptor(env: NodeJS.ProcessEnv = process.env, hacerFet
       if (!r) break;
       if (r.ok) {
         const datos = (await r.json()) as { transcript?: unknown; audioDurationMs?: unknown };
+        uso.ok = true;
+        uso.audio_ms = typeof datos.audioDurationMs === "number" ? Math.round(datos.audioDurationMs) : null;
         console.info(`[ia] voz ${modelo} audio=${String(datos.audioDurationMs ?? "?")}ms`);
         return typeof datos.transcript === "string" ? datos.transcript.trim() : "";
       }
+      uso.error = `proveedor_http_${r.status}`;
       ultimoError = `${r.status} ${(await r.text().catch(() => "")).slice(0, 200)}`;
       if (r.status === 400 && ajustes.keywords) {
         delete ajustes.keywords;
@@ -346,6 +373,10 @@ export function crearTranscriptor(env: NodeJS.ProcessEnv = process.env, hacerFet
       }
       if (r.status === 429 && intento === 0) { await new Promise(listo => setTimeout(listo, 800)); continue; }
       break;
+      } finally {
+        if (!uso.ok && !uso.error) uso.error = "transcripcion_fallida";
+        registrarSinEsperar(registrar, uso);
+      }
     }
     throw new ErrorIA(`No se pudo transcribir el audio: ${ultimoError}`, [{ proveedor: "meta", error: ultimoError }]);
   };

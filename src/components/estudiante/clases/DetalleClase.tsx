@@ -5,7 +5,7 @@ import { useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Badge } from "@/components/ui";
 import { formatearCentro } from "@/lib/fechas-centro";
-import { offsetPorDefecto } from "@/lib/ia/planificador";
+import { offsetPorDefecto } from "@/lib/zona";
 import type { MisTareasDeClase, TareaConEstado } from "@/lib/server/data";
 
 /** Detalle de una clase: encabezado y tareas del estudiante agrupadas en Pendientes, Entregadas y Vencidas. */

@@ -7,6 +7,7 @@ import { PROMPT_PLANIFICADOR } from "../prompts/planificador";
 import { construirPlan, inicioSemanaMs, lunesDe, ubicarPractica, type PasoAUbicar, type TareaEnRiesgo, type TareaPlan } from "./algoritmo";
 import type { Almacen } from "./almacen";
 import { preferenciasPorDefecto } from "./preferencias";
+import { offsetPorDefecto } from "@/lib/zona";
 
 export { preferenciasPorDefecto } from "./preferencias";
 export type { Almacen } from "./almacen";
@@ -27,10 +28,7 @@ export interface OpcionesPlan {
 
 const SalidaAvisos = z.object({ avisos: z.array(z.string().min(1)).min(1).max(3) });
 
-export function offsetPorDefecto(): number {
-  const n = Number(process.env.ZONA_OFFSET_MIN);
-  return Number.isFinite(n) && process.env.ZONA_OFFSET_MIN ? n : -240;
-}
+export { offsetPorDefecto } from "@/lib/zona";
 
 interface Diferencias {
   tareas_nuevas: string[];

@@ -15,6 +15,7 @@ export const espacios = [
   "gestion", // gestión del docente
   "mascota", // lo que dice la mascota
   "legal", // privacidad y términos de uso
+  "uso-ia", // T25
   "avisos", // T12
 ] as const;
 

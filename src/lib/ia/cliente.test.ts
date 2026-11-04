@@ -2,6 +2,9 @@ import { describe, expect, it, vi } from "vitest";
 import { z } from "zod";
 import { crearLlamador, crearLlamadorStream, crearTranscriptor, extraerJson, palabrasClaveVoz, proveedoresDesdeEntorno, type ClienteChat, type Proveedor } from "./cliente";
 
+import { calcularCosto } from "./precios";
+import type { UsoIA } from "./registro-uso";
+
 const meta: Proveedor = { id: "meta", baseURL: "https://api.meta.ai/v1", apiKey: "k", modelo: "muse-spark-1.3", avanzado: true };
 const abierto: Proveedor = { id: "abierto", baseURL: "https://inference.baseten.co/v1", apiKey: "k", modelo: "meta-models/muse-spark-open-1026", avanzado: false };
 
@@ -182,5 +185,90 @@ describe("transcribirAudio", () => {
 
   it("sin clave no llama a nadie", async () => {
     await expect(crearTranscriptor({} as NodeJS.ProcessEnv)({ wav })).rejects.toThrow(/MODEL_API_KEY/);
+  });
+});
+
+describe("registro de uso T25", () => {
+  it("registra fallo y ?xito del respaldo sin contenido sensible", async () => {
+    const usos: UsoIA[] = [];
+    const llamar = crearLlamador({ abierto, meta }, simulado([new Error("secreto"), "ok"]).fabrica, async u => { usos.push(u); });
+    await llamar({ funcion: "analizar", sistema: "privado", mensajes: [], usuarioId: "usuario" });
+    await Promise.resolve();
+    expect(usos).toHaveLength(2);
+    expect(usos[0]).toMatchObject({ proveedor: "abierto", ok: false, error: "intento_fallido", tokens_entrada: null });
+    expect(usos[1]).toMatchObject({ proveedor: "meta", ok: true, tokens_entrada: 10, tokens_salida: 5, usuario_id: "usuario" });
+    expect(JSON.stringify(usos)).not.toMatch(/secreto|privado/);
+  });
+  it("un registro rechazado o que lanza no rompe la respuesta", async () => {
+    for (const registrar of [async () => { throw new Error("db"); }, () => { throw new Error("sync"); }]) {
+      const llamar = crearLlamador({ meta }, simulado(["ok"]).fabrica, registrar);
+      expect((await llamar({ funcion: "tutor", sistema: "s", mensajes: [] })).texto).toBe("ok");
+    }
+  });
+  it.each([true, false])("stream conserva usage cuando existe: %s", async conUso => {
+    const usos: UsoIA[] = [];
+    const create = vi.fn(async (cuerpo: Record<string, unknown>) => {
+      expect(cuerpo.stream_options).toEqual({ include_usage: true });
+      return (async function* () {
+      yield { choices: [{ delta: { content: "ok" } }] };
+      if (conUso) yield { choices: [], usage: { prompt_tokens: 23, completion_tokens: 7 } };
+    })(); });
+    const llamar = crearLlamadorStream({ meta }, () => ({ chat: { completions: { create } } }), async u => { usos.push(u); });
+    for await (const trozo of llamar({ funcion: "tutor", sistema: "s", mensajes: [] })) expect(trozo).toBe("ok");
+    await Promise.resolve();
+    expect(create.mock.calls[0][0]).toMatchObject({ stream_options: { include_usage: true } });
+    expect(usos[0]).toMatchObject({ ok: true, stream: true, tokens_entrada: conUso ? 23 : null, tokens_salida: conUso ? 7 : null });
+  });
+  it("registra cada intento de voz", async () => {
+    const usos: UsoIA[] = []; let n = 0;
+    const falso = (async () => new Response(JSON.stringify(++n === 1 ? {} : { transcript: "ok", audioDurationMs: 1500 }), { status: n === 1 ? 400 : 200 })) as typeof fetch;
+    await crearTranscriptor({ MODEL_API_KEY: "k", NODE_ENV: "test" } as NodeJS.ProcessEnv, falso, async u => { usos.push(u); })({ wav: new Blob(), palabrasClave: ["algebra"] });
+    await Promise.resolve();
+    expect(usos.map(u => u.ok)).toEqual([false, true]);
+    expect(usos[1].audio_ms).toBe(1500);
+  });
+  it("calcula costo solo con ambos precios y tokens conocidos", () => {
+    const env = { PRECIO_META_ENTRADA: "2", PRECIO_META_SALIDA: "8", NODE_ENV: "test" } as NodeJS.ProcessEnv;
+    expect(calcularCosto("meta", 1000000, 500000, env)).toBe(6);
+    expect(calcularCosto("abierto", 1, 1, env)).toBeNull();
+    expect(calcularCosto("meta", null, 1, env)).toBeNull();
+    expect(calcularCosto("meta", 1, 1, { ...env, PRECIO_META_ENTRADA: "-1" })).toBeNull();
+    expect(calcularCosto("meta", 1, 1, { ...env, PRECIO_META_ENTRADA: "0", PRECIO_META_SALIDA: "0" })).toBe(0);
+  });
+});
+
+describe("intentos interrumpidos T25", () => {
+  it("registra JSON rechazado y el reintento con sus tokens", async () => {
+    const usos: UsoIA[] = [];
+    await crearLlamador({ abierto }, simulado(['{"dificultad":9}', '{"dificultad":3}']).fabrica, async u => { usos.push(u); })({ funcion: "analizar", sistema: "s", mensajes: [], esquema: Esquema });
+    expect(usos.map(u => u.ok)).toEqual([false, true]);
+    expect(usos.map(u => u.tokens_entrada)).toEqual([10, 10]);
+  });
+  it("registra el fallo a mitad del stream sin usar respaldo", async () => {
+    const usos: UsoIA[] = []; const proveedores: string[] = [];
+    const llamar = crearLlamadorStream({ meta, abierto }, p => {
+      proveedores.push(p.id);
+      return { chat: { completions: { create: async () => (async function* () { yield { choices: [{ delta: { content: "hola" } }] }; throw new Error("red"); })() } } };
+    }, async u => { usos.push(u); });
+    await expect(async () => { for await (const texto of llamar({ funcion: "tutor", sistema: "s", mensajes: [] })) expect(texto).toBe("hola"); }).rejects.toThrow("red");
+    expect(proveedores).toEqual(["meta"]);
+    expect(usos[0]).toMatchObject({ ok: false, stream: true, tokens_entrada: null });
+  });
+});
+
+describe("streaming sin stream_options", () => {
+  it("si el proveedor rechaza stream_options con 400, repite sin él y sigue respondiendo", async () => {
+    const cuerpos: Record<string, unknown>[] = [];
+    const fabrica = () => ({ chat: { completions: { create: async (c: Record<string, unknown>) => {
+      cuerpos.push({ ...c });
+      if ("stream_options" in c) throw Object.assign(new Error("parámetro no admitido"), { status: 400 });
+      return (async function* () { yield { choices: [{ delta: { content: "Hola" } }] }; })();
+    } } } });
+    const stream = crearLlamadorStream({ meta: { id: "meta", baseURL: "https://x", apiKey: "k", modelo: "m", avanzado: false } }, fabrica as never, async () => {});
+    let texto = "";
+    for await (const t of stream({ funcion: "tutor", sistema: "s", mensajes: [{ role: "user", content: "hola" }] })) texto += t;
+    expect(texto).toBe("Hola");
+    expect(cuerpos).toHaveLength(2);
+    expect("stream_options" in cuerpos[1]).toBe(false);
   });
 });

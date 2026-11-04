@@ -145,6 +145,17 @@ npm run dev                     # http://localhost:3000
 - Database: apply the migrations in [`supabase/migrations/`](supabase/migrations/) in order (`0001` … `0015`).
 - `npm run prueba:ia` checks that each AI provider configured in `.env.local` answers.
 
+### Monitoring AI usage
+
+Every model call is recorded in the `uso_ia` table (provider, job, model, tokens, success or failure; never prompts, answers or student text). Set `ADMIN_CORREOS` (comma-separated emails) to enable the private page `/docente/uso-ia`, which shows calls, failures, tokens and estimated cost per provider. Prices per million tokens come from `PRECIO_META_ENTRADA`, `PRECIO_META_SALIDA`, `PRECIO_ABIERTO_ENTRADA`, `PRECIO_ABIERTO_SALIDA`, `PRECIO_NVIDIA_ENTRADA` and `PRECIO_NVIDIA_SALIDA`; without them only tokens are shown. `CREDITO_ABIERTO_USD` (default 100) sets the open-weight credit shown on the page. These are estimates made by MuseLearn, not billing.
+
+```sql
+-- Backup query in the Supabase SQL editor
+select proveedor, modelo, count(*) llamadas, count(*) filter (where not ok) fallidas,
+       sum(tokens_entrada) entrada, sum(tokens_salida) salida
+from public.uso_ia group by proveedor, modelo order by proveedor, modelo;
+```
+
 ## Demo data
 
 All names and work are invented. The dataset has one teacher, twelve students and two classes, **Matemática 4to A** and **Tecnología 4to B**; every student is enrolled in both. Use `docente@muselearn.demo` for the teacher and `camila@muselearn.demo` for the student. The full roster is in [`supabase/demo/cuentas.json`](supabase/demo/cuentas.json).

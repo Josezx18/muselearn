@@ -7,7 +7,8 @@ import { cerrarSesion } from "@/components/auth/acciones";
 import { Mascota } from "@/components/comun/mascotas/Mascota";
 
 /** Menú de la cuenta en la cabecera: nombre, Mi perfil, Configuración y Salir. */
-export function MenuUsuario({ nombre, rol }: { nombre: string; rol: "docente" | "estudiante" }) {
+export function MenuUsuario({ nombre, rol, esAdmin = false }: { nombre: string; rol: "docente" | "estudiante"; esAdmin?: boolean }) {
+  const uso = useTranslations("uso-ia");
   const t = useTranslations("cuenta.menu");
   const [abierto, setAbierto] = useState(false);
   const caja = useRef<HTMLDivElement>(null);
@@ -68,6 +69,7 @@ export function MenuUsuario({ nombre, rol }: { nombre: string; rol: "docente" | 
               <Icono d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z" />
               {t("configuracion")}
             </Link>
+            {esAdmin && <Link role="menuitem" href="/docente/uso-ia" className={opcion} onClick={() => setAbierto(false)}>{uso("titulo")}</Link>}
             <form action={cerrarSesion}>
               <button type="submit" role="menuitem" className={`${opcion} text-peligro`}>
                 <Icono d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3M10 17l5-5-5-5M15 12H4" />

@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
-import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
+import { DatosAviso } from "@/types/contratos";
+import { useFormatter, useTranslations } from "next-intl";
+import { useRouter } from "@/i18n/navigation";
 import { cn } from "@/components/ui";
 import { listarAvisos, marcarAvisosLeidos as marcarAvisosLeidosApi } from "@/lib/api-cliente";
 
@@ -11,6 +12,7 @@ interface Aviso {
   usuario_id: string;
   tipo: string;
   titulo: string;
+  datos?: DatosAviso | null;
   enlace: string;
   leido: boolean;
   creado_en: string;
@@ -18,6 +20,7 @@ interface Aviso {
 
 export function Campana() {
   const t = useTranslations("avisos");
+  const formato = useFormatter();
   const router = useRouter();
   const [abierto, setAbierto] = useState(false);
   const [avisos, setAvisos] = useState<Aviso[]>([]);
@@ -169,10 +172,9 @@ export function Campana() {
                     !aviso.leido && "bg-resaltador-claro/50 font-medium"
                   )}
                 >
-                  <p className="text-sm text-tinta">{aviso.titulo}</p>
-                  <p className="text-xs text-tinta-suave mt-0.5 truncate">{aviso.enlace}</p>
+                  <p className="text-sm text-tinta">{textoAviso(aviso, t)}</p>
                   <p className="text-xs text-tinta-suave mt-1">
-                    {new Date(aviso.creado_en).toLocaleString(undefined, { dateStyle: "short", timeStyle: "short" })}
+                    {formato.dateTime(new Date(aviso.creado_en), { dateStyle: "short", timeStyle: "short" })}
                   </p>
                   {!aviso.leido && <span className="inline-block mt-1.5 w-1.5 h-1.5 rounded-full bg-primario-fuerte" aria-hidden="true" />}
                 </li>
@@ -183,4 +185,12 @@ export function Campana() {
       )}
     </div>
   );
+}
+type TipoMensajeAviso = "tarea_nueva" | "comentario" | "nota" | "entrega_devuelta" | "entrega_nueva" | "tareas_importadas";
+
+export function textoAviso(aviso: Pick<Aviso, "tipo" | "titulo" | "datos">, traducir: (clave: `mensajes.${TipoMensajeAviso}`, datos: Record<string, string | number>) => string): string {
+  const datos = DatosAviso.safeParse(aviso.datos);
+  const tipos = ["tarea_nueva", "comentario", "nota", "entrega_devuelta", "entrega_nueva", "tareas_importadas"];
+  if (!datos.success || !tipos.includes(aviso.tipo)) return aviso.titulo;
+  return traducir(`mensajes.${aviso.tipo as TipoMensajeAviso}`, { tarea: "", estudiante: "", n: 0, ...datos.data });
 }

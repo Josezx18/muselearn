@@ -23,9 +23,9 @@ export function csvEntregas(datos: {
   estudiantes: Usuario[]; tareas: Tarea[]; entregas: Entrega[];
   informes: { informe: InformeComprension }[];
   notas?: Map<string, number | null>; correos?: Map<string, string>;
-}, offset = -240): string {
+}, offset = -240, idioma: "es" | "en" = "es"): string {
   return generarCSV([
-    ["Estudiante", "Correo", "Tarea", "Fecha de entrega", "Estado", "Entregada en", "Entregada fuera", "Nivel global de comprensión", "Nota"],
+    idioma === "en" ? ["Student", "Email", "Task", "Due date", "Status", "Submitted at", "Submitted externally", "Overall comprehension level", "Grade"] : ["Estudiante", "Correo", "Tarea", "Fecha de entrega", "Estado", "Entregada en", "Entregada fuera", "Nivel global de comprensión", "Nota"],
     ...datos.estudiantes.flatMap((u) => datos.tareas.map((t) => {
       const e = datos.entregas.find((e) => e.estudiante_id === u.id && e.tarea_id === t.id);
       const informe = e && datos.informes.find((f) => f.informe.entrega_id === e.id)?.informe;
@@ -34,9 +34,9 @@ export function csvEntregas(datos: {
   ]);
 }
 
-export function csvComprension(estudiantes: Usuario[], mapa: MapaComprension): string {
+export function csvComprension(estudiantes: Usuario[], mapa: MapaComprension, idioma: "es" | "en" = "es"): string {
   return generarCSV([
-    ["Estudiante", ...mapa.conceptos, "Promedio"],
+    [idioma === "en" ? "Student" : "Estudiante", ...mapa.conceptos, idioma === "en" ? "Average" : "Promedio"],
     ...estudiantes.map((u) => {
       const niveles = mapa.conceptos.map((c) => mapa.celdas.find((f) => f.estudiante_id === u.id && f.concepto === c)?.nivel ?? null);
       const conocidos = niveles.filter((n): n is NonNullable<typeof n> => n !== null);

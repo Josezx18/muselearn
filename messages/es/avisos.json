@@ -14,5 +14,13 @@
     "nota": "Nota publicada",
     "tareas_importadas": "Tareas importadas",
     "entrega_nueva": "Nueva entrega"
+  },
+  "mensajes": {
+    "tarea_nueva": "Nueva tarea: {tarea}",
+    "comentario": "Comentario en tu entrega: {tarea}",
+    "nota": "Nota publicada: {tarea}",
+    "entrega_devuelta": "Tu docente te pidió corregir: {tarea}",
+    "entrega_nueva": "{estudiante} entregó: {tarea}",
+    "tareas_importadas": "{n, plural, one {Se importó # tarea nueva de Classroom} other {Se importaron # tareas nuevas de Classroom}}"
   }
 }

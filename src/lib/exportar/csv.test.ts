@@ -38,3 +38,8 @@ describe("CSV para Excel", () => {
     expect(csvComprension([u], { ...mapa, celdas: [] })).toContain(';"";"";"";""\r\n');
   });
 });
+
+it("encabezados ingleses sin traducir tareas ni nombres", () => {
+ const datos = {estudiantes: [], tareas: [], entregas: [], informes: []};
+ expect(csvEntregas(datos, undefined, "en")).toContain('"Student";"Email";"Task"');
+});

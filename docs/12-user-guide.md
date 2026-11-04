@@ -75,3 +75,5 @@ Ask AI for review activities when reports are available. Review its explanation 
 Profile settings let you download JSON containing the account records currently included by the export implementation. It is not yet an exhaustive export of every newer table; see [privacy details](09-security-privacy-ai.md). To delete the account, read the consequences and type DELETE or ELIMINAR. Deleting a teacher also removes their classes, tasks and the student work belonging to them. The application has no undo.
 
 For technical troubleshooting and environment limits, see [Operations](11-operations-deployment.md) and [Testing](10-testing.md).
+
+Task titles and instructions, comments, submissions, names, and previously generated reports, plans and materials keep their original language; new generated content uses the active language.

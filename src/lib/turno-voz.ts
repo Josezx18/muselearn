@@ -17,7 +17,7 @@ export type Decision = "seguir" | "termino" | "silencio" | "maximo";
 
 export const AJUSTES_TURNO = {
   calibracionMs: 400, // primeros ms: se mide el ruido del salón
-  pausaMs: 1300, // silencio después de hablar que cierra el turno
+  pausaMs: 900, // silencio después de hablar que cierra el turno
   esperaMs: 12000, // si no habla en este tiempo, se pausa
   maximoMs: 45000, // turno más largo
   umbralMinimo: 0.012,

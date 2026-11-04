@@ -56,3 +56,10 @@ it("avisa tras el segundo fallo y no reintenta errores de permisos", async () =>
   await expect(transcribirConReintento(new Blob())).rejects.toThrow("permiso");
   expect(transcribir).toHaveBeenCalledTimes(1);
 });
+
+it("conversación usa 900 ms y respeta una pausa guardada", () => {
+  vi.stubGlobal("localStorage", { getItem: () => null });
+  expect(leerPreferenciasVoz(900).pausaMs).toBe(900);
+  vi.stubGlobal("localStorage", { getItem: () => '{"pausaMs":1800}' });
+  expect(leerPreferenciasVoz(900).pausaMs).toBe(1800);
+});

@@ -162,7 +162,7 @@ export const guardarPreferencias = (p: PreferenciasEstudio) =>
 
 // ---------------- T04 — tutor y verificación ----------------
 /** Envía un mensaje al tutor y devuelve la respuesta en partes (stream de texto). */
-export async function* enviarAlTutor(tarea_id: string, mensaje: string): AsyncGenerator<string> {
+export async function* enviarAlTutor(tarea_id: string, mensaje: string, opciones: { modo?: "texto" | "voz" } = {}): AsyncGenerator<string> {
   if (usarMocks()) {
     const respuesta = "Buena pregunta. Antes de seguir: ¿qué operación está haciendo el número que acompaña a la x?";
     for (const palabra of respuesta.split(" ")) {
@@ -174,7 +174,7 @@ export async function* enviarAlTutor(tarea_id: string, mensaje: string): AsyncGe
   const r = await fetch("/api/tutor", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ tarea_id, mensaje }),
+    body: JSON.stringify({ tarea_id, mensaje, ...opciones }),
   });
   if (!r.ok || !r.body) {
     const e = (await r.json().catch(() => null)) as { error?: { codigo?: string } } | null;

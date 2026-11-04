@@ -4,7 +4,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { ErrorApi, enviarAlTutor } from "@/lib/api-cliente";
-import { Mascota } from "@/components/comun/mascotas/Mascota";
+import { Orbe } from "./Orbe";
+import { cortarFrases } from "@/lib/voz-frases";
 import { grabarWav, transcribirConReintento } from "@/components/verificacion/wav";
 import { useVozSalida, leerPreferenciasVoz } from "@/lib/voz-salida";
 import { AJUSTES_TURNO, nuevoTurno, procesarNivel } from "@/lib/turno-voz";
@@ -28,6 +29,7 @@ export function ModoConversacion({ tareaId }: { tareaId: string }) {
   const [dicho, setDicho] = useState("");
   const [respuesta, setRespuesta] = useState("");
   const [volumen, setVolumen] = useState(0);
+  const [palabra, setPalabra] = useState(0);
 
   const [audioPendiente, setAudioPendiente] = useState<Blob | null>(null);
   const vigente = useRef(true);
@@ -69,22 +71,45 @@ export function ModoConversacion({ tareaId }: { tareaId: string }) {
         setDicho(texto);
         setRespuesta("");
         let completa = "";
-        for await (const trozo of enviarAlTutor(tareaId, texto)) {
-          if (!vigente.current || miTurno !== turno.current) return;
+        let resto = "";
+        let fin = false;
+        let leyendo = false;
+        const cola: string[] = [];
+        const actual = () => vigente.current && miTurno === turno.current;
+        const avanzar = () => {
+          if (!actual() || leyendo) return;
+          const frase = cola.shift();
+          if (!frase) {
+            if (fin) escucharRef.current();
+            else setEstado("pensando");
+            return;
+          }
+          leyendo = true;
+          setEstado("hablando");
+          const terminar = () => { leyendo = false; avanzar(); };
+          if (!voz.hablar(frase, {
+            forzar: true,
+            respaldo: true,
+            alPalabra: () => { if (actual()) setPalabra(p => p + 1); },
+            alTerminar: terminar,
+          })) terminar();
+        };
+        for await (const trozo of enviarAlTutor(tareaId, texto, { modo: "voz" })) {
+          if (!actual()) return;
           completa += trozo;
           setRespuesta(completa);
+          const corte = cortarFrases(resto + trozo);
+          resto = corte.resto;
+          cola.push(...corte.frases);
+          avanzar();
         }
-        setEstado("hablando");
-        const leyo = voz.hablar(completa, {
-          forzar: true,
-          alTerminar: () => {
-            if (vigente.current && miTurno === turno.current) escucharRef.current();
-          },
-        });
-        // Sin voz en el navegador: se muestra el texto y se vuelve a escuchar después de un momento.
-        if (!leyo) setTimeout(() => vigente.current && miTurno === turno.current && escucharRef.current(), 2500);
+        if (!actual()) return;
+        cola.push(...cortarFrases(resto, true).frases);
+        fin = true;
+        avanzar();
       } catch (e) {
         if (!vigente.current || miTurno !== turno.current) return;
+        voz.callar();
         setAviso(e instanceof ErrorApi && e.codigo.startsWith("limite_diario") ? "limite" : "error");
         setEstado("pausa");
       }
@@ -97,7 +122,7 @@ export function ModoConversacion({ tareaId }: { tareaId: string }) {
     voz.callar();
     setEstado("escuchando");
     const vad = nuevoTurno(performance.now());
-    const ajustes = {...AJUSTES_TURNO, pausaMs: leerPreferenciasVoz().pausaMs};
+    const ajustes = {...AJUSTES_TURNO, pausaMs: leerPreferenciasVoz(900).pausaMs};
     let cerrado = false;
     try {
       grabacion.current = await grabarWav({
@@ -110,6 +135,7 @@ export function ModoConversacion({ tareaId }: { tareaId: string }) {
           void (async () => {
             const wav = await detenerGrabacion();
             if (!vigente.current || miTurno !== turno.current) return;
+            senal(false);
             if (d === "silencio" || !wav) {
               setAviso("silencio");
               setEstado("pausa");
@@ -123,6 +149,7 @@ export function ModoConversacion({ tareaId }: { tareaId: string }) {
       });
       if (!vigente.current || miTurno !== turno.current) { await detenerGrabacion(); return; }
       // La calibración comienza cuando el micrófono está listo, no mientras pide permiso.
+      senal(true);
       vad.inicio = performance.now();
       setAviso(null);
     } catch {
@@ -136,6 +163,7 @@ export function ModoConversacion({ tareaId }: { tareaId: string }) {
   }, [escuchar]);
 
   function pausar() {
+    if (estado === "escuchando") senal(false);
     turno.current++;
     voz.callar();
     void detenerGrabacion();
@@ -146,10 +174,9 @@ export function ModoConversacion({ tareaId }: { tareaId: string }) {
   /** Tocar a la mascota: si habla, la interrumpe y te escucha; si está en pausa, empieza a escuchar. */
   function tocarMascota() {
     if (audioPendiente) return;
-    if (estado === "hablando" || estado === "pausa" || estado === "inicio") void escuchar();
+    if (estado === "hablando" || estado === "pensando" || estado === "pausa" || estado === "inicio") void escuchar();
   }
 
-  const expresion = estado === "escuchando" ? "escucho" : estado === "pensando" ? "pensando" : estado === "hablando" ? "hola" : "hola";
   const textoEstado =
     estado === "inicio"
       ? t("ayuda")
@@ -158,7 +185,7 @@ export function ModoConversacion({ tareaId }: { tareaId: string }) {
         : estado === "pausa"
           ? t("pausa")
           : t(estado as "escuchando" | "pensando" | "hablando");
-  const escala = 1 + Math.min(0.25, volumen * 4);
+
 
   return (
     <div className="fixed inset-0 z-50 flex flex-col overflow-y-auto overflow-x-hidden bg-[#0b1026] text-white">
@@ -186,24 +213,7 @@ export function ModoConversacion({ tareaId }: { tareaId: string }) {
           aria-label={estado === "hablando" ? t("hablando") : t("seguir")}
           className="relative grid place-items-center rounded-full"
         >
-          {/* Anillos que siguen tu voz mientras escucha */}
-          <span
-            aria-hidden
-            className="absolute size-64 rounded-full border-4 border-white/15 transition-transform duration-100 sm:size-80"
-            style={{ transform: `scale(${estado === "escuchando" ? escala : 1})` }}
-          />
-          <span
-            aria-hidden
-            className="absolute size-72 rounded-full border-2 border-white/10 transition-transform duration-150 sm:size-96"
-            style={{ transform: `scale(${estado === "escuchando" ? 1 + (escala - 1) * 1.6 : 1})` }}
-          />
-          <Mascota
-            expresion={expresion}
-            viva
-            hablando={voz.hablando}
-            flota={estado !== "escuchando"}
-            className="relative size-56 sm:size-72"
-          />
+          <Orbe estado={estado} volumen={volumen} palabra={palabra} />
         </button>
 
         <p role="status" aria-live="polite" className="min-h-14 max-w-md text-center font-titulo text-xl font-bold">
@@ -278,4 +288,23 @@ export function ModoConversacion({ tareaId }: { tareaId: string }) {
       </footer>
     </div>
   );
+}
+
+/** Señales locales suaves, sin archivos ni solicitudes de red. */
+function senal(inicio: boolean) {
+  try {
+    if (localStorage.getItem("muselearn-voz") === "no") return;
+    const contexto = new AudioContext();
+    const tono = contexto.createOscillator();
+    const ganancia = contexto.createGain();
+    tono.frequency.value = inicio ? 660 : 440;
+    ganancia.gain.setValueAtTime(0, contexto.currentTime);
+    ganancia.gain.linearRampToValueAtTime(.025, contexto.currentTime + .015);
+    ganancia.gain.exponentialRampToValueAtTime(.001, contexto.currentTime + .1);
+    tono.connect(ganancia); ganancia.connect(contexto.destination);
+    tono.onended = () => { void contexto.close(); };
+    void contexto.resume().catch(() => contexto.close());
+    tono.start(); tono.stop(contexto.currentTime + .12);
+    navigator.vibrate?.(30);
+  } catch { /* Señales opcionales si el navegador bloquea WebAudio. */ }
 }

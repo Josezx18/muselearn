@@ -31,7 +31,7 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
   try {
-    const entrada = EntradaTutor.parse(await request.json().catch(() => null));
+    const entrada = EntradaTutor.extend({ modo: z.enum(["texto", "voz"]).default("texto") }).parse(await request.json().catch(() => null));
     const ctx = await cargar(entrada.tarea_id);
     if ((await mensajesTutorHoy(ctx.db, ctx.usuario.id)) >= LIMITES.tutor) throw new ErrorConversacion(429, "limite_diario_tutor");
     const mensajes = [
@@ -41,7 +41,7 @@ export async function POST(request: Request) {
     const flujo = llamarMuseStream({
       funcion: "tutor",
       idioma: ctx.usuario.idioma,
-      sistema: sistemaTutor(ctx.tarea),
+      sistema: sistemaTutor(ctx.tarea, entrada.modo),
       mensajes: mensajes.slice(-20).map((m) => ({ role: m.rol === "agente" ? "assistant" : "user", content: m.contenido })),
     });
     // Obtener el primer trozo antes de responder permite devolver un error HTTP si falla el proveedor.

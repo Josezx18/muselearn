@@ -12,17 +12,17 @@ function simular(nivel: (ms: number) => number, hastaMs = 60000) {
 }
 
 describe("turno de habla", () => {
-  it("termina después de una pausa de ~1.3 s tras hablar", () => {
+  it("termina después de una pausa de ~0.9 s tras hablar", () => {
     const r = simular((ms) => (ms > 600 && ms < 3000 ? 0.08 : 0.004));
     expect(r.d).toBe("termino");
-    expect(r.ms).toBeGreaterThan(4200);
-    expect(r.ms).toBeLessThan(4500);
+    expect(r.ms).toBeGreaterThan(3800);
+    expect(r.ms).toBeLessThan(4100);
   });
 
   it("no corta en pausas cortas entre palabras", () => {
     const r = simular((ms) => ((ms > 600 && ms < 2000) || (ms > 2800 && ms < 4000) ? 0.08 : 0.004));
     expect(r.d).toBe("termino");
-    expect(r.ms).toBeGreaterThan(5200);
+    expect(r.ms).toBeGreaterThan(4800);
   });
 
   it("si nunca habla, se pausa a los 12 s", () => {

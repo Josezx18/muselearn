@@ -602,10 +602,15 @@ export async function obtenerMaterial(tareaId: string, estudiante = false) {
   try { return await pedir(`/api/tareas/${tareaId}/material`, MaterialGuardado); }
   catch (e) { if (e instanceof ErrorApi && e.estado === 404) return null; throw e; }
 }
-export async function generarMaterialEstudio(tareaId: string) {
-  const datos = PedidoMaterial.parse({ tarea_id: tareaId });
-  return usarMocks() ? mock(guardarMaterialMock(tareaId, materialMock, false))
-    : pedir("/api/docente/ia/material", MaterialGuardado, json(datos));
+export async function generarMaterialEstudio(tareaId: string, formato: import("@/types/contratos").FormatoMaterial = "guia") {
+  const datos = PedidoMaterial.parse({ tarea_id: tareaId, formato });
+  if (usarMocks()) {
+    const { diapositivas: _d, mapa: _m, infografia: _i, ...guia } = materialMock;
+    void _d; void _m; void _i;
+    const contenido = formato === "guia" ? guia : { ...(leerMaterialMock(tareaId)?.contenido ?? guia), [formato]: materialMock[formato] };
+    return mock(guardarMaterialMock(tareaId, contenido, false));
+  }
+  return pedir("/api/docente/ia/material", MaterialGuardado, json(datos));
 }
 export async function guardarMaterial(tareaId: string, edicion: import("@/types/contratos").EdicionMaterial) {
   PedidoMaterial.parse({ tarea_id: tareaId });

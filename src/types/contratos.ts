@@ -367,6 +367,13 @@ export const RevisionGuardada = z.object({
 });
 export type RevisionGuardada = z.infer<typeof RevisionGuardada>;
 // ---------- Material de estudio (T28) ----------
+export const FormatoMaterial = z.enum(["guia", "diapositivas", "mapa", "infografia"]);
+export type FormatoMaterial = z.infer<typeof FormatoMaterial>;
+const TextoFormato = z.string().trim().min(1).max(240);
+export const Diapositivas = z.array(z.object({ titulo: TextoFormato, puntos: z.array(TextoFormato).min(2).max(5), nota_docente: z.string().trim().min(1).max(600).optional() })).min(5).max(8);
+const NodoMapa = z.object({ concepto: TextoFormato, relacion: z.string().trim().min(1).max(80) });
+export const MapaConceptual = z.object({ central: TextoFormato, ramas: z.array(NodoMapa.extend({ hijos: z.array(NodoMapa).max(3) })).min(3).max(6) });
+export const Infografia = z.object({ titulo: TextoFormato, dato_clave: z.object({ valor: TextoFormato, texto: TextoFormato }).optional(), secciones: z.array(z.object({ icono: z.enum(["idea", "pasos", "alerta", "ejemplo", "pregunta", "meta"]), titulo: TextoFormato, texto: z.string().trim().min(1).max(600) })).min(3).max(6), pasos: z.array(TextoFormato).min(3).max(6).optional(), cierre: TextoFormato });
 export const MaterialEstudio = z.object({
   titulo: z.string().trim().min(2).max(160),
   resumen: z.string().trim().min(30).max(1600),
@@ -380,6 +387,9 @@ export const MaterialEstudio = z.object({
     pregunta: z.string().trim().min(5).max(500),
     respuesta: z.string().trim().min(5).max(1000),
   })).min(3).max(6),
+  diapositivas: Diapositivas.optional(),
+  mapa: MapaConceptual.optional(),
+  infografia: Infografia.optional(),
   guion_audio: z.string().trim().min(400).max(2400),
 });
 export type MaterialEstudio = z.infer<typeof MaterialEstudio>;
@@ -388,7 +398,7 @@ export const MaterialGuardado = z.object({
   creado_en: FechaHora, actualizado_en: FechaHora,
 });
 export type MaterialGuardado = z.infer<typeof MaterialGuardado>;
-export const PedidoMaterial = z.object({ tarea_id: z.string().uuid() }).strict();
+export const PedidoMaterial = z.object({ tarea_id: z.string().uuid(), formato: FormatoMaterial.optional() }).strict();
 export const EdicionMaterial = z.object({
   contenido: MaterialEstudio.optional(), publicado: z.boolean().optional(),
 }).strict().refine(v => v.contenido !== undefined || v.publicado !== undefined, "sin_cambios");

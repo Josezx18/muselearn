@@ -1,6 +1,9 @@
 import { MaterialEstudio, MaterialGuardado } from "@/types/contratos";
 
 export const materialMock = MaterialEstudio.parse({
+  diapositivas: ["La igualdad", "El equilibrio", "Operaciones inversas", "Comprobación", "Explica tu razonamiento"].map(titulo => ({ titulo, puntos: ["Aplica la misma operación a ambos miembros.", "Comprueba cada paso antes de continuar."], nota_docente: "Pide justificar la conservación de la igualdad." })),
+  mapa: { central: "Ecuaciones", ramas: ["Igualdad", "Operaciones inversas", "Comprobación"].map(concepto => ({ concepto, relacion: "se comprende con", hijos: [{ concepto: "Equilibrio", relacion: "conserva" }] })) },
+  infografia: { titulo: "Conserva el equilibrio", dato_clave: { valor: "2", texto: "miembros de una igualdad" }, secciones: [{ icono: "idea", titulo: "Observa", texto: "Identifica las operaciones." }, { icono: "alerta", titulo: "Cuida la igualdad", texto: "Opera en ambos miembros." }, { icono: "pregunta", titulo: "Comprueba", texto: "¿Se mantiene el equilibrio?" }], pasos: ["Lee la igualdad", "Justifica cada operación", "Comprueba tu propuesta"], cierre: "Explica por qué funciona tu razonamiento." },
   titulo: "Repaso de ecuaciones",
   resumen: "Una ecuación expresa una igualdad entre dos cantidades. Mantener el equilibrio permite encontrar el valor desconocido y comprobarlo.",
   conceptos: [{ nombre: "Equilibrio", explicacion: "Aplicar la misma operación a ambos miembros conserva la igualdad.", ejemplo: "En una balanza, x + 9 = 20. Quitamos nueve a ambos lados: x = 11. Comprobación: 11 + 9 = 20." }],

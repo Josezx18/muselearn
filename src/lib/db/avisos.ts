@@ -1,5 +1,7 @@
 import { crearClienteAdmin } from "@/lib/supabase/servidor";
 
+import { DatosAviso } from "@/types/contratos";
+
 export type TipoAviso =
   | "tarea_nueva"
   | "entrega_devuelta"
@@ -12,6 +14,7 @@ export interface CrearAvisoParams {
   usuarioIds: string[];
   tipo: TipoAviso;
   titulo: string;
+  datos?: DatosAviso | null;
   enlace: string;
 }
 
@@ -22,19 +25,20 @@ export interface CrearAvisoParams {
  */
 export async function crearAviso(
   admin: ReturnType<typeof crearClienteAdmin>,
-  { usuarioIds, tipo, titulo, enlace }: CrearAvisoParams
+  { usuarioIds, tipo, titulo, enlace, datos }: CrearAvisoParams
 ): Promise<void> {
   if (!usuarioIds.length) return;
 
-  const filas = usuarioIds.map((usuario_id) => ({
-    usuario_id,
-    tipo,
-    titulo,
-    enlace,
-    leido: false,
-  }));
-
   try {
+    const filas = usuarioIds.map((usuario_id) => ({
+      usuario_id,
+      tipo,
+      titulo,
+      ...(datos == null ? {} : { datos: DatosAviso.parse(datos) }),
+      enlace,
+      leido: false,
+    }));
+
     const { error } = await admin.from("avisos").insert(filas);
     if (error) {
       console.warn("[avisos] Error insertando avisos:", error.message);
@@ -103,6 +107,7 @@ export interface Aviso {
   usuario_id: string;
   tipo: TipoAviso;
   titulo: string;
+  datos?: DatosAviso | null;
   enlace: string;
   leido: boolean;
   creado_en: string;
@@ -120,6 +125,7 @@ export async function avisarEstudianteDeEntrega(entregaId: string, tipo: "coment
     await crearAviso(admin, {
       usuarioIds: [data.estudiante_id as string],
       tipo,
+      datos: { tarea: tarea?.titulo ?? "" },
       titulo: tarea?.titulo ? `${titulo}: ${tarea.titulo}`.slice(0, 200) : titulo,
       enlace: `/estudiante/tarea/${data.tarea_id as string}`,
     });
@@ -136,6 +142,7 @@ export async function avisarDocenteDeEntrega(docenteId: string, tareaId: string,
     await crearAviso(admin, {
       usuarioIds: [docenteId],
       tipo: "entrega_nueva",
+      datos: { tarea: tarea?.titulo ?? "", estudiante: nombreEstudiante },
       titulo: `${nombreEstudiante} entregó: ${tarea?.titulo ?? "una tarea"}`.slice(0, 200),
       enlace: `/docente/tareas/${tareaId}`,
     });

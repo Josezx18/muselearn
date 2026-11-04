@@ -55,6 +55,7 @@ export async function POST(peticion: Request) {
           await crearAviso(admin, {
             usuarioIds: idsEstudiantes,
             tipo: "tareas_importadas" as TipoAviso,
+            datos: { n: tareas?.nuevas.length ?? 0 },
             titulo: `Se importaron ${tareas?.nuevas.length ?? 0} tareas nuevas de Classroom`,
             enlace: `/estudiante/hoy`,
           });

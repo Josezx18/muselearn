@@ -14,5 +14,13 @@
     "nota": "Grade published",
     "tareas_importadas": "Tasks imported",
     "entrega_nueva": "New submission"
+  },
+  "mensajes": {
+    "tarea_nueva": "New task: {tarea}",
+    "comentario": "Comment on your submission: {tarea}",
+    "nota": "Grade published: {tarea}",
+    "entrega_devuelta": "Your teacher asked for corrections: {tarea}",
+    "entrega_nueva": "{estudiante} submitted: {tarea}",
+    "tareas_importadas": "{n, plural, one {# new task imported from Classroom} other {# new tasks imported from Classroom}}"
   }
 }

@@ -137,8 +137,8 @@ function Idioma() {
 
   async function cambiar(l: Locale) {
     if (l === actual) return;
-    await actualizarPerfil({ idioma: l }).catch(() => undefined);
-    iniciar(() => router.replace(ruta, { locale: l }));
+    void actualizarPerfil({ idioma: l }).catch(() => undefined);
+    iniciar(() => router.replace(ruta + window.location.search + window.location.hash, { locale: l }));
   }
 
   return (

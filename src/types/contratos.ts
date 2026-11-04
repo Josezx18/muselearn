@@ -393,3 +393,11 @@ export const EdicionMaterial = z.object({
   contenido: MaterialEstudio.optional(), publicado: z.boolean().optional(),
 }).strict().refine(v => v.contenido !== undefined || v.publicado !== undefined, "sin_cambios");
 export type EdicionMaterial = z.infer<typeof EdicionMaterial>;
+
+// Datos traducibles de avisos (T29); los avisos antiguos conservan su t?tulo.
+export const DatosAviso = z.object({
+  tarea: z.string().optional(),
+  estudiante: z.string().optional(),
+  n: z.number().int().nonnegative().optional(),
+}).strict();
+export type DatosAviso = z.infer<typeof DatosAviso>;

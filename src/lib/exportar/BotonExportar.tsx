@@ -1,4 +1,5 @@
 "use client";
+import { useLocale } from "next-intl";
 import { useState } from "react";
 import { Button, useToast } from "@/components/ui";
 import { cargarComprension, obtenerClase } from "@/lib/api-cliente";
@@ -7,6 +8,7 @@ import { csvComprension, csvEntregas, nombreCSV } from "./csv";
 export function BotonExportar({ claseId, tipo, etiqueta, error }: {
   claseId: string; tipo: "entregas" | "comprension"; etiqueta: string; error: string;
 }) {
+  const idioma = useLocale() === "en" ? "en" : "es";
   const [ocupado, setOcupado] = useState(false);
   const avisar = useToast();
   async function descargar() {
@@ -17,12 +19,12 @@ export function BotonExportar({ claseId, tipo, etiqueta, error }: {
       let url: string | undefined;
       if (process.env.NEXT_PUBLIC_USAR_MOCKS === "true") {
         const [datos, clase] = await Promise.all([cargarComprension(claseId), obtenerClase(claseId)]);
-        const csv = tipo === "entregas" ? csvEntregas(datos) : csvComprension(datos.estudiantes, datos.mapa);
+        const csv = tipo === "entregas" ? csvEntregas(datos, undefined, idioma) : csvComprension(datos.estudiantes, datos.mapa, idioma);
         url = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8" }));
         enlace.href = url;
         enlace.download = nombreCSV(clase.nombre, tipo);
       } else {
-        enlace.href = `/api/clases/${encodeURIComponent(claseId)}/exportar?tipo=${tipo}`;
+        enlace.href = `/api/clases/${encodeURIComponent(claseId)}/exportar?tipo=${tipo}&idioma=${idioma}`;
         enlace.download = "";
       }
       document.body.append(enlace);

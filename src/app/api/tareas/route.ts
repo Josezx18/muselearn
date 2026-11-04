@@ -66,6 +66,7 @@ export async function POST(peticion: Request) {
         await crearAviso(admin, {
           usuarioIds: idsEstudiantes,
           tipo: "tarea_nueva" as TipoAviso,
+          datos: { tarea: entrada.data.titulo },
           titulo: `Nueva tarea: ${entrada.data.titulo}`,
           enlace: `/estudiante/tarea/${tarea.id}`,
         });

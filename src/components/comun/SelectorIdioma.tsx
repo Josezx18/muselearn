@@ -4,6 +4,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { useTransition } from "react";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
+import { actualizarPerfil } from "@/lib/api-cliente";
 import { cn } from "@/components/ui";
 
 export function SelectorIdioma({ className }: { className?: string }) {
@@ -22,7 +23,11 @@ export function SelectorIdioma({ className }: { className?: string }) {
           lang={l}
           aria-pressed={actual === l}
           disabled={pendiente}
-          onClick={() => iniciar(() => router.replace(ruta, { locale: l }))}
+          onClick={() => {
+            if (l === actual) return;
+            void actualizarPerfil({ idioma: l }).catch(() => undefined);
+            iniciar(() => router.replace(ruta + window.location.search + window.location.hash, { locale: l }));
+          }}
           className={cn(
             "rounded-md px-3 py-2 text-sm font-bold uppercase min-h-[44px] min-w-[44px]",
             actual === l ? "bg-primario text-white" : "text-tinta-suave hover:text-tinta",
